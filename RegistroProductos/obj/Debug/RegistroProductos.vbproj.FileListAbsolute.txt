@@ -1,0 +1,14 @@
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\bin\Debug\RegistroProductos.exe.config
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\bin\Debug\RegistroProductos.exe
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\bin\Debug\RegistroProductos.pdb
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\bin\Debug\RegistroProductos.xml
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form1.resources
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Resources.resources
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.vbproj.GenerateResource.Cache
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.vbproj.CoreCompileInputs.cache
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.exe
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.xml
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.pdb
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\bin\Debug\MySql.Data.dll
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\bin\Debug\MySql.Data.xml
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form2.resources
