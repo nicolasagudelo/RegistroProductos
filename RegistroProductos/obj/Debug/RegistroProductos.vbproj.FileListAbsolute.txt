@@ -12,3 +12,5 @@ C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\Regi
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\bin\Debug\MySql.Data.dll
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\bin\Debug\MySql.Data.xml
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form2.resources
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.vbprojResolveAssemblyReference.cache
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form3.resources

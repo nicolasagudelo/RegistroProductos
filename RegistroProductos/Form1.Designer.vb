@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Form1
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,32 +20,54 @@ Partial Class Form1
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.BtnGenerarReporte = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.DTPFechaLimite = New System.Windows.Forms.DateTimePicker()
+        Me.LblFechaLimite = New System.Windows.Forms.Label()
+        Me.LblContadorCaracteres = New System.Windows.Forms.Label()
+        Me.BtnModificarRegistro = New System.Windows.Forms.Button()
+        Me.BtnRegistrarProducto = New System.Windows.Forms.Button()
+        Me.RchTxtBxObservaciones = New System.Windows.Forms.RichTextBox()
+        Me.LblObservaciones = New System.Windows.Forms.Label()
+        Me.LblNumeroSerie = New System.Windows.Forms.Label()
+        Me.CmbBxTipoProducto = New System.Windows.Forms.ComboBox()
+        Me.TxtBxNumeroSerie = New System.Windows.Forms.TextBox()
+        Me.LblTipoProducto = New System.Windows.Forms.Label()
+        Me.CmbBxClientes = New System.Windows.Forms.ComboBox()
+        Me.LblCliente = New System.Windows.Forms.Label()
         Me.LblNumeroProducto = New System.Windows.Forms.Label()
         Me.TxtBxProductoID = New System.Windows.Forms.TextBox()
         Me.DGVProductosSinRevisar = New System.Windows.Forms.DataGridView()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.BtnGenerarReporte2 = New System.Windows.Forms.Button()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.DTPFechaLimite2 = New System.Windows.Forms.DateTimePicker()
+        Me.LblFechaLimite2 = New System.Windows.Forms.Label()
+        Me.LblContadorCaracteres2 = New System.Windows.Forms.Label()
+        Me.BtnModificarRegistroLimite = New System.Windows.Forms.Button()
+        Me.RchTxBxObservaciones2 = New System.Windows.Forms.RichTextBox()
+        Me.LblObservaciones2 = New System.Windows.Forms.Label()
+        Me.LblNumeroSerie2 = New System.Windows.Forms.Label()
+        Me.CmbBxProducto2 = New System.Windows.Forms.ComboBox()
+        Me.TxtBxNumeroSerie2 = New System.Windows.Forms.TextBox()
+        Me.LblProducto2 = New System.Windows.Forms.Label()
+        Me.CmbBxCliente2 = New System.Windows.Forms.ComboBox()
+        Me.LblCliente2 = New System.Windows.Forms.Label()
+        Me.LblNumeroProducto2 = New System.Windows.Forms.Label()
+        Me.TxtBxNumeroProducto2 = New System.Windows.Forms.TextBox()
         Me.DGVProductosLimite = New System.Windows.Forms.DataGridView()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.LabelUsuario = New System.Windows.Forms.Label()
+        Me.LblUsuario = New System.Windows.Forms.Label()
         Me.BtnDesconectar = New System.Windows.Forms.Button()
-        Me.LblCliente = New System.Windows.Forms.Label()
-        Me.CmbBxClientes = New System.Windows.Forms.ComboBox()
-        Me.LblTipoProducto = New System.Windows.Forms.Label()
-        Me.TxtBxNumeroSerie = New System.Windows.Forms.TextBox()
-        Me.CmbBxTipoProducto = New System.Windows.Forms.ComboBox()
-        Me.LblNumeroSerie = New System.Windows.Forms.Label()
-        Me.LblObservaciones = New System.Windows.Forms.Label()
-        Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DGVProductosSinRevisar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         CType(Me.DGVProductosLimite, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -56,30 +78,45 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Location = New System.Drawing.Point(0, 24)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1015, 460)
+        Me.TabControl1.Size = New System.Drawing.Size(933, 460)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage1.Controls.Add(Me.BtnGenerarReporte)
         Me.TabPage1.Controls.Add(Me.Panel1)
         Me.TabPage1.Controls.Add(Me.DGVProductosSinRevisar)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1007, 434)
+        Me.TabPage1.Size = New System.Drawing.Size(925, 434)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Registrar Producto"
+        '
+        'BtnGenerarReporte
+        '
+        Me.BtnGenerarReporte.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnGenerarReporte.Location = New System.Drawing.Point(801, 291)
+        Me.BtnGenerarReporte.Name = "BtnGenerarReporte"
+        Me.BtnGenerarReporte.Size = New System.Drawing.Size(121, 137)
+        Me.BtnGenerarReporte.TabIndex = 2
+        Me.BtnGenerarReporte.Text = "Generar Reporte"
+        Me.BtnGenerarReporte.UseVisualStyleBackColor = True
         '
         'Panel1
         '
         Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.Controls.Add(Me.RichTextBox1)
+        Me.Panel1.Controls.Add(Me.DTPFechaLimite)
+        Me.Panel1.Controls.Add(Me.LblFechaLimite)
+        Me.Panel1.Controls.Add(Me.LblContadorCaracteres)
+        Me.Panel1.Controls.Add(Me.BtnModificarRegistro)
+        Me.Panel1.Controls.Add(Me.BtnRegistrarProducto)
+        Me.Panel1.Controls.Add(Me.RchTxtBxObservaciones)
         Me.Panel1.Controls.Add(Me.LblObservaciones)
         Me.Panel1.Controls.Add(Me.LblNumeroSerie)
         Me.Panel1.Controls.Add(Me.CmbBxTipoProducto)
@@ -89,10 +126,132 @@ Partial Class Form1
         Me.Panel1.Controls.Add(Me.LblCliente)
         Me.Panel1.Controls.Add(Me.LblNumeroProducto)
         Me.Panel1.Controls.Add(Me.TxtBxProductoID)
-        Me.Panel1.Location = New System.Drawing.Point(8, 287)
+        Me.Panel1.Location = New System.Drawing.Point(8, 291)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(993, 137)
+        Me.Panel1.Size = New System.Drawing.Size(787, 137)
         Me.Panel1.TabIndex = 1
+        '
+        'DTPFechaLimite
+        '
+        Me.DTPFechaLimite.Enabled = False
+        Me.DTPFechaLimite.Location = New System.Drawing.Point(563, 87)
+        Me.DTPFechaLimite.Name = "DTPFechaLimite"
+        Me.DTPFechaLimite.Size = New System.Drawing.Size(121, 20)
+        Me.DTPFechaLimite.TabIndex = 13
+        Me.DTPFechaLimite.Visible = False
+        '
+        'LblFechaLimite
+        '
+        Me.LblFechaLimite.AutoSize = True
+        Me.LblFechaLimite.Enabled = False
+        Me.LblFechaLimite.Location = New System.Drawing.Point(560, 71)
+        Me.LblFechaLimite.Name = "LblFechaLimite"
+        Me.LblFechaLimite.Size = New System.Drawing.Size(70, 13)
+        Me.LblFechaLimite.TabIndex = 12
+        Me.LblFechaLimite.Text = "Fecha Limite:"
+        Me.LblFechaLimite.Visible = False
+        '
+        'LblContadorCaracteres
+        '
+        Me.LblContadorCaracteres.AutoSize = True
+        Me.LblContadorCaracteres.Location = New System.Drawing.Point(510, 111)
+        Me.LblContadorCaracteres.Name = "LblContadorCaracteres"
+        Me.LblContadorCaracteres.Size = New System.Drawing.Size(36, 13)
+        Me.LblContadorCaracteres.TabIndex = 11
+        Me.LblContadorCaracteres.Text = "0/150"
+        '
+        'BtnModificarRegistro
+        '
+        Me.BtnModificarRegistro.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnModificarRegistro.Enabled = False
+        Me.BtnModificarRegistro.Location = New System.Drawing.Point(694, 63)
+        Me.BtnModificarRegistro.Name = "BtnModificarRegistro"
+        Me.BtnModificarRegistro.Size = New System.Drawing.Size(90, 45)
+        Me.BtnModificarRegistro.TabIndex = 10
+        Me.BtnModificarRegistro.Text = "Modificar Registro"
+        Me.BtnModificarRegistro.UseVisualStyleBackColor = True
+        Me.BtnModificarRegistro.Visible = False
+        '
+        'BtnRegistrarProducto
+        '
+        Me.BtnRegistrarProducto.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnRegistrarProducto.Location = New System.Drawing.Point(694, 63)
+        Me.BtnRegistrarProducto.Name = "BtnRegistrarProducto"
+        Me.BtnRegistrarProducto.Size = New System.Drawing.Size(90, 45)
+        Me.BtnRegistrarProducto.TabIndex = 5
+        Me.BtnRegistrarProducto.Text = "Registrar Producto"
+        Me.BtnRegistrarProducto.UseVisualStyleBackColor = True
+        '
+        'RchTxtBxObservaciones
+        '
+        Me.RchTxtBxObservaciones.Location = New System.Drawing.Point(335, 40)
+        Me.RchTxtBxObservaciones.MaxLength = 150
+        Me.RchTxtBxObservaciones.Name = "RchTxtBxObservaciones"
+        Me.RchTxtBxObservaciones.Size = New System.Drawing.Size(211, 68)
+        Me.RchTxtBxObservaciones.TabIndex = 9
+        Me.RchTxtBxObservaciones.Text = ""
+        '
+        'LblObservaciones
+        '
+        Me.LblObservaciones.AutoSize = True
+        Me.LblObservaciones.Location = New System.Drawing.Point(332, 11)
+        Me.LblObservaciones.Name = "LblObservaciones"
+        Me.LblObservaciones.Size = New System.Drawing.Size(78, 13)
+        Me.LblObservaciones.TabIndex = 8
+        Me.LblObservaciones.Text = "Observaciones"
+        '
+        'LblNumeroSerie
+        '
+        Me.LblNumeroSerie.AutoSize = True
+        Me.LblNumeroSerie.Location = New System.Drawing.Point(176, 11)
+        Me.LblNumeroSerie.Name = "LblNumeroSerie"
+        Me.LblNumeroSerie.Size = New System.Drawing.Size(89, 13)
+        Me.LblNumeroSerie.TabIndex = 7
+        Me.LblNumeroSerie.Text = "Numero de Serie:"
+        '
+        'CmbBxTipoProducto
+        '
+        Me.CmbBxTipoProducto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBxTipoProducto.FormattingEnabled = True
+        Me.CmbBxTipoProducto.Location = New System.Drawing.Point(179, 87)
+        Me.CmbBxTipoProducto.Name = "CmbBxTipoProducto"
+        Me.CmbBxTipoProducto.Size = New System.Drawing.Size(150, 21)
+        Me.CmbBxTipoProducto.TabIndex = 6
+        '
+        'TxtBxNumeroSerie
+        '
+        Me.TxtBxNumeroSerie.Location = New System.Drawing.Point(179, 40)
+        Me.TxtBxNumeroSerie.Name = "TxtBxNumeroSerie"
+        Me.TxtBxNumeroSerie.Size = New System.Drawing.Size(150, 20)
+        Me.TxtBxNumeroSerie.TabIndex = 5
+        '
+        'LblTipoProducto
+        '
+        Me.LblTipoProducto.AutoSize = True
+        Me.LblTipoProducto.Location = New System.Drawing.Point(176, 71)
+        Me.LblTipoProducto.Name = "LblTipoProducto"
+        Me.LblTipoProducto.Size = New System.Drawing.Size(53, 13)
+        Me.LblTipoProducto.TabIndex = 4
+        Me.LblTipoProducto.Text = "Producto:"
+        '
+        'CmbBxClientes
+        '
+        Me.CmbBxClientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBxClientes.FormattingEnabled = True
+        Me.CmbBxClientes.IntegralHeight = False
+        Me.CmbBxClientes.Location = New System.Drawing.Point(13, 87)
+        Me.CmbBxClientes.Name = "CmbBxClientes"
+        Me.CmbBxClientes.Size = New System.Drawing.Size(160, 21)
+        Me.CmbBxClientes.TabIndex = 3
+        '
+        'LblCliente
+        '
+        Me.LblCliente.AutoSize = True
+        Me.LblCliente.Location = New System.Drawing.Point(10, 71)
+        Me.LblCliente.Name = "LblCliente"
+        Me.LblCliente.Size = New System.Drawing.Size(42, 13)
+        Me.LblCliente.TabIndex = 2
+        Me.LblCliente.Text = "Cliente:"
         '
         'LblNumeroProducto
         '
@@ -107,7 +266,7 @@ Partial Class Form1
         '
         Me.TxtBxProductoID.Location = New System.Drawing.Point(13, 40)
         Me.TxtBxProductoID.Name = "TxtBxProductoID"
-        Me.TxtBxProductoID.Size = New System.Drawing.Size(121, 20)
+        Me.TxtBxProductoID.Size = New System.Drawing.Size(160, 20)
         Me.TxtBxProductoID.TabIndex = 0
         '
         'DGVProductosSinRevisar
@@ -121,19 +280,181 @@ Partial Class Form1
         Me.DGVProductosSinRevisar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVProductosSinRevisar.Location = New System.Drawing.Point(3, 3)
         Me.DGVProductosSinRevisar.Name = "DGVProductosSinRevisar"
-        Me.DGVProductosSinRevisar.Size = New System.Drawing.Size(998, 278)
+        Me.DGVProductosSinRevisar.Size = New System.Drawing.Size(786, 278)
         Me.DGVProductosSinRevisar.TabIndex = 0
         '
         'TabPage2
         '
+        Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage2.Controls.Add(Me.BtnGenerarReporte2)
+        Me.TabPage2.Controls.Add(Me.Panel2)
         Me.TabPage2.Controls.Add(Me.DGVProductosLimite)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1007, 434)
+        Me.TabPage2.Size = New System.Drawing.Size(925, 434)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Productos Limite"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'BtnGenerarReporte2
+        '
+        Me.BtnGenerarReporte2.Location = New System.Drawing.Point(801, 291)
+        Me.BtnGenerarReporte2.Name = "BtnGenerarReporte2"
+        Me.BtnGenerarReporte2.Size = New System.Drawing.Size(121, 137)
+        Me.BtnGenerarReporte2.TabIndex = 4
+        Me.BtnGenerarReporte2.Text = "Generar Reporte"
+        Me.BtnGenerarReporte2.UseVisualStyleBackColor = True
+        '
+        'Panel2
+        '
+        Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel2.Controls.Add(Me.DTPFechaLimite2)
+        Me.Panel2.Controls.Add(Me.LblFechaLimite2)
+        Me.Panel2.Controls.Add(Me.LblContadorCaracteres2)
+        Me.Panel2.Controls.Add(Me.BtnModificarRegistroLimite)
+        Me.Panel2.Controls.Add(Me.RchTxBxObservaciones2)
+        Me.Panel2.Controls.Add(Me.LblObservaciones2)
+        Me.Panel2.Controls.Add(Me.LblNumeroSerie2)
+        Me.Panel2.Controls.Add(Me.CmbBxProducto2)
+        Me.Panel2.Controls.Add(Me.TxtBxNumeroSerie2)
+        Me.Panel2.Controls.Add(Me.LblProducto2)
+        Me.Panel2.Controls.Add(Me.CmbBxCliente2)
+        Me.Panel2.Controls.Add(Me.LblCliente2)
+        Me.Panel2.Controls.Add(Me.LblNumeroProducto2)
+        Me.Panel2.Controls.Add(Me.TxtBxNumeroProducto2)
+        Me.Panel2.Location = New System.Drawing.Point(8, 291)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(787, 137)
+        Me.Panel2.TabIndex = 3
+        '
+        'DTPFechaLimite2
+        '
+        Me.DTPFechaLimite2.Enabled = False
+        Me.DTPFechaLimite2.Location = New System.Drawing.Point(563, 87)
+        Me.DTPFechaLimite2.Name = "DTPFechaLimite2"
+        Me.DTPFechaLimite2.Size = New System.Drawing.Size(121, 20)
+        Me.DTPFechaLimite2.TabIndex = 13
+        Me.DTPFechaLimite2.Visible = False
+        '
+        'LblFechaLimite2
+        '
+        Me.LblFechaLimite2.AutoSize = True
+        Me.LblFechaLimite2.Enabled = False
+        Me.LblFechaLimite2.Location = New System.Drawing.Point(560, 71)
+        Me.LblFechaLimite2.Name = "LblFechaLimite2"
+        Me.LblFechaLimite2.Size = New System.Drawing.Size(70, 13)
+        Me.LblFechaLimite2.TabIndex = 12
+        Me.LblFechaLimite2.Text = "Fecha Limite:"
+        Me.LblFechaLimite2.Visible = False
+        '
+        'LblContadorCaracteres2
+        '
+        Me.LblContadorCaracteres2.AutoSize = True
+        Me.LblContadorCaracteres2.Location = New System.Drawing.Point(510, 111)
+        Me.LblContadorCaracteres2.Name = "LblContadorCaracteres2"
+        Me.LblContadorCaracteres2.Size = New System.Drawing.Size(36, 13)
+        Me.LblContadorCaracteres2.TabIndex = 11
+        Me.LblContadorCaracteres2.Text = "0/150"
+        '
+        'BtnModificarRegistroLimite
+        '
+        Me.BtnModificarRegistroLimite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnModificarRegistroLimite.Enabled = False
+        Me.BtnModificarRegistroLimite.Location = New System.Drawing.Point(694, 63)
+        Me.BtnModificarRegistroLimite.Name = "BtnModificarRegistroLimite"
+        Me.BtnModificarRegistroLimite.Size = New System.Drawing.Size(90, 45)
+        Me.BtnModificarRegistroLimite.TabIndex = 10
+        Me.BtnModificarRegistroLimite.Text = "Modificar Registro"
+        Me.BtnModificarRegistroLimite.UseVisualStyleBackColor = True
+        Me.BtnModificarRegistroLimite.Visible = False
+        '
+        'RchTxBxObservaciones2
+        '
+        Me.RchTxBxObservaciones2.Location = New System.Drawing.Point(335, 40)
+        Me.RchTxBxObservaciones2.MaxLength = 150
+        Me.RchTxBxObservaciones2.Name = "RchTxBxObservaciones2"
+        Me.RchTxBxObservaciones2.Size = New System.Drawing.Size(211, 68)
+        Me.RchTxBxObservaciones2.TabIndex = 9
+        Me.RchTxBxObservaciones2.Text = ""
+        '
+        'LblObservaciones2
+        '
+        Me.LblObservaciones2.AutoSize = True
+        Me.LblObservaciones2.Location = New System.Drawing.Point(332, 11)
+        Me.LblObservaciones2.Name = "LblObservaciones2"
+        Me.LblObservaciones2.Size = New System.Drawing.Size(78, 13)
+        Me.LblObservaciones2.TabIndex = 8
+        Me.LblObservaciones2.Text = "Observaciones"
+        '
+        'LblNumeroSerie2
+        '
+        Me.LblNumeroSerie2.AutoSize = True
+        Me.LblNumeroSerie2.Location = New System.Drawing.Point(176, 11)
+        Me.LblNumeroSerie2.Name = "LblNumeroSerie2"
+        Me.LblNumeroSerie2.Size = New System.Drawing.Size(89, 13)
+        Me.LblNumeroSerie2.TabIndex = 7
+        Me.LblNumeroSerie2.Text = "Numero de Serie:"
+        '
+        'CmbBxProducto2
+        '
+        Me.CmbBxProducto2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBxProducto2.FormattingEnabled = True
+        Me.CmbBxProducto2.Location = New System.Drawing.Point(179, 87)
+        Me.CmbBxProducto2.Name = "CmbBxProducto2"
+        Me.CmbBxProducto2.Size = New System.Drawing.Size(150, 21)
+        Me.CmbBxProducto2.TabIndex = 6
+        '
+        'TxtBxNumeroSerie2
+        '
+        Me.TxtBxNumeroSerie2.Location = New System.Drawing.Point(179, 40)
+        Me.TxtBxNumeroSerie2.Name = "TxtBxNumeroSerie2"
+        Me.TxtBxNumeroSerie2.Size = New System.Drawing.Size(150, 20)
+        Me.TxtBxNumeroSerie2.TabIndex = 5
+        '
+        'LblProducto2
+        '
+        Me.LblProducto2.AutoSize = True
+        Me.LblProducto2.Location = New System.Drawing.Point(176, 71)
+        Me.LblProducto2.Name = "LblProducto2"
+        Me.LblProducto2.Size = New System.Drawing.Size(53, 13)
+        Me.LblProducto2.TabIndex = 4
+        Me.LblProducto2.Text = "Producto:"
+        '
+        'CmbBxCliente2
+        '
+        Me.CmbBxCliente2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBxCliente2.FormattingEnabled = True
+        Me.CmbBxCliente2.IntegralHeight = False
+        Me.CmbBxCliente2.Location = New System.Drawing.Point(13, 87)
+        Me.CmbBxCliente2.Name = "CmbBxCliente2"
+        Me.CmbBxCliente2.Size = New System.Drawing.Size(160, 21)
+        Me.CmbBxCliente2.TabIndex = 3
+        '
+        'LblCliente2
+        '
+        Me.LblCliente2.AutoSize = True
+        Me.LblCliente2.Location = New System.Drawing.Point(10, 71)
+        Me.LblCliente2.Name = "LblCliente2"
+        Me.LblCliente2.Size = New System.Drawing.Size(42, 13)
+        Me.LblCliente2.TabIndex = 2
+        Me.LblCliente2.Text = "Cliente:"
+        '
+        'LblNumeroProducto2
+        '
+        Me.LblNumeroProducto2.AutoSize = True
+        Me.LblNumeroProducto2.Location = New System.Drawing.Point(10, 11)
+        Me.LblNumeroProducto2.Name = "LblNumeroProducto2"
+        Me.LblNumeroProducto2.Size = New System.Drawing.Size(85, 26)
+        Me.LblNumeroProducto2.TabIndex = 1
+        Me.LblNumeroProducto2.Text = "Identificador del " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "producto:"
+        '
+        'TxtBxNumeroProducto2
+        '
+        Me.TxtBxNumeroProducto2.Location = New System.Drawing.Point(13, 40)
+        Me.TxtBxNumeroProducto2.Name = "TxtBxNumeroProducto2"
+        Me.TxtBxNumeroProducto2.Size = New System.Drawing.Size(160, 20)
+        Me.TxtBxNumeroProducto2.TabIndex = 0
         '
         'DGVProductosLimite
         '
@@ -146,116 +467,41 @@ Partial Class Form1
         Me.DGVProductosLimite.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVProductosLimite.Location = New System.Drawing.Point(3, 3)
         Me.DGVProductosLimite.Name = "DGVProductosLimite"
-        Me.DGVProductosLimite.Size = New System.Drawing.Size(998, 254)
+        Me.DGVProductosLimite.Size = New System.Drawing.Size(919, 254)
         Me.DGVProductosLimite.TabIndex = 2
         '
-        'TabPage3
+        'LblUsuario
         '
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(1007, 434)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Reportar Resultados."
-        Me.TabPage3.UseVisualStyleBackColor = True
-        '
-        'LabelUsuario
-        '
-        Me.LabelUsuario.AutoSize = True
-        Me.LabelUsuario.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.LabelUsuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelUsuario.ForeColor = System.Drawing.Color.Red
-        Me.LabelUsuario.Location = New System.Drawing.Point(4, 4)
-        Me.LabelUsuario.Name = "LabelUsuario"
-        Me.LabelUsuario.Size = New System.Drawing.Size(57, 17)
-        Me.LabelUsuario.TabIndex = 3
-        Me.LabelUsuario.Text = "Label1"
+        Me.LblUsuario.AutoSize = True
+        Me.LblUsuario.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.LblUsuario.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblUsuario.ForeColor = System.Drawing.Color.Red
+        Me.LblUsuario.Location = New System.Drawing.Point(4, 4)
+        Me.LblUsuario.Name = "LblUsuario"
+        Me.LblUsuario.Size = New System.Drawing.Size(57, 17)
+        Me.LblUsuario.TabIndex = 3
+        Me.LblUsuario.Text = "Label1"
         '
         'BtnDesconectar
         '
         Me.BtnDesconectar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnDesconectar.Location = New System.Drawing.Point(921, 1)
+        Me.BtnDesconectar.Location = New System.Drawing.Point(839, 1)
         Me.BtnDesconectar.Name = "BtnDesconectar"
-        Me.BtnDesconectar.Size = New System.Drawing.Size(90, 23)
+        Me.BtnDesconectar.Size = New System.Drawing.Size(90, 39)
         Me.BtnDesconectar.TabIndex = 4
         Me.BtnDesconectar.Text = "Cerrar Sesion"
         Me.BtnDesconectar.UseVisualStyleBackColor = True
-        '
-        'LblCliente
-        '
-        Me.LblCliente.AutoSize = True
-        Me.LblCliente.Location = New System.Drawing.Point(10, 71)
-        Me.LblCliente.Name = "LblCliente"
-        Me.LblCliente.Size = New System.Drawing.Size(42, 13)
-        Me.LblCliente.TabIndex = 2
-        Me.LblCliente.Text = "Cliente:"
-        '
-        'CmbBxClientes
-        '
-        Me.CmbBxClientes.FormattingEnabled = True
-        Me.CmbBxClientes.Location = New System.Drawing.Point(13, 87)
-        Me.CmbBxClientes.Name = "CmbBxClientes"
-        Me.CmbBxClientes.Size = New System.Drawing.Size(121, 21)
-        Me.CmbBxClientes.TabIndex = 3
-        '
-        'LblTipoProducto
-        '
-        Me.LblTipoProducto.AutoSize = True
-        Me.LblTipoProducto.Location = New System.Drawing.Point(155, 71)
-        Me.LblTipoProducto.Name = "LblTipoProducto"
-        Me.LblTipoProducto.Size = New System.Drawing.Size(53, 13)
-        Me.LblTipoProducto.TabIndex = 4
-        Me.LblTipoProducto.Text = "Producto:"
-        '
-        'TxtBxNumeroSerie
-        '
-        Me.TxtBxNumeroSerie.Location = New System.Drawing.Point(158, 40)
-        Me.TxtBxNumeroSerie.Name = "TxtBxNumeroSerie"
-        Me.TxtBxNumeroSerie.Size = New System.Drawing.Size(121, 20)
-        Me.TxtBxNumeroSerie.TabIndex = 5
-        '
-        'CmbBxTipoProducto
-        '
-        Me.CmbBxTipoProducto.FormattingEnabled = True
-        Me.CmbBxTipoProducto.Location = New System.Drawing.Point(158, 87)
-        Me.CmbBxTipoProducto.Name = "CmbBxTipoProducto"
-        Me.CmbBxTipoProducto.Size = New System.Drawing.Size(121, 21)
-        Me.CmbBxTipoProducto.TabIndex = 6
-        '
-        'LblNumeroSerie
-        '
-        Me.LblNumeroSerie.AutoSize = True
-        Me.LblNumeroSerie.Location = New System.Drawing.Point(155, 11)
-        Me.LblNumeroSerie.Name = "LblNumeroSerie"
-        Me.LblNumeroSerie.Size = New System.Drawing.Size(89, 13)
-        Me.LblNumeroSerie.TabIndex = 7
-        Me.LblNumeroSerie.Text = "Numero de Serie:"
-        '
-        'LblObservaciones
-        '
-        Me.LblObservaciones.AutoSize = True
-        Me.LblObservaciones.Location = New System.Drawing.Point(308, 11)
-        Me.LblObservaciones.Name = "LblObservaciones"
-        Me.LblObservaciones.Size = New System.Drawing.Size(78, 13)
-        Me.LblObservaciones.TabIndex = 8
-        Me.LblObservaciones.Text = "Observaciones"
-        '
-        'RichTextBox1
-        '
-        Me.RichTextBox1.Location = New System.Drawing.Point(311, 40)
-        Me.RichTextBox1.Name = "RichTextBox1"
-        Me.RichTextBox1.Size = New System.Drawing.Size(211, 68)
-        Me.RichTextBox1.TabIndex = 9
-        Me.RichTextBox1.Text = ""
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.ClientSize = New System.Drawing.Size(1017, 482)
+        Me.ClientSize = New System.Drawing.Size(935, 482)
         Me.Controls.Add(Me.BtnDesconectar)
-        Me.Controls.Add(Me.LabelUsuario)
+        Me.Controls.Add(Me.LblUsuario)
         Me.Controls.Add(Me.TabControl1)
+        Me.MinimumSize = New System.Drawing.Size(951, 521)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Form1"
@@ -266,6 +512,8 @@ Partial Class Form1
         Me.Panel1.PerformLayout()
         CType(Me.DGVProductosSinRevisar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         CType(Me.DGVProductosLimite, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -277,18 +525,39 @@ Partial Class Form1
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents DGVProductosSinRevisar As DataGridView
     Friend WithEvents DGVProductosLimite As DataGridView
-    Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents LabelUsuario As Label
+    Friend WithEvents LblUsuario As Label
     Friend WithEvents BtnDesconectar As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents LblNumeroProducto As Label
     Friend WithEvents TxtBxProductoID As TextBox
     Friend WithEvents CmbBxClientes As ComboBox
     Friend WithEvents LblCliente As Label
-    Friend WithEvents RichTextBox1 As RichTextBox
+    Friend WithEvents RchTxtBxObservaciones As RichTextBox
     Friend WithEvents LblObservaciones As Label
     Friend WithEvents LblNumeroSerie As Label
     Friend WithEvents CmbBxTipoProducto As ComboBox
     Friend WithEvents TxtBxNumeroSerie As TextBox
     Friend WithEvents LblTipoProducto As Label
+    Friend WithEvents LblContadorCaracteres As Label
+    Friend WithEvents BtnModificarRegistro As Button
+    Friend WithEvents BtnRegistrarProducto As Button
+    Friend WithEvents DTPFechaLimite As DateTimePicker
+    Friend WithEvents LblFechaLimite As Label
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents DTPFechaLimite2 As DateTimePicker
+    Friend WithEvents LblFechaLimite2 As Label
+    Friend WithEvents LblContadorCaracteres2 As Label
+    Friend WithEvents BtnModificarRegistroLimite As Button
+    Friend WithEvents RchTxBxObservaciones2 As RichTextBox
+    Friend WithEvents LblObservaciones2 As Label
+    Friend WithEvents LblNumeroSerie2 As Label
+    Friend WithEvents CmbBxProducto2 As ComboBox
+    Friend WithEvents TxtBxNumeroSerie2 As TextBox
+    Friend WithEvents LblProducto2 As Label
+    Friend WithEvents CmbBxCliente2 As ComboBox
+    Friend WithEvents LblCliente2 As Label
+    Friend WithEvents LblNumeroProducto2 As Label
+    Friend WithEvents TxtBxNumeroProducto2 As TextBox
+    Friend WithEvents BtnGenerarReporte As Button
+    Friend WithEvents BtnGenerarReporte2 As Button
 End Class

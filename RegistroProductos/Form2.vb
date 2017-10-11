@@ -4,10 +4,10 @@ Imports System.Configuration
 Public Class Form2
     Dim conn As New MySqlConnection
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Form1.ShowDialog()
-        'Connect()
-        'TxBxContraseña.Text = ""
-        'TxtBxUsuario.Text = ""
+        'Form1.ShowDialog()
+        Connect()
+        TxBxContraseña.Text = ""
+        TxtBxUsuario.Text = ""
     End Sub
 
     Public Sub Connect()
@@ -27,6 +27,7 @@ Public Class Form2
     Private Sub BtnAceptar_Click(sender As Object, e As EventArgs) Handles BtnAceptar.Click
         'Form1.TextBoxContraseña.Text = TxBxContraseña.Text
         'Form1.TextBoxRespuestaForm2.Text = "1"
+        Form1.Close()
         Dim usuario As String = TxtBxUsuario.Text
         Dim contraseña As String = TxBxContraseña.Text
         Dim bd_password As String
@@ -54,7 +55,8 @@ Public Class Form2
                 Dim cmd As New MySqlCommand(String.Format("Select UsuarioID from usuarios where usuario = '" & usuario & "';"), conn)
                 usuario_id = Convert.ToString(cmd.ExecuteScalar())
                 'Form1.TxBxUsuario.Text = usuario_id
-                Form1.LabelUsuario.Text = "Sesion actual: " + usuario
+                Form1.RecibirVariablesForm2(usuario)
+                Form1.LblUsuario.Text = "Sesion actual: " + usuario
                 conn.Close()
             Catch ex As Exception
                 MsgBox(ex.Message, False, "Error")
