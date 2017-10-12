@@ -78,6 +78,9 @@ Partial Class Form1
         Me.BtnAceptarGrpBxAdmin2 = New System.Windows.Forms.Button()
         Me.TxtBx3GrpBxAdmin2 = New System.Windows.Forms.TextBox()
         Me.Lbl3GrpBxAdmin2 = New System.Windows.Forms.Label()
+        Me.CmbBx1GrpBxAdmin2 = New System.Windows.Forms.ComboBox()
+        Me.CmbBx2GrpBxAdmin2 = New System.Windows.Forms.ComboBox()
+        Me.Intervalo = New System.Windows.Forms.NumericUpDown()
         Me.TabControl1.SuspendLayout()
         Me.TabPageRegistrarProducto.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -89,6 +92,7 @@ Partial Class Form1
         CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrpBxAdmin.SuspendLayout()
         Me.GrpBxAdmin2.SuspendLayout()
+        CType(Me.Intervalo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -610,6 +614,9 @@ Partial Class Form1
         'GrpBxAdmin2
         '
         Me.GrpBxAdmin2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GrpBxAdmin2.Controls.Add(Me.Intervalo)
+        Me.GrpBxAdmin2.Controls.Add(Me.CmbBx1GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.CmbBx2GrpBxAdmin2)
         Me.GrpBxAdmin2.Controls.Add(Me.TxtBx3GrpBxAdmin2)
         Me.GrpBxAdmin2.Controls.Add(Me.Lbl3GrpBxAdmin2)
         Me.GrpBxAdmin2.Controls.Add(Me.BtnAceptarGrpBxAdmin2)
@@ -680,6 +687,34 @@ Partial Class Form1
         Me.Lbl3GrpBxAdmin2.TabIndex = 9
         Me.Lbl3GrpBxAdmin2.Text = "Label1"
         '
+        'CmbBx1GrpBxAdmin2
+        '
+        Me.CmbBx1GrpBxAdmin2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBx1GrpBxAdmin2.FormattingEnabled = True
+        Me.CmbBx1GrpBxAdmin2.Location = New System.Drawing.Point(6, 31)
+        Me.CmbBx1GrpBxAdmin2.Name = "CmbBx1GrpBxAdmin2"
+        Me.CmbBx1GrpBxAdmin2.Size = New System.Drawing.Size(129, 21)
+        Me.CmbBx1GrpBxAdmin2.TabIndex = 7
+        '
+        'CmbBx2GrpBxAdmin2
+        '
+        Me.CmbBx2GrpBxAdmin2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBx2GrpBxAdmin2.FormattingEnabled = True
+        Me.CmbBx2GrpBxAdmin2.Location = New System.Drawing.Point(6, 71)
+        Me.CmbBx2GrpBxAdmin2.Name = "CmbBx2GrpBxAdmin2"
+        Me.CmbBx2GrpBxAdmin2.Size = New System.Drawing.Size(129, 21)
+        Me.CmbBx2GrpBxAdmin2.TabIndex = 8
+        '
+        'Intervalo
+        '
+        Me.Intervalo.Location = New System.Drawing.Point(6, 72)
+        Me.Intervalo.Minimum = New Decimal(New Integer() {3, 0, 0, 0})
+        Me.Intervalo.Name = "Intervalo"
+        Me.Intervalo.Size = New System.Drawing.Size(129, 20)
+        Me.Intervalo.TabIndex = 11
+        Me.Intervalo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.Intervalo.Value = New Decimal(New Integer() {3, 0, 0, 0})
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -709,6 +744,7 @@ Partial Class Form1
         Me.GrpBxAdmin.ResumeLayout(False)
         Me.GrpBxAdmin2.ResumeLayout(False)
         Me.GrpBxAdmin2.PerformLayout()
+        CType(Me.Intervalo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -770,4 +806,7 @@ Partial Class Form1
     Friend WithEvents BtnAceptarGrpBxAdmin2 As Button
     Friend WithEvents TxtBx3GrpBxAdmin2 As TextBox
     Friend WithEvents Lbl3GrpBxAdmin2 As Label
+    Friend WithEvents CmbBx1GrpBxAdmin2 As ComboBox
+    Friend WithEvents CmbBx2GrpBxAdmin2 As ComboBox
+    Friend WithEvents Intervalo As NumericUpDown
 End Class

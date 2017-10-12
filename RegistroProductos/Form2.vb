@@ -28,7 +28,7 @@ Public Class Form2
         'Form1.TextBoxContraseña.Text = TxBxContraseña.Text
         'Form1.TextBoxRespuestaForm2.Text = "1"
         Form1.Close()
-        Dim usuario As String = TxtBxUsuario.Text
+        Dim usuario As String = TxtBxUsuario.Text.Trim
         Dim contraseña As String = TxBxContraseña.Text
         Dim bd_password As String
         Try

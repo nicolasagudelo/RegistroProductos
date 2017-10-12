@@ -27,7 +27,7 @@ Public Class FormCambiarContraseña
     Private Sub BtnAceptar_Click(sender As Object, e As EventArgs) Handles BtnAceptar.Click
 
         If TxBxContraseñaAnterior.TextLength < 3 Or TxBxNuevaContraseña.TextLength < 3 Or TxBxNuevaContraseña2.TextLength < 3 Then
-            MsgBox("Las contraseñas deben tener minimo 3 caracteres", False, "Error")
+            MsgBox("Las contraseñas deben tener minimo 3 caracteres", MsgBoxStyle.Exclamation, "Error")
         Else
             Dim reader As MySqlDataReader
             Dim id_usu As String
@@ -37,7 +37,7 @@ Public Class FormCambiarContraseña
                 id_usu = cmd.ExecuteScalar.ToString
                 conn.Close()
             Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
                 conn.Close()
                 Exit Sub
             End Try
@@ -50,7 +50,7 @@ Public Class FormCambiarContraseña
                 bd_password = Convert.ToString(cmd.ExecuteScalar())
                 conn.Close()
             Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
                 conn.Close()
                 Exit Sub
             End Try
@@ -66,16 +66,16 @@ Public Class FormCambiarContraseña
                         MsgBox("Contraseña Actualizada", False, "Contraseña Actualizada")
                         conn.Close()
                     Catch ex As Exception
-                        MsgBox(ex.Message, False, "Error")
+                        MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
                         conn.Close()
                         Exit Sub
                     End Try
                     Me.Close()
                 Else
-                    MsgBox("La constraseña nueva no coincide en los dos campos", False, "Error")
+                    MsgBox("La constraseña nueva no coincide en los dos campos", MsgBoxStyle.Exclamation, "Error")
                 End If
             Else
-                MsgBox("La contraseña ingresada es erronea", False, "Error")
+                MsgBox("La contraseña ingresada es erronea", MsgBoxStyle.Exclamation, "Error")
             End If
         End If
     End Sub

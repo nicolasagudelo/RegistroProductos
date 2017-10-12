@@ -40,9 +40,11 @@ Public Class Form1
             CmbBxTablas.Items.Add("Categorias")
             CmbBxTablas.Items.Add("Pruebas por Categoria")
             CmbBxTablas.Items.Add("Tipo de Mercancia")
-            CmbBxTablas.Items.Add("Historial de Productos revisados")
+            CmbBxTablas.Items.Add("Historial de Productos Revisados")
             CmbBxTablas.Items.Add("Historial de Pruebas")
             CmbBxTablas.SelectedIndex = 0
+            LlenarComboBoxPruebas()
+            LlenarComboBoxCategorias()
         Else
             admin = 0
             Panel2.Visible = False
@@ -257,6 +259,27 @@ Public Class Form1
         CmbBxCliente2.DataSource = dtRecord
         CmbBxCliente2.DisplayMember = "Nombre"
         CmbBxCliente2.ValueMember = "ClienteID"
+    End Sub
+
+    private sub LlenarComboBoxPruebas()
+        Dim query As String = " Select ID_Prueba from Pruebas"
+        Dim cmd As New MySqlCommand(query, conn)
+        Dim sqlAdap As New MySqlDataAdapter(cmd)
+        Dim dtRecord As New DataTable
+        sqlAdap.Fill(dtRecord)
+        CmbBx1GrpBxAdmin2.DataSource = dtRecord
+        CmbBx1GrpBxAdmin2.DisplayMember = "ID_Prueba"
+        CmbBx1GrpBxAdmin2.ValueMember = "ID_Prueba"
+    End Sub
+    Private Sub LlenarComboBoxCategorias()
+        Dim query As String = " Select ID_Categoria, Nombre from categorias"
+        Dim cmd As New MySqlCommand(query, conn)
+        Dim sqlAdap As New MySqlDataAdapter(cmd)
+        Dim dtRecord As New DataTable
+        sqlAdap.Fill(dtRecord)
+        CmbBx2GrpBxAdmin2.DataSource = dtRecord
+        CmbBx2GrpBxAdmin2.DisplayMember = "Nombre"
+        CmbBx2GrpBxAdmin2.ValueMember = "ID_Categoria"
     End Sub
 
     Public Sub LlenarComboBoxTipoProducto()
@@ -559,6 +582,181 @@ Public Class Form1
                 MsgBox(ex.Message, False, "Error")
                 conn.Close()
             End Try
+        ElseIf CmbBxTablas.SelectedItem = "Clientes" Then
+            Dim query As String = "SELECT * From Clientes;"
+
+            Dim cmd As New MySqlCommand(query, conn)
+            Dim reader As MySqlDataReader
+
+            Try
+                conn.Open()
+                Console.WriteLine("Cargando Clientes")
+
+                reader = cmd.ExecuteReader
+
+                Dim table As New DataTable
+                table.Load(reader)
+                DGVAdmin.DataSource = table
+                DGVAdmin.ReadOnly = True
+                DGVAdmin.AllowUserToResizeColumns = True
+                DGVAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                reader.Close()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "Error")
+                conn.Close()
+            End Try
+        ElseIf CmbBxTablas.SelectedItem = "Pruebas" Then
+            Dim query As String = "SELECT * From Pruebas;"
+
+            Dim cmd As New MySqlCommand(query, conn)
+            Dim reader As MySqlDataReader
+
+            Try
+                conn.Open()
+                Console.WriteLine("Cargando Pruebas")
+
+                reader = cmd.ExecuteReader
+
+                Dim table As New DataTable
+                table.Load(reader)
+                DGVAdmin.DataSource = table
+                DGVAdmin.ReadOnly = True
+                DGVAdmin.AllowUserToResizeColumns = True
+                DGVAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                reader.Close()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+            End Try
+        ElseIf CmbBxTablas.SelectedItem = "Categorias" Then
+            Dim query As String = "SELECT * From Categorias;"
+
+            Dim cmd As New MySqlCommand(query, conn)
+            Dim reader As MySqlDataReader
+
+            Try
+                conn.Open()
+                Console.WriteLine("Cargando Categorias")
+
+                reader = cmd.ExecuteReader
+
+                Dim table As New DataTable
+                table.Load(reader)
+                DGVAdmin.DataSource = table
+                DGVAdmin.ReadOnly = True
+                DGVAdmin.AllowUserToResizeColumns = True
+                DGVAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                reader.Close()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+            End Try
+        ElseIf CmbBxTablas.SelectedItem = "Pruebas por Categoria" Then
+            Dim query As String = "select pruebasxcategoria.ID_Prueba, categorias.Nombre 
+                                   from pruebasxcategoria inner join categorias on pruebasxcategoria.ID_Categoria = categorias.ID_Categoria
+                                   order by ID_Prueba;;"
+
+            Dim cmd As New MySqlCommand(query, conn)
+            Dim reader As MySqlDataReader
+
+            Try
+                conn.Open()
+                Console.WriteLine("Cargando Pruebas por Categoria")
+
+                reader = cmd.ExecuteReader
+
+                Dim table As New DataTable
+                table.Load(reader)
+                DGVAdmin.DataSource = table
+                DGVAdmin.ReadOnly = True
+                DGVAdmin.AllowUserToResizeColumns = True
+                DGVAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                reader.Close()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+            End Try
+
+        ElseIf CmbBxTablas.SelectedItem = "Tipo de Mercancia" Then
+            Dim query As String = "SELECT * From tipo_productos;"
+
+            Dim cmd As New MySqlCommand(query, conn)
+            Dim reader As MySqlDataReader
+
+            Try
+                conn.Open()
+                Console.WriteLine("Cargando tipo de productos")
+
+                reader = cmd.ExecuteReader
+
+                Dim table As New DataTable
+                table.Load(reader)
+                DGVAdmin.DataSource = table
+                DGVAdmin.ReadOnly = True
+                DGVAdmin.AllowUserToResizeColumns = True
+                DGVAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                reader.Close()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+            End Try
+
+        ElseIf CmbBxTablas.SelectedItem = "Historial de Productos Revisados" Then
+            Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Numero_Serie as 'Numero de Serie', Observaciones, Fecha_Entrada, Fecha_Limite, Estado
+                               from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID
+                               Where Estado = 'Revisado';"
+
+            Dim cmd As New MySqlCommand(query, conn)
+            Dim reader As MySqlDataReader
+
+            Try
+                conn.Open()
+                Console.WriteLine("Cargando Productos Revisados")
+
+                reader = cmd.ExecuteReader
+
+                Dim table As New DataTable
+                table.Load(reader)
+                DGVAdmin.DataSource = table
+                DGVAdmin.ReadOnly = True
+                DGVAdmin.AllowUserToResizeColumns = True
+                DGVAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                reader.Close()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+            End Try
+        ElseIf CmbBxTablas.SelectedItem = "Historial de Pruebas" Then
+            Dim query As String = "select reportes.ProductoID as 'Id del producto', clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', reportes.Numero_Serie as 'Numero de Serie', reportes.Observaciones as 'Observaciones' , reportes.Fecha_Ingreso as 'Fecha de Ingreso', reportes.Fecha_Reporte as 'Fecha de Reporte', pruebas.Nombre as 'Prueba', reportes.Valor as 'Valor Prueba', usuarios.usuario as 'Revisado Por'
+                                   from reportes inner join clientes on reportes.ClienteID = clientes.ClienteID inner join tipo_productos on reportes.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID inner join pruebas on reportes.ID_Prueba = pruebas.ID_Prueba inner join usuarios on reportes.UsuarioID = usuarios.UsuarioID;"
+
+            Dim cmd As New MySqlCommand(query, conn)
+            Dim reader As MySqlDataReader
+
+            Try
+                conn.Open()
+                Console.WriteLine("Cargando Historial de Pruebas")
+
+                reader = cmd.ExecuteReader
+
+                Dim table As New DataTable
+                table.Load(reader)
+                DGVAdmin.DataSource = table
+                DGVAdmin.ReadOnly = True
+                DGVAdmin.AllowUserToResizeColumns = True
+                DGVAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                reader.Close()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+            End Try
         End If
     End Sub
 
@@ -570,18 +768,139 @@ Public Class Form1
             BtnNuevoRegistro.Text = "Agregar Usuario"
             BtnModificarRegistroAdmin.Visible = False
             BtnEliminarRegistro.Text = "Eliminar Usuario"
+            BtnEliminarRegistro.Visible = True
+            BtnNuevoRegistro.Visible = True
             GrpBxAdmin.Visible = True
+            CargarDGVAdmin()
+        ElseIf CmbBxTablas.SelectedItem = "Clientes" Then
+            BtnNuevoRegistro.Enabled = True
+            BtnEliminarRegistro.Enabled = True
+            BtnNuevoRegistro.Text = "Agregar Cliente"
+            BtnModificarRegistroAdmin.Visible = False
+            BtnEliminarRegistro.Text = "Eliminar Cliente"
+            BtnEliminarRegistro.Visible = True
+            BtnNuevoRegistro.Visible = True
+            GrpBxAdmin.Visible = True
+            CargarDGVAdmin()
+        ElseIf CmbBxTablas.SelectedItem = "Pruebas" Then
+            BtnNuevoRegistro.Enabled = True
+            BtnEliminarRegistro.Visible = False
+            BtnNuevoRegistro.Text = "Agregar Prueba"
+            BtnNuevoRegistro.Visible = True
+            BtnModificarRegistroAdmin.Visible = False
+            GrpBxAdmin.Visible = True
+            CargarDGVAdmin()
+        ElseIf CmbBxTablas.SelectedItem = "Categorias" Then
+            BtnNuevoRegistro.Enabled = True
+            BtnEliminarRegistro.Visible = False
+            BtnNuevoRegistro.Text = "Agregar Categoria"
+            BtnModificarRegistroAdmin.Visible = False
+            BtnNuevoRegistro.Visible = True
+            GrpBxAdmin.Visible = True
+            CargarDGVAdmin()
+        ElseIf CmbBxTablas.SelectedItem = "Pruebas por Categoria" Then
+            BtnNuevoRegistro.Enabled = True
+            BtnEliminarRegistro.Enabled = True
+            BtnNuevoRegistro.Text = "Nuevo Registro"
+            BtnModificarRegistroAdmin.Visible = False
+            BtnEliminarRegistro.Text = "Eliminar Registro"
+            BtnEliminarRegistro.Visible = True
+            GrpBxAdmin.Visible = True
+            CargarDGVAdmin()
+        ElseIf CmbBxTablas.SelectedItem = "Tipo de Mercancia" Then
+            BtnNuevoRegistro.Enabled = True
+            BtnEliminarRegistro.Visible = False
+            BtnNuevoRegistro.Text = "Agregar Tipo de Mercancia"
+            BtnModificarRegistroAdmin.Visible = False
+            BtnNuevoRegistro.Visible = True
+            GrpBxAdmin.Visible = True
+            CargarDGVAdmin()
+        ElseIf CmbBxTablas.SelectedItem = "Historial de Productos Revisados" Or CmbBxTablas.SelectedItem = "Historial de Pruebas" Then
+            GrpBxAdmin.Visible = False
+            GrpBxAdmin2.Visible = False
             CargarDGVAdmin()
         End If
     End Sub
 
     Private Sub BtnNuevoRegistro_Click(sender As Object, e As EventArgs) Handles BtnNuevoRegistro.Click
         If CmbBxTablas.SelectedItem = "Usuarios" Then
+            Lbl1GrpBxAdmin2.Visible = True
+            Lbl2GrpBxAdmin2.Visible = True
+            Lbl3GrpBxAdmin2.Visible = True
+            Intervalo.Visible = False
+            TxtBx1GrpBxAdmin2.Visible = True
+            TxtBx2GrpBxAdmin2.Visible = True
+            TxtBx3GrpBxAdmin2.Visible = True
+            CmbBx1GrpBxAdmin2.Visible = False
+            CmbBx2GrpBxAdmin2.Visible = False
             Lbl1GrpBxAdmin2.Text = "Nombre de Usuario"
             Lbl2GrpBxAdmin2.Text = "Contraseña"
             Lbl3GrpBxAdmin2.Text = "Confirmar Contraseña"
             TxtBx2GrpBxAdmin2.PasswordChar = "*"
             TxtBx3GrpBxAdmin2.PasswordChar = "*"
+            GrpBxAdmin2.Visible = True
+        ElseIf CmbBxTablas.SelectedItem = "Clientes" Then
+            Lbl1GrpBxAdmin2.Text = "Nombre del Cliente"
+            Lbl1GrpBxAdmin2.Visible = True
+            Lbl2GrpBxAdmin2.Visible = False
+            Lbl3GrpBxAdmin2.Visible = False
+            Intervalo.Visible = False
+            TxtBx1GrpBxAdmin2.Visible = True
+            TxtBx2GrpBxAdmin2.Visible = False
+            TxtBx3GrpBxAdmin2.Visible = False
+            CmbBx1GrpBxAdmin2.Visible = False
+            CmbBx2GrpBxAdmin2.Visible = False
+            GrpBxAdmin2.Visible = True
+        ElseIf CmbBxTablas.SelectedItem = "Pruebas" Then
+            Lbl1GrpBxAdmin2.Text = "Codigo de la Prueba"
+            Lbl2GrpBxAdmin2.Text = "Nombre de la Prueba"
+            Lbl1GrpBxAdmin2.Visible = True
+            Lbl2GrpBxAdmin2.Visible = True
+            Lbl3GrpBxAdmin2.Visible = False
+            Intervalo.Visible = False
+            TxtBx1GrpBxAdmin2.Visible = True
+            TxtBx2GrpBxAdmin2.Visible = True
+            TxtBx3GrpBxAdmin2.Visible = False
+            CmbBx1GrpBxAdmin2.Visible = False
+            CmbBx2GrpBxAdmin2.Visible = False
+            GrpBxAdmin2.Visible = True
+        ElseIf CmbBxTablas.SelectedItem = "Categorias" Then
+            Lbl1GrpBxAdmin2.Text = "Nombre de la Categoria"
+            Lbl1GrpBxAdmin2.Visible = True
+            Lbl2GrpBxAdmin2.Visible = False
+            Lbl3GrpBxAdmin2.Visible = False
+            Intervalo.Visible = False
+            TxtBx1GrpBxAdmin2.Visible = True
+            TxtBx2GrpBxAdmin2.Visible = False
+            TxtBx3GrpBxAdmin2.Visible = False
+            CmbBx1GrpBxAdmin2.Visible = False
+            CmbBx2GrpBxAdmin2.Visible = False
+            GrpBxAdmin2.Visible = True
+        ElseIf CmbBxTablas.SelectedItem = "Pruebas por Categoria" Then
+            Lbl1GrpBxAdmin2.Text = "Codigo de la Prueba"
+            Lbl2GrpBxAdmin2.Text = "Categoria de la Prueba"
+            Lbl1GrpBxAdmin2.Visible = True
+            Lbl2GrpBxAdmin2.Visible = True
+            Lbl3GrpBxAdmin2.Visible = False
+            Intervalo.Visible = False
+            TxtBx1GrpBxAdmin2.Visible = False
+            TxtBx2GrpBxAdmin2.Visible = False
+            TxtBx3GrpBxAdmin2.Visible = False
+            CmbBx1GrpBxAdmin2.Visible = True
+            CmbBx2GrpBxAdmin2.Visible = True
+            GrpBxAdmin2.Visible = True
+        ElseIf CmbBxTablas.SelectedItem = "Tipo de Mercancia" Then
+            Lbl1GrpBxAdmin2.Text = "Nombre"
+            Lbl2GrpBxAdmin2.Text = "Intervalo (en dias)"
+            Lbl1GrpBxAdmin2.Visible = True
+            Lbl2GrpBxAdmin2.Visible = True
+            Lbl3GrpBxAdmin2.Visible = False
+            TxtBx1GrpBxAdmin2.Visible = True
+            Intervalo.Visible = True
+            TxtBx2GrpBxAdmin2.Visible = False
+            TxtBx3GrpBxAdmin2.Visible = False
+            CmbBx1GrpBxAdmin2.Visible = False
+            CmbBx2GrpBxAdmin2.Visible = False
             GrpBxAdmin2.Visible = True
         End If
     End Sub
@@ -603,16 +922,96 @@ Public Class Form1
                         Dim cmd2 As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`usuarios` (`UsuarioID`, `usuario`, `Contraseña`) VALUES ('" & llave & "', '" & TxtBx1GrpBxAdmin2.Text & "', '" & TxtBx2GrpBxAdmin2.Text & "');"), conn)
                         cmd2.ExecuteNonQuery()
                         conn.Close()
-                        MsgBox("Usuario Agregado", False, "Usuario Agregado")
+                        MsgBox("Usuario Agregado", MsgBoxStyle.Information, "Usuario Agregado")
                     Catch ex As Exception
-                        MsgBox(ex.Message, False, "Error")
+                        MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
                         conn.Close()
                         Exit Sub
                     End Try
                     CargarDGVAdmin()
                 End If
             End If
+        ElseIf CmbBxTablas.SelectedItem = "Clientes" Then
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("select max(ClienteID) + 1 FROM clientes;"), conn)
+                Dim llave As String = cmd.ExecuteScalar.ToString
+                Dim cmd2 As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`clientes` (`ClienteID`, `Nombre`) VALUES ('" & llave & "', '" & TxtBx1GrpBxAdmin2.Text & "');"), conn)
+                cmd2.ExecuteNonQuery()
+                conn.Close()
+                MsgBox("Cliente Agregado", MsgBoxStyle.Information, "Cliente Agregado")
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
+            CargarDGVAdmin()
+        ElseIf CmbBxTablas.SelectedItem = "Pruebas" Then
+            Dim llave As String = TxtBx1GrpBxAdmin2.Text
+            Dim nombre As String = TxtBx2GrpBxAdmin2.Text
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`pruebas` (`ID_Prueba`, `Nombre`) VALUES ('" & llave & "', '" & nombre & "');"), conn)
+                cmd.ExecuteNonQuery()
+                conn.Close()
+                MsgBox("Prueba Agregada", MsgBoxStyle.Information, "Prueba Agregada")
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
+            CargarDGVAdmin()
+        ElseIf CmbBxTablas.SelectedItem = "Categorias" Then
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("select max(ID_Categoria) + 1 FROM categorias;"), conn)
+                Dim llave As String = cmd.ExecuteScalar.ToString
+                Dim cmd2 As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`categorias` (`ID_Categoria`, `Nombre`) VALUES ('" & llave & "', '" & TxtBx1GrpBxAdmin2.Text & "');"), conn)
+                cmd2.ExecuteNonQuery()
+                conn.Close()
+                MsgBox("Categoria Agregada", MsgBoxStyle.Information, "Categoria Agregada")
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
+            CargarDGVAdmin()
+
+        ElseIf CmbBxTablas.SelectedItem = "Pruebas por Categoria" Then
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`pruebasxcategoria` (`ID_Prueba`, `ID_Categoria`) VALUES ('" & CmbBx1GrpBxAdmin2.SelectedValue & "', '" & CmbBx2GrpBxAdmin2.SelectedValue & "');"), conn)
+                cmd.ExecuteNonQuery()
+                conn.Close()
+                MsgBox("Registro Agregado", MsgBoxStyle.Information, "Registro Agregado")
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
+            CargarDGVAdmin()
+
+        ElseIf CmbBxTablas.SelectedItem = "Tipo de Mercancia" Then
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("select max(Tipo_Producto_ID) + 1 FROM tipo_productos;"), conn)
+                Dim llave As String = cmd.ExecuteScalar.ToString
+                Dim cmd2 As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`tipo_productos` (`Tipo_Producto_ID`, `Nombre`, `Intervalo`) VALUES ('" & llave & "', '" & TxtBx1GrpBxAdmin2.Text & "', '" & Intervalo.Value.ToString & " DAY');"), conn)
+                cmd2.ExecuteNonQuery()
+                conn.Close()
+                MsgBox("Tipo de Mercancia Agregada", MsgBoxStyle.Information, "Tipo de Mercancia Agregada")
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
+            CargarDGVAdmin()
+
         End If
+        TxtBx1GrpBxAdmin2.Text = ""
+        TxtBx2GrpBxAdmin2.Text = ""
+        TxtBx3GrpBxAdmin2.Text = ""
+
     End Sub
 
     Private Sub BtnEliminarRegistro_Click(sender As Object, e As EventArgs) Handles BtnEliminarRegistro.Click
@@ -639,9 +1038,43 @@ Public Class Form1
                     conn.Close()
                     Exit Sub
                 End Try
-                CargarDGVAdmin()
-            End If
 
+            ElseIf CmbBxTablas.SelectedItem = "Clientes" Then
+                Dim fila_actual As Integer = DGVAdmin.CurrentRow.Index
+                Dim llave As Integer = DGVAdmin(0, fila_actual).Value
+                Try
+                    conn.Open()
+                    Dim query As String = "Delete from clientes where ClienteID = " & llave & ""
+                    Dim cmd As New MySqlCommand(query, conn)
+                    reader = cmd.ExecuteReader
+                    MsgBox("Cliente Eliminado", MsgBoxStyle.Information, "Cliente Eliminado")
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+            ElseIf CmbBxTablas.SelectedItem = "Pruebas por Categoria" Then
+                Dim fila_actual As Integer = DGVAdmin.CurrentRow.Index
+                Dim llave As String = DGVAdmin(0, fila_actual).Value.ToString
+                Dim var As String = DGVAdmin(1, fila_actual).Value.ToString
+                Try
+                    conn.Open()
+                    Dim query As String = "select id_categoria from categorias where nombre ='" & var & "';"
+                    Dim cmd As New MySqlCommand(query, conn)
+                    Dim llave2 As String = cmd.ExecuteScalar
+                    Dim query2 As String = "Delete from pruebasxcategoria where ID_Prueba = '" & llave & "' and ID_Categoria = '" & llave2 & "';"
+                    Dim cmd2 As New MySqlCommand(query2, conn)
+                    reader = cmd2.ExecuteReader
+                    MsgBox("Registro Eliminado", MsgBoxStyle.Information, "Registro Eliminado")
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+            End If
+            CargarDGVAdmin()
         End If
 
     End Sub

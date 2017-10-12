@@ -5,9 +5,9 @@ Public Class Form3
     Dim conn As New MySqlConnection
 
     Private Sub Form3_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        control = 0
         Connect()
         LlenarCmbBxCategorias()
-        CmbBxCategorias.SelectedText = ""
     End Sub
 
     Private Sub Connect()
@@ -41,358 +41,18 @@ Public Class Form3
     Dim cod_prue As New List(Of String)()
     Dim nombre_prueba As New List(Of String)()
 
+
+
     Private Sub CmbBxCategorias_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbBxCategorias.SelectedIndexChanged
+        If control = 0 Then
+            Exit Sub
+        End If
         cod_prue.Clear()
         nombre_prueba.Clear()
-        If CmbBxCategorias.SelectedValue.ToString = "1" Then
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("Select count(*) from pruebasxcategoria where id_categoria = 1"), conn)
-                pruebascategoria = cmd.ExecuteScalar
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
-                conn.Close()
-            End Try
 
-            ReDim CheckBoxButtonArray(pruebascategoria)
-            ReDim TextBoxArray(pruebascategoria)
+        Dim categoria As String = CmbBxCategorias.SelectedValue.ToString
 
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("select ID_Prueba from pruebasxcategoria where ID_Categoria = 1"), conn)
-                Dim dr = cmd.ExecuteReader
-                While dr.Read
-                    cod_prue.Add(dr("ID_Prueba").ToString())
-                End While
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
-                conn.Close()
-            End Try
-
-            For Each item As String In cod_prue
-                Console.WriteLine(item)
-            Next
-
-
-            For Each item As String In cod_prue
-                Try
-                    conn.Open()
-                    Dim cmd As New MySqlCommand(String.Format("select Nombre from pruebas where ID_Prueba = '" & item & "';"), conn)
-                    Dim dr = cmd.ExecuteReader
-                    While dr.Read
-                        nombre_prueba.Add(dr("nombre").ToString())
-                    End While
-                    conn.Close()
-                Catch ex As Exception
-                    MsgBox(ex.Message, False, "Error")
-                    conn.Close()
-                End Try
-            Next
-
-            For Each item As String In nombre_prueba
-                Console.WriteLine(item)
-            Next
-
-            Panel1.Controls.Clear()
-
-            Dim X1, Y1, Y2 As Integer
-            Dim deltay As Integer = 70
-            For i = 0 To pruebascategoria - 1
-                X1 = 7
-                If i = 0 Then
-                    Y1 = 15
-                    Y2 = 40
-                Else
-                    Y1 = Y1 + deltay
-                    Y2 = Y2 + deltay
-                End If
-                CheckBoxButtonArray(i) = New CheckBox With {
-                    .Location = New Point(X1, Y1),
-                    .Text = cod_prue(i).ToString + " " + nombre_prueba(i) + ":",
-                    .Width = 300,
-                    .Height = 20,
-                    .ForeColor = Color.Black,
-                    .Visible = True,
-                    .Parent = Me.Panel1,
-                    .Name = i.ToString,
-                    .Checked = True
-                }
-                TextBoxArray(i) = New TextBox With {
-                    .Location = New Point(X1, Y2),
-                    .Size = New Size(300, 40),
-                    .Enabled = True,
-                    .Visible = True,
-                    .Parent = Me.Panel1,
-                    .Name = "TxtBx" + cod_prue(i).ToString
-                }
-
-                AddHandler CheckBoxButtonArray(i).Click, AddressOf CheckBox_Clicked
-            Next
-
-        ElseIf CmbBxCategorias.SelectedValue.ToString = "2" Then
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("Select count(*) from pruebasxcategoria where id_categoria = 2"), conn)
-                pruebascategoria = cmd.ExecuteScalar
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
-                conn.Close()
-            End Try
-
-            ReDim CheckBoxButtonArray(pruebascategoria)
-            ReDim TextBoxArray(pruebascategoria)
-
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("select ID_Prueba from pruebasxcategoria where ID_Categoria = 2"), conn)
-                Dim dr = cmd.ExecuteReader
-                While dr.Read
-                    cod_prue.Add(dr("ID_Prueba").ToString())
-                End While
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
-                conn.Close()
-            End Try
-
-            For Each item As String In cod_prue
-                Console.WriteLine(item)
-            Next
-
-
-            For Each item As String In cod_prue
-                Try
-                    conn.Open()
-                    Dim cmd As New MySqlCommand(String.Format("select Nombre from pruebas where ID_Prueba = '" & item & "';"), conn)
-                    Dim dr = cmd.ExecuteReader
-                    While dr.Read
-                        nombre_prueba.Add(dr("nombre").ToString())
-                    End While
-                    conn.Close()
-                Catch ex As Exception
-                    MsgBox(ex.Message, False, "Error")
-                    conn.Close()
-                End Try
-            Next
-
-            For Each item As String In nombre_prueba
-                Console.WriteLine(item)
-            Next
-
-            Panel1.Controls.Clear()
-
-            Dim X1, Y1, Y2 As Integer
-            Dim deltay As Integer = 70
-            For i = 0 To pruebascategoria - 1
-                X1 = 7
-                If i = 0 Then
-                    Y1 = 15
-                    Y2 = 40
-                Else
-                    Y1 = Y1 + deltay
-                    Y2 = Y2 + deltay
-                End If
-                CheckBoxButtonArray(i) = New CheckBox With {
-                    .Location = New Point(X1, Y1),
-                    .Text = cod_prue(i).ToString + " " + nombre_prueba(i) + ":",
-                    .Width = 300,
-                    .Height = 20,
-                    .ForeColor = Color.Black,
-                    .Visible = True,
-                    .Parent = Me.Panel1,
-                    .Name = i.ToString,
-                    .Checked = True
-                }
-                TextBoxArray(i) = New TextBox With {
-                    .Location = New Point(X1, Y2),
-                    .Size = New Size(300, 40),
-                    .Enabled = True,
-                    .Visible = True,
-                    .Parent = Me.Panel1,
-                    .Name = "TxtBx" + cod_prue(i).ToString
-                }
-
-                AddHandler CheckBoxButtonArray(i).Click, AddressOf CheckBox_Clicked
-            Next
-
-        ElseIf CmbBxCategorias.SelectedValue.ToString = "3" Then
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("Select count(*) from pruebasxcategoria where id_categoria = 3"), conn)
-                pruebascategoria = cmd.ExecuteScalar
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
-                conn.Close()
-            End Try
-
-            ReDim CheckBoxButtonArray(pruebascategoria)
-            ReDim TextBoxArray(pruebascategoria)
-
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("select ID_Prueba from pruebasxcategoria where ID_Categoria = 3"), conn)
-                Dim dr = cmd.ExecuteReader
-                While dr.Read
-                    cod_prue.Add(dr("ID_Prueba").ToString())
-                End While
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
-                conn.Close()
-            End Try
-
-            For Each item As String In cod_prue
-                Console.WriteLine(item)
-            Next
-
-
-            For Each item As String In cod_prue
-                Try
-                    conn.Open()
-                    Dim cmd As New MySqlCommand(String.Format("select Nombre from pruebas where ID_Prueba = '" & item & "';"), conn)
-                    Dim dr = cmd.ExecuteReader
-                    While dr.Read
-                        nombre_prueba.Add(dr("nombre").ToString())
-                    End While
-                    conn.Close()
-                Catch ex As Exception
-                    MsgBox(ex.Message, False, "Error")
-                    conn.Close()
-                End Try
-            Next
-
-            For Each item As String In nombre_prueba
-                Console.WriteLine(item)
-            Next
-
-            Panel1.Controls.Clear()
-
-            Dim X1, Y1, Y2 As Integer
-            Dim deltay As Integer = 70
-            For i = 0 To pruebascategoria - 1
-                X1 = 7
-                If i = 0 Then
-                    Y1 = 15
-                    Y2 = 40
-                Else
-                    Y1 = Y1 + deltay
-                    Y2 = Y2 + deltay
-                End If
-                CheckBoxButtonArray(i) = New CheckBox With {
-                    .Location = New Point(X1, Y1),
-                    .Text = cod_prue(i).ToString + " " + nombre_prueba(i) + ":",
-                    .Width = 300,
-                    .Height = 20,
-                    .ForeColor = Color.Black,
-                    .Visible = True,
-                    .Parent = Me.Panel1,
-                    .Name = i.ToString,
-                    .Checked = True
-                }
-                TextBoxArray(i) = New TextBox With {
-                    .Location = New Point(X1, Y2),
-                    .Size = New Size(300, 40),
-                    .Enabled = True,
-                    .Visible = True,
-                    .Parent = Me.Panel1,
-                    .Name = "TxtBx" + cod_prue(i).ToString
-                }
-
-                AddHandler CheckBoxButtonArray(i).Click, AddressOf CheckBox_Clicked
-            Next
-
-        ElseIf CmbBxCategorias.SelectedValue.ToString = "4" Then
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("Select count(*) from pruebasxcategoria where id_categoria = 4"), conn)
-                pruebascategoria = cmd.ExecuteScalar
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
-                conn.Close()
-            End Try
-
-            ReDim CheckBoxButtonArray(pruebascategoria)
-            ReDim TextBoxArray(pruebascategoria)
-
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("select ID_Prueba from pruebasxcategoria where ID_Categoria = 4"), conn)
-                Dim dr = cmd.ExecuteReader
-                While dr.Read
-                    cod_prue.Add(dr("ID_Prueba").ToString())
-                End While
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
-                conn.Close()
-            End Try
-
-            For Each item As String In cod_prue
-                Console.WriteLine(item)
-            Next
-
-
-            For Each item As String In cod_prue
-                Try
-                    conn.Open()
-                    Dim cmd As New MySqlCommand(String.Format("select Nombre from pruebas where ID_Prueba = '" & item & "';"), conn)
-                    Dim dr = cmd.ExecuteReader
-                    While dr.Read
-                        nombre_prueba.Add(dr("nombre").ToString())
-                    End While
-                    conn.Close()
-                Catch ex As Exception
-                    MsgBox(ex.Message, False, "Error")
-                    conn.Close()
-                End Try
-            Next
-
-            For Each item As String In nombre_prueba
-                Console.WriteLine(item)
-            Next
-
-            Panel1.Controls.Clear()
-
-            Dim X1, Y1, Y2 As Integer
-            Dim deltay As Integer = 70
-            For i = 0 To pruebascategoria - 1
-                X1 = 7
-                If i = 0 Then
-                    Y1 = 15
-                    Y2 = 40
-                Else
-                    Y1 = Y1 + deltay
-                    Y2 = Y2 + deltay
-                End If
-                CheckBoxButtonArray(i) = New CheckBox With {
-                    .Location = New Point(X1, Y1),
-                    .Text = cod_prue(i).ToString + " " + nombre_prueba(i) + ":",
-                    .Width = 300,
-                    .Height = 20,
-                    .ForeColor = Color.Black,
-                    .Visible = True,
-                    .Parent = Me.Panel1,
-                    .Name = i.ToString,
-                    .Checked = True
-                }
-                TextBoxArray(i) = New TextBox With {
-                    .Location = New Point(X1, Y2),
-                    .Size = New Size(300, 40),
-                    .Enabled = True,
-                    .Visible = True,
-                    .Parent = Me.Panel1,
-                    .Name = "TxtBx" + cod_prue(i).ToString
-                }
-
-                AddHandler CheckBoxButtonArray(i).Click, AddressOf CheckBox_Clicked
-            Next
-
-        ElseIf CmbBxCategorias.SelectedValue.ToString = "5" Then
+        If categoria = "5" Then
             Try
                 conn.Open()
                 Dim cmd As New MySqlCommand(String.Format("Select count(*) from Pruebas"), conn)
@@ -409,6 +69,92 @@ Public Class Form3
             Try
                 conn.Open()
                 Dim cmd As New MySqlCommand(String.Format("select ID_Prueba from Pruebas"), conn)
+                Dim dr = cmd.ExecuteReader
+                While dr.Read
+                    cod_prue.Add(dr("ID_Prueba").ToString())
+                End While
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "Error")
+                conn.Close()
+            End Try
+
+            For Each item As String In cod_prue
+                Console.WriteLine(item)
+            Next
+
+
+            For Each item As String In cod_prue
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("select Nombre from pruebas where ID_Prueba = '" & item & "';"), conn)
+                    Dim dr = cmd.ExecuteReader
+                    While dr.Read
+                        nombre_prueba.Add(dr("nombre").ToString())
+                    End While
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, False, "Error")
+                    conn.Close()
+                End Try
+            Next
+
+            For Each item As String In nombre_prueba
+                Console.WriteLine(item)
+            Next
+
+            Panel1.Controls.Clear()
+
+            Dim X1, Y1, Y2 As Integer
+            Dim deltay As Integer = 70
+            For i = 0 To pruebascategoria - 1
+                X1 = 7
+                If i = 0 Then
+                    Y1 = 15
+                    Y2 = 40
+                Else
+                    Y1 = Y1 + deltay
+                    Y2 = Y2 + deltay
+                End If
+                CheckBoxButtonArray(i) = New CheckBox With {
+                    .Location = New Point(X1, Y1),
+                    .Text = cod_prue(i).ToString + " " + nombre_prueba(i) + ":",
+                    .Width = 300,
+                    .Height = 20,
+                    .ForeColor = Color.Black,
+                    .Visible = True,
+                    .Parent = Me.Panel1,
+                    .Name = i.ToString,
+                    .Checked = True
+                }
+                TextBoxArray(i) = New TextBox With {
+                    .Location = New Point(X1, Y2),
+                    .Size = New Size(300, 40),
+                    .Enabled = True,
+                    .Visible = True,
+                    .Parent = Me.Panel1,
+                    .Name = "TxtBx" + cod_prue(i).ToString
+                }
+
+                AddHandler CheckBoxButtonArray(i).Click, AddressOf CheckBox_Clicked
+            Next
+        Else
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("Select count(*) from pruebasxcategoria where id_categoria = " & categoria & ";"), conn)
+                pruebascategoria = cmd.ExecuteScalar
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "Error")
+                conn.Close()
+            End Try
+
+            ReDim CheckBoxButtonArray(pruebascategoria)
+            ReDim TextBoxArray(pruebascategoria)
+
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("select ID_Prueba from pruebasxcategoria where ID_Categoria = " & categoria & ";"), conn)
                 Dim dr = cmd.ExecuteReader
                 While dr.Read
                     cod_prue.Add(dr("ID_Prueba").ToString())
@@ -540,5 +286,10 @@ Public Class Form3
 
     Private Sub BtnCancelar_Click(sender As Object, e As EventArgs) Handles BtnCancelar.Click
         Me.Close()
+    End Sub
+
+    Dim control As Integer = 0
+    Private Sub Form3_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        control = 1
     End Sub
 End Class
