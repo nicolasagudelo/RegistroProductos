@@ -519,7 +519,9 @@ Public Class Form3
                 Try
                     conn.Open()
                     Dim cmd As New MySqlCommand(String.Format("INSERT INTO reportes (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Observaciones`, `Fecha_Ingreso`, `Fecha_Reporte`, `ID_Prueba`, `Valor`, `UsuarioID`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & TipoProducto & "', '" & NumeroSerie & "', '" & Observaciones & "', '" & Fecha_Ingreso & "', '" & Fecha_Reporte & "', '" & ID_Prueba & "', '" & valor & "', '" & UsuarioID & "');"), conn)
+                    Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado' , Valor = '" & valor & "', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
                     cmd.ExecuteNonQuery()
+                    cmd2.ExecuteNonQuery()
                     Console.WriteLine("Reporte Registrado")
                     conn.Close()
                 Catch ex As Exception
@@ -530,5 +532,13 @@ Public Class Form3
             End If
         Next
         MsgBox("Reporte Registrado", False, "Reporte Registrado")
+        Form1.CargarDGVProductosLimite()
+        Form1.CargarDGVProductosSinRevisar()
+        Form1.ProductosFechaLimiteCerca()
+        Me.Close()
+    End Sub
+
+    Private Sub BtnCancelar_Click(sender As Object, e As EventArgs) Handles BtnCancelar.Click
+        Me.Close()
     End Sub
 End Class

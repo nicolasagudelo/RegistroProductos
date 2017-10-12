@@ -14,3 +14,4 @@ C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\bin\Debug\MySq
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form2.resources
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.vbprojResolveAssemblyReference.cache
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form3.resources
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.FormCambiarContraseña.resources

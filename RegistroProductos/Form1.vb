@@ -6,7 +6,9 @@ Public Class Form1
     Dim conn As New MySqlConnection
     Dim admin As Integer
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If LblUsuario.Text = "Sesion actual: " & nombre_usuario Then
+        Connect()
+        TabControl1.TabPages.Remove(TabPageAdmin)
+        If LblUsuario.Text = "Sesion actual: Administrador" Then
             admin = 1
             Panel2.Visible = True
             TxtBxProductoID.Enabled = False
@@ -28,13 +30,28 @@ Public Class Form1
             DTPFechaLimite.Visible = True
             DTPFechaLimite.Format = DateTimePickerFormat.Custom
             DTPFechaLimite.CustomFormat = "yyyy-MM-dd"
+            BtnGenerarReporte.Visible = False
+            BtnGenerarReporte2.Visible = False
+            TabControl1.TabPages.Insert(2, TabPageAdmin)
+            CmbBxTablas.Items.Clear()
+            CmbBxTablas.Items.Add("Usuarios")
+            CmbBxTablas.Items.Add("Clientes")
+            CmbBxTablas.Items.Add("Pruebas")
+            CmbBxTablas.Items.Add("Categorias")
+            CmbBxTablas.Items.Add("Pruebas por Categoria")
+            CmbBxTablas.Items.Add("Tipo de Mercancia")
+            CmbBxTablas.Items.Add("Historial de Productos revisados")
+            CmbBxTablas.Items.Add("Historial de Pruebas")
+            CmbBxTablas.SelectedIndex = 0
         Else
             admin = 0
             Panel2.Visible = False
             TxtBxProductoID.Enabled = True
             BtnRegistrarProducto.Visible = True
+            BtnGenerarReporte.Visible = True
+            BtnGenerarReporte2.Visible = True
+            TabControl1.TabPages.Remove(TabPageAdmin)
         End If
-        Connect()
         Try
             conn.Open()
             Dim cmd As New MySqlCommand(String.Format("SELECT NOW()"), conn)
@@ -435,46 +452,200 @@ Public Class Form1
     End Sub
 
     Private Sub BtnGenerarReporte_Click(sender As Object, e As EventArgs) Handles BtnGenerarReporte.Click
-        If TabControl1.TabIndex = 0 Then
-            Dim fila_actual As Integer = (DGVProductosSinRevisar.CurrentRow.Index)
-            Form3.TxtBxUsuario.Text = nombre_usuario
-            Dim usu_id As String
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("select UsuarioID from usuarios where usuario = '" & nombre_usuario & "';"), conn)
-                usu_id = cmd.ExecuteScalar
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
-                conn.Close()
-                Exit Sub
-            End Try
-            Form3.TxtBxIdUsuario.Text = usu_id
-            Form3.TxtBxIDProducto.Text = DGVProductosSinRevisar(0, (fila_actual)).Value
-            Form3.TxtBxCliente.Text = DGVProductosSinRevisar(3, fila_actual).Value
-            Form3.TxtBxProducto.Text = DGVProductosSinRevisar(4, fila_actual).Value
-            Form3.TxtBxNumeroSerie.Text = DGVProductosSinRevisar(5, fila_actual).Value
-            Form3.RchTxtBxObservaciones.Text = DGVProductosSinRevisar(6, fila_actual).Value
-            Form3.TxtBxTipoProductoID.Text = DGVProductosSinRevisar(2, fila_actual).Value
-            Form3.TxtBxClienteID.Text = DGVProductosSinRevisar(1, fila_actual).Value
-            Dim fecha_entrada As Date = DGVProductosSinRevisar(7, fila_actual).Value
-            Form3.TxtBxFechaEntrada.Text = fecha_entrada.ToString("yyyy-MM-dd")
-            Dim fecha_registro As Date
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("select date(now())"), conn)
-                fecha_registro = cmd.ExecuteScalar
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
-                conn.Close()
-            End Try
-            Form3.TxtBxFechaRegistro.Text = fecha_registro.ToString("yyyy-MM-dd")
-
-            'Else
-
-        End If
+        Dim fila_actual As Integer = (DGVProductosSinRevisar.CurrentRow.Index)
+        Form3.TxtBxUsuario.Text = nombre_usuario
+        Dim usu_id As String
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("select UsuarioID from usuarios where usuario = '" & nombre_usuario & "';"), conn)
+            usu_id = cmd.ExecuteScalar
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, False, "Error")
+            conn.Close()
+            Exit Sub
+        End Try
+        Form3.TxtBxIdUsuario.Text = usu_id
+        Form3.TxtBxIDProducto.Text = DGVProductosSinRevisar(0, (fila_actual)).Value
+        Form3.TxtBxCliente.Text = DGVProductosSinRevisar(3, fila_actual).Value
+        Form3.TxtBxProducto.Text = DGVProductosSinRevisar(4, fila_actual).Value
+        Form3.TxtBxNumeroSerie.Text = DGVProductosSinRevisar(5, fila_actual).Value
+        Form3.RchTxtBxObservaciones.Text = DGVProductosSinRevisar(6, fila_actual).Value
+        Form3.TxtBxTipoProductoID.Text = DGVProductosSinRevisar(2, fila_actual).Value
+        Form3.TxtBxClienteID.Text = DGVProductosSinRevisar(1, fila_actual).Value
+        Dim fecha_entrada As Date = DGVProductosSinRevisar(7, fila_actual).Value
+        Form3.TxtBxFechaEntrada.Text = fecha_entrada.ToString("yyyy-MM-dd")
+        Dim fecha_registro As Date
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("select date(now())"), conn)
+            fecha_registro = cmd.ExecuteScalar
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, False, "Error")
+            conn.Close()
+        End Try
+        Form3.TxtBxFechaRegistro.Text = fecha_registro.ToString("yyyy-MM-dd")
 
         Form3.ShowDialog()
     End Sub
+
+    Private Sub BtnGenerarReporte2_Click(sender As Object, e As EventArgs) Handles BtnGenerarReporte2.Click
+        Dim fila_actual As Integer = (DGVProductosLimite.CurrentRow.Index)
+        Form3.TxtBxUsuario.Text = nombre_usuario
+        Dim usu_id As String
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("select UsuarioID from usuarios where usuario = '" & nombre_usuario & "';"), conn)
+            usu_id = cmd.ExecuteScalar
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, False, "Error")
+            conn.Close()
+            Exit Sub
+        End Try
+        Form3.TxtBxIdUsuario.Text = usu_id
+        Form3.TxtBxIDProducto.Text = DGVProductosLimite(0, (fila_actual)).Value
+        Form3.TxtBxCliente.Text = DGVProductosLimite(3, fila_actual).Value
+        Form3.TxtBxProducto.Text = DGVProductosLimite(4, fila_actual).Value
+        Form3.TxtBxNumeroSerie.Text = DGVProductosLimite(5, fila_actual).Value
+        Form3.RchTxtBxObservaciones.Text = DGVProductosLimite(6, fila_actual).Value
+        Form3.TxtBxTipoProductoID.Text = DGVProductosLimite(2, fila_actual).Value
+        Form3.TxtBxClienteID.Text = DGVProductosLimite(1, fila_actual).Value
+        Dim fecha_entrada As Date = DGVProductosLimite(7, fila_actual).Value
+        Form3.TxtBxFechaEntrada.Text = fecha_entrada.ToString("yyyy-MM-dd")
+        Dim fecha_registro As Date
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("select date(now())"), conn)
+            fecha_registro = cmd.ExecuteScalar
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, False, "Error")
+            conn.Close()
+        End Try
+        Form3.TxtBxFechaRegistro.Text = fecha_registro.ToString("yyyy-MM-dd")
+
+        Form3.ShowDialog()
+    End Sub
+
+    Private Sub LblCambiarContraseña_Click(sender As Object, e As EventArgs) Handles LblCambiarContraseña.Click
+        FormCambiarContraseña.RecibirVariablesForm1(nombre_usuario)
+        FormCambiarContraseña.ShowDialog()
+    End Sub
+
+    Private Sub CargarDGVAdmin()
+        If CmbBxTablas.SelectedItem = "Usuarios" Then
+            Dim query As String = "SELECT * From usuarios;"
+
+            Dim cmd As New MySqlCommand(query, conn)
+            Dim reader As MySqlDataReader
+
+            Try
+                conn.Open()
+                Console.WriteLine("Cargando Usuarios")
+
+                reader = cmd.ExecuteReader
+
+                Dim table As New DataTable
+                table.Load(reader)
+                DGVAdmin.DataSource = table
+                DGVAdmin.ReadOnly = True
+                DGVAdmin.AllowUserToResizeColumns = True
+                DGVAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                reader.Close()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "Error")
+                conn.Close()
+            End Try
+        End If
+    End Sub
+
+    Private Sub CmbBxTablas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbBxTablas.SelectedIndexChanged
+        GrpBxAdmin2.Visible = False
+        If CmbBxTablas.SelectedItem = "Usuarios" Then
+            BtnNuevoRegistro.Enabled = True
+            BtnEliminarRegistro.Enabled = True
+            BtnNuevoRegistro.Text = "Agregar Usuario"
+            BtnModificarRegistroAdmin.Visible = False
+            BtnEliminarRegistro.Text = "Eliminar Usuario"
+            GrpBxAdmin.Visible = True
+            CargarDGVAdmin()
+        End If
+    End Sub
+
+    Private Sub BtnNuevoRegistro_Click(sender As Object, e As EventArgs) Handles BtnNuevoRegistro.Click
+        If CmbBxTablas.SelectedItem = "Usuarios" Then
+            Lbl1GrpBxAdmin2.Text = "Nombre de Usuario"
+            Lbl2GrpBxAdmin2.Text = "Contraseña"
+            Lbl3GrpBxAdmin2.Text = "Confirmar Contraseña"
+            TxtBx2GrpBxAdmin2.PasswordChar = "*"
+            TxtBx3GrpBxAdmin2.PasswordChar = "*"
+            GrpBxAdmin2.Visible = True
+        End If
+    End Sub
+
+    Private Sub BtnAceptarGrpBxAdmin2_Click(sender As Object, e As EventArgs) Handles BtnAceptarGrpBxAdmin2.Click
+        If CmbBxTablas.SelectedItem = "Usuarios" Then
+            If TxtBx2GrpBxAdmin2.TextLength < 3 Or TxtBx3GrpBxAdmin2.TextLength < 3 Then
+                MsgBox("La contraseña debe ser de al menos 3 caracteres", False, "Error")
+                Exit Sub
+            Else
+                If TxtBx2GrpBxAdmin2.Text <> TxtBx3GrpBxAdmin2.Text Then
+                    MsgBox("Las contraseñas ingresadas no coinciden", False, "Error")
+                    Exit Sub
+                Else
+                    Try
+                        conn.Open()
+                        Dim cmd As New MySqlCommand(String.Format("select max(UsuarioID) + 1 FROM usuarios;"), conn)
+                        Dim llave As String = cmd.ExecuteScalar.ToString
+                        Dim cmd2 As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`usuarios` (`UsuarioID`, `usuario`, `Contraseña`) VALUES ('" & llave & "', '" & TxtBx1GrpBxAdmin2.Text & "', '" & TxtBx2GrpBxAdmin2.Text & "');"), conn)
+                        cmd2.ExecuteNonQuery()
+                        conn.Close()
+                        MsgBox("Usuario Agregado", False, "Usuario Agregado")
+                    Catch ex As Exception
+                        MsgBox(ex.Message, False, "Error")
+                        conn.Close()
+                        Exit Sub
+                    End Try
+                    CargarDGVAdmin()
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub BtnEliminarRegistro_Click(sender As Object, e As EventArgs) Handles BtnEliminarRegistro.Click
+        If MessageBox.Show("¿Esta seguro que desea eliminar el registro seleccionado?", "Eliminar", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            Dim reader As MySqlDataReader
+            Dim fila_actual_obj As Object = DGVAdmin.CurrentRow
+            If IsNothing(fila_actual_obj) Then
+                MsgBox("Seleccione un registro a eliminar", MsgBoxStyle.Information, "Info.")
+                Exit Sub
+            End If
+
+            If CmbBxTablas.SelectedItem = "Usuarios" Then
+                Dim fila_actual As Integer = DGVAdmin.CurrentRow.Index
+                Dim llave As Integer = DGVAdmin(0, fila_actual).Value
+                Try
+                    conn.Open()
+                    Dim query As String = "Delete from usuarios where usuarioID = " & llave & ""
+                    Dim cmd As New MySqlCommand(query, conn)
+                    reader = cmd.ExecuteReader
+                    MsgBox("Usuario Eliminado", MsgBoxStyle.Information, "Usuario Eliminado")
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+                CargarDGVAdmin()
+            End If
+
+        End If
+
+    End Sub
+
+
+
 End Class

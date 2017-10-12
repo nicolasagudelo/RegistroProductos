@@ -23,7 +23,7 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPageRegistrarProducto = New System.Windows.Forms.TabPage()
         Me.BtnGenerarReporte = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.DTPFechaLimite = New System.Windows.Forms.DateTimePicker()
@@ -42,7 +42,7 @@ Partial Class Form1
         Me.LblNumeroProducto = New System.Windows.Forms.Label()
         Me.TxtBxProductoID = New System.Windows.Forms.TextBox()
         Me.DGVProductosSinRevisar = New System.Windows.Forms.DataGridView()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabPageProductoLimite = New System.Windows.Forms.TabPage()
         Me.BtnGenerarReporte2 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.DTPFechaLimite2 = New System.Windows.Forms.DateTimePicker()
@@ -62,13 +62,33 @@ Partial Class Form1
         Me.DGVProductosLimite = New System.Windows.Forms.DataGridView()
         Me.LblUsuario = New System.Windows.Forms.Label()
         Me.BtnDesconectar = New System.Windows.Forms.Button()
+        Me.LblCambiarContraseña = New System.Windows.Forms.Label()
+        Me.TabPageAdmin = New System.Windows.Forms.TabPage()
+        Me.DGVAdmin = New System.Windows.Forms.DataGridView()
+        Me.CmbBxTablas = New System.Windows.Forms.ComboBox()
+        Me.GrpBxAdmin = New System.Windows.Forms.GroupBox()
+        Me.BtnNuevoRegistro = New System.Windows.Forms.Button()
+        Me.BtnModificarRegistroAdmin = New System.Windows.Forms.Button()
+        Me.BtnEliminarRegistro = New System.Windows.Forms.Button()
+        Me.GrpBxAdmin2 = New System.Windows.Forms.GroupBox()
+        Me.Lbl1GrpBxAdmin2 = New System.Windows.Forms.Label()
+        Me.Lbl2GrpBxAdmin2 = New System.Windows.Forms.Label()
+        Me.TxtBx1GrpBxAdmin2 = New System.Windows.Forms.TextBox()
+        Me.TxtBx2GrpBxAdmin2 = New System.Windows.Forms.TextBox()
+        Me.BtnAceptarGrpBxAdmin2 = New System.Windows.Forms.Button()
+        Me.TxtBx3GrpBxAdmin2 = New System.Windows.Forms.TextBox()
+        Me.Lbl3GrpBxAdmin2 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
+        Me.TabPageRegistrarProducto.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DGVProductosSinRevisar, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage2.SuspendLayout()
+        Me.TabPageProductoLimite.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.DGVProductosLimite, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPageAdmin.SuspendLayout()
+        CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GrpBxAdmin.SuspendLayout()
+        Me.GrpBxAdmin2.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -76,33 +96,34 @@ Partial Class Form1
         Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPageRegistrarProducto)
+        Me.TabControl1.Controls.Add(Me.TabPageProductoLimite)
+        Me.TabControl1.Controls.Add(Me.TabPageAdmin)
         Me.TabControl1.Location = New System.Drawing.Point(0, 24)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(933, 460)
         Me.TabControl1.TabIndex = 0
         '
-        'TabPage1
+        'TabPageRegistrarProducto
         '
-        Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage1.Controls.Add(Me.BtnGenerarReporte)
-        Me.TabPage1.Controls.Add(Me.Panel1)
-        Me.TabPage1.Controls.Add(Me.DGVProductosSinRevisar)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(925, 434)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Registrar Producto"
+        Me.TabPageRegistrarProducto.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPageRegistrarProducto.Controls.Add(Me.BtnGenerarReporte)
+        Me.TabPageRegistrarProducto.Controls.Add(Me.Panel1)
+        Me.TabPageRegistrarProducto.Controls.Add(Me.DGVProductosSinRevisar)
+        Me.TabPageRegistrarProducto.Location = New System.Drawing.Point(4, 22)
+        Me.TabPageRegistrarProducto.Name = "TabPageRegistrarProducto"
+        Me.TabPageRegistrarProducto.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPageRegistrarProducto.Size = New System.Drawing.Size(925, 434)
+        Me.TabPageRegistrarProducto.TabIndex = 0
+        Me.TabPageRegistrarProducto.Text = "Registrar Producto"
         '
         'BtnGenerarReporte
         '
         Me.BtnGenerarReporte.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnGenerarReporte.Location = New System.Drawing.Point(801, 291)
+        Me.BtnGenerarReporte.Location = New System.Drawing.Point(798, 290)
         Me.BtnGenerarReporte.Name = "BtnGenerarReporte"
-        Me.BtnGenerarReporte.Size = New System.Drawing.Size(121, 137)
+        Me.BtnGenerarReporte.Size = New System.Drawing.Size(121, 108)
         Me.BtnGenerarReporte.TabIndex = 2
         Me.BtnGenerarReporte.Text = "Generar Reporte"
         Me.BtnGenerarReporte.UseVisualStyleBackColor = True
@@ -283,24 +304,25 @@ Partial Class Form1
         Me.DGVProductosSinRevisar.Size = New System.Drawing.Size(786, 278)
         Me.DGVProductosSinRevisar.TabIndex = 0
         '
-        'TabPage2
+        'TabPageProductoLimite
         '
-        Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPage2.Controls.Add(Me.BtnGenerarReporte2)
-        Me.TabPage2.Controls.Add(Me.Panel2)
-        Me.TabPage2.Controls.Add(Me.DGVProductosLimite)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(925, 434)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Productos Limite"
+        Me.TabPageProductoLimite.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPageProductoLimite.Controls.Add(Me.BtnGenerarReporte2)
+        Me.TabPageProductoLimite.Controls.Add(Me.Panel2)
+        Me.TabPageProductoLimite.Controls.Add(Me.DGVProductosLimite)
+        Me.TabPageProductoLimite.Location = New System.Drawing.Point(4, 22)
+        Me.TabPageProductoLimite.Name = "TabPageProductoLimite"
+        Me.TabPageProductoLimite.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPageProductoLimite.Size = New System.Drawing.Size(925, 434)
+        Me.TabPageProductoLimite.TabIndex = 1
+        Me.TabPageProductoLimite.Text = "Productos Limite"
         '
         'BtnGenerarReporte2
         '
+        Me.BtnGenerarReporte2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnGenerarReporte2.Location = New System.Drawing.Point(801, 291)
         Me.BtnGenerarReporte2.Name = "BtnGenerarReporte2"
-        Me.BtnGenerarReporte2.Size = New System.Drawing.Size(121, 137)
+        Me.BtnGenerarReporte2.Size = New System.Drawing.Size(121, 107)
         Me.BtnGenerarReporte2.TabIndex = 4
         Me.BtnGenerarReporte2.Text = "Generar Reporte"
         Me.BtnGenerarReporte2.UseVisualStyleBackColor = True
@@ -467,7 +489,7 @@ Partial Class Form1
         Me.DGVProductosLimite.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVProductosLimite.Location = New System.Drawing.Point(3, 3)
         Me.DGVProductosLimite.Name = "DGVProductosLimite"
-        Me.DGVProductosLimite.Size = New System.Drawing.Size(919, 254)
+        Me.DGVProductosLimite.Size = New System.Drawing.Size(792, 254)
         Me.DGVProductosLimite.TabIndex = 2
         '
         'LblUsuario
@@ -485,12 +507,178 @@ Partial Class Form1
         'BtnDesconectar
         '
         Me.BtnDesconectar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnDesconectar.Location = New System.Drawing.Point(839, 1)
+        Me.BtnDesconectar.Location = New System.Drawing.Point(839, 4)
         Me.BtnDesconectar.Name = "BtnDesconectar"
         Me.BtnDesconectar.Size = New System.Drawing.Size(90, 39)
         Me.BtnDesconectar.TabIndex = 4
         Me.BtnDesconectar.Text = "Cerrar Sesion"
         Me.BtnDesconectar.UseVisualStyleBackColor = True
+        '
+        'LblCambiarContraseña
+        '
+        Me.LblCambiarContraseña.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblCambiarContraseña.AutoSize = True
+        Me.LblCambiarContraseña.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.LblCambiarContraseña.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblCambiarContraseña.ForeColor = System.Drawing.Color.Blue
+        Me.LblCambiarContraseña.Location = New System.Drawing.Point(713, 6)
+        Me.LblCambiarContraseña.Name = "LblCambiarContraseña"
+        Me.LblCambiarContraseña.Size = New System.Drawing.Size(120, 13)
+        Me.LblCambiarContraseña.TabIndex = 3
+        Me.LblCambiarContraseña.Text = "Cambiar Contraseña"
+        '
+        'TabPageAdmin
+        '
+        Me.TabPageAdmin.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPageAdmin.Controls.Add(Me.GrpBxAdmin2)
+        Me.TabPageAdmin.Controls.Add(Me.GrpBxAdmin)
+        Me.TabPageAdmin.Controls.Add(Me.CmbBxTablas)
+        Me.TabPageAdmin.Controls.Add(Me.DGVAdmin)
+        Me.TabPageAdmin.Location = New System.Drawing.Point(4, 22)
+        Me.TabPageAdmin.Name = "TabPageAdmin"
+        Me.TabPageAdmin.Size = New System.Drawing.Size(925, 434)
+        Me.TabPageAdmin.TabIndex = 2
+        Me.TabPageAdmin.Text = "Administrador"
+        '
+        'DGVAdmin
+        '
+        Me.DGVAdmin.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGVAdmin.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DGVAdmin.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.DGVAdmin.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DGVAdmin.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVAdmin.Location = New System.Drawing.Point(3, 3)
+        Me.DGVAdmin.Name = "DGVAdmin"
+        Me.DGVAdmin.Size = New System.Drawing.Size(916, 309)
+        Me.DGVAdmin.TabIndex = 3
+        '
+        'CmbBxTablas
+        '
+        Me.CmbBxTablas.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.CmbBxTablas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBxTablas.FormattingEnabled = True
+        Me.CmbBxTablas.Location = New System.Drawing.Point(8, 324)
+        Me.CmbBxTablas.Name = "CmbBxTablas"
+        Me.CmbBxTablas.Size = New System.Drawing.Size(171, 21)
+        Me.CmbBxTablas.TabIndex = 4
+        '
+        'GrpBxAdmin
+        '
+        Me.GrpBxAdmin.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GrpBxAdmin.Controls.Add(Me.BtnEliminarRegistro)
+        Me.GrpBxAdmin.Controls.Add(Me.BtnModificarRegistroAdmin)
+        Me.GrpBxAdmin.Controls.Add(Me.BtnNuevoRegistro)
+        Me.GrpBxAdmin.Location = New System.Drawing.Point(206, 318)
+        Me.GrpBxAdmin.Name = "GrpBxAdmin"
+        Me.GrpBxAdmin.Size = New System.Drawing.Size(285, 68)
+        Me.GrpBxAdmin.TabIndex = 5
+        Me.GrpBxAdmin.TabStop = False
+        Me.GrpBxAdmin.Visible = False
+        '
+        'BtnNuevoRegistro
+        '
+        Me.BtnNuevoRegistro.Enabled = False
+        Me.BtnNuevoRegistro.Location = New System.Drawing.Point(10, 18)
+        Me.BtnNuevoRegistro.Name = "BtnNuevoRegistro"
+        Me.BtnNuevoRegistro.Size = New System.Drawing.Size(89, 39)
+        Me.BtnNuevoRegistro.TabIndex = 6
+        Me.BtnNuevoRegistro.Text = "Nuevo Registro"
+        Me.BtnNuevoRegistro.UseVisualStyleBackColor = True
+        '
+        'BtnModificarRegistroAdmin
+        '
+        Me.BtnModificarRegistroAdmin.Enabled = False
+        Me.BtnModificarRegistroAdmin.Location = New System.Drawing.Point(105, 18)
+        Me.BtnModificarRegistroAdmin.Name = "BtnModificarRegistroAdmin"
+        Me.BtnModificarRegistroAdmin.Size = New System.Drawing.Size(89, 39)
+        Me.BtnModificarRegistroAdmin.TabIndex = 6
+        Me.BtnModificarRegistroAdmin.Text = "Modificar Registro"
+        Me.BtnModificarRegistroAdmin.UseVisualStyleBackColor = True
+        '
+        'BtnEliminarRegistro
+        '
+        Me.BtnEliminarRegistro.Enabled = False
+        Me.BtnEliminarRegistro.Location = New System.Drawing.Point(200, 18)
+        Me.BtnEliminarRegistro.Name = "BtnEliminarRegistro"
+        Me.BtnEliminarRegistro.Size = New System.Drawing.Size(78, 39)
+        Me.BtnEliminarRegistro.TabIndex = 6
+        Me.BtnEliminarRegistro.Text = "Eliminar Registro"
+        Me.BtnEliminarRegistro.UseVisualStyleBackColor = True
+        '
+        'GrpBxAdmin2
+        '
+        Me.GrpBxAdmin2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GrpBxAdmin2.Controls.Add(Me.TxtBx3GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.Lbl3GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.BtnAceptarGrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.TxtBx2GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.TxtBx1GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.Lbl2GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.Lbl1GrpBxAdmin2)
+        Me.GrpBxAdmin2.Location = New System.Drawing.Point(514, 317)
+        Me.GrpBxAdmin2.Name = "GrpBxAdmin2"
+        Me.GrpBxAdmin2.Size = New System.Drawing.Size(393, 100)
+        Me.GrpBxAdmin2.TabIndex = 7
+        Me.GrpBxAdmin2.TabStop = False
+        '
+        'Lbl1GrpBxAdmin2
+        '
+        Me.Lbl1GrpBxAdmin2.AutoSize = True
+        Me.Lbl1GrpBxAdmin2.Location = New System.Drawing.Point(3, 16)
+        Me.Lbl1GrpBxAdmin2.Name = "Lbl1GrpBxAdmin2"
+        Me.Lbl1GrpBxAdmin2.Size = New System.Drawing.Size(39, 13)
+        Me.Lbl1GrpBxAdmin2.TabIndex = 0
+        Me.Lbl1GrpBxAdmin2.Text = "Label1"
+        '
+        'Lbl2GrpBxAdmin2
+        '
+        Me.Lbl2GrpBxAdmin2.AutoSize = True
+        Me.Lbl2GrpBxAdmin2.Location = New System.Drawing.Point(3, 55)
+        Me.Lbl2GrpBxAdmin2.Name = "Lbl2GrpBxAdmin2"
+        Me.Lbl2GrpBxAdmin2.Size = New System.Drawing.Size(39, 13)
+        Me.Lbl2GrpBxAdmin2.TabIndex = 1
+        Me.Lbl2GrpBxAdmin2.Text = "Label2"
+        '
+        'TxtBx1GrpBxAdmin2
+        '
+        Me.TxtBx1GrpBxAdmin2.Location = New System.Drawing.Point(6, 32)
+        Me.TxtBx1GrpBxAdmin2.Name = "TxtBx1GrpBxAdmin2"
+        Me.TxtBx1GrpBxAdmin2.Size = New System.Drawing.Size(124, 20)
+        Me.TxtBx1GrpBxAdmin2.TabIndex = 2
+        '
+        'TxtBx2GrpBxAdmin2
+        '
+        Me.TxtBx2GrpBxAdmin2.Location = New System.Drawing.Point(6, 71)
+        Me.TxtBx2GrpBxAdmin2.Name = "TxtBx2GrpBxAdmin2"
+        Me.TxtBx2GrpBxAdmin2.Size = New System.Drawing.Size(124, 20)
+        Me.TxtBx2GrpBxAdmin2.TabIndex = 3
+        '
+        'BtnAceptarGrpBxAdmin2
+        '
+        Me.BtnAceptarGrpBxAdmin2.Location = New System.Drawing.Point(313, 55)
+        Me.BtnAceptarGrpBxAdmin2.Name = "BtnAceptarGrpBxAdmin2"
+        Me.BtnAceptarGrpBxAdmin2.Size = New System.Drawing.Size(74, 39)
+        Me.BtnAceptarGrpBxAdmin2.TabIndex = 8
+        Me.BtnAceptarGrpBxAdmin2.Text = "Aceptar"
+        Me.BtnAceptarGrpBxAdmin2.UseVisualStyleBackColor = True
+        '
+        'TxtBx3GrpBxAdmin2
+        '
+        Me.TxtBx3GrpBxAdmin2.Location = New System.Drawing.Point(141, 32)
+        Me.TxtBx3GrpBxAdmin2.Name = "TxtBx3GrpBxAdmin2"
+        Me.TxtBx3GrpBxAdmin2.Size = New System.Drawing.Size(124, 20)
+        Me.TxtBx3GrpBxAdmin2.TabIndex = 10
+        '
+        'Lbl3GrpBxAdmin2
+        '
+        Me.Lbl3GrpBxAdmin2.AutoSize = True
+        Me.Lbl3GrpBxAdmin2.Location = New System.Drawing.Point(138, 16)
+        Me.Lbl3GrpBxAdmin2.Name = "Lbl3GrpBxAdmin2"
+        Me.Lbl3GrpBxAdmin2.Size = New System.Drawing.Size(39, 13)
+        Me.Lbl3GrpBxAdmin2.TabIndex = 9
+        Me.Lbl3GrpBxAdmin2.Text = "Label1"
         '
         'Form1
         '
@@ -498,6 +686,7 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlLight
         Me.ClientSize = New System.Drawing.Size(935, 482)
+        Me.Controls.Add(Me.LblCambiarContraseña)
         Me.Controls.Add(Me.BtnDesconectar)
         Me.Controls.Add(Me.LblUsuario)
         Me.Controls.Add(Me.TabControl1)
@@ -507,22 +696,27 @@ Partial Class Form1
         Me.Text = "Form1"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
+        Me.TabPageRegistrarProducto.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.DGVProductosSinRevisar, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage2.ResumeLayout(False)
+        Me.TabPageProductoLimite.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.DGVProductosLimite, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPageAdmin.ResumeLayout(False)
+        CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GrpBxAdmin.ResumeLayout(False)
+        Me.GrpBxAdmin2.ResumeLayout(False)
+        Me.GrpBxAdmin2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents TabPageRegistrarProducto As TabPage
+    Friend WithEvents TabPageProductoLimite As TabPage
     Friend WithEvents DGVProductosSinRevisar As DataGridView
     Friend WithEvents DGVProductosLimite As DataGridView
     Friend WithEvents LblUsuario As Label
@@ -560,4 +754,20 @@ Partial Class Form1
     Friend WithEvents TxtBxNumeroProducto2 As TextBox
     Friend WithEvents BtnGenerarReporte As Button
     Friend WithEvents BtnGenerarReporte2 As Button
+    Friend WithEvents LblCambiarContraseña As Label
+    Friend WithEvents TabPageAdmin As TabPage
+    Friend WithEvents DGVAdmin As DataGridView
+    Friend WithEvents CmbBxTablas As ComboBox
+    Friend WithEvents GrpBxAdmin As GroupBox
+    Friend WithEvents BtnEliminarRegistro As Button
+    Friend WithEvents BtnModificarRegistroAdmin As Button
+    Friend WithEvents BtnNuevoRegistro As Button
+    Friend WithEvents GrpBxAdmin2 As GroupBox
+    Friend WithEvents TxtBx2GrpBxAdmin2 As TextBox
+    Friend WithEvents TxtBx1GrpBxAdmin2 As TextBox
+    Friend WithEvents Lbl2GrpBxAdmin2 As Label
+    Friend WithEvents Lbl1GrpBxAdmin2 As Label
+    Friend WithEvents BtnAceptarGrpBxAdmin2 As Button
+    Friend WithEvents TxtBx3GrpBxAdmin2 As TextBox
+    Friend WithEvents Lbl3GrpBxAdmin2 As Label
 End Class
