@@ -60,27 +60,27 @@ Partial Class Form1
         Me.LblNumeroProducto2 = New System.Windows.Forms.Label()
         Me.TxtBxNumeroProducto2 = New System.Windows.Forms.TextBox()
         Me.DGVProductosLimite = New System.Windows.Forms.DataGridView()
+        Me.TabPageAdmin = New System.Windows.Forms.TabPage()
+        Me.GrpBxAdmin2 = New System.Windows.Forms.GroupBox()
+        Me.Intervalo = New System.Windows.Forms.NumericUpDown()
+        Me.CmbBx1GrpBxAdmin2 = New System.Windows.Forms.ComboBox()
+        Me.CmbBx2GrpBxAdmin2 = New System.Windows.Forms.ComboBox()
+        Me.TxtBx3GrpBxAdmin2 = New System.Windows.Forms.TextBox()
+        Me.Lbl3GrpBxAdmin2 = New System.Windows.Forms.Label()
+        Me.BtnAceptarGrpBxAdmin2 = New System.Windows.Forms.Button()
+        Me.TxtBx2GrpBxAdmin2 = New System.Windows.Forms.TextBox()
+        Me.TxtBx1GrpBxAdmin2 = New System.Windows.Forms.TextBox()
+        Me.Lbl2GrpBxAdmin2 = New System.Windows.Forms.Label()
+        Me.Lbl1GrpBxAdmin2 = New System.Windows.Forms.Label()
+        Me.GrpBxAdmin = New System.Windows.Forms.GroupBox()
+        Me.BtnEliminarRegistro = New System.Windows.Forms.Button()
+        Me.BtnModificarRegistroAdmin = New System.Windows.Forms.Button()
+        Me.BtnNuevoRegistro = New System.Windows.Forms.Button()
+        Me.CmbBxTablas = New System.Windows.Forms.ComboBox()
+        Me.DGVAdmin = New System.Windows.Forms.DataGridView()
         Me.LblUsuario = New System.Windows.Forms.Label()
         Me.BtnDesconectar = New System.Windows.Forms.Button()
         Me.LblCambiarContraseña = New System.Windows.Forms.Label()
-        Me.TabPageAdmin = New System.Windows.Forms.TabPage()
-        Me.DGVAdmin = New System.Windows.Forms.DataGridView()
-        Me.CmbBxTablas = New System.Windows.Forms.ComboBox()
-        Me.GrpBxAdmin = New System.Windows.Forms.GroupBox()
-        Me.BtnNuevoRegistro = New System.Windows.Forms.Button()
-        Me.BtnModificarRegistroAdmin = New System.Windows.Forms.Button()
-        Me.BtnEliminarRegistro = New System.Windows.Forms.Button()
-        Me.GrpBxAdmin2 = New System.Windows.Forms.GroupBox()
-        Me.Lbl1GrpBxAdmin2 = New System.Windows.Forms.Label()
-        Me.Lbl2GrpBxAdmin2 = New System.Windows.Forms.Label()
-        Me.TxtBx1GrpBxAdmin2 = New System.Windows.Forms.TextBox()
-        Me.TxtBx2GrpBxAdmin2 = New System.Windows.Forms.TextBox()
-        Me.BtnAceptarGrpBxAdmin2 = New System.Windows.Forms.Button()
-        Me.TxtBx3GrpBxAdmin2 = New System.Windows.Forms.TextBox()
-        Me.Lbl3GrpBxAdmin2 = New System.Windows.Forms.Label()
-        Me.CmbBx1GrpBxAdmin2 = New System.Windows.Forms.ComboBox()
-        Me.CmbBx2GrpBxAdmin2 = New System.Windows.Forms.ComboBox()
-        Me.Intervalo = New System.Windows.Forms.NumericUpDown()
         Me.TabControl1.SuspendLayout()
         Me.TabPageRegistrarProducto.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -89,10 +89,10 @@ Partial Class Form1
         Me.Panel2.SuspendLayout()
         CType(Me.DGVProductosLimite, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPageAdmin.SuspendLayout()
-        CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GrpBxAdmin.SuspendLayout()
         Me.GrpBxAdmin2.SuspendLayout()
         CType(Me.Intervalo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GrpBxAdmin.SuspendLayout()
+        CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -283,9 +283,9 @@ Partial Class Form1
         Me.LblNumeroProducto.AutoSize = True
         Me.LblNumeroProducto.Location = New System.Drawing.Point(10, 11)
         Me.LblNumeroProducto.Name = "LblNumeroProducto"
-        Me.LblNumeroProducto.Size = New System.Drawing.Size(85, 26)
+        Me.LblNumeroProducto.Size = New System.Drawing.Size(91, 26)
         Me.LblNumeroProducto.TabIndex = 1
-        Me.LblNumeroProducto.Text = "Identificador del " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "producto:"
+        Me.LblNumeroProducto.Text = "Identificador de la" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "muestra:"
         '
         'TxtBxProductoID
         '
@@ -496,6 +496,190 @@ Partial Class Form1
         Me.DGVProductosLimite.Size = New System.Drawing.Size(792, 254)
         Me.DGVProductosLimite.TabIndex = 2
         '
+        'TabPageAdmin
+        '
+        Me.TabPageAdmin.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPageAdmin.Controls.Add(Me.GrpBxAdmin2)
+        Me.TabPageAdmin.Controls.Add(Me.GrpBxAdmin)
+        Me.TabPageAdmin.Controls.Add(Me.CmbBxTablas)
+        Me.TabPageAdmin.Controls.Add(Me.DGVAdmin)
+        Me.TabPageAdmin.Location = New System.Drawing.Point(4, 22)
+        Me.TabPageAdmin.Name = "TabPageAdmin"
+        Me.TabPageAdmin.Size = New System.Drawing.Size(925, 434)
+        Me.TabPageAdmin.TabIndex = 2
+        Me.TabPageAdmin.Text = "Administrador"
+        '
+        'GrpBxAdmin2
+        '
+        Me.GrpBxAdmin2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GrpBxAdmin2.Controls.Add(Me.Intervalo)
+        Me.GrpBxAdmin2.Controls.Add(Me.CmbBx1GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.CmbBx2GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.TxtBx3GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.Lbl3GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.BtnAceptarGrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.TxtBx2GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.TxtBx1GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.Lbl2GrpBxAdmin2)
+        Me.GrpBxAdmin2.Controls.Add(Me.Lbl1GrpBxAdmin2)
+        Me.GrpBxAdmin2.Location = New System.Drawing.Point(514, 317)
+        Me.GrpBxAdmin2.Name = "GrpBxAdmin2"
+        Me.GrpBxAdmin2.Size = New System.Drawing.Size(393, 100)
+        Me.GrpBxAdmin2.TabIndex = 7
+        Me.GrpBxAdmin2.TabStop = False
+        '
+        'Intervalo
+        '
+        Me.Intervalo.Location = New System.Drawing.Point(6, 72)
+        Me.Intervalo.Minimum = New Decimal(New Integer() {3, 0, 0, 0})
+        Me.Intervalo.Name = "Intervalo"
+        Me.Intervalo.Size = New System.Drawing.Size(129, 20)
+        Me.Intervalo.TabIndex = 11
+        Me.Intervalo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.Intervalo.Value = New Decimal(New Integer() {3, 0, 0, 0})
+        '
+        'CmbBx1GrpBxAdmin2
+        '
+        Me.CmbBx1GrpBxAdmin2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBx1GrpBxAdmin2.FormattingEnabled = True
+        Me.CmbBx1GrpBxAdmin2.Location = New System.Drawing.Point(6, 31)
+        Me.CmbBx1GrpBxAdmin2.Name = "CmbBx1GrpBxAdmin2"
+        Me.CmbBx1GrpBxAdmin2.Size = New System.Drawing.Size(129, 21)
+        Me.CmbBx1GrpBxAdmin2.TabIndex = 7
+        '
+        'CmbBx2GrpBxAdmin2
+        '
+        Me.CmbBx2GrpBxAdmin2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBx2GrpBxAdmin2.FormattingEnabled = True
+        Me.CmbBx2GrpBxAdmin2.Location = New System.Drawing.Point(6, 71)
+        Me.CmbBx2GrpBxAdmin2.Name = "CmbBx2GrpBxAdmin2"
+        Me.CmbBx2GrpBxAdmin2.Size = New System.Drawing.Size(129, 21)
+        Me.CmbBx2GrpBxAdmin2.TabIndex = 8
+        '
+        'TxtBx3GrpBxAdmin2
+        '
+        Me.TxtBx3GrpBxAdmin2.Location = New System.Drawing.Point(141, 32)
+        Me.TxtBx3GrpBxAdmin2.Name = "TxtBx3GrpBxAdmin2"
+        Me.TxtBx3GrpBxAdmin2.Size = New System.Drawing.Size(124, 20)
+        Me.TxtBx3GrpBxAdmin2.TabIndex = 10
+        '
+        'Lbl3GrpBxAdmin2
+        '
+        Me.Lbl3GrpBxAdmin2.AutoSize = True
+        Me.Lbl3GrpBxAdmin2.Location = New System.Drawing.Point(138, 16)
+        Me.Lbl3GrpBxAdmin2.Name = "Lbl3GrpBxAdmin2"
+        Me.Lbl3GrpBxAdmin2.Size = New System.Drawing.Size(39, 13)
+        Me.Lbl3GrpBxAdmin2.TabIndex = 9
+        Me.Lbl3GrpBxAdmin2.Text = "Label1"
+        '
+        'BtnAceptarGrpBxAdmin2
+        '
+        Me.BtnAceptarGrpBxAdmin2.Location = New System.Drawing.Point(313, 55)
+        Me.BtnAceptarGrpBxAdmin2.Name = "BtnAceptarGrpBxAdmin2"
+        Me.BtnAceptarGrpBxAdmin2.Size = New System.Drawing.Size(74, 39)
+        Me.BtnAceptarGrpBxAdmin2.TabIndex = 8
+        Me.BtnAceptarGrpBxAdmin2.Text = "Aceptar"
+        Me.BtnAceptarGrpBxAdmin2.UseVisualStyleBackColor = True
+        '
+        'TxtBx2GrpBxAdmin2
+        '
+        Me.TxtBx2GrpBxAdmin2.Location = New System.Drawing.Point(6, 71)
+        Me.TxtBx2GrpBxAdmin2.Name = "TxtBx2GrpBxAdmin2"
+        Me.TxtBx2GrpBxAdmin2.Size = New System.Drawing.Size(124, 20)
+        Me.TxtBx2GrpBxAdmin2.TabIndex = 3
+        '
+        'TxtBx1GrpBxAdmin2
+        '
+        Me.TxtBx1GrpBxAdmin2.Location = New System.Drawing.Point(6, 32)
+        Me.TxtBx1GrpBxAdmin2.Name = "TxtBx1GrpBxAdmin2"
+        Me.TxtBx1GrpBxAdmin2.Size = New System.Drawing.Size(124, 20)
+        Me.TxtBx1GrpBxAdmin2.TabIndex = 2
+        '
+        'Lbl2GrpBxAdmin2
+        '
+        Me.Lbl2GrpBxAdmin2.AutoSize = True
+        Me.Lbl2GrpBxAdmin2.Location = New System.Drawing.Point(3, 55)
+        Me.Lbl2GrpBxAdmin2.Name = "Lbl2GrpBxAdmin2"
+        Me.Lbl2GrpBxAdmin2.Size = New System.Drawing.Size(39, 13)
+        Me.Lbl2GrpBxAdmin2.TabIndex = 1
+        Me.Lbl2GrpBxAdmin2.Text = "Label2"
+        '
+        'Lbl1GrpBxAdmin2
+        '
+        Me.Lbl1GrpBxAdmin2.AutoSize = True
+        Me.Lbl1GrpBxAdmin2.Location = New System.Drawing.Point(3, 16)
+        Me.Lbl1GrpBxAdmin2.Name = "Lbl1GrpBxAdmin2"
+        Me.Lbl1GrpBxAdmin2.Size = New System.Drawing.Size(39, 13)
+        Me.Lbl1GrpBxAdmin2.TabIndex = 0
+        Me.Lbl1GrpBxAdmin2.Text = "Label1"
+        '
+        'GrpBxAdmin
+        '
+        Me.GrpBxAdmin.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.GrpBxAdmin.Controls.Add(Me.BtnEliminarRegistro)
+        Me.GrpBxAdmin.Controls.Add(Me.BtnModificarRegistroAdmin)
+        Me.GrpBxAdmin.Controls.Add(Me.BtnNuevoRegistro)
+        Me.GrpBxAdmin.Location = New System.Drawing.Point(206, 318)
+        Me.GrpBxAdmin.Name = "GrpBxAdmin"
+        Me.GrpBxAdmin.Size = New System.Drawing.Size(285, 68)
+        Me.GrpBxAdmin.TabIndex = 5
+        Me.GrpBxAdmin.TabStop = False
+        Me.GrpBxAdmin.Visible = False
+        '
+        'BtnEliminarRegistro
+        '
+        Me.BtnEliminarRegistro.Enabled = False
+        Me.BtnEliminarRegistro.Location = New System.Drawing.Point(200, 18)
+        Me.BtnEliminarRegistro.Name = "BtnEliminarRegistro"
+        Me.BtnEliminarRegistro.Size = New System.Drawing.Size(78, 39)
+        Me.BtnEliminarRegistro.TabIndex = 6
+        Me.BtnEliminarRegistro.Text = "Eliminar Registro"
+        Me.BtnEliminarRegistro.UseVisualStyleBackColor = True
+        '
+        'BtnModificarRegistroAdmin
+        '
+        Me.BtnModificarRegistroAdmin.Enabled = False
+        Me.BtnModificarRegistroAdmin.Location = New System.Drawing.Point(105, 18)
+        Me.BtnModificarRegistroAdmin.Name = "BtnModificarRegistroAdmin"
+        Me.BtnModificarRegistroAdmin.Size = New System.Drawing.Size(89, 39)
+        Me.BtnModificarRegistroAdmin.TabIndex = 6
+        Me.BtnModificarRegistroAdmin.Text = "Modificar Registro"
+        Me.BtnModificarRegistroAdmin.UseVisualStyleBackColor = True
+        '
+        'BtnNuevoRegistro
+        '
+        Me.BtnNuevoRegistro.Enabled = False
+        Me.BtnNuevoRegistro.Location = New System.Drawing.Point(10, 18)
+        Me.BtnNuevoRegistro.Name = "BtnNuevoRegistro"
+        Me.BtnNuevoRegistro.Size = New System.Drawing.Size(89, 39)
+        Me.BtnNuevoRegistro.TabIndex = 6
+        Me.BtnNuevoRegistro.Text = "Nuevo Registro"
+        Me.BtnNuevoRegistro.UseVisualStyleBackColor = True
+        '
+        'CmbBxTablas
+        '
+        Me.CmbBxTablas.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.CmbBxTablas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBxTablas.FormattingEnabled = True
+        Me.CmbBxTablas.Location = New System.Drawing.Point(8, 324)
+        Me.CmbBxTablas.Name = "CmbBxTablas"
+        Me.CmbBxTablas.Size = New System.Drawing.Size(171, 21)
+        Me.CmbBxTablas.TabIndex = 4
+        '
+        'DGVAdmin
+        '
+        Me.DGVAdmin.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGVAdmin.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DGVAdmin.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.DGVAdmin.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DGVAdmin.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVAdmin.Location = New System.Drawing.Point(3, 3)
+        Me.DGVAdmin.Name = "DGVAdmin"
+        Me.DGVAdmin.Size = New System.Drawing.Size(916, 309)
+        Me.DGVAdmin.TabIndex = 3
+        '
         'LblUsuario
         '
         Me.LblUsuario.AutoSize = True
@@ -531,190 +715,6 @@ Partial Class Form1
         Me.LblCambiarContraseña.TabIndex = 3
         Me.LblCambiarContraseña.Text = "Cambiar Contraseña"
         '
-        'TabPageAdmin
-        '
-        Me.TabPageAdmin.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPageAdmin.Controls.Add(Me.GrpBxAdmin2)
-        Me.TabPageAdmin.Controls.Add(Me.GrpBxAdmin)
-        Me.TabPageAdmin.Controls.Add(Me.CmbBxTablas)
-        Me.TabPageAdmin.Controls.Add(Me.DGVAdmin)
-        Me.TabPageAdmin.Location = New System.Drawing.Point(4, 22)
-        Me.TabPageAdmin.Name = "TabPageAdmin"
-        Me.TabPageAdmin.Size = New System.Drawing.Size(925, 434)
-        Me.TabPageAdmin.TabIndex = 2
-        Me.TabPageAdmin.Text = "Administrador"
-        '
-        'DGVAdmin
-        '
-        Me.DGVAdmin.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DGVAdmin.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DGVAdmin.BackgroundColor = System.Drawing.SystemColors.Control
-        Me.DGVAdmin.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.DGVAdmin.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVAdmin.Location = New System.Drawing.Point(3, 3)
-        Me.DGVAdmin.Name = "DGVAdmin"
-        Me.DGVAdmin.Size = New System.Drawing.Size(916, 309)
-        Me.DGVAdmin.TabIndex = 3
-        '
-        'CmbBxTablas
-        '
-        Me.CmbBxTablas.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.CmbBxTablas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CmbBxTablas.FormattingEnabled = True
-        Me.CmbBxTablas.Location = New System.Drawing.Point(8, 324)
-        Me.CmbBxTablas.Name = "CmbBxTablas"
-        Me.CmbBxTablas.Size = New System.Drawing.Size(171, 21)
-        Me.CmbBxTablas.TabIndex = 4
-        '
-        'GrpBxAdmin
-        '
-        Me.GrpBxAdmin.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.GrpBxAdmin.Controls.Add(Me.BtnEliminarRegistro)
-        Me.GrpBxAdmin.Controls.Add(Me.BtnModificarRegistroAdmin)
-        Me.GrpBxAdmin.Controls.Add(Me.BtnNuevoRegistro)
-        Me.GrpBxAdmin.Location = New System.Drawing.Point(206, 318)
-        Me.GrpBxAdmin.Name = "GrpBxAdmin"
-        Me.GrpBxAdmin.Size = New System.Drawing.Size(285, 68)
-        Me.GrpBxAdmin.TabIndex = 5
-        Me.GrpBxAdmin.TabStop = False
-        Me.GrpBxAdmin.Visible = False
-        '
-        'BtnNuevoRegistro
-        '
-        Me.BtnNuevoRegistro.Enabled = False
-        Me.BtnNuevoRegistro.Location = New System.Drawing.Point(10, 18)
-        Me.BtnNuevoRegistro.Name = "BtnNuevoRegistro"
-        Me.BtnNuevoRegistro.Size = New System.Drawing.Size(89, 39)
-        Me.BtnNuevoRegistro.TabIndex = 6
-        Me.BtnNuevoRegistro.Text = "Nuevo Registro"
-        Me.BtnNuevoRegistro.UseVisualStyleBackColor = True
-        '
-        'BtnModificarRegistroAdmin
-        '
-        Me.BtnModificarRegistroAdmin.Enabled = False
-        Me.BtnModificarRegistroAdmin.Location = New System.Drawing.Point(105, 18)
-        Me.BtnModificarRegistroAdmin.Name = "BtnModificarRegistroAdmin"
-        Me.BtnModificarRegistroAdmin.Size = New System.Drawing.Size(89, 39)
-        Me.BtnModificarRegistroAdmin.TabIndex = 6
-        Me.BtnModificarRegistroAdmin.Text = "Modificar Registro"
-        Me.BtnModificarRegistroAdmin.UseVisualStyleBackColor = True
-        '
-        'BtnEliminarRegistro
-        '
-        Me.BtnEliminarRegistro.Enabled = False
-        Me.BtnEliminarRegistro.Location = New System.Drawing.Point(200, 18)
-        Me.BtnEliminarRegistro.Name = "BtnEliminarRegistro"
-        Me.BtnEliminarRegistro.Size = New System.Drawing.Size(78, 39)
-        Me.BtnEliminarRegistro.TabIndex = 6
-        Me.BtnEliminarRegistro.Text = "Eliminar Registro"
-        Me.BtnEliminarRegistro.UseVisualStyleBackColor = True
-        '
-        'GrpBxAdmin2
-        '
-        Me.GrpBxAdmin2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GrpBxAdmin2.Controls.Add(Me.Intervalo)
-        Me.GrpBxAdmin2.Controls.Add(Me.CmbBx1GrpBxAdmin2)
-        Me.GrpBxAdmin2.Controls.Add(Me.CmbBx2GrpBxAdmin2)
-        Me.GrpBxAdmin2.Controls.Add(Me.TxtBx3GrpBxAdmin2)
-        Me.GrpBxAdmin2.Controls.Add(Me.Lbl3GrpBxAdmin2)
-        Me.GrpBxAdmin2.Controls.Add(Me.BtnAceptarGrpBxAdmin2)
-        Me.GrpBxAdmin2.Controls.Add(Me.TxtBx2GrpBxAdmin2)
-        Me.GrpBxAdmin2.Controls.Add(Me.TxtBx1GrpBxAdmin2)
-        Me.GrpBxAdmin2.Controls.Add(Me.Lbl2GrpBxAdmin2)
-        Me.GrpBxAdmin2.Controls.Add(Me.Lbl1GrpBxAdmin2)
-        Me.GrpBxAdmin2.Location = New System.Drawing.Point(514, 317)
-        Me.GrpBxAdmin2.Name = "GrpBxAdmin2"
-        Me.GrpBxAdmin2.Size = New System.Drawing.Size(393, 100)
-        Me.GrpBxAdmin2.TabIndex = 7
-        Me.GrpBxAdmin2.TabStop = False
-        '
-        'Lbl1GrpBxAdmin2
-        '
-        Me.Lbl1GrpBxAdmin2.AutoSize = True
-        Me.Lbl1GrpBxAdmin2.Location = New System.Drawing.Point(3, 16)
-        Me.Lbl1GrpBxAdmin2.Name = "Lbl1GrpBxAdmin2"
-        Me.Lbl1GrpBxAdmin2.Size = New System.Drawing.Size(39, 13)
-        Me.Lbl1GrpBxAdmin2.TabIndex = 0
-        Me.Lbl1GrpBxAdmin2.Text = "Label1"
-        '
-        'Lbl2GrpBxAdmin2
-        '
-        Me.Lbl2GrpBxAdmin2.AutoSize = True
-        Me.Lbl2GrpBxAdmin2.Location = New System.Drawing.Point(3, 55)
-        Me.Lbl2GrpBxAdmin2.Name = "Lbl2GrpBxAdmin2"
-        Me.Lbl2GrpBxAdmin2.Size = New System.Drawing.Size(39, 13)
-        Me.Lbl2GrpBxAdmin2.TabIndex = 1
-        Me.Lbl2GrpBxAdmin2.Text = "Label2"
-        '
-        'TxtBx1GrpBxAdmin2
-        '
-        Me.TxtBx1GrpBxAdmin2.Location = New System.Drawing.Point(6, 32)
-        Me.TxtBx1GrpBxAdmin2.Name = "TxtBx1GrpBxAdmin2"
-        Me.TxtBx1GrpBxAdmin2.Size = New System.Drawing.Size(124, 20)
-        Me.TxtBx1GrpBxAdmin2.TabIndex = 2
-        '
-        'TxtBx2GrpBxAdmin2
-        '
-        Me.TxtBx2GrpBxAdmin2.Location = New System.Drawing.Point(6, 71)
-        Me.TxtBx2GrpBxAdmin2.Name = "TxtBx2GrpBxAdmin2"
-        Me.TxtBx2GrpBxAdmin2.Size = New System.Drawing.Size(124, 20)
-        Me.TxtBx2GrpBxAdmin2.TabIndex = 3
-        '
-        'BtnAceptarGrpBxAdmin2
-        '
-        Me.BtnAceptarGrpBxAdmin2.Location = New System.Drawing.Point(313, 55)
-        Me.BtnAceptarGrpBxAdmin2.Name = "BtnAceptarGrpBxAdmin2"
-        Me.BtnAceptarGrpBxAdmin2.Size = New System.Drawing.Size(74, 39)
-        Me.BtnAceptarGrpBxAdmin2.TabIndex = 8
-        Me.BtnAceptarGrpBxAdmin2.Text = "Aceptar"
-        Me.BtnAceptarGrpBxAdmin2.UseVisualStyleBackColor = True
-        '
-        'TxtBx3GrpBxAdmin2
-        '
-        Me.TxtBx3GrpBxAdmin2.Location = New System.Drawing.Point(141, 32)
-        Me.TxtBx3GrpBxAdmin2.Name = "TxtBx3GrpBxAdmin2"
-        Me.TxtBx3GrpBxAdmin2.Size = New System.Drawing.Size(124, 20)
-        Me.TxtBx3GrpBxAdmin2.TabIndex = 10
-        '
-        'Lbl3GrpBxAdmin2
-        '
-        Me.Lbl3GrpBxAdmin2.AutoSize = True
-        Me.Lbl3GrpBxAdmin2.Location = New System.Drawing.Point(138, 16)
-        Me.Lbl3GrpBxAdmin2.Name = "Lbl3GrpBxAdmin2"
-        Me.Lbl3GrpBxAdmin2.Size = New System.Drawing.Size(39, 13)
-        Me.Lbl3GrpBxAdmin2.TabIndex = 9
-        Me.Lbl3GrpBxAdmin2.Text = "Label1"
-        '
-        'CmbBx1GrpBxAdmin2
-        '
-        Me.CmbBx1GrpBxAdmin2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CmbBx1GrpBxAdmin2.FormattingEnabled = True
-        Me.CmbBx1GrpBxAdmin2.Location = New System.Drawing.Point(6, 31)
-        Me.CmbBx1GrpBxAdmin2.Name = "CmbBx1GrpBxAdmin2"
-        Me.CmbBx1GrpBxAdmin2.Size = New System.Drawing.Size(129, 21)
-        Me.CmbBx1GrpBxAdmin2.TabIndex = 7
-        '
-        'CmbBx2GrpBxAdmin2
-        '
-        Me.CmbBx2GrpBxAdmin2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CmbBx2GrpBxAdmin2.FormattingEnabled = True
-        Me.CmbBx2GrpBxAdmin2.Location = New System.Drawing.Point(6, 71)
-        Me.CmbBx2GrpBxAdmin2.Name = "CmbBx2GrpBxAdmin2"
-        Me.CmbBx2GrpBxAdmin2.Size = New System.Drawing.Size(129, 21)
-        Me.CmbBx2GrpBxAdmin2.TabIndex = 8
-        '
-        'Intervalo
-        '
-        Me.Intervalo.Location = New System.Drawing.Point(6, 72)
-        Me.Intervalo.Minimum = New Decimal(New Integer() {3, 0, 0, 0})
-        Me.Intervalo.Name = "Intervalo"
-        Me.Intervalo.Size = New System.Drawing.Size(129, 20)
-        Me.Intervalo.TabIndex = 11
-        Me.Intervalo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
-        Me.Intervalo.Value = New Decimal(New Integer() {3, 0, 0, 0})
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -740,11 +740,11 @@ Partial Class Form1
         Me.Panel2.PerformLayout()
         CType(Me.DGVProductosLimite, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPageAdmin.ResumeLayout(False)
-        CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GrpBxAdmin.ResumeLayout(False)
         Me.GrpBxAdmin2.ResumeLayout(False)
         Me.GrpBxAdmin2.PerformLayout()
         CType(Me.Intervalo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GrpBxAdmin.ResumeLayout(False)
+        CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

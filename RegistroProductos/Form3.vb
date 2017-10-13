@@ -125,12 +125,12 @@ Public Class Form3
                     .Visible = True,
                     .Parent = Me.Panel1,
                     .Name = i.ToString,
-                    .Checked = True
+                    .Checked = False
                 }
                 TextBoxArray(i) = New TextBox With {
                     .Location = New Point(X1, Y2),
                     .Size = New Size(300, 40),
-                    .Enabled = True,
+                    .Enabled = False,
                     .Visible = True,
                     .Parent = Me.Panel1,
                     .Name = "TxtBx" + cod_prue(i).ToString
