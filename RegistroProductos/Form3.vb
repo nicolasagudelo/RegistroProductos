@@ -37,6 +37,8 @@ Public Class Form3
 
     Dim CheckBoxButtonArray() As CheckBox
     Dim TextBoxArray() As TextBox
+    Dim tamaniobuttonarray As Integer = 0
+    Dim ButtonArray(6) As Button
     Dim pruebascategoria As Integer
     Dim cod_prue As New List(Of String)()
     Dim nombre_prueba As New List(Of String)()
@@ -136,6 +138,20 @@ Public Class Form3
                     .Name = "TxtBx" + cod_prue(i).ToString
                 }
 
+                If cod_prue(i).ToString = "D-130-2" Or cod_prue(i).ToString = "D-86-9" Then
+                    ButtonArray(tamaniobuttonarray) = New Button With {
+                    .Location = New Point(332, Y2),
+                    .Size = New Size(66, 40),
+                    .Enabled = True,
+                    .Visible = True,
+                    .Parent = Me.Panel1,
+                    .Text = "Calculo",
+                    .Name = "Button" + cod_prue(i).ToString
+                    }
+                    AddHandler ButtonArray(tamaniobuttonarray).Click, AddressOf Button_Clicked
+                    tamaniobuttonarray += 1
+                End If
+
                 AddHandler CheckBoxButtonArray(i).Click, AddressOf CheckBox_Clicked
             Next
         Else
@@ -222,9 +238,33 @@ Public Class Form3
                     .Name = "TxtBx" + cod_prue(i).ToString
                 }
 
+                If cod_prue(i).ToString = "D-130-2" Or cod_prue(i).ToString = "D-86-9" Then
+                    Console.WriteLine("Entramos")
+                    ButtonArray(tamaniobuttonarray) = New Button With {
+                    .Location = New Point(332, Y2),
+                    .Size = New Size(66, 40),
+                    .Enabled = True,
+                    .Visible = True,
+                    .Parent = Me.Panel1,
+                    .Text = "Calculo",
+                    .Name = "Button" + cod_prue(i).ToString
+                    }
+                    AddHandler ButtonArray(tamaniobuttonarray).Click, AddressOf Button_Clicked
+                    tamaniobuttonarray += 1
+                End If
+
+
                 AddHandler CheckBoxButtonArray(i).Click, AddressOf CheckBox_Clicked
             Next
 
+        End If
+    End Sub
+
+    Private Sub Button_Clicked(sender As Object, e As EventArgs)
+        Dim bt As Button = CType(sender, Button)
+        Console.WriteLine(bt.Name.ToString)
+        If bt.Name = "ButtonD-130-2" Then
+            MsgBox("Click")
         End If
     End Sub
 
@@ -251,7 +291,7 @@ Public Class Form3
         For i = 0 To pruebascategoria - 1
             If TextBoxArray(i).Enabled = True Then
                 If TextBoxArray(i).Text = "" Then
-                    MsgBox("El valor para la prueba" & cod_prue(i) & " esta vacio, Asignele un valor o desmarque la prueba antes de continuar", False, "Error")
+                    MsgBox("ThenEl valor para la prueba" & cod_prue(i) & " esta vacio, Asignele un valor o desmarque la prueba antes de continuar", False, "Error")
                     Exit Sub
                 End If
             End If
@@ -265,17 +305,17 @@ Public Class Form3
                 Try
                     conn.Open()
                     Dim cmd As New MySqlCommand(String.Format("INSERT INTO reportes (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Observaciones`, `Fecha_Ingreso`, `Fecha_Reporte`, `ID_Prueba`, `Valor`, `UsuarioID`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & TipoProducto & "', '" & NumeroSerie & "', '" & Observaciones & "', '" & Fecha_Ingreso & "', '" & Fecha_Reporte & "', '" & ID_Prueba & "', '" & valor & "', '" & UsuarioID & "');"), conn)
-                    Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado' , Valor = '" & valor & "', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
+                    Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
                     cmd.ExecuteNonQuery()
-                    cmd2.ExecuteNonQuery()
-                    Console.WriteLine("Reporte Registrado")
-                    conn.Close()
-                Catch ex As Exception
-                    MsgBox(ex.Message, False, "Error")
-                    conn.Close()
-                    Exit Sub
-                End Try
-            End If
+            cmd2.ExecuteNonQuery()
+            Console.WriteLine("Reporte Registrado")
+            conn.Close()
+            Catch ex As Exception
+            MsgBox(ex.Message, False, "Error")
+            conn.Close()
+            Exit Sub
+            End Try
+        End If
         Next
         MsgBox("Reporte Registrado", False, "Reporte Registrado")
         Form1.CargarDGVProductosLimite()

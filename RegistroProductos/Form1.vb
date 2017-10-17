@@ -40,7 +40,7 @@ Public Class Form1
             CmbBxTablas.Items.Add("Categorias")
             CmbBxTablas.Items.Add("Pruebas por Categoria")
             CmbBxTablas.Items.Add("Tipo de Mercancia")
-            CmbBxTablas.Items.Add("Historial de Productos Revisados")
+            CmbBxTablas.Items.Add("Productos Revisados")
             CmbBxTablas.Items.Add("Historial de Pruebas")
             CmbBxTablas.SelectedIndex = 0
             LlenarComboBoxPruebas()
@@ -84,7 +84,7 @@ Public Class Form1
     End Sub
 
     Public Sub CargarDGVProductosSinRevisar()
-        Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Numero_Serie as 'Numero de Serie', Observaciones, Fecha_Entrada, Fecha_Limite, Estado
+        Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Numero_Serie as 'Numero de Serie', Observaciones, Fecha_Entrada, Hora_Entrada, Fecha_Limite, Estado
                                from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID
                                Where Estado = 'Pendiente'; "
 
@@ -138,7 +138,7 @@ Public Class Form1
             Dim fecha_limite As Date
             Dim fecha_limite_string As String
             For i = 0 To filas_total - 2
-                fecha_limite = DGVProductosSinRevisar(8, i).Value
+                fecha_limite = DGVProductosSinRevisar(9, i).Value
                 fecha_limite_string = fecha_limite.ToString("yyyy-MM-dd")
                 Dim diferencia As Integer = DateDiff("d", fecha_servidor, fecha_limite)
                 If diferencia <= 5 Then
@@ -159,7 +159,7 @@ Public Class Form1
             Dim fecha_limite2 As Date
             Dim fecha_limite_string2 As String
             For i = 0 To filas_total2 - 2
-                fecha_limite2 = DGVProductosLimite(8, i).Value
+                fecha_limite2 = DGVProductosLimite(9, i).Value
                 fecha_limite_string2 = fecha_limite2.ToString("yyyy-MM-dd")
                 Dim diferencia2 As Integer = DateDiff("d", fecha_servidor, fecha_limite2)
                 If diferencia2 <= 5 Then
@@ -174,7 +174,7 @@ Public Class Form1
     End Sub
 
     Public Sub CargarDGVProductosLimite()
-        Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Numero_Serie as 'Numero de Serie', Observaciones, Fecha_Entrada, Fecha_Limite, Estado
+        Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Numero_Serie as 'Numero de Serie', Observaciones, Fecha_Entrada, Hora_Entrada, Fecha_Limite, Estado
                                from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID
                                Where Estado = 'Pendiente' and datediff(Fecha_limite,(select date(now()))) <= 10;"
 
@@ -261,7 +261,7 @@ Public Class Form1
         CmbBxCliente2.ValueMember = "ClienteID"
     End Sub
 
-    private sub LlenarComboBoxPruebas()
+    Private Sub LlenarComboBoxPruebas()
         Dim query As String = " Select ID_Prueba from Pruebas"
         Dim cmd As New MySqlCommand(query, conn)
         Dim sqlAdap As New MySqlDataAdapter(cmd)
@@ -329,6 +329,7 @@ Public Class Form1
 
         Dim fecha_registro As String
         Dim fecha_limite As String
+        Dim hora_registro As String
 
         Try
             conn.Open()
@@ -338,6 +339,17 @@ Public Class Form1
             conn.Close()
         Catch ex As Exception
             MsgBox(ex.Message, False, "Error")
+            conn.Close()
+            Exit Sub
+        End Try
+
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("SELECT TIME(NOW())"), conn)
+            hora_registro = cmd.ExecuteScalar.ToString
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
             conn.Close()
             Exit Sub
         End Try
@@ -358,7 +370,7 @@ Public Class Form1
 
         Try
             conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("INSERT INTO productos VALUES ('" & llave & "', '" & Cliente & "', '" & Producto & "', '" & NumeroSerie & "', '" & Observaciones & "', '" & fecha_registro & "','" & fecha_limite & "', 'Pendiente');"), conn)
+            Dim cmd As New MySqlCommand(String.Format("INSERT INTO productos (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Observaciones`, `Fecha_Entrada`, `Hora_Entrada`, `Fecha_Limite`, `Estado`) VALUES ('" & llave & "', '" & Cliente & "', '" & Producto & "', '" & NumeroSerie & "', '" & Observaciones & "', '" & fecha_registro & "','" & hora_registro & "','" & fecha_limite & "', 'Pendiente');"), conn)
             cmd.ExecuteNonQuery()
             Console.WriteLine("Producto Registrado")
             conn.Close()
@@ -706,7 +718,7 @@ Public Class Form1
                 conn.Close()
             End Try
 
-        ElseIf CmbBxTablas.SelectedItem = "Historial de Productos Revisados" Then
+        ElseIf CmbBxTablas.SelectedItem = "Productos Revisados" Then
             Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Numero_Serie as 'Numero de Serie', Observaciones, Fecha_Entrada, Fecha_Limite, Estado
                                from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID
                                Where Estado = 'Revisado';"
@@ -750,7 +762,7 @@ Public Class Form1
                 DGVAdmin.DataSource = table
                 DGVAdmin.ReadOnly = True
                 DGVAdmin.AllowUserToResizeColumns = True
-                DGVAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                'DGVAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect
                 reader.Close()
                 conn.Close()
             Catch ex As Exception
@@ -815,7 +827,7 @@ Public Class Form1
             BtnNuevoRegistro.Visible = True
             GrpBxAdmin.Visible = True
             CargarDGVAdmin()
-        ElseIf CmbBxTablas.SelectedItem = "Historial de Productos Revisados" Or CmbBxTablas.SelectedItem = "Historial de Pruebas" Then
+        ElseIf CmbBxTablas.SelectedItem = "Productos Revisados" Or CmbBxTablas.SelectedItem = "Historial de Pruebas" Then
             GrpBxAdmin.Visible = False
             GrpBxAdmin2.Visible = False
             CargarDGVAdmin()

@@ -189,7 +189,7 @@ Partial Class Form1
         '
         Me.BtnModificarRegistro.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnModificarRegistro.Enabled = False
-        Me.BtnModificarRegistro.Location = New System.Drawing.Point(694, 63)
+        Me.BtnModificarRegistro.Location = New System.Drawing.Point(694, 11)
         Me.BtnModificarRegistro.Name = "BtnModificarRegistro"
         Me.BtnModificarRegistro.Size = New System.Drawing.Size(90, 45)
         Me.BtnModificarRegistro.TabIndex = 10

@@ -230,7 +230,7 @@ Partial Class Form3
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Location = New System.Drawing.Point(12, 342)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(413, 285)
+        Me.Panel1.Size = New System.Drawing.Size(438, 285)
         Me.Panel1.TabIndex = 21
         '
         'BtnRegistrarReporte
@@ -272,7 +272,7 @@ Partial Class Form3
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(458, 685)
+        Me.ClientSize = New System.Drawing.Size(485, 685)
         Me.Controls.Add(Me.TxtBxClienteID)
         Me.Controls.Add(Me.TxtBxTipoProductoID)
         Me.Controls.Add(Me.BtnCancelar)
