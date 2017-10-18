@@ -47,13 +47,17 @@ Partial Class Form3
         Me.BtnCancelar = New System.Windows.Forms.Button()
         Me.TxtBxTipoProductoID = New System.Windows.Forms.TextBox()
         Me.TxtBxClienteID = New System.Windows.Forms.TextBox()
+        Me.TxtBxDireccion = New System.Windows.Forms.TextBox()
+        Me.LblDireccion = New System.Windows.Forms.Label()
+        Me.TxtBxHoraEntrada = New System.Windows.Forms.TextBox()
+        Me.LblHoraEntrada = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'CmbBxCategorias
         '
         Me.CmbBxCategorias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbBxCategorias.FormattingEnabled = True
-        Me.CmbBxCategorias.Location = New System.Drawing.Point(15, 302)
+        Me.CmbBxCategorias.Location = New System.Drawing.Point(15, 320)
         Me.CmbBxCategorias.Name = "CmbBxCategorias"
         Me.CmbBxCategorias.Size = New System.Drawing.Size(171, 21)
         Me.CmbBxCategorias.TabIndex = 0
@@ -61,7 +65,7 @@ Partial Class Form3
         'LblCategoria
         '
         Me.LblCategoria.AutoSize = True
-        Me.LblCategoria.Location = New System.Drawing.Point(12, 286)
+        Me.LblCategoria.Location = New System.Drawing.Point(12, 304)
         Me.LblCategoria.Name = "LblCategoria"
         Me.LblCategoria.Size = New System.Drawing.Size(83, 13)
         Me.LblCategoria.TabIndex = 1
@@ -121,7 +125,7 @@ Partial Class Form3
         'LblNumeroSerie
         '
         Me.LblNumeroSerie.AutoSize = True
-        Me.LblNumeroSerie.Location = New System.Drawing.Point(226, 118)
+        Me.LblNumeroSerie.Location = New System.Drawing.Point(224, 168)
         Me.LblNumeroSerie.Name = "LblNumeroSerie"
         Me.LblNumeroSerie.Size = New System.Drawing.Size(89, 13)
         Me.LblNumeroSerie.TabIndex = 9
@@ -129,7 +133,7 @@ Partial Class Form3
         '
         'TxtBxNumeroSerie
         '
-        Me.TxtBxNumeroSerie.Location = New System.Drawing.Point(229, 134)
+        Me.TxtBxNumeroSerie.Location = New System.Drawing.Point(227, 184)
         Me.TxtBxNumeroSerie.Name = "TxtBxNumeroSerie"
         Me.TxtBxNumeroSerie.ReadOnly = True
         Me.TxtBxNumeroSerie.Size = New System.Drawing.Size(128, 20)
@@ -157,7 +161,7 @@ Partial Class Form3
         'LblFechaEntrada
         '
         Me.LblFechaEntrada.AutoSize = True
-        Me.LblFechaEntrada.Location = New System.Drawing.Point(226, 168)
+        Me.LblFechaEntrada.Location = New System.Drawing.Point(224, 208)
         Me.LblFechaEntrada.Name = "LblFechaEntrada"
         Me.LblFechaEntrada.Size = New System.Drawing.Size(95, 13)
         Me.LblFechaEntrada.TabIndex = 13
@@ -166,7 +170,7 @@ Partial Class Form3
         'LblFechaRegistro
         '
         Me.LblFechaRegistro.AutoSize = True
-        Me.LblFechaRegistro.Location = New System.Drawing.Point(226, 220)
+        Me.LblFechaRegistro.Location = New System.Drawing.Point(224, 304)
         Me.LblFechaRegistro.Name = "LblFechaRegistro"
         Me.LblFechaRegistro.Size = New System.Drawing.Size(97, 13)
         Me.LblFechaRegistro.TabIndex = 14
@@ -174,7 +178,7 @@ Partial Class Form3
         '
         'TxtBxFechaEntrada
         '
-        Me.TxtBxFechaEntrada.Location = New System.Drawing.Point(229, 186)
+        Me.TxtBxFechaEntrada.Location = New System.Drawing.Point(227, 226)
         Me.TxtBxFechaEntrada.Name = "TxtBxFechaEntrada"
         Me.TxtBxFechaEntrada.ReadOnly = True
         Me.TxtBxFechaEntrada.Size = New System.Drawing.Size(128, 20)
@@ -182,7 +186,7 @@ Partial Class Form3
         '
         'TxtBxFechaRegistro
         '
-        Me.TxtBxFechaRegistro.Location = New System.Drawing.Point(229, 238)
+        Me.TxtBxFechaRegistro.Location = New System.Drawing.Point(227, 320)
         Me.TxtBxFechaRegistro.Name = "TxtBxFechaRegistro"
         Me.TxtBxFechaRegistro.ReadOnly = True
         Me.TxtBxFechaRegistro.Size = New System.Drawing.Size(128, 20)
@@ -228,14 +232,14 @@ Partial Class Form3
         '
         Me.Panel1.AutoScroll = True
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Location = New System.Drawing.Point(12, 342)
+        Me.Panel1.Location = New System.Drawing.Point(12, 365)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(438, 285)
         Me.Panel1.TabIndex = 21
         '
         'BtnRegistrarReporte
         '
-        Me.BtnRegistrarReporte.Location = New System.Drawing.Point(269, 633)
+        Me.BtnRegistrarReporte.Location = New System.Drawing.Point(269, 656)
         Me.BtnRegistrarReporte.Name = "BtnRegistrarReporte"
         Me.BtnRegistrarReporte.Size = New System.Drawing.Size(75, 40)
         Me.BtnRegistrarReporte.TabIndex = 22
@@ -244,7 +248,7 @@ Partial Class Form3
         '
         'BtnCancelar
         '
-        Me.BtnCancelar.Location = New System.Drawing.Point(350, 633)
+        Me.BtnCancelar.Location = New System.Drawing.Point(350, 656)
         Me.BtnCancelar.Name = "BtnCancelar"
         Me.BtnCancelar.Size = New System.Drawing.Size(75, 40)
         Me.BtnCancelar.TabIndex = 23
@@ -267,12 +271,50 @@ Partial Class Form3
         Me.TxtBxClienteID.TabIndex = 25
         Me.TxtBxClienteID.Visible = False
         '
+        'TxtBxDireccion
+        '
+        Me.TxtBxDireccion.Location = New System.Drawing.Point(227, 133)
+        Me.TxtBxDireccion.Name = "TxtBxDireccion"
+        Me.TxtBxDireccion.ReadOnly = True
+        Me.TxtBxDireccion.Size = New System.Drawing.Size(128, 20)
+        Me.TxtBxDireccion.TabIndex = 27
+        '
+        'LblDireccion
+        '
+        Me.LblDireccion.AutoSize = True
+        Me.LblDireccion.Location = New System.Drawing.Point(224, 120)
+        Me.LblDireccion.Name = "LblDireccion"
+        Me.LblDireccion.Size = New System.Drawing.Size(55, 13)
+        Me.LblDireccion.TabIndex = 26
+        Me.LblDireccion.Text = "Direccion:"
+        '
+        'TxtBxHoraEntrada
+        '
+        Me.TxtBxHoraEntrada.Location = New System.Drawing.Point(227, 272)
+        Me.TxtBxHoraEntrada.Name = "TxtBxHoraEntrada"
+        Me.TxtBxHoraEntrada.ReadOnly = True
+        Me.TxtBxHoraEntrada.Size = New System.Drawing.Size(128, 20)
+        Me.TxtBxHoraEntrada.TabIndex = 29
+        '
+        'LblHoraEntrada
+        '
+        Me.LblHoraEntrada.AutoSize = True
+        Me.LblHoraEntrada.Location = New System.Drawing.Point(224, 256)
+        Me.LblHoraEntrada.Name = "LblHoraEntrada"
+        Me.LblHoraEntrada.Size = New System.Drawing.Size(88, 13)
+        Me.LblHoraEntrada.TabIndex = 28
+        Me.LblHoraEntrada.Text = "Hora de Entrada:"
+        '
         'Form3
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
-        Me.ClientSize = New System.Drawing.Size(485, 685)
+        Me.ClientSize = New System.Drawing.Size(485, 707)
+        Me.Controls.Add(Me.TxtBxHoraEntrada)
+        Me.Controls.Add(Me.LblHoraEntrada)
+        Me.Controls.Add(Me.TxtBxDireccion)
+        Me.Controls.Add(Me.LblDireccion)
         Me.Controls.Add(Me.TxtBxClienteID)
         Me.Controls.Add(Me.TxtBxTipoProductoID)
         Me.Controls.Add(Me.BtnCancelar)
@@ -331,4 +373,8 @@ Partial Class Form3
     Friend WithEvents BtnCancelar As Button
     Friend WithEvents TxtBxTipoProductoID As TextBox
     Friend WithEvents TxtBxClienteID As TextBox
+    Friend WithEvents TxtBxDireccion As TextBox
+    Friend WithEvents LblDireccion As Label
+    Friend WithEvents TxtBxHoraEntrada As TextBox
+    Friend WithEvents LblHoraEntrada As Label
 End Class

@@ -50,13 +50,17 @@ Public Class Form2
         If contraseña = bd_password Then
             MsgBox("Bienvenido " & usuario & "", False, "Log-In")
             Dim usuario_id As String
+            Dim esadmin As String
             Try
                 conn.Open()
                 Dim cmd As New MySqlCommand(String.Format("Select UsuarioID from usuarios where usuario = '" & usuario & "';"), conn)
+                Dim cmd2 As New MySqlCommand(String.Format("Select Admin from usuarios where usuario ='" & usuario & "';"), conn)
                 usuario_id = Convert.ToString(cmd.ExecuteScalar())
+                esadmin = Convert.ToString(cmd2.ExecuteScalar())
                 'Form1.TxBxUsuario.Text = usuario_id
                 Form1.RecibirVariablesForm2(usuario)
                 Form1.LblUsuario.Text = "Sesion actual: " + usuario
+                Form1.LblEsAdmin.Text = esadmin
                 conn.Close()
             Catch ex As Exception
                 MsgBox(ex.Message, False, "Error")

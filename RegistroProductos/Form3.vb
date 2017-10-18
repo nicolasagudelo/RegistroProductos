@@ -282,6 +282,7 @@ Public Class Form3
         Dim ProductoID As String = TxtBxIDProducto.Text
         Dim NumeroSerie As String = TxtBxNumeroSerie.Text
         Dim Fecha_Ingreso As String = TxtBxFechaEntrada.Text
+        Dim Hora_Ingreso As String = TxtBxHoraEntrada.Text
         Dim Fecha_Reporte As String = TxtBxFechaRegistro.Text
         Dim ClienteID As String = TxtBxClienteID.Text
         Dim TipoProducto As String = TxtBxTipoProductoID.Text
@@ -304,7 +305,7 @@ Public Class Form3
                 Dim valor As String = TextBoxArray(i).Text
                 Try
                     conn.Open()
-                    Dim cmd As New MySqlCommand(String.Format("INSERT INTO reportes (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Observaciones`, `Fecha_Ingreso`, `Fecha_Reporte`, `ID_Prueba`, `Valor`, `UsuarioID`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & TipoProducto & "', '" & NumeroSerie & "', '" & Observaciones & "', '" & Fecha_Ingreso & "', '" & Fecha_Reporte & "', '" & ID_Prueba & "', '" & valor & "', '" & UsuarioID & "');"), conn)
+                    Dim cmd As New MySqlCommand(String.Format("INSERT INTO reportes (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Fecha_Ingreso`, `Hora_Ingreso`, `Fecha_Reporte`, `ID_Prueba`, `Valor`, `UsuarioID`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & TipoProducto & "', '" & NumeroSerie & "', '" & Fecha_Ingreso & "', '" & Hora_Ingreso & "', '" & Fecha_Reporte & "', '" & ID_Prueba & "', '" & valor & "', '" & UsuarioID & "');"), conn)
                     Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
                     cmd.ExecuteNonQuery()
             cmd2.ExecuteNonQuery()

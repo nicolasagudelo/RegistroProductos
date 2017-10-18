@@ -15,3 +15,20 @@ C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\Regi
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.vbprojResolveAssemblyReference.cache
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form3.resources
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.FormCambiarContraseña.resources
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\bin\Debug\RegistroProductos.exe.config
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\bin\Debug\RegistroProductos.exe
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\bin\Debug\RegistroProductos.pdb
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\bin\Debug\RegistroProductos.xml
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\bin\Debug\MySql.Data.dll
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\bin\Debug\MySql.Data.xml
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.vbprojResolveAssemblyReference.cache
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.Form1.resources
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.Form2.resources
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.Form3.resources
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.FormCambiarContraseña.resources
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.Resources.resources
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.vbproj.GenerateResource.Cache
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.exe
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.xml
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.pdb
+E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.Form5.resources

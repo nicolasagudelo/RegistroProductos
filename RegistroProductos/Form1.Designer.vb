@@ -62,6 +62,8 @@ Partial Class Form1
         Me.DGVProductosLimite = New System.Windows.Forms.DataGridView()
         Me.TabPageAdmin = New System.Windows.Forms.TabPage()
         Me.GrpBxAdmin2 = New System.Windows.Forms.GroupBox()
+        Me.CmbBxEsAdmin = New System.Windows.Forms.ComboBox()
+        Me.LblValorAdmin = New System.Windows.Forms.Label()
         Me.Intervalo = New System.Windows.Forms.NumericUpDown()
         Me.CmbBx1GrpBxAdmin2 = New System.Windows.Forms.ComboBox()
         Me.CmbBx2GrpBxAdmin2 = New System.Windows.Forms.ComboBox()
@@ -81,6 +83,10 @@ Partial Class Form1
         Me.LblUsuario = New System.Windows.Forms.Label()
         Me.BtnDesconectar = New System.Windows.Forms.Button()
         Me.LblCambiarContraseña = New System.Windows.Forms.Label()
+        Me.LblEsAdmin = New System.Windows.Forms.Label()
+        Me.GrpBxTipoSesion = New System.Windows.Forms.GroupBox()
+        Me.RBAnalista = New System.Windows.Forms.RadioButton()
+        Me.RBAdmin = New System.Windows.Forms.RadioButton()
         Me.TabControl1.SuspendLayout()
         Me.TabPageRegistrarProducto.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -93,6 +99,7 @@ Partial Class Form1
         CType(Me.Intervalo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrpBxAdmin.SuspendLayout()
         CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GrpBxTipoSesion.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -189,7 +196,7 @@ Partial Class Form1
         '
         Me.BtnModificarRegistro.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnModificarRegistro.Enabled = False
-        Me.BtnModificarRegistro.Location = New System.Drawing.Point(694, 11)
+        Me.BtnModificarRegistro.Location = New System.Drawing.Point(694, 63)
         Me.BtnModificarRegistro.Name = "BtnModificarRegistro"
         Me.BtnModificarRegistro.Size = New System.Drawing.Size(90, 45)
         Me.BtnModificarRegistro.TabIndex = 10
@@ -512,6 +519,8 @@ Partial Class Form1
         'GrpBxAdmin2
         '
         Me.GrpBxAdmin2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GrpBxAdmin2.Controls.Add(Me.CmbBxEsAdmin)
+        Me.GrpBxAdmin2.Controls.Add(Me.LblValorAdmin)
         Me.GrpBxAdmin2.Controls.Add(Me.Intervalo)
         Me.GrpBxAdmin2.Controls.Add(Me.CmbBx1GrpBxAdmin2)
         Me.GrpBxAdmin2.Controls.Add(Me.CmbBx2GrpBxAdmin2)
@@ -527,6 +536,24 @@ Partial Class Form1
         Me.GrpBxAdmin2.Size = New System.Drawing.Size(393, 100)
         Me.GrpBxAdmin2.TabIndex = 7
         Me.GrpBxAdmin2.TabStop = False
+        '
+        'CmbBxEsAdmin
+        '
+        Me.CmbBxEsAdmin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBxEsAdmin.FormattingEnabled = True
+        Me.CmbBxEsAdmin.Location = New System.Drawing.Point(141, 72)
+        Me.CmbBxEsAdmin.Name = "CmbBxEsAdmin"
+        Me.CmbBxEsAdmin.Size = New System.Drawing.Size(129, 21)
+        Me.CmbBxEsAdmin.TabIndex = 13
+        '
+        'LblValorAdmin
+        '
+        Me.LblValorAdmin.AutoSize = True
+        Me.LblValorAdmin.Location = New System.Drawing.Point(138, 56)
+        Me.LblValorAdmin.Name = "LblValorAdmin"
+        Me.LblValorAdmin.Size = New System.Drawing.Size(96, 13)
+        Me.LblValorAdmin.TabIndex = 12
+        Me.LblValorAdmin.Text = "¿Es administrador?"
         '
         'Intervalo
         '
@@ -715,12 +742,58 @@ Partial Class Form1
         Me.LblCambiarContraseña.TabIndex = 3
         Me.LblCambiarContraseña.Text = "Cambiar Contraseña"
         '
+        'LblEsAdmin
+        '
+        Me.LblEsAdmin.AutoSize = True
+        Me.LblEsAdmin.Location = New System.Drawing.Point(60, 6)
+        Me.LblEsAdmin.Name = "LblEsAdmin"
+        Me.LblEsAdmin.Size = New System.Drawing.Size(39, 13)
+        Me.LblEsAdmin.TabIndex = 5
+        Me.LblEsAdmin.Text = "Label1"
+        Me.LblEsAdmin.Visible = False
+        '
+        'GrpBxTipoSesion
+        '
+        Me.GrpBxTipoSesion.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GrpBxTipoSesion.Controls.Add(Me.RBAnalista)
+        Me.GrpBxTipoSesion.Controls.Add(Me.RBAdmin)
+        Me.GrpBxTipoSesion.Location = New System.Drawing.Point(544, 0)
+        Me.GrpBxTipoSesion.Name = "GrpBxTipoSesion"
+        Me.GrpBxTipoSesion.Size = New System.Drawing.Size(168, 40)
+        Me.GrpBxTipoSesion.TabIndex = 6
+        Me.GrpBxTipoSesion.TabStop = False
+        Me.GrpBxTipoSesion.Visible = False
+        '
+        'RBAnalista
+        '
+        Me.RBAnalista.AutoSize = True
+        Me.RBAnalista.Location = New System.Drawing.Point(104, 16)
+        Me.RBAnalista.Name = "RBAnalista"
+        Me.RBAnalista.Size = New System.Drawing.Size(62, 17)
+        Me.RBAnalista.TabIndex = 1
+        Me.RBAnalista.TabStop = True
+        Me.RBAnalista.Text = "Analista"
+        Me.RBAnalista.UseVisualStyleBackColor = True
+        '
+        'RBAdmin
+        '
+        Me.RBAdmin.AutoSize = True
+        Me.RBAdmin.Location = New System.Drawing.Point(0, 16)
+        Me.RBAdmin.Name = "RBAdmin"
+        Me.RBAdmin.Size = New System.Drawing.Size(88, 17)
+        Me.RBAdmin.TabIndex = 0
+        Me.RBAdmin.TabStop = True
+        Me.RBAdmin.Text = "Administrador"
+        Me.RBAdmin.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ControlLight
         Me.ClientSize = New System.Drawing.Size(935, 482)
+        Me.Controls.Add(Me.GrpBxTipoSesion)
+        Me.Controls.Add(Me.LblEsAdmin)
         Me.Controls.Add(Me.LblCambiarContraseña)
         Me.Controls.Add(Me.BtnDesconectar)
         Me.Controls.Add(Me.LblUsuario)
@@ -745,6 +818,8 @@ Partial Class Form1
         CType(Me.Intervalo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GrpBxAdmin.ResumeLayout(False)
         CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GrpBxTipoSesion.ResumeLayout(False)
+        Me.GrpBxTipoSesion.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -809,4 +884,10 @@ Partial Class Form1
     Friend WithEvents CmbBx1GrpBxAdmin2 As ComboBox
     Friend WithEvents CmbBx2GrpBxAdmin2 As ComboBox
     Friend WithEvents Intervalo As NumericUpDown
+    Friend WithEvents LblEsAdmin As Label
+    Friend WithEvents GrpBxTipoSesion As GroupBox
+    Friend WithEvents RBAnalista As RadioButton
+    Friend WithEvents RBAdmin As RadioButton
+    Friend WithEvents CmbBxEsAdmin As ComboBox
+    Friend WithEvents LblValorAdmin As Label
 End Class
