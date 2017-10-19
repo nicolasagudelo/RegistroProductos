@@ -52,6 +52,9 @@ Public Class Form3
         cod_prue.Clear()
         nombre_prueba.Clear()
 
+        RBQuitarTodo.Visible = True
+        RBSeleccionarTodo.Visible = True
+
         Dim categoria As String = CmbBxCategorias.SelectedValue.ToString
 
         If categoria = "5" Then
@@ -292,7 +295,7 @@ Public Class Form3
         For i = 0 To pruebascategoria - 1
             If TextBoxArray(i).Enabled = True Then
                 If TextBoxArray(i).Text = "" Then
-                    MsgBox("ThenEl valor para la prueba" & cod_prue(i) & " esta vacio, Asignele un valor o desmarque la prueba antes de continuar", False, "Error")
+                    MsgBox("El valor para la prueba" & cod_prue(i) & " esta vacio, Asignele un valor o desmarque la prueba antes de continuar", False, "Error")
                     Exit Sub
                 End If
             End If
@@ -303,22 +306,174 @@ Public Class Form3
                 'MsgBox(cod_prue(i) & "-" & nombre_prueba(i) & "-" & TextBoxArray(i).Text)
                 Dim ID_Prueba As String = cod_prue(i)
                 Dim valor As String = TextBoxArray(i).Text
+                Dim existevalor As Boolean
+                Dim existevalor2 As Boolean
+                Dim existevalor3 As Boolean
+                Dim existevalor4 As Boolean
+                Dim existevalor5 As Boolean
+
                 Try
                     conn.Open()
-                    Dim cmd As New MySqlCommand(String.Format("INSERT INTO reportes (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Fecha_Ingreso`, `Hora_Ingreso`, `Fecha_Reporte`, `ID_Prueba`, `Valor`, `UsuarioID`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & TipoProducto & "', '" & NumeroSerie & "', '" & Fecha_Ingreso & "', '" & Hora_Ingreso & "', '" & Fecha_Reporte & "', '" & ID_Prueba & "', '" & valor & "', '" & UsuarioID & "');"), conn)
-                    Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
-                    cmd.ExecuteNonQuery()
-            cmd2.ExecuteNonQuery()
-            Console.WriteLine("Reporte Registrado")
-            conn.Close()
-            Catch ex As Exception
-            MsgBox(ex.Message, False, "Error")
-            conn.Close()
-            Exit Sub
-            End Try
-        End If
+                    Dim cmd As New MySqlCommand(String.Format("Select Valor from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
+                    If cmd.ExecuteScalar.ToString.Trim = "" Then
+                        existevalor = False
+                    Else
+                        existevalor = True
+                    End If
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("Select Valor_2 from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
+                    If cmd.ExecuteScalar.ToString.Trim = "" Then
+                        existevalor2 = False
+                    Else
+                        existevalor2 = True
+                    End If
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("Select Valor_3 from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
+                    If cmd.ExecuteScalar.ToString.Trim = "" Then
+                        existevalor3 = False
+                    Else
+                        existevalor3 = True
+                    End If
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("Select Valor_4 from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
+                    If cmd.ExecuteScalar.ToString.Trim = "" Then
+                        existevalor4 = False
+                    Else
+                        existevalor4 = True
+                    End If
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("Select Valor_5 from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
+                    If cmd.ExecuteScalar.ToString.Trim = "" Then
+                        existevalor5 = False
+                    Else
+                        existevalor5 = True
+                    End If
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+
+                If existevalor = False Then
+
+                    Try
+                        conn.Open()
+                        Dim cmd As New MySqlCommand(String.Format("INSERT INTO reportes (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Fecha_Ingreso`, `Hora_Ingreso`, `Fecha_Reporte`, `ID_Prueba`, `Valor`, `UsuarioID`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & TipoProducto & "', '" & NumeroSerie & "', '" & Fecha_Ingreso & "', '" & Hora_Ingreso & "', '" & Fecha_Reporte & "', '" & ID_Prueba & "', '" & valor & "', '" & UsuarioID & "');"), conn)
+                        Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
+                        cmd.ExecuteNonQuery()
+                        cmd2.ExecuteNonQuery()
+                        Console.WriteLine("Reporte Registrado")
+                        MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                        conn.Close()
+                    Catch ex As Exception
+                        MsgBox(ex.Message, False, "Error")
+                        conn.Close()
+                        Exit Sub
+                    End Try
+                Else
+                    If existevalor2 = False Then
+                        Try
+                            conn.Open()
+                            Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_2`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
+                            Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
+                            cmd.ExecuteNonQuery()
+                            cmd2.ExecuteNonQuery()
+                            Console.WriteLine("Reporte Registrado")
+                            MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                            conn.Close()
+                        Catch ex As Exception
+                            MsgBox(ex.Message, False, "Error")
+                            conn.Close()
+                            Exit Sub
+                        End Try
+                    Else
+                        If existevalor3 = False Then
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_3`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
+                                Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
+                                cmd.ExecuteNonQuery()
+                                cmd2.ExecuteNonQuery()
+                                Console.WriteLine("Reporte Registrado")
+                                MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                                conn.Close()
+                            Catch ex As Exception
+                                MsgBox(ex.Message, False, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+                        Else
+                            If existevalor4 = False Then
+                                Try
+                                    conn.Open()
+                                    Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_4`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
+                                    Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
+                                    cmd.ExecuteNonQuery()
+                                    cmd2.ExecuteNonQuery()
+                                    Console.WriteLine("Reporte Registrado")
+                                    MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                                    conn.Close()
+                                Catch ex As Exception
+                                    MsgBox(ex.Message, False, "Error")
+                                    conn.Close()
+                                    Exit Sub
+                                End Try
+                            Else
+                                If existevalor5 = False Then
+                                    Try
+                                        conn.Open()
+                                        Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_5`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
+                                        Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
+                                        cmd.ExecuteNonQuery()
+                                        cmd2.ExecuteNonQuery()
+                                        Console.WriteLine("Reporte Registrado")
+                                        MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                                        conn.Close()
+                                    Catch ex As Exception
+                                        MsgBox(ex.Message, False, "Error")
+                                        conn.Close()
+                                        Exit Sub
+                                    End Try
+                                End If
+                            End If
+                        End If
+                    End If
+                End If
+            End If
         Next
-        MsgBox("Reporte Registrado", False, "Reporte Registrado")
         Form1.CargarDGVProductosLimite()
         Form1.CargarDGVProductosSinRevisar()
         Form1.ProductosFechaLimiteCerca()
@@ -332,5 +487,23 @@ Public Class Form3
     Dim control As Integer = 0
     Private Sub Form3_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         control = 1
+    End Sub
+
+    Private Sub RBSeleccionarTodo_CheckedChanged(sender As Object, e As EventArgs) Handles RBSeleccionarTodo.CheckedChanged
+        If RBSeleccionarTodo.Checked = True Then
+            For i As Integer = 0 To pruebascategoria - 1
+                CheckBoxButtonArray(i).Checked = True
+                TextBoxArray(i).Enabled = True
+            Next
+        End If
+    End Sub
+
+    Private Sub RBQuitarTodo_CheckedChanged(sender As Object, e As EventArgs) Handles RBQuitarTodo.CheckedChanged
+        If RBQuitarTodo.Checked = True Then
+            For i As Integer = 0 To pruebascategoria - 1
+                CheckBoxButtonArray(i).Checked = False
+                TextBoxArray(i).Enabled = False
+            Next
+        End If
     End Sub
 End Class

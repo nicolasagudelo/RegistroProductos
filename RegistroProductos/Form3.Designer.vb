@@ -51,6 +51,8 @@ Partial Class Form3
         Me.LblDireccion = New System.Windows.Forms.Label()
         Me.TxtBxHoraEntrada = New System.Windows.Forms.TextBox()
         Me.LblHoraEntrada = New System.Windows.Forms.Label()
+        Me.RBSeleccionarTodo = New System.Windows.Forms.RadioButton()
+        Me.RBQuitarTodo = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'CmbBxCategorias
@@ -305,12 +307,38 @@ Partial Class Form3
         Me.LblHoraEntrada.TabIndex = 28
         Me.LblHoraEntrada.Text = "Hora de Entrada:"
         '
+        'RBSeleccionarTodo
+        '
+        Me.RBSeleccionarTodo.AutoSize = True
+        Me.RBSeleccionarTodo.Checked = True
+        Me.RBSeleccionarTodo.Location = New System.Drawing.Point(12, 347)
+        Me.RBSeleccionarTodo.Name = "RBSeleccionarTodo"
+        Me.RBSeleccionarTodo.Size = New System.Drawing.Size(109, 17)
+        Me.RBSeleccionarTodo.TabIndex = 30
+        Me.RBSeleccionarTodo.TabStop = True
+        Me.RBSeleccionarTodo.Text = "Seleccionar Todo"
+        Me.RBSeleccionarTodo.UseVisualStyleBackColor = True
+        Me.RBSeleccionarTodo.Visible = False
+        '
+        'RBQuitarTodo
+        '
+        Me.RBQuitarTodo.AutoSize = True
+        Me.RBQuitarTodo.Location = New System.Drawing.Point(127, 347)
+        Me.RBQuitarTodo.Name = "RBQuitarTodo"
+        Me.RBQuitarTodo.Size = New System.Drawing.Size(77, 17)
+        Me.RBQuitarTodo.TabIndex = 31
+        Me.RBQuitarTodo.Text = "Quitar todo"
+        Me.RBQuitarTodo.UseVisualStyleBackColor = True
+        Me.RBQuitarTodo.Visible = False
+        '
         'Form3
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(485, 707)
+        Me.Controls.Add(Me.RBQuitarTodo)
+        Me.Controls.Add(Me.RBSeleccionarTodo)
         Me.Controls.Add(Me.TxtBxHoraEntrada)
         Me.Controls.Add(Me.LblHoraEntrada)
         Me.Controls.Add(Me.TxtBxDireccion)
@@ -377,4 +405,6 @@ Partial Class Form3
     Friend WithEvents LblDireccion As Label
     Friend WithEvents TxtBxHoraEntrada As TextBox
     Friend WithEvents LblHoraEntrada As Label
+    Friend WithEvents RBSeleccionarTodo As RadioButton
+    Friend WithEvents RBQuitarTodo As RadioButton
 End Class

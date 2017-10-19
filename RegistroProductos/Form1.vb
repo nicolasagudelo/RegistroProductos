@@ -131,7 +131,7 @@ Public Class Form1
 
     Dim controlmensaje As Integer = 0
 
-    Private Sub CargarDGVProductosRevisados()
+    Public Sub CargarDGVProductosRevisados()
         If admin = 1 Then
             Dim query As String = "SELECT distinct productos.ProductoID as 'ID Producto', clientes.ClienteID, clientes.Nombre as 'Cliente', clientes.Direccion as 'Direccion',tipo_productos.Tipo_Producto_ID, tipo_productos.Nombre as 'Producto', productos.Numero_Serie as 'Numero de Serie', productos.Observaciones as 'Observaciones', productos.Fecha_Entrada as 'Fecha de Entrada', Productos.Hora_Entrada as 'Hora de Entrada', reportes.Fecha_Reporte as 'Fecha Reporte', productos.Fecha_Limite as 'Fecha Limite', productos.Estado as 'Estado', productos.UsuarioID, usuarios.usuario as 'Revisado Por'
                                    from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID inner join usuarios on productos.UsuarioID = usuarios.UsuarioID inner join reportes on productos.ProductoID = reportes.ProductoID
@@ -1239,7 +1239,7 @@ Public Class Form1
 
         Try
             conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("Select Direccion from Clientes where ClienteID = '" & DGVProductosSinRevisar(1, fila_actual).Value & "';"), conn)
+            Dim cmd As New MySqlCommand(String.Format("Select Direccion from Clientes where ClienteID = '" & DGVProductosRevisados(1, fila_actual).Value & "';"), conn)
             Form5.TxtBxDireccion.Text = cmd.ExecuteScalar
             conn.Close()
         Catch ex As Exception

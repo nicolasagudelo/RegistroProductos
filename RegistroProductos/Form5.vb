@@ -61,6 +61,19 @@ Public Class Form5
     End Sub
 
     Private Sub BtnRechazarReporte_Click(sender As Object, e As EventArgs) Handles BtnRechazarReporte.Click
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`productos` SET `Estado`='Pendiente', `Observaciones` = '" & RchTxtBxObservaciones.Text & "' WHERE `ProductoID`='" & TxtBxIDProducto.Text & "';"), conn)
+            cmd.ExecuteNonQuery()
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+            conn.Close()
+        End Try
+        Form1.CargarDGVProductosRevisados()
+        Form1.CargarDGVProductosLimite()
+        Form1.CargarDGVProductosSinRevisar()
+        Form1.ProductosFechaLimiteCerca()
         Me.Close()
     End Sub
 
@@ -247,7 +260,21 @@ Public Class Form5
 
             pdfStamper.FormFlattening = True
             pdfStamper.Close()
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`productos` SET `Estado`='Aprovado' WHERE `ProductoID`='" & TxtBxIDProducto.Text & "';"), conn)
+                cmd.ExecuteNonQuery()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+            End Try
+
             MsgBox("Reporte Generado en " & filepath, MsgBoxStyle.Information, "PDF Creado")
+
+            Form1.CargarDGVProductosRevisados()
+            Me.Close()
+
         End If
 
     End Sub
