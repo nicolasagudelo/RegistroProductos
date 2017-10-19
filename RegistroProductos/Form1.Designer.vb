@@ -60,6 +60,8 @@ Partial Class Form1
         Me.LblNumeroProducto2 = New System.Windows.Forms.Label()
         Me.TxtBxNumeroProducto2 = New System.Windows.Forms.TextBox()
         Me.DGVProductosLimite = New System.Windows.Forms.DataGridView()
+        Me.TabPageProductosRevisados = New System.Windows.Forms.TabPage()
+        Me.DGVProductosRevisados = New System.Windows.Forms.DataGridView()
         Me.TabPageAdmin = New System.Windows.Forms.TabPage()
         Me.GrpBxAdmin2 = New System.Windows.Forms.GroupBox()
         Me.CmbBxEsAdmin = New System.Windows.Forms.ComboBox()
@@ -94,6 +96,8 @@ Partial Class Form1
         Me.TabPageProductoLimite.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.DGVProductosLimite, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPageProductosRevisados.SuspendLayout()
+        CType(Me.DGVProductosRevisados, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPageAdmin.SuspendLayout()
         Me.GrpBxAdmin2.SuspendLayout()
         CType(Me.Intervalo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -109,6 +113,7 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.TabPageRegistrarProducto)
         Me.TabControl1.Controls.Add(Me.TabPageProductoLimite)
+        Me.TabControl1.Controls.Add(Me.TabPageProductosRevisados)
         Me.TabControl1.Controls.Add(Me.TabPageAdmin)
         Me.TabControl1.Location = New System.Drawing.Point(0, 24)
         Me.TabControl1.Name = "TabControl1"
@@ -503,6 +508,31 @@ Partial Class Form1
         Me.DGVProductosLimite.Size = New System.Drawing.Size(792, 254)
         Me.DGVProductosLimite.TabIndex = 2
         '
+        'TabPageProductosRevisados
+        '
+        Me.TabPageProductosRevisados.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPageProductosRevisados.Controls.Add(Me.DGVProductosRevisados)
+        Me.TabPageProductosRevisados.Location = New System.Drawing.Point(4, 22)
+        Me.TabPageProductosRevisados.Name = "TabPageProductosRevisados"
+        Me.TabPageProductosRevisados.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPageProductosRevisados.Size = New System.Drawing.Size(925, 434)
+        Me.TabPageProductosRevisados.TabIndex = 3
+        Me.TabPageProductosRevisados.Text = "Productos Revisados"
+        '
+        'DGVProductosRevisados
+        '
+        Me.DGVProductosRevisados.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGVProductosRevisados.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DGVProductosRevisados.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.DGVProductosRevisados.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DGVProductosRevisados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVProductosRevisados.Location = New System.Drawing.Point(3, 6)
+        Me.DGVProductosRevisados.Name = "DGVProductosRevisados"
+        Me.DGVProductosRevisados.Size = New System.Drawing.Size(916, 406)
+        Me.DGVProductosRevisados.TabIndex = 7
+        '
         'TabPageAdmin
         '
         Me.TabPageAdmin.BackColor = System.Drawing.SystemColors.Control
@@ -812,6 +842,8 @@ Partial Class Form1
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.DGVProductosLimite, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPageProductosRevisados.ResumeLayout(False)
+        CType(Me.DGVProductosRevisados, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPageAdmin.ResumeLayout(False)
         Me.GrpBxAdmin2.ResumeLayout(False)
         Me.GrpBxAdmin2.PerformLayout()
@@ -890,4 +922,6 @@ Partial Class Form1
     Friend WithEvents RBAdmin As RadioButton
     Friend WithEvents CmbBxEsAdmin As ComboBox
     Friend WithEvents LblValorAdmin As Label
+    Friend WithEvents TabPageProductosRevisados As TabPage
+    Friend WithEvents DGVProductosRevisados As DataGridView
 End Class

@@ -32,3 +32,4 @@ E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\Regis
 E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.xml
 E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.pdb
 E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\RegistroProductos.Form5.resources
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form5.resources

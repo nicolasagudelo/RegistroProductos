@@ -1,5 +1,8 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.Configuration
+Imports iTextSharp.text.pdf
+Imports System.IO
+Imports System.Text
 
 Public Class Form5
 
@@ -18,6 +21,10 @@ Public Class Form5
     End Sub
 
     Private Sub Form5_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        TxtBxIDMuestra.Clear()
+        TxtBxOrigen.Clear()
+        TxtBxLote.Clear()
+        TxtBxATN.Clear()
         Connect()
         CArgarDGV()
 
@@ -52,4 +59,213 @@ Public Class Form5
         End Try
 
     End Sub
+
+    Private Sub BtnRechazarReporte_Click(sender As Object, e As EventArgs) Handles BtnRechazarReporte.Click
+        Me.Close()
+    End Sub
+
+    Private Sub BtnAceptarReporte_Click(sender As Object, e As EventArgs) Handles BtnAceptarReporte.Click
+        If RBBasica.Checked = False And RBCompleta.Checked = False And RBEspecifica.Checked = False Then
+            MsgBox("Seleccione un tipo de prueba", MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
+        End If
+        CargarPDF()
+    End Sub
+
+    Private Sub CargarPDF()
+
+        'ListarCampos()
+        LlenarPDF()
+    End Sub
+
+    Private Sub LlenarPDF()
+        If TxtBxTipoProductoID.Text = "7" Then
+            Dim pdfTemplate As String = ConfigurationManager.AppSettings("Key7")
+            Dim GuardarPDF As New SaveFileDialog
+            GuardarPDF.InitialDirectory = "C:\"
+            GuardarPDF.RestoreDirectory = True
+            GuardarPDF.DefaultExt = ".pdf"
+            GuardarPDF.ShowDialog()
+            Dim filepath As String
+
+            Try
+                filepath = Path.GetFullPath(GuardarPDF.FileName)
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                Exit Sub
+            End Try
+
+            Dim pdfReader As New PdfReader(pdfTemplate)
+            Dim pdfStamper As New PdfStamper(pdfReader, New FileStream(
+                        filepath, FileMode.Create))
+
+            Dim pdfFormFields As AcroFields = pdfStamper.AcroFields
+            pdfFormFields.SetField("Cliente", TxtBxCliente.Text)
+            pdfFormFields.SetField("Direccion", TxtBxDireccion.Text)
+            pdfFormFields.SetField("ATN", TxtBxATN.Text)
+            pdfFormFields.SetField("FechaRecibo", TxtBxFechaEntrada.Text)
+            pdfFormFields.SetField("HoraRecibo", TxtBxHoraEntrada.Text)
+            pdfFormFields.SetField("FechaReporte", TxtBxFechaRegistro.Text)
+            pdfFormFields.SetField("PeriodoAnalisis", TxtBxPeriodoAnalisis.Text.ToUpper)
+            pdfFormFields.SetField("IdMuestra", TxtBxIDMuestra.Text)
+            pdfFormFields.SetField("NoLab", TxtBxIDProducto.Text.Substring(5))
+            pdfFormFields.SetField("NoReporte", TxtBxIDProducto.Text)
+            pdfFormFields.SetField("Origen/Tanque", TxtBxOrigen.Text)
+            pdfFormFields.SetField("Cochada/Lote", TxtBxLote.Text)
+            pdfFormFields.SetField("Observaciones", RchTxtBxObservaciones.Text)
+            pdfFormFields.SetField("Aprobador", Form1.LblUsuario.Text.Substring(14))
+            If RBCompleta.Checked = True Then
+                pdfFormFields.SetField("CBBasico", "0")
+                pdfFormFields.SetField("CBCompleto", "Yes")
+                pdfFormFields.SetField("CBEspecifico", "0")
+            ElseIf RBBasica.Checked = True Then
+                pdfFormFields.SetField("CBBasico", "Yes")
+                pdfFormFields.SetField("CBCompleto", "0")
+                pdfFormFields.SetField("CBEspecifico", "0")
+            ElseIf RBEspecifica.Checked = True Then
+                pdfFormFields.SetField("CBBasico", "0")
+                pdfFormFields.SetField("CBCompleto", "0")
+                pdfFormFields.SetField("CBEspecifico", "Yes")
+            End If
+
+            Dim filas_total As Integer = DGV.RowCount - 2
+
+            Dim id_prueba As String
+            Dim valor_prueba As String
+
+            For i As Integer = 0 To filas_total
+                id_prueba = DGV(0, i).Value
+
+                valor_prueba = DGV(6, i).Value.ToString.Trim
+                If valor_prueba = "" Then
+                    valor_prueba = DGV(5, i).Value.ToString.Trim
+                End If
+                If valor_prueba = "" Then
+                    valor_prueba = DGV(4, i).Value.ToString.Trim
+                End If
+                If valor_prueba = "" Then
+                    valor_prueba = DGV(3, i).Value.ToString.Trim
+                End If
+                If valor_prueba = "" Then
+                    valor_prueba = DGV(2, i).Value.ToString.Trim
+                End If
+
+                Select Case id_prueba
+                    Case "D-32-43"
+                        pdfFormFields.SetField("TxtBxAcidezTotal", valor_prueba)
+                        Exit Select
+                    Case "D-1319"
+                        pdfFormFields.SetField("TxtAromaticos", valor_prueba)
+                        Exit Select
+                    Case "D-4294"
+                        pdfFormFields.SetField("TxtAzufre", valor_prueba)
+                        Exit Select
+                    Case "D-4952"
+                        pdfFormFields.SetField("TxtBxPruebaDoctor", valor_prueba)
+                        Exit Select
+                    Case "D-1840"
+                        pdfFormFields.SetField("TxtBxNaftalenos", valor_prueba)
+                        Exit Select
+                    Case "D-1298"
+                        pdfFormFields.SetField("TxtBxGravedad", valor_prueba)
+                        Exit Select
+                    Case "D-1250"
+                        pdfFormFields.SetField("TxtBxDensidad", valor_prueba)
+                        Exit Select
+                    Case "D-86-1"
+                        pdfFormFields.SetField("TxbBxPIE", valor_prueba)
+                        Exit Select
+                    Case "D-86-2"
+                        pdfFormFields.SetField("TxtBxTemp10", valor_prueba)
+                        Exit Select
+                    Case "D-86-3"
+                        pdfFormFields.SetField("TxtBxTemp50", valor_prueba)
+                        Exit Select
+                    Case "D-86-4"
+                        pdfFormFields.SetField("TxtBxTemp90", valor_prueba)
+                        Exit Select
+                    Case "D-86-6"
+                        pdfFormFields.SetField("TxtBxPFE", valor_prueba)
+                        Exit Select
+                    Case "D-86-7"
+                        pdfFormFields.SetField("TxtBxResiduoDestilacion", valor_prueba)
+                        Exit Select
+                    Case "D-86-8"
+                        pdfFormFields.SetField("TxtBxPerdidaDestilacion", valor_prueba)
+                        Exit Select
+                    Case "D-56"
+                        pdfFormFields.SetField("TxtBxPuntoChispa", valor_prueba)
+                        Exit Select
+                    Case "D-2386"
+                        pdfFormFields.SetField("TxtBxPCongelacion", valor_prueba)
+                        Exit Select
+                    Case "D-445"
+                        pdfFormFields.SetField("TxtBxViscosidad", valor_prueba)
+                        Exit Select
+                    Case "D-3338"
+                        pdfFormFields.SetField("TxtBxCalorNeto", valor_prueba)
+                        Exit Select
+                    Case "D-1322"
+                        pdfFormFields.SetField("TxtBxPuntoHumo", valor_prueba)
+                        Exit Select
+                    Case "D-130-1"
+                        pdfFormFields.SetField("TxtBxCorrosion100", valor_prueba)
+                        Exit Select
+                    Case "D-3241-1"
+                        pdfFormFields.SetField("TxtBxCaidaPresion", valor_prueba)
+                        Exit Select
+                    Case "D-3241-2"
+                        pdfFormFields.SetField("TxtBxCodigoColor", valor_prueba)
+                        Exit Select
+                    Case "D-3241-2"
+                        pdfFormFields.SetField("TxtBxCodigoColor", valor_prueba)
+                        Exit Select
+                    Case "D-4176"
+                        pdfFormFields.SetField("TxtBxApariencia", valor_prueba)
+                        Exit Select
+                    Case "D-381"
+                        pdfFormFields.SetField("TxtBxGoma", valor_prueba)
+                        Exit Select
+                    Case "D-1094-2"
+                        pdfFormFields.SetField("TxtBxClasifInterfase", valor_prueba)
+                        Exit Select
+                    Case "D-1094-3"
+                        pdfFormFields.SetField("TxtBxClasifSeparacion", valor_prueba)
+                        Exit Select
+                    Case "D-1094-1"
+                        pdfFormFields.SetField("TxtBxCambioVolumen", valor_prueba)
+                        Exit Select
+                    Case "D-3948"
+                        pdfFormFields.SetField("TxtBxMSEP-A", valor_prueba)
+                        Exit Select
+                    Case Else
+                        MsgBox("La prueba" & id_prueba & " no se encuentra en la plantilla PDF", MsgBoxStyle.Exclamation, "Error")
+                        Exit Select
+                End Select
+
+            Next
+
+            pdfStamper.FormFlattening = True
+            pdfStamper.Close()
+            MsgBox("Reporte Generado en " & filepath, MsgBoxStyle.Information, "PDF Creado")
+        End If
+
+    End Sub
+
+    Private Sub ListarCampos()
+        If TxtBxTipoProductoID.Text = "7" Then
+            Dim pdfTemplate As String = ConfigurationManager.AppSettings("Key7")
+
+            Dim pdfReader As PdfReader = New PdfReader(pdfTemplate)
+
+            Dim PDFfld As Object
+
+            Dim sb As New StringBuilder()
+
+            For Each PDFfld In pdfReader.AcroFields.Fields
+                sb.Append(PDFfld.Key.ToString() + Environment.NewLine)
+            Next
+        End If
+    End Sub
+
 End Class

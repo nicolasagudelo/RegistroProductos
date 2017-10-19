@@ -32,7 +32,8 @@ Public Class Form1
             DTPFechaLimite.CustomFormat = "yyyy-MM-dd"
             BtnGenerarReporte.Visible = False
             BtnGenerarReporte2.Visible = False
-            TabControl1.TabPages.Insert(2, TabPageAdmin)
+            TabControl1.TabPages.Insert(2, TabPageProductosRevisados)
+            TabControl1.TabPages.Insert(3, TabPageAdmin)
             CmbBxEsAdmin.Items.Clear()
             CmbBxEsAdmin.Items.Add("Si")
             CmbBxEsAdmin.Items.Add("No")
@@ -43,7 +44,6 @@ Public Class Form1
             CmbBxTablas.Items.Add("Categorias")
             CmbBxTablas.Items.Add("Pruebas por Categoria")
             CmbBxTablas.Items.Add("Tipo de Mercancia")
-            CmbBxTablas.Items.Add("Productos Revisados")
             CmbBxTablas.SelectedIndex = 0
             LlenarComboBoxPruebas()
             LlenarComboBoxCategorias()
@@ -55,6 +55,7 @@ Public Class Form1
             BtnGenerarReporte.Visible = True
             BtnGenerarReporte2.Visible = True
             TabControl1.TabPages.Remove(TabPageAdmin)
+            TabControl1.TabPages.Remove(TabPageProductosRevisados)
             GrpBxTipoSesion.Visible = True
             RBAnalista.Checked = True
         Else
@@ -65,6 +66,7 @@ Public Class Form1
             BtnGenerarReporte.Visible = True
             BtnGenerarReporte2.Visible = True
             TabControl1.TabPages.Remove(TabPageAdmin)
+            TabControl1.TabPages.Remove(TabPageProductosRevisados)
         End If
         Try
             conn.Open()
@@ -78,6 +80,7 @@ Public Class Form1
         End Try
         CargarDGVProductosSinRevisar()
         CargarDGVProductosLimite()
+        CargarDGVProductosRevisados()
         ProductosFechaLimiteCerca()
         LlenarComboBoxClientes()
         LlenarComboBoxTipoProducto()
@@ -127,6 +130,39 @@ Public Class Form1
     End Sub
 
     Dim controlmensaje As Integer = 0
+
+    Private Sub CargarDGVProductosRevisados()
+        If admin = 1 Then
+            Dim query As String = "SELECT distinct productos.ProductoID as 'ID Producto', clientes.ClienteID, clientes.Nombre as 'Cliente', clientes.Direccion as 'Direccion',tipo_productos.Tipo_Producto_ID, tipo_productos.Nombre as 'Producto', productos.Numero_Serie as 'Numero de Serie', productos.Observaciones as 'Observaciones', productos.Fecha_Entrada as 'Fecha de Entrada', Productos.Hora_Entrada as 'Hora de Entrada', reportes.Fecha_Reporte as 'Fecha Reporte', productos.Fecha_Limite as 'Fecha Limite', productos.Estado as 'Estado', productos.UsuarioID, usuarios.usuario as 'Revisado Por'
+                                   from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID inner join usuarios on productos.UsuarioID = usuarios.UsuarioID inner join reportes on productos.ProductoID = reportes.ProductoID
+                                   Where Estado = 'Revisado';"
+
+            Dim cmd As New MySqlCommand(query, conn)
+            Dim reader As MySqlDataReader
+
+            Try
+                conn.Open()
+                Console.WriteLine("Cargando Productos Revisados")
+
+                reader = cmd.ExecuteReader
+
+                Dim table As New DataTable
+                table.Load(reader)
+                DGVProductosRevisados.DataSource = table
+                DGVProductosRevisados.ReadOnly = True
+                DGVProductosRevisados.AllowUserToResizeColumns = True
+                DGVProductosRevisados.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                reader.Close()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+            End Try
+            DGVProductosRevisados.Columns(1).Visible = False
+            DGVProductosRevisados.Columns(4).Visible = False
+            DGVProductosRevisados.Columns(13).Visible = False
+        End If
+    End Sub
 
     Public Sub ProductosFechaLimiteCerca()
         Dim filas_total As Integer = DGVProductosSinRevisar.RowCount
@@ -393,6 +429,7 @@ Public Class Form1
         End Try
         CargarDGVProductosSinRevisar()
         CargarDGVProductosLimite()
+        CargarDGVProductosRevisados()
         ProductosFechaLimiteCerca()
         TxtBxNumeroSerie.Clear()
         TxtBxProductoID.Clear()
@@ -461,6 +498,7 @@ Public Class Form1
             End Try
             CargarDGVProductosSinRevisar()
             CargarDGVProductosLimite()
+            CargarDGVProductosRevisados()
             ProductosFechaLimiteCerca()
             DGVProductosSinRevisar.Rows(fila_actual).Selected = True
         End If
@@ -486,8 +524,9 @@ Public Class Form1
             conn.Close()
         End Try
         CargarDGVProductosSinRevisar()
-        CargarDGVProductosLimite()
-        ProductosFechaLimiteCerca()
+            CargarDGVProductosLimite()
+            CargarDGVProductosRevisados()
+            ProductosFechaLimiteCerca()
             DGVProductosSinRevisar.Rows(fila_actual).Selected = True
         End If
     End Sub
@@ -638,6 +677,7 @@ Public Class Form1
                 MsgBox(ex.Message, False, "Error")
                 conn.Close()
             End Try
+            DGVAdmin.Columns(2).Visible = False
         ElseIf CmbBxTablas.SelectedItem = "Clientes" Then
             Dim query As String = "SELECT * From Clientes;"
 
@@ -761,36 +801,6 @@ Public Class Form1
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
                 conn.Close()
             End Try
-
-        ElseIf CmbBxTablas.SelectedItem = "Productos Revisados" Then
-            Dim query As String = "SELECT distinct productos.ProductoID as 'ID Producto', clientes.ClienteID, clientes.Nombre as 'Cliente', clientes.Direccion as 'Direccion',tipo_productos.Tipo_Producto_ID, tipo_productos.Nombre as 'Producto', productos.Numero_Serie as 'Numero de Serie', productos.Observaciones as 'Observaciones', productos.Fecha_Entrada as 'Fecha de Entrada', Productos.Hora_Entrada as 'Hora de Entrada', reportes.Fecha_Reporte as 'Fecha Reporte', productos.Fecha_Limite as 'Fecha Limite', productos.Estado as 'Estado', productos.UsuarioID, usuarios.usuario as 'Revisado Por'
-                                   from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID inner join usuarios on productos.UsuarioID = usuarios.UsuarioID inner join reportes on productos.ProductoID = reportes.ProductoID
-                                   Where Estado = 'Revisado';"
-
-            Dim cmd As New MySqlCommand(query, conn)
-            Dim reader As MySqlDataReader
-
-            Try
-                conn.Open()
-                Console.WriteLine("Cargando Productos Revisados")
-
-                reader = cmd.ExecuteReader
-
-                Dim table As New DataTable
-                table.Load(reader)
-                DGVAdmin.DataSource = table
-                DGVAdmin.ReadOnly = True
-                DGVAdmin.AllowUserToResizeColumns = True
-                DGVAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                reader.Close()
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
-                conn.Close()
-            End Try
-            DGVAdmin.Columns(1).Visible = False
-            DGVAdmin.Columns(4).Visible = False
-            DGVAdmin.Columns(13).Visible = False
         End If
     End Sub
 
@@ -860,10 +870,6 @@ Public Class Form1
             GrpBxAdmin.Visible = True
             LblValorAdmin.Visible = False
             CmbBxEsAdmin.Visible = False
-            CargarDGVAdmin()
-        ElseIf CmbBxTablas.SelectedItem = "Productos Revisados" Then
-            GrpBxAdmin.Visible = False
-            GrpBxAdmin2.Visible = False
             CargarDGVAdmin()
         End If
     End Sub
@@ -1146,9 +1152,11 @@ Public Class Form1
             BtnGenerarReporte.Visible = True
             BtnGenerarReporte2.Visible = True
             TabControl1.TabPages.Remove(TabPageAdmin)
+            TabControl1.TabPages.Remove(TabPageProductosRevisados)
             GrpBxTipoSesion.Visible = True
             RBAnalista.Checked = True
         ElseIf RBAdmin.Checked = True Then
+            admin = 1
             Panel2.Visible = True
             TxtBxProductoID.Enabled = False
             TxtBxNumeroProducto2.Enabled = False
@@ -1171,7 +1179,9 @@ Public Class Form1
             DTPFechaLimite.CustomFormat = "yyyy-MM-dd"
             BtnGenerarReporte.Visible = False
             BtnGenerarReporte2.Visible = False
-            TabControl1.TabPages.Insert(2, TabPageAdmin)
+            TabControl1.TabPages.Insert(2, TabPageProductosRevisados)
+            TabControl1.TabPages.Insert(3, TabPageAdmin)
+            CargarDGVProductosRevisados()
             CmbBxEsAdmin.Items.Clear()
             CmbBxEsAdmin.Items.Add("Si")
             CmbBxEsAdmin.Items.Add("No")
@@ -1182,7 +1192,6 @@ Public Class Form1
             CmbBxTablas.Items.Add("Categorias")
             CmbBxTablas.Items.Add("Pruebas por Categoria")
             CmbBxTablas.Items.Add("Tipo de Mercancia")
-            CmbBxTablas.Items.Add("Productos Revisados")
             CmbBxTablas.SelectedIndex = 0
             LlenarComboBoxPruebas()
             LlenarComboBoxCategorias()
@@ -1190,53 +1199,58 @@ Public Class Form1
 
     End Sub
 
-    Private Sub DGVAdmin_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVAdmin.CellDoubleClick
-        If CmbBxTablas.SelectedItem = "Productos Revisados" Then
-            Dim fila_actual As Integer = (DGVProductosSinRevisar.CurrentRow.Index)
-            Form5.TxtBxUsuario.Text = DGVAdmin(14, fila_actual).Value
-            Dim usu_id As String
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("select UsuarioID from usuarios where usuario = '" & DGVAdmin(14, fila_actual).Value & "';"), conn)
-                usu_id = cmd.ExecuteScalar
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
-                conn.Close()
-                Exit Sub
-            End Try
-            Form5.TxtBxIdUsuario.Text = usu_id
-            Form5.TxtBxIDProducto.Text = DGVAdmin(0, fila_actual).Value
-            Form5.TxtBxClienteID.Text = DGVAdmin(1, fila_actual).Value
-            Form5.TxtBxCliente.Text = DGVAdmin(2, fila_actual).Value
-            Form5.TxtBxTipoProductoID.Text = DGVAdmin(4, fila_actual).Value
-            Form5.TxtBxProducto.Text = DGVAdmin(5, fila_actual).Value
-            Form5.TxtBxNumeroSerie.Text = DGVAdmin(6, fila_actual).Value
-            Form5.RchTxtBxObservaciones.Text = DGVAdmin(7, fila_actual).Value
-            Dim fecha_entrada As Date = DGVAdmin(8, fila_actual).Value
-            Form5.TxtBxFechaEntrada.Text = fecha_entrada.ToString("yyyy-MM-dd")
-            Dim hora_entrada As String = DGVAdmin(9, fila_actual).Value.ToString
-            Form5.TxtBxHoraEntrada.Text = hora_entrada
-            Dim fecha_registro As Date = DGVAdmin(10, fila_actual).Value
-            Dim PeriodoAnalisis As String = DateDiff("d", fecha_entrada, fecha_registro)
-            Form5.TxtBxPeriodoAnalisis.Text = PeriodoAnalisis
-
-
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("Select Direccion from Clientes where ClienteID = '" & DGVProductosSinRevisar(1, fila_actual).Value & "';"), conn)
-                Form5.TxtBxDireccion.Text = cmd.ExecuteScalar
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
-                conn.Close()
-                Exit Sub
-            End Try
-
-            Form5.TxtBxFechaRegistro.Text = fecha_registro.ToString("yyyy-MM-dd")
-
-            Form5.ShowDialog()
-
+    Private Sub DGVProductosRevisados_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVProductosRevisados.CellDoubleClick
+        Dim fila_actual As Integer = (DGVProductosRevisados.CurrentRow.Index)
+        If nombre_usuario = DGVProductosRevisados(14, fila_actual).Value.ToString Then
+            MsgBox("No puede realizar un reporte sobre una muestra que usted mismo reviso", MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
         End If
+        If fila_actual + 1 = DGVProductosRevisados.Rows.Count Then
+            Exit Sub
+        End If
+        Form5.TxtBxUsuario.Text = DGVProductosRevisados(14, fila_actual).Value
+        Dim usu_id As String
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("select UsuarioID from usuarios where usuario = '" & DGVProductosRevisados(14, fila_actual).Value & "';"), conn)
+            usu_id = cmd.ExecuteScalar
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+            conn.Close()
+            Exit Sub
+        End Try
+        Form5.TxtBxIdUsuario.Text = usu_id
+        Form5.TxtBxIDProducto.Text = DGVProductosRevisados(0, fila_actual).Value
+        Form5.TxtBxClienteID.Text = DGVProductosRevisados(1, fila_actual).Value
+        Form5.TxtBxCliente.Text = DGVProductosRevisados(2, fila_actual).Value
+        Form5.TxtBxTipoProductoID.Text = DGVProductosRevisados(4, fila_actual).Value
+        Form5.TxtBxProducto.Text = DGVProductosRevisados(5, fila_actual).Value
+        Form5.TxtBxNumeroSerie.Text = DGVProductosRevisados(6, fila_actual).Value
+        Form5.RchTxtBxObservaciones.Text = DGVProductosRevisados(7, fila_actual).Value
+        Dim fecha_entrada As Date = DGVProductosRevisados(8, fila_actual).Value
+        Form5.TxtBxFechaEntrada.Text = fecha_entrada.ToString("yyyy-MM-dd")
+        Dim hora_entrada As String = DGVProductosRevisados(9, fila_actual).Value.ToString
+        Form5.TxtBxHoraEntrada.Text = hora_entrada
+        Dim fecha_registro As Date = DGVProductosRevisados(10, fila_actual).Value
+        Dim PeriodoAnalisis As String = DateDiff("d", fecha_entrada, fecha_registro)
+        Form5.TxtBxPeriodoAnalisis.Text = PeriodoAnalisis + " dias"
+
+
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("Select Direccion from Clientes where ClienteID = '" & DGVProductosSinRevisar(1, fila_actual).Value & "';"), conn)
+            Form5.TxtBxDireccion.Text = cmd.ExecuteScalar
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+            conn.Close()
+            Exit Sub
+        End Try
+
+        Form5.TxtBxFechaRegistro.Text = fecha_registro.ToString("yyyy-MM-dd")
+
+        Form5.ShowDialog()
+
     End Sub
 End Class

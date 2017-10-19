@@ -50,18 +50,26 @@ Partial Class Form5
         Me.BtnRechazarReporte = New System.Windows.Forms.Button()
         Me.BtnAceptarReporte = New System.Windows.Forms.Button()
         Me.GrpBxTipoPrueba = New System.Windows.Forms.GroupBox()
-        Me.RBCompleta = New System.Windows.Forms.RadioButton()
-        Me.RBEspecifica = New System.Windows.Forms.RadioButton()
         Me.RBBasica = New System.Windows.Forms.RadioButton()
+        Me.RBEspecifica = New System.Windows.Forms.RadioButton()
+        Me.RBCompleta = New System.Windows.Forms.RadioButton()
         Me.TxtBxPeriodoAnalisis = New System.Windows.Forms.TextBox()
         Me.LblPeriodoAnalisis = New System.Windows.Forms.Label()
+        Me.TxtBxIDMuestra = New System.Windows.Forms.TextBox()
+        Me.LblIdMuestra = New System.Windows.Forms.Label()
+        Me.TxtBxOrigen = New System.Windows.Forms.TextBox()
+        Me.LblOrigen = New System.Windows.Forms.Label()
+        Me.TxtBxLote = New System.Windows.Forms.TextBox()
+        Me.LblLote = New System.Windows.Forms.Label()
+        Me.TxtBxATN = New System.Windows.Forms.TextBox()
+        Me.LblATN = New System.Windows.Forms.Label()
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrpBxTipoPrueba.SuspendLayout()
         Me.SuspendLayout()
         '
         'TxtBxHoraEntrada
         '
-        Me.TxtBxHoraEntrada.Location = New System.Drawing.Point(239, 271)
+        Me.TxtBxHoraEntrada.Location = New System.Drawing.Point(241, 287)
         Me.TxtBxHoraEntrada.Name = "TxtBxHoraEntrada"
         Me.TxtBxHoraEntrada.ReadOnly = True
         Me.TxtBxHoraEntrada.Size = New System.Drawing.Size(128, 20)
@@ -70,7 +78,7 @@ Partial Class Form5
         'LblHoraEntrada
         '
         Me.LblHoraEntrada.AutoSize = True
-        Me.LblHoraEntrada.Location = New System.Drawing.Point(236, 255)
+        Me.LblHoraEntrada.Location = New System.Drawing.Point(238, 271)
         Me.LblHoraEntrada.Name = "LblHoraEntrada"
         Me.LblHoraEntrada.Size = New System.Drawing.Size(88, 13)
         Me.LblHoraEntrada.TabIndex = 54
@@ -78,7 +86,7 @@ Partial Class Form5
         '
         'TxtBxDireccion
         '
-        Me.TxtBxDireccion.Location = New System.Drawing.Point(239, 132)
+        Me.TxtBxDireccion.Location = New System.Drawing.Point(241, 133)
         Me.TxtBxDireccion.Name = "TxtBxDireccion"
         Me.TxtBxDireccion.ReadOnly = True
         Me.TxtBxDireccion.Size = New System.Drawing.Size(128, 20)
@@ -87,7 +95,7 @@ Partial Class Form5
         'LblDireccion
         '
         Me.LblDireccion.AutoSize = True
-        Me.LblDireccion.Location = New System.Drawing.Point(236, 119)
+        Me.LblDireccion.Location = New System.Drawing.Point(238, 117)
         Me.LblDireccion.Name = "LblDireccion"
         Me.LblDireccion.Size = New System.Drawing.Size(55, 13)
         Me.LblDireccion.TabIndex = 52
@@ -147,7 +155,7 @@ Partial Class Form5
         '
         'TxtBxFechaRegistro
         '
-        Me.TxtBxFechaRegistro.Location = New System.Drawing.Point(239, 319)
+        Me.TxtBxFechaRegistro.Location = New System.Drawing.Point(241, 336)
         Me.TxtBxFechaRegistro.Name = "TxtBxFechaRegistro"
         Me.TxtBxFechaRegistro.ReadOnly = True
         Me.TxtBxFechaRegistro.Size = New System.Drawing.Size(128, 20)
@@ -155,7 +163,7 @@ Partial Class Form5
         '
         'TxtBxFechaEntrada
         '
-        Me.TxtBxFechaEntrada.Location = New System.Drawing.Point(239, 225)
+        Me.TxtBxFechaEntrada.Location = New System.Drawing.Point(241, 233)
         Me.TxtBxFechaEntrada.Name = "TxtBxFechaEntrada"
         Me.TxtBxFechaEntrada.ReadOnly = True
         Me.TxtBxFechaEntrada.Size = New System.Drawing.Size(128, 20)
@@ -164,7 +172,7 @@ Partial Class Form5
         'LblFechaRegistro
         '
         Me.LblFechaRegistro.AutoSize = True
-        Me.LblFechaRegistro.Location = New System.Drawing.Point(236, 303)
+        Me.LblFechaRegistro.Location = New System.Drawing.Point(238, 320)
         Me.LblFechaRegistro.Name = "LblFechaRegistro"
         Me.LblFechaRegistro.Size = New System.Drawing.Size(97, 13)
         Me.LblFechaRegistro.TabIndex = 43
@@ -173,7 +181,7 @@ Partial Class Form5
         'LblFechaEntrada
         '
         Me.LblFechaEntrada.AutoSize = True
-        Me.LblFechaEntrada.Location = New System.Drawing.Point(236, 207)
+        Me.LblFechaEntrada.Location = New System.Drawing.Point(238, 217)
         Me.LblFechaEntrada.Name = "LblFechaEntrada"
         Me.LblFechaEntrada.Size = New System.Drawing.Size(95, 13)
         Me.LblFechaEntrada.TabIndex = 42
@@ -184,7 +192,6 @@ Partial Class Form5
         Me.RchTxtBxObservaciones.Location = New System.Drawing.Point(27, 183)
         Me.RchTxtBxObservaciones.MaxLength = 150
         Me.RchTxtBxObservaciones.Name = "RchTxtBxObservaciones"
-        Me.RchTxtBxObservaciones.ReadOnly = True
         Me.RchTxtBxObservaciones.Size = New System.Drawing.Size(171, 153)
         Me.RchTxtBxObservaciones.TabIndex = 41
         Me.RchTxtBxObservaciones.Text = ""
@@ -200,7 +207,7 @@ Partial Class Form5
         '
         'TxtBxNumeroSerie
         '
-        Me.TxtBxNumeroSerie.Location = New System.Drawing.Point(239, 183)
+        Me.TxtBxNumeroSerie.Location = New System.Drawing.Point(241, 183)
         Me.TxtBxNumeroSerie.Name = "TxtBxNumeroSerie"
         Me.TxtBxNumeroSerie.ReadOnly = True
         Me.TxtBxNumeroSerie.Size = New System.Drawing.Size(128, 20)
@@ -209,7 +216,7 @@ Partial Class Form5
         'LblNumeroSerie
         '
         Me.LblNumeroSerie.AutoSize = True
-        Me.LblNumeroSerie.Location = New System.Drawing.Point(236, 167)
+        Me.LblNumeroSerie.Location = New System.Drawing.Point(238, 167)
         Me.LblNumeroSerie.Name = "LblNumeroSerie"
         Me.LblNumeroSerie.Size = New System.Drawing.Size(89, 13)
         Me.LblNumeroSerie.TabIndex = 38
@@ -268,7 +275,9 @@ Partial Class Form5
         '
         'DGV
         '
-        Me.DGV.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGV.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.DGV.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV.Location = New System.Drawing.Point(448, 16)
@@ -278,7 +287,8 @@ Partial Class Form5
         '
         'BtnRechazarReporte
         '
-        Me.BtnRechazarReporte.Location = New System.Drawing.Point(385, 656)
+        Me.BtnRechazarReporte.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnRechazarReporte.Location = New System.Drawing.Point(813, 655)
         Me.BtnRechazarReporte.Name = "BtnRechazarReporte"
         Me.BtnRechazarReporte.Size = New System.Drawing.Size(75, 40)
         Me.BtnRechazarReporte.TabIndex = 58
@@ -287,7 +297,8 @@ Partial Class Form5
         '
         'BtnAceptarReporte
         '
-        Me.BtnAceptarReporte.Location = New System.Drawing.Point(304, 656)
+        Me.BtnAceptarReporte.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnAceptarReporte.Location = New System.Drawing.Point(732, 655)
         Me.BtnAceptarReporte.Name = "BtnAceptarReporte"
         Me.BtnAceptarReporte.Size = New System.Drawing.Size(75, 40)
         Me.BtnAceptarReporte.TabIndex = 57
@@ -306,16 +317,16 @@ Partial Class Form5
         Me.GrpBxTipoPrueba.TabStop = False
         Me.GrpBxTipoPrueba.Text = "Tipo de Prueba"
         '
-        'RBCompleta
+        'RBBasica
         '
-        Me.RBCompleta.AutoSize = True
-        Me.RBCompleta.Location = New System.Drawing.Point(8, 24)
-        Me.RBCompleta.Name = "RBCompleta"
-        Me.RBCompleta.Size = New System.Drawing.Size(69, 17)
-        Me.RBCompleta.TabIndex = 0
-        Me.RBCompleta.TabStop = True
-        Me.RBCompleta.Text = "Completa"
-        Me.RBCompleta.UseVisualStyleBackColor = True
+        Me.RBBasica.AutoSize = True
+        Me.RBBasica.Location = New System.Drawing.Point(8, 48)
+        Me.RBBasica.Name = "RBBasica"
+        Me.RBBasica.Size = New System.Drawing.Size(57, 17)
+        Me.RBBasica.TabIndex = 60
+        Me.RBBasica.TabStop = True
+        Me.RBBasica.Text = "Basica"
+        Me.RBBasica.UseVisualStyleBackColor = True
         '
         'RBEspecifica
         '
@@ -328,20 +339,20 @@ Partial Class Form5
         Me.RBEspecifica.Text = "Especifica"
         Me.RBEspecifica.UseVisualStyleBackColor = True
         '
-        'RBBasica
+        'RBCompleta
         '
-        Me.RBBasica.AutoSize = True
-        Me.RBBasica.Location = New System.Drawing.Point(8, 48)
-        Me.RBBasica.Name = "RBBasica"
-        Me.RBBasica.Size = New System.Drawing.Size(57, 17)
-        Me.RBBasica.TabIndex = 60
-        Me.RBBasica.TabStop = True
-        Me.RBBasica.Text = "Basica"
-        Me.RBBasica.UseVisualStyleBackColor = True
+        Me.RBCompleta.AutoSize = True
+        Me.RBCompleta.Location = New System.Drawing.Point(8, 24)
+        Me.RBCompleta.Name = "RBCompleta"
+        Me.RBCompleta.Size = New System.Drawing.Size(69, 17)
+        Me.RBCompleta.TabIndex = 0
+        Me.RBCompleta.TabStop = True
+        Me.RBCompleta.Text = "Completa"
+        Me.RBCompleta.UseVisualStyleBackColor = True
         '
         'TxtBxPeriodoAnalisis
         '
-        Me.TxtBxPeriodoAnalisis.Location = New System.Drawing.Point(239, 368)
+        Me.TxtBxPeriodoAnalisis.Location = New System.Drawing.Point(241, 385)
         Me.TxtBxPeriodoAnalisis.Name = "TxtBxPeriodoAnalisis"
         Me.TxtBxPeriodoAnalisis.ReadOnly = True
         Me.TxtBxPeriodoAnalisis.Size = New System.Drawing.Size(128, 20)
@@ -350,17 +361,89 @@ Partial Class Form5
         'LblPeriodoAnalisis
         '
         Me.LblPeriodoAnalisis.AutoSize = True
-        Me.LblPeriodoAnalisis.Location = New System.Drawing.Point(236, 352)
+        Me.LblPeriodoAnalisis.Location = New System.Drawing.Point(238, 369)
         Me.LblPeriodoAnalisis.Name = "LblPeriodoAnalisis"
         Me.LblPeriodoAnalisis.Size = New System.Drawing.Size(96, 13)
         Me.LblPeriodoAnalisis.TabIndex = 60
         Me.LblPeriodoAnalisis.Text = "Periodo de Analisis"
+        '
+        'TxtBxIDMuestra
+        '
+        Me.TxtBxIDMuestra.Location = New System.Drawing.Point(241, 429)
+        Me.TxtBxIDMuestra.Name = "TxtBxIDMuestra"
+        Me.TxtBxIDMuestra.Size = New System.Drawing.Size(128, 20)
+        Me.TxtBxIDMuestra.TabIndex = 63
+        '
+        'LblIdMuestra
+        '
+        Me.LblIdMuestra.AutoSize = True
+        Me.LblIdMuestra.Location = New System.Drawing.Point(238, 413)
+        Me.LblIdMuestra.Name = "LblIdMuestra"
+        Me.LblIdMuestra.Size = New System.Drawing.Size(62, 13)
+        Me.LblIdMuestra.TabIndex = 62
+        Me.LblIdMuestra.Text = "ID Muestra:"
+        '
+        'TxtBxOrigen
+        '
+        Me.TxtBxOrigen.Location = New System.Drawing.Point(27, 482)
+        Me.TxtBxOrigen.Name = "TxtBxOrigen"
+        Me.TxtBxOrigen.Size = New System.Drawing.Size(128, 20)
+        Me.TxtBxOrigen.TabIndex = 65
+        '
+        'LblOrigen
+        '
+        Me.LblOrigen.AutoSize = True
+        Me.LblOrigen.Location = New System.Drawing.Point(24, 466)
+        Me.LblOrigen.Name = "LblOrigen"
+        Me.LblOrigen.Size = New System.Drawing.Size(83, 13)
+        Me.LblOrigen.TabIndex = 64
+        Me.LblOrigen.Text = "Origen/Tanque:"
+        '
+        'TxtBxLote
+        '
+        Me.TxtBxLote.Location = New System.Drawing.Point(27, 529)
+        Me.TxtBxLote.Name = "TxtBxLote"
+        Me.TxtBxLote.Size = New System.Drawing.Size(128, 20)
+        Me.TxtBxLote.TabIndex = 67
+        '
+        'LblLote
+        '
+        Me.LblLote.AutoSize = True
+        Me.LblLote.Location = New System.Drawing.Point(24, 513)
+        Me.LblLote.Name = "LblLote"
+        Me.LblLote.Size = New System.Drawing.Size(79, 13)
+        Me.LblLote.TabIndex = 66
+        Me.LblLote.Text = "Cachada/Lote:"
+        '
+        'TxtBxATN
+        '
+        Me.TxtBxATN.Location = New System.Drawing.Point(241, 482)
+        Me.TxtBxATN.Name = "TxtBxATN"
+        Me.TxtBxATN.Size = New System.Drawing.Size(128, 20)
+        Me.TxtBxATN.TabIndex = 69
+        '
+        'LblATN
+        '
+        Me.LblATN.AutoSize = True
+        Me.LblATN.Location = New System.Drawing.Point(238, 466)
+        Me.LblATN.Name = "LblATN"
+        Me.LblATN.Size = New System.Drawing.Size(32, 13)
+        Me.LblATN.TabIndex = 68
+        Me.LblATN.Text = "ATN:"
         '
         'Form5
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(893, 707)
+        Me.Controls.Add(Me.TxtBxATN)
+        Me.Controls.Add(Me.LblATN)
+        Me.Controls.Add(Me.TxtBxLote)
+        Me.Controls.Add(Me.LblLote)
+        Me.Controls.Add(Me.TxtBxOrigen)
+        Me.Controls.Add(Me.LblOrigen)
+        Me.Controls.Add(Me.TxtBxIDMuestra)
+        Me.Controls.Add(Me.LblIdMuestra)
         Me.Controls.Add(Me.TxtBxPeriodoAnalisis)
         Me.Controls.Add(Me.LblPeriodoAnalisis)
         Me.Controls.Add(Me.GrpBxTipoPrueba)
@@ -434,4 +517,12 @@ Partial Class Form5
     Friend WithEvents RBBasica As RadioButton
     Friend WithEvents TxtBxPeriodoAnalisis As TextBox
     Friend WithEvents LblPeriodoAnalisis As Label
+    Friend WithEvents TxtBxIDMuestra As TextBox
+    Friend WithEvents LblIdMuestra As Label
+    Friend WithEvents TxtBxOrigen As TextBox
+    Friend WithEvents LblOrigen As Label
+    Friend WithEvents TxtBxLote As TextBox
+    Friend WithEvents LblLote As Label
+    Friend WithEvents TxtBxATN As TextBox
+    Friend WithEvents LblATN As Label
 End Class
