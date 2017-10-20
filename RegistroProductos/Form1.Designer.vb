@@ -151,7 +151,6 @@ Partial Class Form1
         Me.Panel1.Controls.Add(Me.DTPFechaLimite)
         Me.Panel1.Controls.Add(Me.LblFechaLimite)
         Me.Panel1.Controls.Add(Me.LblContadorCaracteres)
-        Me.Panel1.Controls.Add(Me.BtnModificarRegistro)
         Me.Panel1.Controls.Add(Me.BtnRegistrarProducto)
         Me.Panel1.Controls.Add(Me.RchTxtBxObservaciones)
         Me.Panel1.Controls.Add(Me.LblObservaciones)
@@ -163,6 +162,7 @@ Partial Class Form1
         Me.Panel1.Controls.Add(Me.LblCliente)
         Me.Panel1.Controls.Add(Me.LblNumeroProducto)
         Me.Panel1.Controls.Add(Me.TxtBxProductoID)
+        Me.Panel1.Controls.Add(Me.BtnModificarRegistro)
         Me.Panel1.Location = New System.Drawing.Point(8, 291)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(787, 137)

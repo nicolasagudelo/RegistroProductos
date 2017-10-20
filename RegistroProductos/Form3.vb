@@ -267,7 +267,12 @@ Public Class Form3
         Dim bt As Button = CType(sender, Button)
         Console.WriteLine(bt.Name.ToString)
         If bt.Name = "ButtonD-130-2" Then
-            MsgBox("Click")
+            Dim prueba As String = bt.Name.ToString.Substring(6)
+            For i As Integer = 0 To pruebascategoria - 1
+                If TextBoxArray(i).Name = "TxtBx" + prueba Then
+                    TextBoxArray(i).Text = "Calculo!"
+                End If
+            Next
         End If
     End Sub
 

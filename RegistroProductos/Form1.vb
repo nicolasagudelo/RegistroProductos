@@ -44,6 +44,7 @@ Public Class Form1
             CmbBxTablas.Items.Add("Categorias")
             CmbBxTablas.Items.Add("Pruebas por Categoria")
             CmbBxTablas.Items.Add("Tipo de Mercancia")
+            CmbBxTablas.Items.Add("Productos Aprobados")
             CmbBxTablas.SelectedIndex = 0
             LlenarComboBoxPruebas()
             LlenarComboBoxCategorias()
@@ -801,6 +802,43 @@ Public Class Form1
                 MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
                 conn.Close()
             End Try
+        ElseIf CmbBxTablas.SelectedItem = "Productos Aprobados" Then
+            Dim query As String = "SELECT distinct productos.ProductoID as 'ID Producto', clientes.ClienteID, clientes.Nombre as 'Cliente', clientes.Direccion as 'Direccion',tipo_productos.Tipo_Producto_ID, tipo_productos.Nombre as 'Producto', productos.Numero_Serie as 'Numero de Serie', productos.Observaciones as 'Observaciones', productos.Fecha_Entrada as 'Fecha de Entrada', Productos.Hora_Entrada as 'Hora de Entrada', reportes.Fecha_Reporte as 'Fecha Reporte', productos.Fecha_Limite as 'Fecha Limite', productos.Estado as 'Estado', productos.ID_Muestra, productos.Tanque,productos.Lote,productos.ATN,productos.TipodePrueba, productos.UsuarioID, usuarios.usuario as 'Revisado Por'
+                                   from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID inner join usuarios on productos.UsuarioID = usuarios.UsuarioID inner join reportes on productos.ProductoID = reportes.ProductoID
+                                   Where Estado = 'Aprobado';"
+
+            Dim cmd As New MySqlCommand(query, conn)
+            Dim reader As MySqlDataReader
+
+            Try
+                conn.Open()
+                Console.WriteLine("Cargando productos aprobados")
+
+                reader = cmd.ExecuteReader
+
+                Dim table As New DataTable
+                table.Load(reader)
+                DGVAdmin.DataSource = table
+                DGVAdmin.ReadOnly = True
+                DGVAdmin.AllowUserToResizeColumns = True
+                DGVAdmin.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+                reader.Close()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+            End Try
+
+            DGVAdmin.Columns(1).Visible = False
+            DGVAdmin.Columns(4).Visible = False
+            DGVAdmin.Columns(12).Visible = False
+            DGVAdmin.Columns(13).Visible = False
+            DGVAdmin.Columns(14).Visible = False
+            DGVAdmin.Columns(15).Visible = False
+            DGVAdmin.Columns(16).Visible = False
+            DGVAdmin.Columns(17).Visible = False
+            DGVAdmin.Columns(18).Visible = False
+
         End If
     End Sub
 
@@ -870,6 +908,15 @@ Public Class Form1
             GrpBxAdmin.Visible = True
             LblValorAdmin.Visible = False
             CmbBxEsAdmin.Visible = False
+            CargarDGVAdmin()
+        ElseIf CmbBxTablas.SelectedItem = "Productos Aprobados" Then
+            GrpBxAdmin.Visible = True
+            BtnNuevoRegistro.Enabled = True
+            BtnNuevoRegistro.Visible = True
+            BtnNuevoRegistro.Text = "Re-Proceso"
+            BtnModificarRegistro.Visible = False
+            BtnEliminarRegistro.Visible = False
+            GrpBxAdmin2.Visible = False
             CargarDGVAdmin()
         End If
     End Sub
@@ -954,6 +1001,8 @@ Public Class Form1
             CmbBx1GrpBxAdmin2.Visible = False
             CmbBx2GrpBxAdmin2.Visible = False
             GrpBxAdmin2.Visible = True
+        ElseIf CmbBxTablas.SelectedItem = "Productos Aprobados" Then
+            GenerarReproceso()
         End If
     End Sub
 
@@ -1192,6 +1241,7 @@ Public Class Form1
             CmbBxTablas.Items.Add("Categorias")
             CmbBxTablas.Items.Add("Pruebas por Categoria")
             CmbBxTablas.Items.Add("Tipo de Mercancia")
+            CmbBxTablas.Items.Add("Productos Aprobados")
             CmbBxTablas.SelectedIndex = 0
             LlenarComboBoxPruebas()
             LlenarComboBoxCategorias()
@@ -1200,6 +1250,24 @@ Public Class Form1
     End Sub
 
     Private Sub DGVProductosRevisados_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVProductosRevisados.CellDoubleClick
+        Form5.BtnGenerarPDF.Visible = False
+        Form5.BtnAceptarReporte.Visible = True
+        Form5.BtnRechazarReporte.Visible = True
+        Form5.RchTxtBxObservaciones.ReadOnly = False
+        Form5.RBCompleta.Enabled = True
+        Form5.RBCompleta.Checked = False
+        Form5.RBBasica.Enabled = True
+        Form5.RBBasica.Checked = False
+        Form5.RBEspecifica.Enabled = True
+        Form5.RBEspecifica.Checked = False
+        Form5.TxtBxOrigen.ReadOnly = False
+        Form5.TxtBxOrigen.Clear()
+        Form5.TxtBxLote.ReadOnly = False
+        Form5.TxtBxLote.Clear()
+        Form5.TxtBxIDMuestra.ReadOnly = False
+        Form5.TxtBxIDMuestra.Clear()
+        Form5.TxtBxATN.ReadOnly = False
+        Form5.TxtBxATN.Clear()
         Dim fila_actual As Integer = (DGVProductosRevisados.CurrentRow.Index)
         If nombre_usuario = DGVProductosRevisados(14, fila_actual).Value.ToString Then
             MsgBox("No puede realizar un reporte sobre una muestra que usted mismo reviso", MsgBoxStyle.Exclamation, "Error")
@@ -1253,4 +1321,195 @@ Public Class Form1
         Form5.ShowDialog()
 
     End Sub
+
+    Private Sub DGVAdmin_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVAdmin.CellDoubleClick
+        If CmbBxTablas.SelectedItem = "Productos Aprobados" Then
+
+            Dim fila_actual As Integer = (DGVAdmin.CurrentRow.Index)
+
+            If fila_actual + 1 = DGVAdmin.Rows.Count Then
+                Exit Sub
+            End If
+
+
+
+            Form5.TxtBxUsuario.Text = DGVAdmin(19, fila_actual).Value
+
+            Form5.TxtBxIdUsuario.Text = DGVAdmin(18, fila_actual).Value
+            Form5.TxtBxIDProducto.Text = DGVAdmin(0, fila_actual).Value
+            Form5.TxtBxClienteID.Text = DGVAdmin(1, fila_actual).Value
+            Form5.TxtBxCliente.Text = DGVAdmin(2, fila_actual).Value
+            Form5.TxtBxDireccion.Text = DGVAdmin(3, fila_actual).Value
+            Form5.TxtBxTipoProductoID.Text = DGVAdmin(4, fila_actual).Value
+            Form5.TxtBxProducto.Text = DGVAdmin(5, fila_actual).Value
+            Form5.TxtBxNumeroSerie.Text = DGVAdmin(6, fila_actual).Value
+            Form5.RchTxtBxObservaciones.Text = DGVAdmin(7, fila_actual).Value
+            Dim fecha_entrada As Date = DGVAdmin(8, fila_actual).Value
+            Form5.TxtBxFechaEntrada.Text = fecha_entrada.ToString("yyyy-MM-dd")
+            Dim hora_entrada As String = DGVAdmin(9, fila_actual).Value.ToString
+            Form5.TxtBxHoraEntrada.Text = hora_entrada
+            Dim fecha_registro As Date = DGVAdmin(10, fila_actual).Value
+            Dim PeriodoAnalisis As String = DateDiff("d", fecha_entrada, fecha_registro)
+            Form5.TxtBxPeriodoAnalisis.Text = PeriodoAnalisis + " dias"
+            Form5.TxtBxFechaRegistro.Text = fecha_registro.ToString("yyyy-MM-dd")
+            Form5.TxtBxIDMuestra.Text = DGVAdmin(13, fila_actual).Value
+            Form5.TxtBxOrigen.Text = DGVAdmin(14, fila_actual).Value
+            Form5.TxtBxLote.Text = DGVAdmin(15, fila_actual).Value
+            Form5.TxtBxATN.Text = DGVAdmin(16, fila_actual).Value
+            Dim tipo_prueba As String = DGVAdmin(17, fila_actual).Value
+            If tipo_prueba = 1 Then
+                Form5.RBBasica.Checked = True
+            ElseIf tipo_prueba = 2 Then
+                Form5.RBCompleta.Checked = True
+            ElseIf tipo_prueba = 3 Then
+                Form5.RBEspecifica.Checked = True
+            End If
+
+            Form5.BtnGenerarPDF.Visible = True
+            Form5.BtnAceptarReporte.Visible = False
+            Form5.BtnRechazarReporte.Visible = False
+            Form5.RchTxtBxObservaciones.ReadOnly = True
+            Form5.RBCompleta.Enabled = False
+            Form5.RBBasica.Enabled = False
+            Form5.RBEspecifica.Enabled = False
+            Form5.TxtBxOrigen.ReadOnly = True
+            Form5.TxtBxLote.ReadOnly = True
+            Form5.TxtBxIDMuestra.ReadOnly = True
+            Form5.TxtBxATN.ReadOnly = True
+
+
+            Form5.ShowDialog()
+
+
+        End If
+    End Sub
+
+    Private Sub GenerarReproceso()
+        Dim fila_actual As Integer
+        Try
+            fila_actual = (DGVAdmin.CurrentRow.Index)
+        Catch ex As Exception
+            MsgBox("Seleccione una fila para continuar", MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
+        End Try
+
+        If fila_actual + 1 = DGVAdmin.Rows.Count Then
+            Exit Sub
+        End If
+
+        Dim id_producto As String = DGVAdmin(0, fila_actual).Value.ToString
+        Dim sub_id As Char
+        sub_id = id_producto(id_producto.Length - 1)
+
+        If Char.IsNumber(sub_id) Then
+            sub_id = "a"
+        ElseIf Char.IsLetter(sub_id) Then
+            Inc(sub_id)
+        End If
+
+        id_producto = id_producto + sub_id
+        Dim clienteID As String = DGVAdmin(1, fila_actual).Value
+        Dim tipoProducto As String = DGVAdmin(4, fila_actual).Value
+        Dim numeroSerie As String = DGVAdmin(6, fila_actual).Value
+        Dim observaciones As String = "Re-Proceso"
+        Dim estado As String = "Pendiente"
+        Dim intervalo As String
+
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("SELECT Intervalo from tipo_productos WHERE Tipo_Producto_ID = '" & tipoProducto & "'"), conn)
+            intervalo = cmd.ExecuteScalar.ToString
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, False, "Error")
+            conn.Close()
+            Exit Sub
+        End Try
+
+        Dim fecha_registro As String
+        Dim fecha_limite As String
+        Dim hora_registro As String
+
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("SELECT DATE(NOW())"), conn)
+            Dim fecha_registro_datetime As DateTime = cmd.ExecuteScalar
+            fecha_registro = fecha_registro_datetime.ToString("yyyy-MM-dd")
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, False, "Error")
+            conn.Close()
+            Exit Sub
+        End Try
+
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("SELECT TIME(NOW())"), conn)
+            hora_registro = cmd.ExecuteScalar.ToString
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+            conn.Close()
+            Exit Sub
+        End Try
+
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("SELECT DATE_ADD('" & fecha_registro & "', interval " & intervalo & ");"), conn)
+            Dim fecha_limite_datetime As DateTime = cmd.ExecuteScalar
+            fecha_limite = fecha_limite_datetime.ToString("yyyy-MM-dd")
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, False, "Error")
+            conn.Close()
+            Exit Sub
+        End Try
+
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("INSERT INTO productos (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Observaciones`, `Fecha_Entrada`, `Hora_Entrada`, `Fecha_Limite`, `Estado`) VALUES ('" & id_producto & "', '" & clienteID & "', '" & tipoProducto & "', '" & numeroSerie & "', '" & observaciones & "', '" & fecha_registro & "','" & hora_registro & "','" & fecha_limite & "', '" & estado & "');"), conn)
+            cmd.ExecuteNonQuery()
+            Console.WriteLine("Re-Proceso Registrado")
+            MsgBox("Re-proceso Registrado", MsgBoxStyle.Information, "Error")
+            conn.Close()
+        Catch ex As MySqlException
+            MsgBox(ex.Message, False, "Error")
+            conn.Close()
+            Exit Sub
+        End Try
+        CargarDGVProductosSinRevisar()
+        CargarDGVProductosLimite()
+        CargarDGVProductosRevisados()
+        ProductosFechaLimiteCerca()
+        TxtBxNumeroSerie.Clear()
+        TxtBxProductoID.Clear()
+        RchTxtBxObservaciones.Clear()
+        TxtBxProductoID.Select()
+
+
+
+    End Sub
+
+    Public Sub Inc(ByRef c As Char)
+
+        'Remember if input is uppercase for later
+        Dim isUpper = Char.IsUpper(c)
+
+        'Work in lower case for ease
+        c = Char.ToLower(c)
+
+        'Check input range
+        If c < "a" Or c > "z" Then Throw New ArgumentOutOfRangeException
+
+        'Do the increment
+        c = Chr(Asc(c) + 1)
+
+        'Check not left alphabet
+        If c > "z" Then c = "a"
+
+        'Check if input was upper case
+        If isUpper Then c = Char.ToUpper(c)
+
+    End Sub
+
 End Class

@@ -21,10 +21,10 @@ Public Class Form5
     End Sub
 
     Private Sub Form5_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        TxtBxIDMuestra.Clear()
-        TxtBxOrigen.Clear()
-        TxtBxLote.Clear()
-        TxtBxATN.Clear()
+        'TxtBxIDMuestra.Clear()
+        'TxtBxOrigen.Clear()
+        'TxtBxLote.Clear()
+        'TxtBxATN.Clear()
         Connect()
         CArgarDGV()
 
@@ -61,20 +61,39 @@ Public Class Form5
     End Sub
 
     Private Sub BtnRechazarReporte_Click(sender As Object, e As EventArgs) Handles BtnRechazarReporte.Click
-        Try
-            conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`productos` SET `Estado`='Pendiente', `Observaciones` = '" & RchTxtBxObservaciones.Text & "' WHERE `ProductoID`='" & TxtBxIDProducto.Text & "';"), conn)
-            cmd.ExecuteNonQuery()
-            conn.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
-            conn.Close()
-        End Try
-        Form1.CargarDGVProductosRevisados()
-        Form1.CargarDGVProductosLimite()
-        Form1.CargarDGVProductosSinRevisar()
-        Form1.ProductosFechaLimiteCerca()
-        Me.Close()
+        If RchTxtBxObservaciones.Text.Trim.Length = 0 Then
+            If MessageBox.Show("¿Esta seguro que desea rechazar el analisis sin dejar ninguna observacion?", "Advertencia", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`productos` SET `Estado`='Pendiente', `Observaciones` = '" & RchTxtBxObservaciones.Text & "' WHERE `ProductoID`='" & TxtBxIDProducto.Text & "';"), conn)
+                    cmd.ExecuteNonQuery()
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                    conn.Close()
+                End Try
+                Form1.CargarDGVProductosRevisados()
+                Form1.CargarDGVProductosLimite()
+                Form1.CargarDGVProductosSinRevisar()
+                Form1.ProductosFechaLimiteCerca()
+                Me.Close()
+            End If
+        Else
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`productos` SET `Estado`='Pendiente', `Observaciones` = '" & RchTxtBxObservaciones.Text & "' WHERE `ProductoID`='" & TxtBxIDProducto.Text & "';"), conn)
+                cmd.ExecuteNonQuery()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+            End Try
+            Form1.CargarDGVProductosRevisados()
+            Form1.CargarDGVProductosLimite()
+            Form1.CargarDGVProductosSinRevisar()
+            Form1.ProductosFechaLimiteCerca()
+            Me.Close()
+        End If
     End Sub
 
     Private Sub BtnAceptarReporte_Click(sender As Object, e As EventArgs) Handles BtnAceptarReporte.Click
@@ -82,6 +101,26 @@ Public Class Form5
             MsgBox("Seleccione un tipo de prueba", MsgBoxStyle.Exclamation, "Error")
             Exit Sub
         End If
+        If TxtBxATN.Text.Trim.Length = 0 Then
+            MsgBox("El campo ATN no puede estar vacio", MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
+        End If
+
+        If TxtBxIDMuestra.Text.Trim.Length = 0 Then
+            MsgBox("El campo ID Muestra no puede estar vacio", MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
+        End If
+
+        If TxtBxOrigen.Text.Trim.Length = 0 Then
+            MsgBox("El campo Origen/Tanque no puede estar vacio", MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
+        End If
+
+        If TxtBxLote.Text.Trim.Length = 0 Then
+            MsgBox("El campo Cachada/Lote no puede estar vacio", MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
+        End If
+
         CargarPDF()
     End Sub
 
@@ -100,6 +139,7 @@ Public Class Form5
             GuardarPDF.DefaultExt = ".pdf"
             GuardarPDF.ShowDialog()
             Dim filepath As String
+            Dim tipo_prueba As Integer
 
             Try
                 filepath = Path.GetFullPath(GuardarPDF.FileName)
@@ -131,14 +171,17 @@ Public Class Form5
                 pdfFormFields.SetField("CBBasico", "0")
                 pdfFormFields.SetField("CBCompleto", "Yes")
                 pdfFormFields.SetField("CBEspecifico", "0")
+                tipo_prueba = 2
             ElseIf RBBasica.Checked = True Then
                 pdfFormFields.SetField("CBBasico", "Yes")
                 pdfFormFields.SetField("CBCompleto", "0")
                 pdfFormFields.SetField("CBEspecifico", "0")
+                tipo_prueba = 1
             ElseIf RBEspecifica.Checked = True Then
                 pdfFormFields.SetField("CBBasico", "0")
                 pdfFormFields.SetField("CBCompleto", "0")
                 pdfFormFields.SetField("CBEspecifico", "Yes")
+                tipo_prueba = 3
             End If
 
             Dim filas_total As Integer = DGV.RowCount - 2
@@ -262,7 +305,7 @@ Public Class Form5
             pdfStamper.Close()
             Try
                 conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`productos` SET `Estado`='Aprovado' WHERE `ProductoID`='" & TxtBxIDProducto.Text & "';"), conn)
+                Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`productos` SET `Estado`='Aprobado', `ID_Muestra` = '" & TxtBxIDMuestra.Text & "',`Tanque`='" & TxtBxOrigen.Text & "', `Lote`='" & TxtBxLote.Text & "', `ATN`='" & TxtBxATN.Text & "', `TipodePrueba`='" & tipo_prueba & "' WHERE `ProductoID`='" & TxtBxIDProducto.Text & "';"), conn)
                 cmd.ExecuteNonQuery()
                 conn.Close()
             Catch ex As Exception
@@ -295,4 +338,7 @@ Public Class Form5
         End If
     End Sub
 
+    Private Sub BtnGenerarPDF_Click(sender As Object, e As EventArgs) Handles BtnGenerarPDF.Click
+        CargarPDF()
+    End Sub
 End Class

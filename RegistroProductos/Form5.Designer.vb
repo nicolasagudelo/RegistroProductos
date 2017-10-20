@@ -63,6 +63,7 @@ Partial Class Form5
         Me.LblLote = New System.Windows.Forms.Label()
         Me.TxtBxATN = New System.Windows.Forms.TextBox()
         Me.LblATN = New System.Windows.Forms.Label()
+        Me.BtnGenerarPDF = New System.Windows.Forms.Button()
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrpBxTipoPrueba.SuspendLayout()
         Me.SuspendLayout()
@@ -346,7 +347,6 @@ Partial Class Form5
         Me.RBCompleta.Name = "RBCompleta"
         Me.RBCompleta.Size = New System.Drawing.Size(69, 17)
         Me.RBCompleta.TabIndex = 0
-        Me.RBCompleta.TabStop = True
         Me.RBCompleta.Text = "Completa"
         Me.RBCompleta.UseVisualStyleBackColor = True
         '
@@ -431,6 +431,16 @@ Partial Class Form5
         Me.LblATN.TabIndex = 68
         Me.LblATN.Text = "ATN:"
         '
+        'BtnGenerarPDF
+        '
+        Me.BtnGenerarPDF.Location = New System.Drawing.Point(797, 614)
+        Me.BtnGenerarPDF.Name = "BtnGenerarPDF"
+        Me.BtnGenerarPDF.Size = New System.Drawing.Size(91, 81)
+        Me.BtnGenerarPDF.TabIndex = 70
+        Me.BtnGenerarPDF.Text = "Generar PDF"
+        Me.BtnGenerarPDF.UseVisualStyleBackColor = True
+        Me.BtnGenerarPDF.Visible = False
+        '
         'Form5
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -474,6 +484,7 @@ Partial Class Form5
         Me.Controls.Add(Me.LblCliente)
         Me.Controls.Add(Me.TxtBxIDProducto)
         Me.Controls.Add(Me.LblIDProducto)
+        Me.Controls.Add(Me.BtnGenerarPDF)
         Me.Name = "Form5"
         Me.Text = "Form5"
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).EndInit()
@@ -525,4 +536,5 @@ Partial Class Form5
     Friend WithEvents LblLote As Label
     Friend WithEvents TxtBxATN As TextBox
     Friend WithEvents LblATN As Label
+    Friend WithEvents BtnGenerarPDF As Button
 End Class
