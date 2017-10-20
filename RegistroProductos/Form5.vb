@@ -4,6 +4,7 @@ Imports iTextSharp.text.pdf
 Imports System.IO
 Imports System.Text
 
+
 Public Class Form5
 
     Dim conn As New MySqlConnection
@@ -141,6 +142,8 @@ Public Class Form5
             Dim filepath As String
             Dim tipo_prueba As Integer
 
+            Dim imgurl As String = "C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\Firmas\Firma.png"
+
             Try
                 filepath = Path.GetFullPath(GuardarPDF.FileName)
             Catch ex As Exception
@@ -151,6 +154,13 @@ Public Class Form5
             Dim pdfReader As New PdfReader(pdfTemplate)
             Dim pdfStamper As New PdfStamper(pdfReader, New FileStream(
                         filepath, FileMode.Create))
+            Dim imgstream As New FileStream(imgurl, FileMode.Open, FileAccess.Read)
+            Dim img As iTextSharp.text.Image = iTextSharp.text.Image.GetInstance(imgstream)
+            Dim content As PdfContentByte = pdfStamper.GetOverContent(1)
+            img.ScaleToFit(80, 100)
+            img.SetAbsolutePosition(263, 137)
+
+
 
             Dim pdfFormFields As AcroFields = pdfStamper.AcroFields
             pdfFormFields.SetField("Cliente", TxtBxCliente.Text)
@@ -301,8 +311,11 @@ Public Class Form5
 
             Next
 
+            content.AddImage(img)
+
             pdfStamper.FormFlattening = True
             pdfStamper.Close()
+
             Try
                 conn.Open()
                 Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`productos` SET `Estado`='Aprobado', `ID_Muestra` = '" & TxtBxIDMuestra.Text & "',`Tanque`='" & TxtBxOrigen.Text & "', `Lote`='" & TxtBxLote.Text & "', `ATN`='" & TxtBxATN.Text & "', `TipodePrueba`='" & tipo_prueba & "' WHERE `ProductoID`='" & TxtBxIDProducto.Text & "';"), conn)
@@ -314,6 +327,13 @@ Public Class Form5
             End Try
 
             MsgBox("Reporte Generado en " & filepath, MsgBoxStyle.Information, "PDF Creado")
+
+            Try
+                Process.Start(filepath)
+            Catch ex As Exception
+                MsgBox("No se encontro el archivo", MsgBoxStyle.Exclamation, "Error")
+            End Try
+
 
             Form1.CargarDGVProductosRevisados()
             Me.Close()
