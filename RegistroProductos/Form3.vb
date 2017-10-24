@@ -320,7 +320,7 @@ Public Class Form3
                 Try
                     conn.Open()
                     Dim cmd As New MySqlCommand(String.Format("Select Valor from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
-                    If cmd.ExecuteScalar.ToString.Trim = "" Then
+                    If cmd.ExecuteScalar Is Nothing Then
                         existevalor = False
                     Else
                         existevalor = True
@@ -335,7 +335,7 @@ Public Class Form3
                 Try
                     conn.Open()
                     Dim cmd As New MySqlCommand(String.Format("Select Valor_2 from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
-                    If cmd.ExecuteScalar.ToString.Trim = "" Then
+                    If cmd.ExecuteScalar Is Nothing Then
                         existevalor2 = False
                     Else
                         existevalor2 = True
@@ -350,7 +350,7 @@ Public Class Form3
                 Try
                     conn.Open()
                     Dim cmd As New MySqlCommand(String.Format("Select Valor_3 from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
-                    If cmd.ExecuteScalar.ToString.Trim = "" Then
+                    If cmd.ExecuteScalar Is Nothing Then
                         existevalor3 = False
                     Else
                         existevalor3 = True
@@ -365,7 +365,7 @@ Public Class Form3
                 Try
                     conn.Open()
                     Dim cmd As New MySqlCommand(String.Format("Select Valor_4 from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
-                    If cmd.ExecuteScalar.ToString.Trim = "" Then
+                    If cmd.ExecuteScalar Is Nothing Then
                         existevalor4 = False
                     Else
                         existevalor4 = True
@@ -380,7 +380,7 @@ Public Class Form3
                 Try
                     conn.Open()
                     Dim cmd As New MySqlCommand(String.Format("Select Valor_5 from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
-                    If cmd.ExecuteScalar.ToString.Trim = "" Then
+                    If cmd.ExecuteScalar Is Nothing Then
                         existevalor5 = False
                     Else
                         existevalor5 = True
@@ -401,7 +401,7 @@ Public Class Form3
                         cmd.ExecuteNonQuery()
                         cmd2.ExecuteNonQuery()
                         Console.WriteLine("Reporte Registrado")
-                        MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                        'MsgBox("Reporte Registrado", False, "Reporte Registrado")
                         conn.Close()
                     Catch ex As Exception
                         MsgBox(ex.Message, False, "Error")
@@ -417,7 +417,7 @@ Public Class Form3
                             cmd.ExecuteNonQuery()
                             cmd2.ExecuteNonQuery()
                             Console.WriteLine("Reporte Registrado")
-                            MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                            'MsgBox("Reporte Registrado", False, "Reporte Registrado")
                             conn.Close()
                         Catch ex As Exception
                             MsgBox(ex.Message, False, "Error")
@@ -433,7 +433,7 @@ Public Class Form3
                                 cmd.ExecuteNonQuery()
                                 cmd2.ExecuteNonQuery()
                                 Console.WriteLine("Reporte Registrado")
-                                MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                                'MsgBox("Reporte Registrado", False, "Reporte Registrado")
                                 conn.Close()
                             Catch ex As Exception
                                 MsgBox(ex.Message, False, "Error")
@@ -449,7 +449,7 @@ Public Class Form3
                                     cmd.ExecuteNonQuery()
                                     cmd2.ExecuteNonQuery()
                                     Console.WriteLine("Reporte Registrado")
-                                    MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                                    'MsgBox("Reporte Registrado", False, "Reporte Registrado")
                                     conn.Close()
                                 Catch ex As Exception
                                     MsgBox(ex.Message, False, "Error")
@@ -465,7 +465,7 @@ Public Class Form3
                                         cmd.ExecuteNonQuery()
                                         cmd2.ExecuteNonQuery()
                                         Console.WriteLine("Reporte Registrado")
-                                        MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                                        'MsgBox("Reporte Registrado", False, "Reporte Registrado")
                                         conn.Close()
                                     Catch ex As Exception
                                         MsgBox(ex.Message, False, "Error")
@@ -482,6 +482,7 @@ Public Class Form3
         Form1.CargarDGVProductosLimite()
         Form1.CargarDGVProductosSinRevisar()
         Form1.ProductosFechaLimiteCerca()
+        MsgBox("Reporte Registrado", False, "Reporte Registrado")
         Me.Close()
     End Sub
 
