@@ -22,6 +22,7 @@ Partial Class Form1
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPageRegistrarProducto = New System.Windows.Forms.TabPage()
         Me.BtnGenerarReporte = New System.Windows.Forms.Button()
@@ -29,7 +30,6 @@ Partial Class Form1
         Me.DTPFechaLimite = New System.Windows.Forms.DateTimePicker()
         Me.LblFechaLimite = New System.Windows.Forms.Label()
         Me.LblContadorCaracteres = New System.Windows.Forms.Label()
-        Me.BtnModificarRegistro = New System.Windows.Forms.Button()
         Me.BtnRegistrarProducto = New System.Windows.Forms.Button()
         Me.RchTxtBxObservaciones = New System.Windows.Forms.RichTextBox()
         Me.LblObservaciones = New System.Windows.Forms.Label()
@@ -41,6 +41,7 @@ Partial Class Form1
         Me.LblCliente = New System.Windows.Forms.Label()
         Me.LblNumeroProducto = New System.Windows.Forms.Label()
         Me.TxtBxProductoID = New System.Windows.Forms.TextBox()
+        Me.BtnModificarRegistro = New System.Windows.Forms.Button()
         Me.DGVProductosSinRevisar = New System.Windows.Forms.DataGridView()
         Me.TabPageProductoLimite = New System.Windows.Forms.TabPage()
         Me.BtnGenerarReporte2 = New System.Windows.Forms.Button()
@@ -197,18 +198,6 @@ Partial Class Form1
         Me.LblContadorCaracteres.TabIndex = 11
         Me.LblContadorCaracteres.Text = "0/150"
         '
-        'BtnModificarRegistro
-        '
-        Me.BtnModificarRegistro.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnModificarRegistro.Enabled = False
-        Me.BtnModificarRegistro.Location = New System.Drawing.Point(694, 63)
-        Me.BtnModificarRegistro.Name = "BtnModificarRegistro"
-        Me.BtnModificarRegistro.Size = New System.Drawing.Size(90, 45)
-        Me.BtnModificarRegistro.TabIndex = 10
-        Me.BtnModificarRegistro.Text = "Modificar Registro"
-        Me.BtnModificarRegistro.UseVisualStyleBackColor = True
-        Me.BtnModificarRegistro.Visible = False
-        '
         'BtnRegistrarProducto
         '
         Me.BtnRegistrarProducto.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -305,6 +294,18 @@ Partial Class Form1
         Me.TxtBxProductoID.Name = "TxtBxProductoID"
         Me.TxtBxProductoID.Size = New System.Drawing.Size(160, 20)
         Me.TxtBxProductoID.TabIndex = 0
+        '
+        'BtnModificarRegistro
+        '
+        Me.BtnModificarRegistro.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnModificarRegistro.Enabled = False
+        Me.BtnModificarRegistro.Location = New System.Drawing.Point(694, 63)
+        Me.BtnModificarRegistro.Name = "BtnModificarRegistro"
+        Me.BtnModificarRegistro.Size = New System.Drawing.Size(90, 45)
+        Me.BtnModificarRegistro.TabIndex = 10
+        Me.BtnModificarRegistro.Text = "Modificar Registro"
+        Me.BtnModificarRegistro.UseVisualStyleBackColor = True
+        Me.BtnModificarRegistro.Visible = False
         '
         'DGVProductosSinRevisar
         '
@@ -828,6 +829,7 @@ Partial Class Form1
         Me.Controls.Add(Me.BtnDesconectar)
         Me.Controls.Add(Me.LblUsuario)
         Me.Controls.Add(Me.TabControl1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MinimumSize = New System.Drawing.Size(951, 521)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

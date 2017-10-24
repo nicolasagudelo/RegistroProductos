@@ -22,6 +22,7 @@ Partial Class Form5
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form5))
         Me.TxtBxHoraEntrada = New System.Windows.Forms.TextBox()
         Me.LblHoraEntrada = New System.Windows.Forms.Label()
         Me.TxtBxDireccion = New System.Windows.Forms.TextBox()
@@ -485,6 +486,7 @@ Partial Class Form5
         Me.Controls.Add(Me.TxtBxIDProducto)
         Me.Controls.Add(Me.LblIDProducto)
         Me.Controls.Add(Me.BtnGenerarPDF)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form5"
         Me.Text = "Form5"
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).EndInit()

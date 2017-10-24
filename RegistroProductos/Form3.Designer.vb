@@ -22,6 +22,7 @@ Partial Class Form3
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form3))
         Me.CmbBxCategorias = New System.Windows.Forms.ComboBox()
         Me.LblCategoria = New System.Windows.Forms.Label()
         Me.LblIDProducto = New System.Windows.Forms.Label()
@@ -368,6 +369,7 @@ Partial Class Form3
         Me.Controls.Add(Me.LblIDProducto)
         Me.Controls.Add(Me.LblCategoria)
         Me.Controls.Add(Me.CmbBxCategorias)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form3"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Form3"
