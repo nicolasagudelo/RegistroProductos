@@ -619,7 +619,7 @@ Public Class Form1
         Form3.TxtBxClienteID.Text = DGVProductosLimite(1, fila_actual).Value
         Dim fecha_entrada As Date = DGVProductosLimite(7, fila_actual).Value
         Form3.TxtBxFechaEntrada.Text = fecha_entrada.ToString("yyyy-MM-dd")
-        Dim hora_entrada As String = DGVProductosLimite(8, fila_actual).Value
+        Dim hora_entrada As String = DGVProductosLimite(8, fila_actual).Value.ToString
         Form3.TxtBxHoraEntrada.Text = hora_entrada
         Dim fecha_registro As Date
         Try
