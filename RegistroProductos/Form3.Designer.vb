@@ -54,13 +54,17 @@ Partial Class Form3
         Me.LblHoraEntrada = New System.Windows.Forms.Label()
         Me.RBSeleccionarTodo = New System.Windows.Forms.RadioButton()
         Me.RBQuitarTodo = New System.Windows.Forms.RadioButton()
+        Me.LblRuta = New System.Windows.Forms.Label()
+        Me.TxtBxRuta = New System.Windows.Forms.TextBox()
+        Me.BtnEncontrarRuta = New System.Windows.Forms.Button()
+        Me.BtnAbrirDatos = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'CmbBxCategorias
         '
         Me.CmbBxCategorias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbBxCategorias.FormattingEnabled = True
-        Me.CmbBxCategorias.Location = New System.Drawing.Point(15, 320)
+        Me.CmbBxCategorias.Location = New System.Drawing.Point(15, 281)
         Me.CmbBxCategorias.Name = "CmbBxCategorias"
         Me.CmbBxCategorias.Size = New System.Drawing.Size(171, 21)
         Me.CmbBxCategorias.TabIndex = 0
@@ -68,7 +72,7 @@ Partial Class Form3
         'LblCategoria
         '
         Me.LblCategoria.AutoSize = True
-        Me.LblCategoria.Location = New System.Drawing.Point(12, 304)
+        Me.LblCategoria.Location = New System.Drawing.Point(12, 265)
         Me.LblCategoria.Name = "LblCategoria"
         Me.LblCategoria.Size = New System.Drawing.Size(83, 13)
         Me.LblCategoria.TabIndex = 1
@@ -111,7 +115,7 @@ Partial Class Form3
         'LblTipoMercancia
         '
         Me.LblTipoMercancia.AutoSize = True
-        Me.LblTipoMercancia.Location = New System.Drawing.Point(12, 118)
+        Me.LblTipoMercancia.Location = New System.Drawing.Point(14, 108)
         Me.LblTipoMercancia.Name = "LblTipoMercancia"
         Me.LblTipoMercancia.Size = New System.Drawing.Size(53, 13)
         Me.LblTipoMercancia.TabIndex = 7
@@ -119,7 +123,7 @@ Partial Class Form3
         '
         'TxtBxProducto
         '
-        Me.TxtBxProducto.Location = New System.Drawing.Point(15, 134)
+        Me.TxtBxProducto.Location = New System.Drawing.Point(17, 124)
         Me.TxtBxProducto.Name = "TxtBxProducto"
         Me.TxtBxProducto.ReadOnly = True
         Me.TxtBxProducto.Size = New System.Drawing.Size(128, 20)
@@ -128,7 +132,7 @@ Partial Class Form3
         'LblNumeroSerie
         '
         Me.LblNumeroSerie.AutoSize = True
-        Me.LblNumeroSerie.Location = New System.Drawing.Point(224, 168)
+        Me.LblNumeroSerie.Location = New System.Drawing.Point(226, 150)
         Me.LblNumeroSerie.Name = "LblNumeroSerie"
         Me.LblNumeroSerie.Size = New System.Drawing.Size(89, 13)
         Me.LblNumeroSerie.TabIndex = 9
@@ -136,7 +140,7 @@ Partial Class Form3
         '
         'TxtBxNumeroSerie
         '
-        Me.TxtBxNumeroSerie.Location = New System.Drawing.Point(227, 184)
+        Me.TxtBxNumeroSerie.Location = New System.Drawing.Point(227, 166)
         Me.TxtBxNumeroSerie.Name = "TxtBxNumeroSerie"
         Me.TxtBxNumeroSerie.ReadOnly = True
         Me.TxtBxNumeroSerie.Size = New System.Drawing.Size(128, 20)
@@ -145,7 +149,7 @@ Partial Class Form3
         'LblObservaciones
         '
         Me.LblObservaciones.AutoSize = True
-        Me.LblObservaciones.Location = New System.Drawing.Point(12, 168)
+        Me.LblObservaciones.Location = New System.Drawing.Point(12, 150)
         Me.LblObservaciones.Name = "LblObservaciones"
         Me.LblObservaciones.Size = New System.Drawing.Size(81, 13)
         Me.LblObservaciones.TabIndex = 11
@@ -153,7 +157,7 @@ Partial Class Form3
         '
         'RchTxtBxObservaciones
         '
-        Me.RchTxtBxObservaciones.Location = New System.Drawing.Point(15, 184)
+        Me.RchTxtBxObservaciones.Location = New System.Drawing.Point(15, 166)
         Me.RchTxtBxObservaciones.MaxLength = 150
         Me.RchTxtBxObservaciones.Name = "RchTxtBxObservaciones"
         Me.RchTxtBxObservaciones.ReadOnly = True
@@ -164,7 +168,7 @@ Partial Class Form3
         'LblFechaEntrada
         '
         Me.LblFechaEntrada.AutoSize = True
-        Me.LblFechaEntrada.Location = New System.Drawing.Point(224, 208)
+        Me.LblFechaEntrada.Location = New System.Drawing.Point(226, 189)
         Me.LblFechaEntrada.Name = "LblFechaEntrada"
         Me.LblFechaEntrada.Size = New System.Drawing.Size(95, 13)
         Me.LblFechaEntrada.TabIndex = 13
@@ -173,7 +177,7 @@ Partial Class Form3
         'LblFechaRegistro
         '
         Me.LblFechaRegistro.AutoSize = True
-        Me.LblFechaRegistro.Location = New System.Drawing.Point(224, 304)
+        Me.LblFechaRegistro.Location = New System.Drawing.Point(224, 267)
         Me.LblFechaRegistro.Name = "LblFechaRegistro"
         Me.LblFechaRegistro.Size = New System.Drawing.Size(97, 13)
         Me.LblFechaRegistro.TabIndex = 14
@@ -181,7 +185,7 @@ Partial Class Form3
         '
         'TxtBxFechaEntrada
         '
-        Me.TxtBxFechaEntrada.Location = New System.Drawing.Point(227, 226)
+        Me.TxtBxFechaEntrada.Location = New System.Drawing.Point(229, 205)
         Me.TxtBxFechaEntrada.Name = "TxtBxFechaEntrada"
         Me.TxtBxFechaEntrada.ReadOnly = True
         Me.TxtBxFechaEntrada.Size = New System.Drawing.Size(128, 20)
@@ -189,7 +193,7 @@ Partial Class Form3
         '
         'TxtBxFechaRegistro
         '
-        Me.TxtBxFechaRegistro.Location = New System.Drawing.Point(227, 320)
+        Me.TxtBxFechaRegistro.Location = New System.Drawing.Point(227, 283)
         Me.TxtBxFechaRegistro.Name = "TxtBxFechaRegistro"
         Me.TxtBxFechaRegistro.ReadOnly = True
         Me.TxtBxFechaRegistro.Size = New System.Drawing.Size(128, 20)
@@ -276,7 +280,7 @@ Partial Class Form3
         '
         'TxtBxDireccion
         '
-        Me.TxtBxDireccion.Location = New System.Drawing.Point(227, 133)
+        Me.TxtBxDireccion.Location = New System.Drawing.Point(229, 124)
         Me.TxtBxDireccion.Name = "TxtBxDireccion"
         Me.TxtBxDireccion.ReadOnly = True
         Me.TxtBxDireccion.Size = New System.Drawing.Size(128, 20)
@@ -285,7 +289,7 @@ Partial Class Form3
         'LblDireccion
         '
         Me.LblDireccion.AutoSize = True
-        Me.LblDireccion.Location = New System.Drawing.Point(224, 120)
+        Me.LblDireccion.Location = New System.Drawing.Point(226, 108)
         Me.LblDireccion.Name = "LblDireccion"
         Me.LblDireccion.Size = New System.Drawing.Size(55, 13)
         Me.LblDireccion.TabIndex = 26
@@ -293,7 +297,7 @@ Partial Class Form3
         '
         'TxtBxHoraEntrada
         '
-        Me.TxtBxHoraEntrada.Location = New System.Drawing.Point(227, 272)
+        Me.TxtBxHoraEntrada.Location = New System.Drawing.Point(227, 244)
         Me.TxtBxHoraEntrada.Name = "TxtBxHoraEntrada"
         Me.TxtBxHoraEntrada.ReadOnly = True
         Me.TxtBxHoraEntrada.Size = New System.Drawing.Size(128, 20)
@@ -302,7 +306,7 @@ Partial Class Form3
         'LblHoraEntrada
         '
         Me.LblHoraEntrada.AutoSize = True
-        Me.LblHoraEntrada.Location = New System.Drawing.Point(224, 256)
+        Me.LblHoraEntrada.Location = New System.Drawing.Point(224, 228)
         Me.LblHoraEntrada.Name = "LblHoraEntrada"
         Me.LblHoraEntrada.Size = New System.Drawing.Size(88, 13)
         Me.LblHoraEntrada.TabIndex = 28
@@ -332,12 +336,51 @@ Partial Class Form3
         Me.RBQuitarTodo.UseVisualStyleBackColor = True
         Me.RBQuitarTodo.Visible = False
         '
+        'LblRuta
+        '
+        Me.LblRuta.AutoSize = True
+        Me.LblRuta.Location = New System.Drawing.Point(12, 305)
+        Me.LblRuta.Name = "LblRuta"
+        Me.LblRuta.Size = New System.Drawing.Size(120, 13)
+        Me.LblRuta.TabIndex = 32
+        Me.LblRuta.Text = "Ubicacion de los Datos:"
+        '
+        'TxtBxRuta
+        '
+        Me.TxtBxRuta.Location = New System.Drawing.Point(15, 321)
+        Me.TxtBxRuta.Name = "TxtBxRuta"
+        Me.TxtBxRuta.ReadOnly = True
+        Me.TxtBxRuta.Size = New System.Drawing.Size(340, 20)
+        Me.TxtBxRuta.TabIndex = 33
+        '
+        'BtnEncontrarRuta
+        '
+        Me.BtnEncontrarRuta.Location = New System.Drawing.Point(361, 321)
+        Me.BtnEncontrarRuta.Name = "BtnEncontrarRuta"
+        Me.BtnEncontrarRuta.Size = New System.Drawing.Size(25, 20)
+        Me.BtnEncontrarRuta.TabIndex = 34
+        Me.BtnEncontrarRuta.Text = "..."
+        Me.BtnEncontrarRuta.UseVisualStyleBackColor = True
+        '
+        'BtnAbrirDatos
+        '
+        Me.BtnAbrirDatos.Location = New System.Drawing.Point(392, 321)
+        Me.BtnAbrirDatos.Name = "BtnAbrirDatos"
+        Me.BtnAbrirDatos.Size = New System.Drawing.Size(58, 20)
+        Me.BtnAbrirDatos.TabIndex = 35
+        Me.BtnAbrirDatos.Text = "Abrir"
+        Me.BtnAbrirDatos.UseVisualStyleBackColor = True
+        '
         'Form3
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(485, 707)
+        Me.Controls.Add(Me.BtnAbrirDatos)
+        Me.Controls.Add(Me.BtnEncontrarRuta)
+        Me.Controls.Add(Me.TxtBxRuta)
+        Me.Controls.Add(Me.LblRuta)
         Me.Controls.Add(Me.RBQuitarTodo)
         Me.Controls.Add(Me.RBSeleccionarTodo)
         Me.Controls.Add(Me.TxtBxHoraEntrada)
@@ -371,7 +414,7 @@ Partial Class Form3
         Me.Controls.Add(Me.CmbBxCategorias)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form3"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Form3"
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -409,4 +452,8 @@ Partial Class Form3
     Friend WithEvents LblHoraEntrada As Label
     Friend WithEvents RBSeleccionarTodo As RadioButton
     Friend WithEvents RBQuitarTodo As RadioButton
+    Friend WithEvents LblRuta As Label
+    Friend WithEvents TxtBxRuta As TextBox
+    Friend WithEvents BtnEncontrarRuta As Button
+    Friend WithEvents BtnAbrirDatos As Button
 End Class

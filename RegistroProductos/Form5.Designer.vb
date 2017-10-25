@@ -65,8 +65,12 @@ Partial Class Form5
         Me.TxtBxATN = New System.Windows.Forms.TextBox()
         Me.LblATN = New System.Windows.Forms.Label()
         Me.BtnGenerarPDF = New System.Windows.Forms.Button()
+        Me.CBPruebaMicro = New System.Windows.Forms.CheckBox()
+        Me.PorcentajeBioD = New System.Windows.Forms.NumericUpDown()
+        Me.LblPorcentajeBioD = New System.Windows.Forms.Label()
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrpBxTipoPrueba.SuspendLayout()
+        CType(Me.PorcentajeBioD, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TxtBxHoraEntrada
@@ -442,11 +446,44 @@ Partial Class Form5
         Me.BtnGenerarPDF.UseVisualStyleBackColor = True
         Me.BtnGenerarPDF.Visible = False
         '
+        'CBPruebaMicro
+        '
+        Me.CBPruebaMicro.AutoSize = True
+        Me.CBPruebaMicro.Location = New System.Drawing.Point(241, 529)
+        Me.CBPruebaMicro.Name = "CBPruebaMicro"
+        Me.CBPruebaMicro.Size = New System.Drawing.Size(143, 17)
+        Me.CBPruebaMicro.TabIndex = 71
+        Me.CBPruebaMicro.Text = "¿Prueba Microbiologica?"
+        Me.CBPruebaMicro.UseVisualStyleBackColor = True
+        Me.CBPruebaMicro.Visible = False
+        '
+        'PorcentajeBioD
+        '
+        Me.PorcentajeBioD.Location = New System.Drawing.Point(27, 578)
+        Me.PorcentajeBioD.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
+        Me.PorcentajeBioD.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.PorcentajeBioD.Name = "PorcentajeBioD"
+        Me.PorcentajeBioD.Size = New System.Drawing.Size(128, 20)
+        Me.PorcentajeBioD.TabIndex = 72
+        Me.PorcentajeBioD.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'LblPorcentajeBioD
+        '
+        Me.LblPorcentajeBioD.AutoSize = True
+        Me.LblPorcentajeBioD.Location = New System.Drawing.Point(24, 562)
+        Me.LblPorcentajeBioD.Name = "LblPorcentajeBioD"
+        Me.LblPorcentajeBioD.Size = New System.Drawing.Size(108, 13)
+        Me.LblPorcentajeBioD.TabIndex = 73
+        Me.LblPorcentajeBioD.Text = "Porcentaje BioDiesel:"
+        '
         'Form5
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(893, 707)
+        Me.Controls.Add(Me.LblPorcentajeBioD)
+        Me.Controls.Add(Me.PorcentajeBioD)
+        Me.Controls.Add(Me.CBPruebaMicro)
         Me.Controls.Add(Me.TxtBxATN)
         Me.Controls.Add(Me.LblATN)
         Me.Controls.Add(Me.TxtBxLote)
@@ -492,6 +529,7 @@ Partial Class Form5
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GrpBxTipoPrueba.ResumeLayout(False)
         Me.GrpBxTipoPrueba.PerformLayout()
+        CType(Me.PorcentajeBioD, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -539,4 +577,7 @@ Partial Class Form5
     Friend WithEvents TxtBxATN As TextBox
     Friend WithEvents LblATN As Label
     Friend WithEvents BtnGenerarPDF As Button
+    Friend WithEvents CBPruebaMicro As CheckBox
+    Friend WithEvents PorcentajeBioD As NumericUpDown
+    Friend WithEvents LblPorcentajeBioD As Label
 End Class

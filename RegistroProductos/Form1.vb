@@ -424,6 +424,7 @@ Public Class Form1
             Console.WriteLine("Producto Registrado")
             conn.Close()
         Catch ex As MySqlException
+            Console.WriteLine("INSERT INTO productos (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Observaciones`, `Fecha_Entrada`, `Hora_Entrada`, `Fecha_Limite`, `Estado`) VALUES ('" & llave & "', '" & Cliente & "', '" & Producto & "', '" & NumeroSerie & "', '" & Observaciones & "', '" & fecha_registro & "','" & hora_registro & "','" & fecha_limite & "', 'Pendiente');")
             MsgBox(ex.Message, False, "Error")
             conn.Close()
             Exit Sub
@@ -803,7 +804,7 @@ Public Class Form1
                 conn.Close()
             End Try
         ElseIf CmbBxTablas.SelectedItem = "Productos Aprobados" Then
-            Dim query As String = "SELECT distinct productos.ProductoID as 'ID Producto', clientes.ClienteID, clientes.Nombre as 'Cliente', clientes.Direccion as 'Direccion',tipo_productos.Tipo_Producto_ID, tipo_productos.Nombre as 'Producto', productos.Numero_Serie as 'Numero de Serie', productos.Observaciones as 'Observaciones', productos.Fecha_Entrada as 'Fecha de Entrada', Productos.Hora_Entrada as 'Hora de Entrada', reportes.Fecha_Reporte as 'Fecha Reporte', productos.Fecha_Limite as 'Fecha Limite', productos.Estado as 'Estado', productos.ID_Muestra, productos.Tanque,productos.Lote,productos.ATN,productos.TipodePrueba, productos.UsuarioID, usuarios.usuario as 'Revisado Por'
+            Dim query As String = "SELECT distinct productos.ProductoID as 'ID Producto', clientes.ClienteID, clientes.Nombre as 'Cliente', clientes.Direccion as 'Direccion',tipo_productos.Tipo_Producto_ID, tipo_productos.Nombre as 'Producto', productos.Numero_Serie as 'Numero de Serie', productos.Observaciones as 'Observaciones', productos.Fecha_Entrada as 'Fecha de Entrada', Productos.Hora_Entrada as 'Hora de Entrada', reportes.Fecha_Reporte as 'Fecha Reporte', productos.Fecha_Limite as 'Fecha Limite', productos.Estado as 'Estado', productos.ID_Muestra, productos.Tanque,productos.Lote,productos.ATN,productos.TipodePrueba, productos.UsuarioID, usuarios.usuario as 'Revisado Por',  productos.PortBioD
                                    from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID inner join usuarios on productos.UsuarioID = usuarios.UsuarioID inner join reportes on productos.ProductoID = reportes.ProductoID
                                    Where Estado = 'Aprobado';"
 
@@ -838,6 +839,7 @@ Public Class Form1
             DGVAdmin.Columns(16).Visible = False
             DGVAdmin.Columns(17).Visible = False
             DGVAdmin.Columns(18).Visible = False
+            DGVAdmin.Columns(20).Visible = False
 
         End If
     End Sub
@@ -1268,6 +1270,7 @@ Public Class Form1
         Form5.TxtBxIDMuestra.Clear()
         Form5.TxtBxATN.ReadOnly = False
         Form5.TxtBxATN.Clear()
+
         Dim fila_actual As Integer = (DGVProductosRevisados.CurrentRow.Index)
         If nombre_usuario = DGVProductosRevisados(14, fila_actual).Value.ToString Then
             MsgBox("No puede realizar un reporte sobre una muestra que usted mismo reviso", MsgBoxStyle.Exclamation, "Error")
@@ -1288,6 +1291,16 @@ Public Class Form1
             conn.Close()
             Exit Sub
         End Try
+
+        If DGVProductosRevisados(4, fila_actual).Value = "4" Then
+            Form5.PorcentajeBioD.Value = 1
+            Form5.PorcentajeBioD.ReadOnly = False
+            Form5.LblPorcentajeBioD.Visible = True
+        Else
+            Form5.PorcentajeBioD.Visible = False
+            Form5.LblPorcentajeBioD.Visible = False
+        End If
+
         Form5.TxtBxIdUsuario.Text = usu_id
         Form5.TxtBxIDProducto.Text = DGVProductosRevisados(0, fila_actual).Value
         Form5.TxtBxClienteID.Text = DGVProductosRevisados(1, fila_actual).Value
@@ -1329,6 +1342,15 @@ Public Class Form1
 
             If fila_actual + 1 = DGVAdmin.Rows.Count Then
                 Exit Sub
+            End If
+
+            If DGVAdmin(4, fila_actual).Value = "4" Then
+                Form5.PorcentajeBioD.Value = DGVAdmin(20, fila_actual).Value
+                Form5.PorcentajeBioD.ReadOnly = True
+                Form5.LblPorcentajeBioD.Visible = True
+            Else
+                Form5.PorcentajeBioD.Visible = False
+                Form5.PorcentajeBioD.Visible = False
             End If
 
 

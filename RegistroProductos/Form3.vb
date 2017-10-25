@@ -1,5 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.Configuration
+Imports System.IO
 
 Public Class Form3
     Dim conn As New MySqlConnection
@@ -296,6 +297,7 @@ Public Class Form3
         Dim TipoProducto As String = TxtBxTipoProductoID.Text
         Dim Observaciones As String = RchTxtBxObservaciones.Text
         Dim UsuarioID As String = TxtBxIdUsuario.Text
+        Dim ruta As String = TxtBxRuta.Text
 
         For i = 0 To pruebascategoria - 1
             If TextBoxArray(i).Enabled = True Then
@@ -320,7 +322,8 @@ Public Class Form3
                 Try
                     conn.Open()
                     Dim cmd As New MySqlCommand(String.Format("Select Valor from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
-                    If cmd.ExecuteScalar Is Nothing Then
+                    Dim var = cmd.ExecuteScalar
+                    If var Is Nothing Then
                         existevalor = False
                     Else
                         existevalor = True
@@ -335,10 +338,15 @@ Public Class Form3
                 Try
                     conn.Open()
                     Dim cmd As New MySqlCommand(String.Format("Select Valor_2 from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
-                    If cmd.ExecuteScalar Is Nothing Then
-                        existevalor2 = False
-                    Else
-                        existevalor2 = True
+                    Dim reader As MySqlDataReader
+                    reader = cmd.ExecuteReader
+                    If reader.Read() Then
+
+                        If reader.IsDBNull(0) Then
+                            existevalor2 = False
+                        Else
+                            existevalor2 = True
+                        End If
                     End If
                     conn.Close()
                 Catch ex As Exception
@@ -350,10 +358,15 @@ Public Class Form3
                 Try
                     conn.Open()
                     Dim cmd As New MySqlCommand(String.Format("Select Valor_3 from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
-                    If cmd.ExecuteScalar Is Nothing Then
-                        existevalor3 = False
-                    Else
-                        existevalor3 = True
+                    Dim reader As MySqlDataReader
+                    reader = cmd.ExecuteReader
+                    If reader.Read() Then
+
+                        If reader.IsDBNull(0) Then
+                            existevalor3 = False
+                        Else
+                            existevalor3 = True
+                        End If
                     End If
                     conn.Close()
                 Catch ex As Exception
@@ -365,10 +378,15 @@ Public Class Form3
                 Try
                     conn.Open()
                     Dim cmd As New MySqlCommand(String.Format("Select Valor_4 from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
-                    If cmd.ExecuteScalar Is Nothing Then
-                        existevalor4 = False
-                    Else
-                        existevalor4 = True
+                    Dim reader As MySqlDataReader
+                    reader = cmd.ExecuteReader
+                    If reader.Read() Then
+
+                        If reader.IsDBNull(0) Then
+                            existevalor4 = False
+                        Else
+                            existevalor4 = True
+                        End If
                     End If
                     conn.Close()
                 Catch ex As Exception
@@ -380,10 +398,15 @@ Public Class Form3
                 Try
                     conn.Open()
                     Dim cmd As New MySqlCommand(String.Format("Select Valor_5 from reportes where ProductoID  ='" & ProductoID & "' and ID_Prueba = '" & cod_prue(i) & "';"), conn)
-                    If cmd.ExecuteScalar Is Nothing Then
-                        existevalor5 = False
-                    Else
-                        existevalor5 = True
+                    Dim reader As MySqlDataReader
+                    reader = cmd.ExecuteReader
+                    If reader.Read() Then
+
+                        If reader.IsDBNull(0) Then
+                            existevalor5 = False
+                        Else
+                            existevalor5 = True
+                        End If
                     End If
                     conn.Close()
                 Catch ex As Exception
@@ -397,9 +420,7 @@ Public Class Form3
                     Try
                         conn.Open()
                         Dim cmd As New MySqlCommand(String.Format("INSERT INTO reportes (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Fecha_Ingreso`, `Hora_Ingreso`, `Fecha_Reporte`, `ID_Prueba`, `Valor`, `UsuarioID`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & TipoProducto & "', '" & NumeroSerie & "', '" & Fecha_Ingreso & "', '" & Hora_Ingreso & "', '" & Fecha_Reporte & "', '" & ID_Prueba & "', '" & valor & "', '" & UsuarioID & "');"), conn)
-                        Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
                         cmd.ExecuteNonQuery()
-                        cmd2.ExecuteNonQuery()
                         Console.WriteLine("Reporte Registrado")
                         'MsgBox("Reporte Registrado", False, "Reporte Registrado")
                         conn.Close()
@@ -413,9 +434,7 @@ Public Class Form3
                         Try
                             conn.Open()
                             Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_2`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
-                            Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
                             cmd.ExecuteNonQuery()
-                            cmd2.ExecuteNonQuery()
                             Console.WriteLine("Reporte Registrado")
                             'MsgBox("Reporte Registrado", False, "Reporte Registrado")
                             conn.Close()
@@ -429,9 +448,7 @@ Public Class Form3
                             Try
                                 conn.Open()
                                 Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_3`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
-                                Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
                                 cmd.ExecuteNonQuery()
-                                cmd2.ExecuteNonQuery()
                                 Console.WriteLine("Reporte Registrado")
                                 'MsgBox("Reporte Registrado", False, "Reporte Registrado")
                                 conn.Close()
@@ -445,9 +462,7 @@ Public Class Form3
                                 Try
                                     conn.Open()
                                     Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_4`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
-                                    Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
                                     cmd.ExecuteNonQuery()
-                                    cmd2.ExecuteNonQuery()
                                     Console.WriteLine("Reporte Registrado")
                                     'MsgBox("Reporte Registrado", False, "Reporte Registrado")
                                     conn.Close()
@@ -461,9 +476,7 @@ Public Class Form3
                                     Try
                                         conn.Open()
                                         Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_5`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
-                                        Dim cmd2 As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
                                         cmd.ExecuteNonQuery()
-                                        cmd2.ExecuteNonQuery()
                                         Console.WriteLine("Reporte Registrado")
                                         'MsgBox("Reporte Registrado", False, "Reporte Registrado")
                                         conn.Close()
@@ -479,6 +492,31 @@ Public Class Form3
                 End If
             End If
         Next
+
+        If ruta.Trim = "" Then
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
+                cmd.ExecuteNonQuery()
+                Console.Write("Producto Reportado")
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+            End Try
+        Else
+            ruta = ruta.Replace("\", "\\")
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("Update productos SET Estado = 'Revisado', Fecha_Reporte = '" & Fecha_Reporte & "', UsuarioID = '" & UsuarioID & "', RutaDatos = '" & ruta & "' WHERE ProductoID = '" & ProductoID & "' ;"), conn)
+                cmd.ExecuteNonQuery()
+                Console.Write("Producto Reportado")
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+            End Try
+        End If
         Form1.CargarDGVProductosLimite()
         Form1.CargarDGVProductosSinRevisar()
         Form1.ProductosFechaLimiteCerca()
@@ -511,5 +549,37 @@ Public Class Form3
                 TextBoxArray(i).Enabled = False
             Next
         End If
+    End Sub
+
+    Private Sub BtnEncontrarRuta_Click(sender As Object, e As EventArgs) Handles BtnEncontrarRuta.Click
+        Dim getruta As New OpenFileDialog
+        getruta.InitialDirectory = "C:\"
+        getruta.RestoreDirectory = False
+        getruta.Filter = "PDF Files(*.pdf)|*.pdf"
+        getruta.ShowDialog()
+
+        Dim filepath As String
+
+        Try
+            filepath = Path.GetFullPath(getruta.FileName)
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
+        End Try
+
+        TxtBxRuta.Text = filepath
+
+    End Sub
+
+    Private Sub BtnAbrirDatos_Click(sender As Object, e As EventArgs) Handles BtnAbrirDatos.Click
+        If TxtBxRuta.Text.Trim = "" Then
+            MsgBox("Seleccione la ruta del archivo antes de continuar", MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
+        End If
+        Try
+            Process.Start(TxtBxRuta.Text)
+        Catch ex As Exception
+            MsgBox("No se encontro archivo en la ruta seleccionada", MsgBoxStyle.Exclamation, "Error")
+        End Try
     End Sub
 End Class
