@@ -59,6 +59,7 @@ Public Class Form3
         Dim categoria As String = CmbBxCategorias.SelectedValue.ToString
 
         If categoria = "5" Then
+            RBQuitarTodo.Checked = True
             Try
                 conn.Open()
                 Dim cmd As New MySqlCommand(String.Format("Select count(*) from Pruebas"), conn)
@@ -85,9 +86,9 @@ Public Class Form3
                 conn.Close()
             End Try
 
-            For Each item As String In cod_prue
-                Console.WriteLine(item)
-            Next
+            'For Each item As String In cod_prue
+            '    Console.WriteLine(item)
+            'Next
 
 
             For Each item As String In cod_prue
@@ -105,9 +106,9 @@ Public Class Form3
                 End Try
             Next
 
-            For Each item As String In nombre_prueba
-                Console.WriteLine(item)
-            Next
+            'For Each item As String In nombre_prueba
+            '    Console.WriteLine(item)
+            'Next
 
             Panel1.Controls.Clear()
 
@@ -125,8 +126,8 @@ Public Class Form3
                 CheckBoxButtonArray(i) = New CheckBox With {
                     .Location = New Point(X1, Y1),
                     .Text = cod_prue(i).ToString + " " + nombre_prueba(i) + ":",
-                    .Width = 300,
-                    .Height = 20,
+                    .AutoEllipsis = True,
+                    .AutoSize = True, '.Width = 300,'.Height = 20,
                     .ForeColor = Color.Black,
                     .Visible = True,
                     .Parent = Me.Panel1,
@@ -159,6 +160,7 @@ Public Class Form3
                 AddHandler CheckBoxButtonArray(i).Click, AddressOf CheckBox_Clicked
             Next
         Else
+            RBSeleccionarTodo.Checked = True
             Try
                 conn.Open()
                 Dim cmd As New MySqlCommand(String.Format("Select count(*) from pruebasxcategoria where id_categoria = " & categoria & ";"), conn)
@@ -225,8 +227,8 @@ Public Class Form3
                 CheckBoxButtonArray(i) = New CheckBox With {
                     .Location = New Point(X1, Y1),
                     .Text = cod_prue(i).ToString + " " + nombre_prueba(i) + ":",
-                    .Width = 300,
-                    .Height = 20,
+                    .AutoEllipsis = True,
+                    .AutoSize = True, '.Width = 300,'.Height = 20,
                     .ForeColor = Color.Black,
                     .Visible = True,
                     .Parent = Me.Panel1,
