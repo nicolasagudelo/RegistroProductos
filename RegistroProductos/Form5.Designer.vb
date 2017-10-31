@@ -39,8 +39,6 @@ Partial Class Form5
         Me.LblFechaEntrada = New System.Windows.Forms.Label()
         Me.RchTxtBxObservaciones = New System.Windows.Forms.RichTextBox()
         Me.LblObservaciones = New System.Windows.Forms.Label()
-        Me.TxtBxNumeroSerie = New System.Windows.Forms.TextBox()
-        Me.LblNumeroSerie = New System.Windows.Forms.Label()
         Me.TxtBxProducto = New System.Windows.Forms.TextBox()
         Me.LblTipoMercancia = New System.Windows.Forms.Label()
         Me.TxtBxCliente = New System.Windows.Forms.TextBox()
@@ -75,7 +73,7 @@ Partial Class Form5
         '
         'TxtBxHoraEntrada
         '
-        Me.TxtBxHoraEntrada.Location = New System.Drawing.Point(241, 287)
+        Me.TxtBxHoraEntrada.Location = New System.Drawing.Point(241, 237)
         Me.TxtBxHoraEntrada.Name = "TxtBxHoraEntrada"
         Me.TxtBxHoraEntrada.ReadOnly = True
         Me.TxtBxHoraEntrada.Size = New System.Drawing.Size(128, 20)
@@ -84,7 +82,7 @@ Partial Class Form5
         'LblHoraEntrada
         '
         Me.LblHoraEntrada.AutoSize = True
-        Me.LblHoraEntrada.Location = New System.Drawing.Point(238, 271)
+        Me.LblHoraEntrada.Location = New System.Drawing.Point(238, 221)
         Me.LblHoraEntrada.Name = "LblHoraEntrada"
         Me.LblHoraEntrada.Size = New System.Drawing.Size(88, 13)
         Me.LblHoraEntrada.TabIndex = 54
@@ -155,13 +153,13 @@ Partial Class Form5
         Me.LblUsuario.AutoSize = True
         Me.LblUsuario.Location = New System.Drawing.Point(24, 8)
         Me.LblUsuario.Name = "LblUsuario"
-        Me.LblUsuario.Size = New System.Drawing.Size(147, 13)
+        Me.LblUsuario.Size = New System.Drawing.Size(148, 13)
         Me.LblUsuario.TabIndex = 46
-        Me.LblUsuario.Text = "Usuario que realizo el reporte:"
+        Me.LblUsuario.Text = "Usuario que realizo el analisis:"
         '
         'TxtBxFechaRegistro
         '
-        Me.TxtBxFechaRegistro.Location = New System.Drawing.Point(241, 336)
+        Me.TxtBxFechaRegistro.Location = New System.Drawing.Point(241, 286)
         Me.TxtBxFechaRegistro.Name = "TxtBxFechaRegistro"
         Me.TxtBxFechaRegistro.ReadOnly = True
         Me.TxtBxFechaRegistro.Size = New System.Drawing.Size(128, 20)
@@ -169,7 +167,7 @@ Partial Class Form5
         '
         'TxtBxFechaEntrada
         '
-        Me.TxtBxFechaEntrada.Location = New System.Drawing.Point(241, 233)
+        Me.TxtBxFechaEntrada.Location = New System.Drawing.Point(241, 183)
         Me.TxtBxFechaEntrada.Name = "TxtBxFechaEntrada"
         Me.TxtBxFechaEntrada.ReadOnly = True
         Me.TxtBxFechaEntrada.Size = New System.Drawing.Size(128, 20)
@@ -178,7 +176,7 @@ Partial Class Form5
         'LblFechaRegistro
         '
         Me.LblFechaRegistro.AutoSize = True
-        Me.LblFechaRegistro.Location = New System.Drawing.Point(238, 320)
+        Me.LblFechaRegistro.Location = New System.Drawing.Point(238, 270)
         Me.LblFechaRegistro.Name = "LblFechaRegistro"
         Me.LblFechaRegistro.Size = New System.Drawing.Size(97, 13)
         Me.LblFechaRegistro.TabIndex = 43
@@ -187,7 +185,7 @@ Partial Class Form5
         'LblFechaEntrada
         '
         Me.LblFechaEntrada.AutoSize = True
-        Me.LblFechaEntrada.Location = New System.Drawing.Point(238, 217)
+        Me.LblFechaEntrada.Location = New System.Drawing.Point(238, 167)
         Me.LblFechaEntrada.Name = "LblFechaEntrada"
         Me.LblFechaEntrada.Size = New System.Drawing.Size(95, 13)
         Me.LblFechaEntrada.TabIndex = 42
@@ -210,23 +208,6 @@ Partial Class Form5
         Me.LblObservaciones.Size = New System.Drawing.Size(81, 13)
         Me.LblObservaciones.TabIndex = 40
         Me.LblObservaciones.Text = "Observaciones:"
-        '
-        'TxtBxNumeroSerie
-        '
-        Me.TxtBxNumeroSerie.Location = New System.Drawing.Point(241, 183)
-        Me.TxtBxNumeroSerie.Name = "TxtBxNumeroSerie"
-        Me.TxtBxNumeroSerie.ReadOnly = True
-        Me.TxtBxNumeroSerie.Size = New System.Drawing.Size(128, 20)
-        Me.TxtBxNumeroSerie.TabIndex = 39
-        '
-        'LblNumeroSerie
-        '
-        Me.LblNumeroSerie.AutoSize = True
-        Me.LblNumeroSerie.Location = New System.Drawing.Point(238, 167)
-        Me.LblNumeroSerie.Name = "LblNumeroSerie"
-        Me.LblNumeroSerie.Size = New System.Drawing.Size(89, 13)
-        Me.LblNumeroSerie.TabIndex = 38
-        Me.LblNumeroSerie.Text = "Numero de Serie:"
         '
         'TxtBxProducto
         '
@@ -357,7 +338,7 @@ Partial Class Form5
         '
         'TxtBxPeriodoAnalisis
         '
-        Me.TxtBxPeriodoAnalisis.Location = New System.Drawing.Point(241, 385)
+        Me.TxtBxPeriodoAnalisis.Location = New System.Drawing.Point(241, 335)
         Me.TxtBxPeriodoAnalisis.Name = "TxtBxPeriodoAnalisis"
         Me.TxtBxPeriodoAnalisis.ReadOnly = True
         Me.TxtBxPeriodoAnalisis.Size = New System.Drawing.Size(128, 20)
@@ -366,7 +347,7 @@ Partial Class Form5
         'LblPeriodoAnalisis
         '
         Me.LblPeriodoAnalisis.AutoSize = True
-        Me.LblPeriodoAnalisis.Location = New System.Drawing.Point(238, 369)
+        Me.LblPeriodoAnalisis.Location = New System.Drawing.Point(238, 319)
         Me.LblPeriodoAnalisis.Name = "LblPeriodoAnalisis"
         Me.LblPeriodoAnalisis.Size = New System.Drawing.Size(96, 13)
         Me.LblPeriodoAnalisis.TabIndex = 60
@@ -374,7 +355,7 @@ Partial Class Form5
         '
         'TxtBxIDMuestra
         '
-        Me.TxtBxIDMuestra.Location = New System.Drawing.Point(241, 429)
+        Me.TxtBxIDMuestra.Location = New System.Drawing.Point(241, 379)
         Me.TxtBxIDMuestra.Name = "TxtBxIDMuestra"
         Me.TxtBxIDMuestra.Size = New System.Drawing.Size(128, 20)
         Me.TxtBxIDMuestra.TabIndex = 63
@@ -382,7 +363,7 @@ Partial Class Form5
         'LblIdMuestra
         '
         Me.LblIdMuestra.AutoSize = True
-        Me.LblIdMuestra.Location = New System.Drawing.Point(238, 413)
+        Me.LblIdMuestra.Location = New System.Drawing.Point(238, 363)
         Me.LblIdMuestra.Name = "LblIdMuestra"
         Me.LblIdMuestra.Size = New System.Drawing.Size(62, 13)
         Me.LblIdMuestra.TabIndex = 62
@@ -418,11 +399,11 @@ Partial Class Form5
         Me.LblLote.Name = "LblLote"
         Me.LblLote.Size = New System.Drawing.Size(79, 13)
         Me.LblLote.TabIndex = 66
-        Me.LblLote.Text = "Cachada/Lote:"
+        Me.LblLote.Text = "Cochada/Lote:"
         '
         'TxtBxATN
         '
-        Me.TxtBxATN.Location = New System.Drawing.Point(241, 482)
+        Me.TxtBxATN.Location = New System.Drawing.Point(241, 432)
         Me.TxtBxATN.Name = "TxtBxATN"
         Me.TxtBxATN.Size = New System.Drawing.Size(128, 20)
         Me.TxtBxATN.TabIndex = 69
@@ -430,7 +411,7 @@ Partial Class Form5
         'LblATN
         '
         Me.LblATN.AutoSize = True
-        Me.LblATN.Location = New System.Drawing.Point(238, 466)
+        Me.LblATN.Location = New System.Drawing.Point(238, 416)
         Me.LblATN.Name = "LblATN"
         Me.LblATN.Size = New System.Drawing.Size(32, 13)
         Me.LblATN.TabIndex = 68
@@ -449,7 +430,7 @@ Partial Class Form5
         'CBPruebaMicro
         '
         Me.CBPruebaMicro.AutoSize = True
-        Me.CBPruebaMicro.Location = New System.Drawing.Point(241, 529)
+        Me.CBPruebaMicro.Location = New System.Drawing.Point(241, 479)
         Me.CBPruebaMicro.Name = "CBPruebaMicro"
         Me.CBPruebaMicro.Size = New System.Drawing.Size(143, 17)
         Me.CBPruebaMicro.TabIndex = 71
@@ -514,8 +495,6 @@ Partial Class Form5
         Me.Controls.Add(Me.LblFechaEntrada)
         Me.Controls.Add(Me.RchTxtBxObservaciones)
         Me.Controls.Add(Me.LblObservaciones)
-        Me.Controls.Add(Me.TxtBxNumeroSerie)
-        Me.Controls.Add(Me.LblNumeroSerie)
         Me.Controls.Add(Me.TxtBxProducto)
         Me.Controls.Add(Me.LblTipoMercancia)
         Me.Controls.Add(Me.TxtBxCliente)
@@ -551,8 +530,6 @@ Partial Class Form5
     Friend WithEvents LblFechaEntrada As Label
     Friend WithEvents RchTxtBxObservaciones As RichTextBox
     Friend WithEvents LblObservaciones As Label
-    Friend WithEvents TxtBxNumeroSerie As TextBox
-    Friend WithEvents LblNumeroSerie As Label
     Friend WithEvents TxtBxProducto As TextBox
     Friend WithEvents LblTipoMercancia As Label
     Friend WithEvents TxtBxCliente As TextBox

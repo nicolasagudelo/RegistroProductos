@@ -6,8 +6,13 @@ Public Class Form2
     Private Sub Form2_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Form1.ShowDialog()
         Connect()
+        CargarClientes()
+        CmbBxCliente.SelectedIndex = 0
         TxBxContraseña.Text = ""
+        TxtBxContraseñaCliente.Text = ""
         TxtBxUsuario.Text = ""
+        Me.TabControl1.TabIndex = 0
+        Me.AcceptButton = Me.BtnAceptar
     End Sub
 
     Public Sub Connect()
@@ -22,6 +27,17 @@ Public Class Form2
         End Try
         conn.Close()
 
+    End Sub
+
+    Private Sub CargarClientes()
+        Dim query As String = " Select ClienteID, Nombre from Clientes"
+        Dim cmd As New MySqlCommand(query, conn)
+        Dim sqlAdap As New MySqlDataAdapter(cmd)
+        Dim dtRecord As New DataTable
+        sqlAdap.Fill(dtRecord)
+        CmbBxCliente.DataSource = dtRecord
+        CmbBxCliente.DisplayMember = "Nombre"
+        CmbBxCliente.ValueMember = "ClienteID"
     End Sub
 
     Private Sub BtnAceptar_Click(sender As Object, e As EventArgs) Handles BtnAceptar.Click
@@ -78,6 +94,53 @@ Public Class Form2
 
     Private Sub BtnCancelar_Click(sender As Object, e As EventArgs) Handles BtnCancelar.Click
         Form1.Close()
+        Me.Close()
+    End Sub
+
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        Select Case Me.TabControl1.SelectedIndex
+            Case Is = 0
+                Me.AcceptButton = Me.BtnAceptar
+                Me.CancelButton = Me.BtnCancelar
+            Case Is = 1
+                Me.AcceptButton = Me.BtnAceptarCliente
+                Me.CancelButton = Me.BtnCancelarCliente
+        End Select
+    End Sub
+
+    Private Sub BtnAceptarCliente_Click(sender As Object, e As EventArgs) Handles BtnAceptarCliente.Click
+        Dim cliente As Integer = CmbBxCliente.SelectedValue
+        Dim contraseña As String = TxtBxContraseñaCliente.Text
+        Dim bd_password As String
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("Select contraseña from clientes where ClienteID = '" & cliente & "';"), conn)
+            bd_password = Convert.ToString(cmd.ExecuteScalar())
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, False, "Error")
+            conn.Close()
+            Exit Sub
+        End Try
+
+        If bd_password = Nothing Then
+            MsgBox("Credenciales de inicio de sesion no validas")
+            Exit Sub
+        End If
+
+        If contraseña = bd_password Then
+            MsgBox("Conectado como: " & CmbBxCliente.Text & "", False, "Log-In")
+            Form6.RecibirClienteId(cliente)
+            Me.Hide()
+            Form6.ShowDialog()
+        Else
+            MsgBox("Credenciales de inicio de sesion no validas")
+            TxBxContraseña.Text = ""
+            Exit Sub
+        End If
+    End Sub
+
+    Private Sub BtnCancelarCliente_Click(sender As Object, e As EventArgs) Handles BtnCancelarCliente.Click
         Me.Close()
     End Sub
 End Class

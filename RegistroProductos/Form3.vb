@@ -291,7 +291,7 @@ Public Class Form3
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnRegistrarReporte.Click
         Dim ProductoID As String = TxtBxIDProducto.Text
-        Dim NumeroSerie As String = TxtBxNumeroSerie.Text
+        'Dim NumeroSerie As String = TxtBxNumeroSerie.Text
         Dim Fecha_Ingreso As String = TxtBxFechaEntrada.Text
         Dim Hora_Ingreso As String = TxtBxHoraEntrada.Text
         Dim Fecha_Reporte As String = TxtBxFechaRegistro.Text
@@ -419,18 +419,18 @@ Public Class Form3
 
                 If existevalor = False Then
 
-                    Try
-                        conn.Open()
-                        Dim cmd As New MySqlCommand(String.Format("INSERT INTO reportes (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Fecha_Ingreso`, `Hora_Ingreso`, `Fecha_Reporte`, `ID_Prueba`, `Valor`, `UsuarioID`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & TipoProducto & "', '" & NumeroSerie & "', '" & Fecha_Ingreso & "', '" & Hora_Ingreso & "', '" & Fecha_Reporte & "', '" & ID_Prueba & "', '" & valor & "', '" & UsuarioID & "');"), conn)
-                        cmd.ExecuteNonQuery()
-                        Console.WriteLine("Reporte Registrado")
-                        'MsgBox("Reporte Registrado", False, "Reporte Registrado")
-                        conn.Close()
-                    Catch ex As Exception
-                        MsgBox(ex.Message, False, "Error")
-                        conn.Close()
-                        Exit Sub
-                    End Try
+                    'Try
+                    '    conn.Open()
+                    '    Dim cmd As New MySqlCommand(String.Format("INSERT INTO reportes (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Fecha_Ingreso`, `Hora_Ingreso`, `Fecha_Reporte`, `ID_Prueba`, `Valor`, `UsuarioID`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & TipoProducto & "', '" & NumeroSerie & "', '" & Fecha_Ingreso & "', '" & Hora_Ingreso & "', '" & Fecha_Reporte & "', '" & ID_Prueba & "', '" & valor & "', '" & UsuarioID & "');"), conn)
+                    '    cmd.ExecuteNonQuery()
+                    '    Console.WriteLine("Reporte Registrado")
+                    '    'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                    '    conn.Close()
+                    'Catch ex As Exception
+                    '    MsgBox(ex.Message, False, "Error")
+                    '    conn.Close()
+                    '    Exit Sub
+                    'End Try
                 Else
                     If existevalor2 = False Then
                         Try

@@ -278,8 +278,8 @@ Public Class Form1
 
     Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RchTxtBxObservaciones.TextChanged
         Dim i As Integer = RchTxtBxObservaciones.TextLength
-        LblContadorCaracteres.Text = i.ToString + "/150"
-        If i >= 130 Then
+        LblContadorCaracteres.Text = i.ToString + "/500"
+        If i >= 450 Then
             LblContadorCaracteres.ForeColor = Color.Red
         Else
             LblContadorCaracteres.ForeColor = Color.Black
@@ -288,8 +288,8 @@ Public Class Form1
 
     Private Sub RichTextBox2_TextChanged(sender As Object, e As EventArgs) Handles RchTxBxObservaciones2.TextChanged
         Dim i As Integer = RchTxBxObservaciones2.TextLength
-        LblContadorCaracteres2.Text = i.ToString + "/150"
-        If i >= 130 Then
+        LblContadorCaracteres2.Text = i.ToString + "/400"
+        If i >= 450 Then
             LblContadorCaracteres2.ForeColor = Color.Red
         Else
             LblContadorCaracteres2.ForeColor = Color.Black
@@ -561,7 +561,7 @@ Public Class Form1
         Form3.TxtBxIDProducto.Text = DGVProductosSinRevisar(0, (fila_actual)).Value
         Form3.TxtBxCliente.Text = DGVProductosSinRevisar(3, fila_actual).Value
         Form3.TxtBxProducto.Text = DGVProductosSinRevisar(4, fila_actual).Value
-        Form3.TxtBxNumeroSerie.Text = DGVProductosSinRevisar(5, fila_actual).Value
+        'Form3.TxtBxNumeroSerie.Text = DGVProductosSinRevisar(5, fila_actual).Value
         Form3.RchTxtBxObservaciones.Text = DGVProductosSinRevisar(6, fila_actual).Value
         Form3.TxtBxTipoProductoID.Text = DGVProductosSinRevisar(2, fila_actual).Value
         Form3.TxtBxClienteID.Text = DGVProductosSinRevisar(1, fila_actual).Value
@@ -614,7 +614,7 @@ Public Class Form1
         Form3.TxtBxIDProducto.Text = DGVProductosLimite(0, (fila_actual)).Value
         Form3.TxtBxCliente.Text = DGVProductosLimite(3, fila_actual).Value
         Form3.TxtBxProducto.Text = DGVProductosLimite(4, fila_actual).Value
-        Form3.TxtBxNumeroSerie.Text = DGVProductosLimite(5, fila_actual).Value
+        'Form3.TxtBxNumeroSerie.Text = DGVProductosLimite(5, fila_actual).Value
         Form3.RchTxtBxObservaciones.Text = DGVProductosLimite(6, fila_actual).Value
         Form3.TxtBxTipoProductoID.Text = DGVProductosLimite(2, fila_actual).Value
         Form3.TxtBxClienteID.Text = DGVProductosLimite(1, fila_actual).Value
@@ -1307,7 +1307,7 @@ Public Class Form1
         Form5.TxtBxCliente.Text = DGVProductosRevisados(2, fila_actual).Value
         Form5.TxtBxTipoProductoID.Text = DGVProductosRevisados(4, fila_actual).Value
         Form5.TxtBxProducto.Text = DGVProductosRevisados(5, fila_actual).Value
-        Form5.TxtBxNumeroSerie.Text = DGVProductosRevisados(6, fila_actual).Value
+        'Form5.TxtBxNumeroSerie.Text = DGVProductosRevisados(6, fila_actual).Value
         Form5.RchTxtBxObservaciones.Text = DGVProductosRevisados(7, fila_actual).Value
         Dim fecha_entrada As Date = DGVProductosRevisados(8, fila_actual).Value
         Form5.TxtBxFechaEntrada.Text = fecha_entrada.ToString("yyyy-MM-dd")
@@ -1364,7 +1364,7 @@ Public Class Form1
             Form5.TxtBxDireccion.Text = DGVAdmin(3, fila_actual).Value
             Form5.TxtBxTipoProductoID.Text = DGVAdmin(4, fila_actual).Value
             Form5.TxtBxProducto.Text = DGVAdmin(5, fila_actual).Value
-            Form5.TxtBxNumeroSerie.Text = DGVAdmin(6, fila_actual).Value
+            'Form5.TxtBxNumeroSerie.Text = DGVAdmin(6, fila_actual).Value
             Form5.RchTxtBxObservaciones.Text = DGVAdmin(7, fila_actual).Value
             Dim fecha_entrada As Date = DGVAdmin(8, fila_actual).Value
             Form5.TxtBxFechaEntrada.Text = fecha_entrada.ToString("yyyy-MM-dd")
