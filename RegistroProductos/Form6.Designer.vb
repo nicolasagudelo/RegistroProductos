@@ -24,6 +24,7 @@ Partial Class Form6
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
         Me.CmbBxCategorias = New System.Windows.Forms.ComboBox()
         Me.BtnCancelar = New System.Windows.Forms.Button()
         Me.RBQuitarTodo = New System.Windows.Forms.RadioButton()
@@ -51,13 +52,24 @@ Partial Class Form6
         Me.LblTipoMercancia = New System.Windows.Forms.Label()
         Me.LblCliente = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.BtnGenerarReporte = New System.Windows.Forms.Button()
+        Me.LblFechaFin = New System.Windows.Forms.Label()
+        Me.FechaFin = New System.Windows.Forms.DateTimePicker()
+        Me.LblFechaInicio = New System.Windows.Forms.Label()
+        Me.FechaInicio = New System.Windows.Forms.DateTimePicker()
+        Me.DGVHistorial = New System.Windows.Forms.DataGridView()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PorcentajeBioD, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
+        CType(Me.DGVHistorial, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
         '
+        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Location = New System.Drawing.Point(1, 0)
@@ -69,6 +81,7 @@ Partial Class Form6
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage1.Controls.Add(Me.ProgressBar1)
         Me.TabPage1.Controls.Add(Me.CmbBxCategorias)
         Me.TabPage1.Controls.Add(Me.BtnCancelar)
         Me.TabPage1.Controls.Add(Me.RBQuitarTodo)
@@ -102,52 +115,65 @@ Partial Class Form6
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Registrar Muestra"
         '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ProgressBar1.Location = New System.Drawing.Point(538, 397)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(327, 23)
+        Me.ProgressBar1.TabIndex = 83
+        '
         'CmbBxCategorias
         '
+        Me.CmbBxCategorias.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CmbBxCategorias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.CmbBxCategorias.FormattingEnabled = True
         Me.CmbBxCategorias.Location = New System.Drawing.Point(538, 30)
         Me.CmbBxCategorias.Name = "CmbBxCategorias"
         Me.CmbBxCategorias.Size = New System.Drawing.Size(489, 21)
-        Me.CmbBxCategorias.TabIndex = 82
+        Me.CmbBxCategorias.TabIndex = 7
         '
         'BtnCancelar
         '
+        Me.BtnCancelar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnCancelar.Location = New System.Drawing.Point(952, 363)
         Me.BtnCancelar.Name = "BtnCancelar"
         Me.BtnCancelar.Size = New System.Drawing.Size(75, 57)
-        Me.BtnCancelar.TabIndex = 79
+        Me.BtnCancelar.TabIndex = 12
         Me.BtnCancelar.Text = "Cancelar"
         Me.BtnCancelar.UseVisualStyleBackColor = True
         '
         'RBQuitarTodo
         '
+        Me.RBQuitarTodo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RBQuitarTodo.AutoSize = True
         Me.RBQuitarTodo.Location = New System.Drawing.Point(653, 54)
         Me.RBQuitarTodo.Name = "RBQuitarTodo"
         Me.RBQuitarTodo.Size = New System.Drawing.Size(77, 17)
-        Me.RBQuitarTodo.TabIndex = 81
+        Me.RBQuitarTodo.TabIndex = 9
         Me.RBQuitarTodo.Text = "Quitar todo"
         Me.RBQuitarTodo.UseVisualStyleBackColor = True
         Me.RBQuitarTodo.Visible = False
         '
         'BtnAceptar
         '
+        Me.BtnAceptar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnAceptar.Location = New System.Drawing.Point(871, 363)
         Me.BtnAceptar.Name = "BtnAceptar"
         Me.BtnAceptar.Size = New System.Drawing.Size(75, 57)
-        Me.BtnAceptar.TabIndex = 78
+        Me.BtnAceptar.TabIndex = 11
         Me.BtnAceptar.Text = "Registrar Producto"
         Me.BtnAceptar.UseVisualStyleBackColor = True
         '
         'RBSeleccionarTodo
         '
+        Me.RBSeleccionarTodo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.RBSeleccionarTodo.AutoSize = True
         Me.RBSeleccionarTodo.Checked = True
         Me.RBSeleccionarTodo.Location = New System.Drawing.Point(538, 54)
         Me.RBSeleccionarTodo.Name = "RBSeleccionarTodo"
         Me.RBSeleccionarTodo.Size = New System.Drawing.Size(109, 17)
-        Me.RBSeleccionarTodo.TabIndex = 80
+        Me.RBSeleccionarTodo.TabIndex = 8
         Me.RBSeleccionarTodo.TabStop = True
         Me.RBSeleccionarTodo.Text = "Seleccionar Todo"
         Me.RBSeleccionarTodo.UseVisualStyleBackColor = True
@@ -155,15 +181,18 @@ Partial Class Form6
         '
         'Panel1
         '
+        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.AutoScroll = True
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Location = New System.Drawing.Point(538, 72)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(489, 285)
-        Me.Panel1.TabIndex = 79
+        Me.Panel1.TabIndex = 10
         '
         'LblCategorias
         '
+        Me.LblCategorias.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.LblCategorias.AutoSize = True
         Me.LblCategorias.Location = New System.Drawing.Point(535, 14)
         Me.LblCategorias.Name = "LblCategorias"
@@ -187,7 +216,7 @@ Partial Class Form6
         Me.PorcentajeBioD.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.PorcentajeBioD.Name = "PorcentajeBioD"
         Me.PorcentajeBioD.Size = New System.Drawing.Size(218, 20)
-        Me.PorcentajeBioD.TabIndex = 76
+        Me.PorcentajeBioD.TabIndex = 5
         Me.PorcentajeBioD.Value = New Decimal(New Integer() {1, 0, 0, 0})
         Me.PorcentajeBioD.Visible = False
         '
@@ -196,7 +225,7 @@ Partial Class Form6
         Me.TxtBxLote.Location = New System.Drawing.Point(10, 149)
         Me.TxtBxLote.Name = "TxtBxLote"
         Me.TxtBxLote.Size = New System.Drawing.Size(214, 20)
-        Me.TxtBxLote.TabIndex = 75
+        Me.TxtBxLote.TabIndex = 4
         '
         'LblLote
         '
@@ -212,7 +241,7 @@ Partial Class Form6
         Me.TxtBxOrigen.Location = New System.Drawing.Point(249, 110)
         Me.TxtBxOrigen.Name = "TxtBxOrigen"
         Me.TxtBxOrigen.Size = New System.Drawing.Size(218, 20)
-        Me.TxtBxOrigen.TabIndex = 73
+        Me.TxtBxOrigen.TabIndex = 3
         '
         'LblOrigen
         '
@@ -228,7 +257,7 @@ Partial Class Form6
         Me.TxtBxIDMuestra.Location = New System.Drawing.Point(10, 110)
         Me.TxtBxIDMuestra.Name = "TxtBxIDMuestra"
         Me.TxtBxIDMuestra.Size = New System.Drawing.Size(214, 20)
-        Me.TxtBxIDMuestra.TabIndex = 71
+        Me.TxtBxIDMuestra.TabIndex = 2
         '
         'LblIdMuestra
         '
@@ -275,6 +304,7 @@ Partial Class Form6
         '
         'LblContadorCaracteres
         '
+        Me.LblContadorCaracteres.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.LblContadorCaracteres.AutoSize = True
         Me.LblContadorCaracteres.Location = New System.Drawing.Point(432, 360)
         Me.LblContadorCaracteres.Name = "LblContadorCaracteres"
@@ -284,11 +314,13 @@ Partial Class Form6
         '
         'RchTxtBxObservaciones
         '
+        Me.RchTxtBxObservaciones.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.RchTxtBxObservaciones.Location = New System.Drawing.Point(11, 188)
         Me.RchTxtBxObservaciones.MaxLength = 500
         Me.RchTxtBxObservaciones.Name = "RchTxtBxObservaciones"
         Me.RchTxtBxObservaciones.Size = New System.Drawing.Size(457, 169)
-        Me.RchTxtBxObservaciones.TabIndex = 42
+        Me.RchTxtBxObservaciones.TabIndex = 6
         Me.RchTxtBxObservaciones.Text = ""
         '
         'LblObservacionesCliente
@@ -317,7 +349,7 @@ Partial Class Form6
         Me.CmbBxProducto.Location = New System.Drawing.Point(10, 70)
         Me.CmbBxProducto.Name = "CmbBxProducto"
         Me.CmbBxProducto.Size = New System.Drawing.Size(214, 21)
-        Me.CmbBxProducto.TabIndex = 39
+        Me.CmbBxProducto.TabIndex = 1
         '
         'LblTipoMercancia
         '
@@ -340,6 +372,12 @@ Partial Class Form6
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage2.Controls.Add(Me.BtnGenerarReporte)
+        Me.TabPage2.Controls.Add(Me.LblFechaFin)
+        Me.TabPage2.Controls.Add(Me.FechaFin)
+        Me.TabPage2.Controls.Add(Me.LblFechaInicio)
+        Me.TabPage2.Controls.Add(Me.FechaInicio)
+        Me.TabPage2.Controls.Add(Me.DGVHistorial)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
@@ -347,18 +385,81 @@ Partial Class Form6
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Historial"
         '
+        'BtnGenerarReporte
+        '
+        Me.BtnGenerarReporte.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.BtnGenerarReporte.Location = New System.Drawing.Point(349, 15)
+        Me.BtnGenerarReporte.Name = "BtnGenerarReporte"
+        Me.BtnGenerarReporte.Size = New System.Drawing.Size(78, 39)
+        Me.BtnGenerarReporte.TabIndex = 26
+        Me.BtnGenerarReporte.Text = "Revisar Historial"
+        Me.BtnGenerarReporte.UseVisualStyleBackColor = True
+        '
+        'LblFechaFin
+        '
+        Me.LblFechaFin.AutoSize = True
+        Me.LblFechaFin.Location = New System.Drawing.Point(172, 15)
+        Me.LblFechaFin.Name = "LblFechaFin"
+        Me.LblFechaFin.Size = New System.Drawing.Size(57, 13)
+        Me.LblFechaFin.TabIndex = 25
+        Me.LblFechaFin.Text = "Fecha Fin:"
+        '
+        'FechaFin
+        '
+        Me.FechaFin.Location = New System.Drawing.Point(175, 31)
+        Me.FechaFin.Name = "FechaFin"
+        Me.FechaFin.Size = New System.Drawing.Size(146, 20)
+        Me.FechaFin.TabIndex = 24
+        Me.FechaFin.Value = New Date(2017, 9, 14, 10, 3, 34, 0)
+        '
+        'LblFechaInicio
+        '
+        Me.LblFechaInicio.AutoSize = True
+        Me.LblFechaInicio.Location = New System.Drawing.Point(7, 15)
+        Me.LblFechaInicio.Name = "LblFechaInicio"
+        Me.LblFechaInicio.Size = New System.Drawing.Size(68, 13)
+        Me.LblFechaInicio.TabIndex = 23
+        Me.LblFechaInicio.Text = "Fecha Inicio:"
+        '
+        'FechaInicio
+        '
+        Me.FechaInicio.Location = New System.Drawing.Point(10, 31)
+        Me.FechaInicio.MinDate = New Date(2017, 1, 1, 0, 0, 0, 0)
+        Me.FechaInicio.Name = "FechaInicio"
+        Me.FechaInicio.Size = New System.Drawing.Size(146, 20)
+        Me.FechaInicio.TabIndex = 22
+        Me.FechaInicio.Value = New Date(2017, 9, 14, 10, 3, 34, 0)
+        '
+        'DGVHistorial
+        '
+        Me.DGVHistorial.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGVHistorial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DGVHistorial.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.DGVHistorial.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DGVHistorial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVHistorial.Location = New System.Drawing.Point(3, 68)
+        Me.DGVHistorial.Name = "DGVHistorial"
+        Me.DGVHistorial.Size = New System.Drawing.Size(1024, 360)
+        Me.DGVHistorial.TabIndex = 0
+        '
         'Form6
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1054, 458)
         Me.Controls.Add(Me.TabControl1)
+        Me.MinimumSize = New System.Drawing.Size(1070, 497)
         Me.Name = "Form6"
         Me.Text = "Form6"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         CType(Me.PorcentajeBioD, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
+        CType(Me.DGVHistorial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -392,4 +493,11 @@ Partial Class Form6
     Friend WithEvents RBSeleccionarTodo As RadioButton
     Friend WithEvents Panel1 As Panel
     Friend WithEvents CmbBxCategorias As ComboBox
+    Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents DGVHistorial As DataGridView
+    Friend WithEvents BtnGenerarReporte As Button
+    Friend WithEvents LblFechaFin As Label
+    Friend WithEvents FechaFin As DateTimePicker
+    Friend WithEvents LblFechaInicio As Label
+    Friend WithEvents FechaInicio As DateTimePicker
 End Class

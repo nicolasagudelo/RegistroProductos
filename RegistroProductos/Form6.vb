@@ -87,6 +87,9 @@ Public Class Form6
             Exit Sub
         End If
 
+        cod_prue.Clear()
+        nombre_prueba.Clear()
+
         RBQuitarTodo.Visible = True
         RBSeleccionarTodo.Visible = True
 
@@ -383,16 +386,165 @@ Public Class Form6
 
         End If
 
+
+
+        Dim checks As Integer = 0
+        Dim mensaje As String
+
         For i = 0 To pruebascategoria - 1
             If CheckBoxButtonArray(i).Checked = True Then
-                'MsgBox(cod_prue(i) & "-" & nombre_prueba(i))
-                Dim ID_Prueba As String = cod_prue(i)
+                checks += 1
+                mensaje = mensaje + cod_prue(i) & vbTab & vbTab & nombre_prueba(i) & vbCrLf
             End If
         Next
 
+        If checks = 0 Then
+            MsgBox("Seleccione alguna prueba para realizar sobre la muestra", MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
+        End If
+
+        mensaje = "Esta seguro que desea registrar las siguientes pruebas:" & vbCrLf & vbCrLf & mensaje & vbCrLf & "Para el producto: " & vbCrLf & vbCrLf & CmbBxProducto.Text & "?"
+
+        If MessageBox.Show(mensaje, "Registro Producto", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+
+            Dim steps As Integer = 100 / checks
+            Dim max As Integer = (steps * checks) - steps
+            ProgressBar1.Maximum = max
+            Dim temp = pruebascategoria
+
+            For i = 0 To pruebascategoria - 1
+                If CheckBoxButtonArray(i).Checked = True Then
+                    'MsgBox(cod_prue(i) & "-" & nombre_prueba(i))
+                    Dim ID_Prueba As String = cod_prue(i)
+
+                    Try
+                        conn.Open()
+                        Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`pruebasxproducto` (`ProductoID`, `ID_Prueba`) VALUES ('" & ProductoID & "', '" & ID_Prueba & "');"), conn)
+                        cmd.ExecuteNonQuery()
+                        Console.WriteLine("Reporte Registrado")
+                        'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                        conn.Close()
+                    Catch ex As Exception
+                        MsgBox(ex.Message, False, "Error")
+                        conn.Close()
+                        Exit Sub
+                    End Try
+                    Dim var As Integer = ProgressBar1.Value
+                    If var = max Then
+                        Dim ID As String = ProductoID.Substring(5)
+                        MsgBox("Reporte Registrado" & vbCrLf & vbCrLf & "Numero de Registro: " & ID & vbCrLf & vbCrLf & "Por favor anote el numero de registro e incluyalo en el envio de la misma.", MsgBoxStyle.Information, "Reporte Registrado")
+                        ProgressBar1.Value = 0
+                        Panel1.Controls.Clear()
+                        TxtBxOrigen.Clear()
+                        TxtBxLote.Clear()
+                        RchTxtBxObservaciones.Clear()
+
+                        With TxtBxIDMuestra
+                            .Clear()
+                            .Focus()
+                        End With
+                    Else
+                        ProgressBar1.Increment(steps)
+                    End If
+                End If
+            Next
+
+        ElseIf DialogResult.No Or DialogResult.Cancel Or DialogResult.Abort Then
+
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("DELETE FROM `bd_productos`.`productos` WHERE `ProductoID`='" & ProductoID & "';"), conn)
+                cmd.ExecuteNonQuery()
+                Console.WriteLine("Reporte Eliminado")
+                'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
+
+            Panel1.Controls.Clear()
+            TxtBxOrigen.Clear()
+            TxtBxLote.Clear()
+            RchTxtBxObservaciones.Clear()
+
+            With TxtBxIDMuestra
+                .Clear()
+                .Focus()
+            End With
+
+        End If
 
     End Sub
+
     Private Sub BtnCancelar_Click(sender As Object, e As EventArgs) Handles BtnCancelar.Click
         Me.Close()
+    End Sub
+
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        If TabControl1.SelectedTab Is TabPage1 Then
+
+            Me.AcceptButton = BtnAceptar
+            Me.CancelButton = BtnCancelar
+
+        ElseIf TabControl1.SelectedTab Is TabPage2 Then
+
+            Me.AcceptButton = BtnGenerarReporte
+
+            FechaInicio.Format = DateTimePickerFormat.Custom
+            FechaInicio.CustomFormat = "yyyy-MM-dd"
+            FechaInicio.Value = FechaInicio.MinDate
+            FechaFin.Format = DateTimePickerFormat.Custom
+            FechaFin.CustomFormat = "yyyy-MM-dd"
+
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("SELECT NOW();"), conn)
+                Dim fecha_servidor As DateTime = cmd.ExecuteScalar()
+                FechaFin.MaxDate = fecha_servidor.ToString("yyyy-MM-dd")
+                FechaInicio.MaxDate = FechaFin.MaxDate
+                FechaFin.Value = FechaFin.MaxDate
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "No se puede obtener la fecha de la base de datos se tomara la hora local")
+                conn.Close()
+                FechaFin.MaxDate = DateTime.Now.ToString("yyyy-MM-dd")
+                FechaInicio.MaxDate = FechaFin.MaxDate
+                FechaFin.Value = FechaFin.MaxDate
+                Exit Sub
+            End Try
+
+        End If
+    End Sub
+
+    Private Sub BtnGenerarReporte_Click(sender As Object, e As EventArgs) Handles BtnGenerarReporte.Click
+        If FechaInicio.Value > FechaFin.Value Then
+            MsgBox("La fecha inicial no puede estar despues de la fecha final", False, "Error")
+            Exit Sub
+        End If
+
+        Dim fecha_inicial As String = FechaInicio.Value.ToString("yyyy-MM-dd")
+        Dim fecha_final As String = FechaFin.Value.ToString("yyyy-MM-dd")
+
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("SELECT productos.productoID as 'Numero Registro', tipo_productos.Nombre, productos.Fecha_Registro as 'Fecha de Registro', productos.Fecha_Entrada as 'Fecha de Entrada al Lab', productos.Estado
+                                                       FROM productos inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID
+                                                       where Fecha_Registro between '" & fecha_inicial & "' and '" & fecha_final & "'; "), conn)
+            Dim reader As MySqlDataReader
+            reader = cmd.ExecuteReader()
+            Dim table As New DataTable
+            table.Load(reader)
+            DGVHistorial.DataSource = table
+            DGVHistorial.ReadOnly = True
+            DGVHistorial.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+            reader.Close()
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+            conn.Close()
+        End Try
+
     End Sub
 End Class
