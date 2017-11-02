@@ -22,23 +22,49 @@ Public Class Form6
         cliente = c
     End Sub
 
+    Dim EsAnalista As Integer
+
+    Public Sub AnalistaOCliente(var As Integer)
+        EsAnalista = var
+    End Sub
+
+    Private Sub cargarcontroles()
+        If EsAnalista = 0 Then
+            CmbBxCliente.Enabled = False
+            CmbBxCliente.SelectedValue = cliente
+        Else
+            CmbBxCliente.Enabled = True
+            CmbBxCliente.SelectedValue = 1
+        End If
+    End Sub
 
     Private Sub Form6_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         control = 0
         Connect()
         CargarClientes()
+        CargarProductos()
+        CargarCategorias()
+        FechaHoyBD()
+        cargarcontroles()
+        Panel1.Controls.Clear()
+        TxtBxLote.Clear()
+        TxtBxOrigen.Clear()
+        RchTxtBxObservaciones.Text = ""
+        With TxtBxIDMuestra
+            .Clear()
+            .Focus()
+        End With
+        Dim id_cliente As String = CmbBxCliente.SelectedValue.ToString
         Try
             conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("Select Direccion from clientes where ClienteID =" & cliente), conn)
+            Dim cmd As New MySqlCommand(String.Format("Select Direccion from clientes where ClienteID =" & id_cliente), conn)
             TxtBxDireccion.Text = cmd.ExecuteScalar.ToString
             conn.Close()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
             conn.Close()
         End Try
-        CargarProductos()
-        CargarCategorias()
-        FechaHoyBD()
+
     End Sub
 
     Private Sub FechaHoyBD()
@@ -298,7 +324,9 @@ Public Class Form6
     End Sub
 
     Private Sub Form6_Closed(sender As Object, e As EventArgs) Handles Me.Closed
-        Form2.Close()
+        If EsAnalista = 0 Then
+            Form2.Close()
+        End If
     End Sub
     Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RchTxtBxObservaciones.TextChanged
         Dim i As Integer = RchTxtBxObservaciones.TextLength
@@ -311,152 +339,205 @@ Public Class Form6
     End Sub
 
     Private Sub BtnAceptar_Click(sender As Object, e As EventArgs) Handles BtnAceptar.Click
-        If TxtBxOrigen.Text.Trim.Length = 0 Then
-            MsgBox("Introduzca un Origen de la muestra", MsgBoxStyle.Exclamation, "Error")
-            With TxtBxOrigen
-                .Focus()
-                .SelectAll()
-            End With
-            Exit Sub
-        End If
-
-        Dim año_actual As String
-
-        Try
-            conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("SELECT YEAR (NOW());"), conn)
-            año_actual = (cmd.ExecuteScalar).ToString
-            conn.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message, False, "Error")
-            conn.Close()
-            Exit Sub
-        End Try
-
-        Dim consecutivo As String
-
-        Try
-            conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("select count(*)+1 as c from productos where ProductoID like '" & año_actual & "%';"), conn)
-            consecutivo = cmd.ExecuteScalar()
-            conn.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message, False, "Error")
-            conn.Close()
-            Exit Sub
-        End Try
-
-        Dim ProductoID = año_actual & "-" & consecutivo
-        Dim Tipo_ProductoID As String = CmbBxProducto.SelectedValue.ToString
-        Dim Fecha_Registro As String = TxtBxFechaRegistro.Text
-        Dim ID_Muestra As String = TxtBxIDMuestra.Text
-        Dim Lote As String = TxtBxLote.Text
-        Dim Origen As String = TxtBxOrigen.Text
-        Dim ObservacionesC As String = RchTxtBxObservaciones.Text
-        If PorcentajeBioD.Visible = True Then
-            Dim PorBioD As String = PorcentajeBioD.Value.ToString
-
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`productos` (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Observaciones_Cliente`, `Fecha_Registro`, `Estado`, `ID_Muestra`, `Tanque`, `Lote`, `PortBioD`) VALUES ('" & ProductoID & "', '" & cliente & "', '" & Tipo_ProductoID & "', '" & ObservacionesC & "', '" & Fecha_Registro & "', 'Transito', '" & ID_Muestra & "', '" & Origen & "', '" & Lote & "', '" & PorBioD & "');"), conn)
-                cmd.ExecuteNonQuery()
-                Console.WriteLine("Reporte Registrado")
-                'MsgBox("Reporte Registrado", False, "Reporte Registrado")
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
-                conn.Close()
+        If EsAnalista = 0 Then
+            If TxtBxOrigen.Text.Trim.Length = 0 Then
+                MsgBox("Introduzca un Origen de la muestra", MsgBoxStyle.Exclamation, "Error")
+                With TxtBxOrigen
+                    .Focus()
+                    .SelectAll()
+                End With
                 Exit Sub
-            End Try
-
-        Else
-
-            Try
-                conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`productos` (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Observaciones_Cliente`, `Fecha_Registro`, `Estado`, `ID_Muestra`, `Tanque`, `Lote`) VALUES ('" & ProductoID & "', '" & cliente & "', '" & Tipo_ProductoID & "', '" & ObservacionesC & "', '" & Fecha_Registro & "', 'Transito', '" & ID_Muestra & "', '" & Origen & "', '" & Lote & "');"), conn)
-                cmd.ExecuteNonQuery()
-                Console.WriteLine("Reporte Registrado")
-                'MsgBox("Reporte Registrado", False, "Reporte Registrado")
-                conn.Close()
-            Catch ex As Exception
-                MsgBox(ex.Message, False, "Error")
-                conn.Close()
-                Exit Sub
-            End Try
-
-        End If
-
-
-
-        Dim checks As Integer = 0
-        Dim mensaje As String
-
-        For i = 0 To pruebascategoria - 1
-            If CheckBoxButtonArray(i).Checked = True Then
-                checks += 1
-                mensaje = mensaje + cod_prue(i) & vbTab & vbTab & nombre_prueba(i) & vbCrLf
             End If
-        Next
 
-        If checks = 0 Then
-            MsgBox("Seleccione alguna prueba para realizar sobre la muestra", MsgBoxStyle.Exclamation, "Error")
-            Exit Sub
-        End If
+            Dim año_actual As String
 
-        mensaje = "Esta seguro que desea registrar las siguientes pruebas:" & vbCrLf & vbCrLf & mensaje & vbCrLf & "Para el producto: " & vbCrLf & vbCrLf & CmbBxProducto.Text & "?"
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("SELECT YEAR (NOW());"), conn)
+                año_actual = (cmd.ExecuteScalar).ToString
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
 
-        If MessageBox.Show(mensaje, "Registro Producto", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            Dim consecutivo As String
 
-            Dim steps As Integer = 100 / checks
-            Dim max As Integer = (steps * checks) - steps
-            ProgressBar1.Maximum = max
-            Dim temp = pruebascategoria
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("select count(*)+1 as c from productos where ProductoID like '" & año_actual & "%';"), conn)
+                consecutivo = cmd.ExecuteScalar()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
+
+            Dim ProductoID = año_actual & "-" & consecutivo
+            Dim Tipo_ProductoID As String = CmbBxProducto.SelectedValue.ToString
+            Dim Fecha_Registro As String = TxtBxFechaRegistro.Text
+            Dim ID_Muestra As String = TxtBxIDMuestra.Text
+            Dim Lote As String = TxtBxLote.Text
+            Dim Origen As String = TxtBxOrigen.Text
+            Dim ObservacionesC As String = RchTxtBxObservaciones.Text
+            If PorcentajeBioD.Visible = True Then
+                Dim PorBioD As String = PorcentajeBioD.Value.ToString
+
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`productos` (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Observaciones_Cliente`, `Fecha_Registro`, `Estado`, `ID_Muestra`, `Tanque`, `Lote`, `PortBioD`) VALUES ('" & ProductoID & "', '" & cliente & "', '" & Tipo_ProductoID & "', '" & ObservacionesC & "', '" & Fecha_Registro & "', 'Transito', '" & ID_Muestra & "', '" & Origen & "', '" & Lote & "', '" & PorBioD & "');"), conn)
+                    cmd.ExecuteNonQuery()
+                    Console.WriteLine("Reporte Registrado")
+                    'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, False, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+
+            Else
+
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`productos` (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Observaciones_Cliente`, `Fecha_Registro`, `Estado`, `ID_Muestra`, `Tanque`, `Lote`) VALUES ('" & ProductoID & "', '" & cliente & "', '" & Tipo_ProductoID & "', '" & ObservacionesC & "', '" & Fecha_Registro & "', 'Transito', '" & ID_Muestra & "', '" & Origen & "', '" & Lote & "');"), conn)
+                    cmd.ExecuteNonQuery()
+                    Console.WriteLine("Reporte Registrado")
+                    'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, False, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+
+            End If
+
+
+
+            Dim checks As Integer = 0
+            Dim mensaje As String
 
             For i = 0 To pruebascategoria - 1
                 If CheckBoxButtonArray(i).Checked = True Then
-                    'MsgBox(cod_prue(i) & "-" & nombre_prueba(i))
-                    Dim ID_Prueba As String = cod_prue(i)
-
-                    Try
-                        conn.Open()
-                        Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`pruebasxproducto` (`ProductoID`, `ID_Prueba`) VALUES ('" & ProductoID & "', '" & ID_Prueba & "');"), conn)
-                        cmd.ExecuteNonQuery()
-                        Console.WriteLine("Reporte Registrado")
-                        'MsgBox("Reporte Registrado", False, "Reporte Registrado")
-                        conn.Close()
-                    Catch ex As Exception
-                        MsgBox(ex.Message, False, "Error")
-                        conn.Close()
-                        Exit Sub
-                    End Try
-                    Dim var As Integer = ProgressBar1.Value
-                    If var = max Then
-                        Dim ID As String = ProductoID.Substring(5)
-                        MsgBox("Reporte Registrado" & vbCrLf & vbCrLf & "Numero de Registro: " & ID & vbCrLf & vbCrLf & "Por favor anote el numero de registro e incluyalo en el envio de la misma.", MsgBoxStyle.Information, "Reporte Registrado")
-                        ProgressBar1.Value = 0
-                        Panel1.Controls.Clear()
-                        TxtBxOrigen.Clear()
-                        TxtBxLote.Clear()
-                        RchTxtBxObservaciones.Clear()
-
-                        With TxtBxIDMuestra
-                            .Clear()
-                            .Focus()
-                        End With
-                    Else
-                        ProgressBar1.Increment(steps)
-                    End If
+                    checks += 1
+                    mensaje = mensaje + cod_prue(i) & vbTab & vbTab & nombre_prueba(i) & vbCrLf
                 End If
             Next
 
-        ElseIf DialogResult.No Or DialogResult.Cancel Or DialogResult.Abort Then
+            If checks = 0 Then
+                MsgBox("Seleccione alguna prueba para realizar sobre la muestra", MsgBoxStyle.Exclamation, "Error")
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("DELETE FROM `bd_productos`.`productos` WHERE `ProductoID`='" & ProductoID & "';"), conn)
+                    cmd.ExecuteNonQuery()
+                    Console.WriteLine("Reporte Eliminado")
+                    'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, False, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+                Exit Sub
+            End If
+
+            mensaje = "Esta seguro que desea registrar las siguientes pruebas:" & vbCrLf & vbCrLf & mensaje & vbCrLf & "Para el producto: " & vbCrLf & vbCrLf & CmbBxProducto.Text & "?"
+
+            If MessageBox.Show(mensaje, "Registro Producto", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+
+                Dim steps As Integer = 100 / checks
+                Dim max As Integer = (steps * checks) - steps
+                ProgressBar1.Maximum = max
+                Dim temp = pruebascategoria
+
+                For i = 0 To pruebascategoria - 1
+                    If CheckBoxButtonArray(i).Checked = True Then
+                        'MsgBox(cod_prue(i) & "-" & nombre_prueba(i))
+                        Dim ID_Prueba As String = cod_prue(i)
+
+                        Try
+                            conn.Open()
+                            Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`pruebasxproducto` (`ProductoID`, `ID_Prueba`) VALUES ('" & ProductoID & "', '" & ID_Prueba & "');"), conn)
+                            cmd.ExecuteNonQuery()
+                            Console.WriteLine("Reporte Registrado")
+                            'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                            conn.Close()
+                        Catch ex As Exception
+                            MsgBox(ex.Message, False, "Error")
+                            Dim cmd As New MySqlCommand(String.Format("DELETE FROM `bd_productos`.`productos` WHERE `ProductoID`='" & ProductoID & "';"), conn)
+                            cmd.ExecuteNonQuery()
+                            Console.WriteLine("Reporte Eliminado")
+                            'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                            conn.Close()
+                            Exit Sub
+                        End Try
+                        Dim var As Integer = ProgressBar1.Value
+                        If var = max Then
+                            Dim ID As String = ProductoID.Substring(5)
+                            MsgBox("Reporte Registrado" & vbCrLf & vbCrLf & "Numero de Registro: " & ID & vbCrLf & vbCrLf & "Por favor anote el numero de registro e incluyalo en el envio de la misma.", MsgBoxStyle.Information, "Reporte Registrado")
+                            ProgressBar1.Value = 0
+                            Panel1.Controls.Clear()
+                            TxtBxOrigen.Clear()
+                            TxtBxLote.Clear()
+                            RchTxtBxObservaciones.Clear()
+
+                            With TxtBxIDMuestra
+                                .Clear()
+                                .Focus()
+                            End With
+                        Else
+                            ProgressBar1.Increment(steps)
+                        End If
+                    End If
+                Next
+
+            ElseIf DialogResult.No Or DialogResult.Cancel Or DialogResult.Abort Then
+
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("DELETE FROM `bd_productos`.`productos` WHERE `ProductoID`='" & ProductoID & "';"), conn)
+                    cmd.ExecuteNonQuery()
+                    Console.WriteLine("Reporte Eliminado")
+                    'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, False, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+
+                Panel1.Controls.Clear()
+                TxtBxOrigen.Clear()
+                TxtBxLote.Clear()
+                RchTxtBxObservaciones.Clear()
+
+                With TxtBxIDMuestra
+                    .Clear()
+                    .Focus()
+                End With
+
+            End If
+
+        ElseIf EsAnalista = 1 Then
+
+            If TxtBxOrigen.Text.Trim.Length = 0 Then
+                MsgBox("Introduzca un Origen de la muestra", MsgBoxStyle.Exclamation, "Error")
+                With TxtBxOrigen
+                    .Focus()
+                    .SelectAll()
+                End With
+                Exit Sub
+            End If
+
+            Dim año_actual As String
 
             Try
                 conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("DELETE FROM `bd_productos`.`productos` WHERE `ProductoID`='" & ProductoID & "';"), conn)
-                cmd.ExecuteNonQuery()
-                Console.WriteLine("Reporte Eliminado")
-                'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                Dim cmd As New MySqlCommand(String.Format("SELECT YEAR (NOW());"), conn)
+                año_actual = (cmd.ExecuteScalar).ToString
                 conn.Close()
             Catch ex As Exception
                 MsgBox(ex.Message, False, "Error")
@@ -464,17 +545,216 @@ Public Class Form6
                 Exit Sub
             End Try
 
-            Panel1.Controls.Clear()
-            TxtBxOrigen.Clear()
-            TxtBxLote.Clear()
-            RchTxtBxObservaciones.Clear()
+            Dim consecutivo As String
 
-            With TxtBxIDMuestra
-                .Clear()
-                .Focus()
-            End With
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("select count(*)+1 as c from productos where ProductoID like '" & año_actual & "%';"), conn)
+                consecutivo = cmd.ExecuteScalar()
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
+
+            Dim ClienteID As String = CmbBxCliente.SelectedValue.ToString
+            Dim ProductoID = año_actual & "-" & consecutivo
+            Dim Tipo_ProductoID As String = CmbBxProducto.SelectedValue.ToString
+            Dim Fecha_Registro As String = TxtBxFechaRegistro.Text
+            Dim Fecha_Entrada As String = TxtBxFechaRegistro.Text
+            Dim Fecha_Limite As String
+            Dim Hora_Entrada As String
+            Dim ID_Muestra As String = TxtBxIDMuestra.Text
+            Dim Lote As String = TxtBxLote.Text
+            Dim Origen As String = TxtBxOrigen.Text
+            Dim ObservacionesA As String = RchTxtBxObservaciones.Text
+
+            Dim intervalo As String
+
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("SELECT Intervalo from tipo_productos WHERE Tipo_Producto_ID = '" & Tipo_ProductoID & "'"), conn)
+                intervalo = cmd.ExecuteScalar.ToString
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
+
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("SELECT TIME(NOW())"), conn)
+                Hora_Entrada = cmd.ExecuteScalar.ToString
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
+
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("SELECT DATE_ADD('" & Fecha_Registro & "', interval " & intervalo & ");"), conn)
+                Dim fecha_limite_datetime As DateTime = cmd.ExecuteScalar
+                Fecha_Limite = fecha_limite_datetime.ToString("yyyy-MM-dd")
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, False, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
+
+            If PorcentajeBioD.Visible = True Then
+                Dim PorBioD As String = PorcentajeBioD.Value.ToString
+
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`productos` (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Fecha_Registro`, `Fecha_Entrada`, `Hora_Entrada`, `Fecha_Limite`, `Estado`, `Observaciones_Analista`, `ID_Muestra`, `Tanque`, `Lote`, `PortBioD`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & Tipo_ProductoID & "', '" & Fecha_Registro & "', '" & Fecha_Entrada & "', '" & Hora_Entrada & "', '" & Fecha_Limite & "', 'Pendiente', '" & ObservacionesA & "', '" & ID_Muestra & "', '" & Origen & "', '" & Lote & "', '" & PorBioD & "');"), conn)
+                    cmd.ExecuteNonQuery()
+                    Console.WriteLine("Reporte Registrado")
+                    'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, False, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+
+            Else
+
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`productos` (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Fecha_Registro`, `Fecha_Entrada`, `Hora_Entrada`, `Fecha_Limite`, `Estado`, `Observaciones_Analista`, `ID_Muestra`, `Tanque`, `Lote`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & Tipo_ProductoID & "', '" & Fecha_Registro & "', '" & Fecha_Entrada & "', '" & Hora_Entrada & "', '" & Fecha_Limite & "', 'Pendiente', '" & ObservacionesA & "', '" & ID_Muestra & "', '" & Origen & "', '" & Lote & "');"), conn)
+                    cmd.ExecuteNonQuery()
+                    Console.WriteLine("Reporte Registrado")
+                    'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, False, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+
+            End If
+
+
+
+            Dim checks As Integer = 0
+            Dim mensaje As String
+
+            For i = 0 To pruebascategoria - 1
+                If CheckBoxButtonArray(i).Checked = True Then
+                    checks += 1
+                    mensaje = mensaje + cod_prue(i) & vbTab & vbTab & nombre_prueba(i) & vbCrLf
+                End If
+            Next
+
+            If checks = 0 Then
+                MsgBox("Seleccione alguna prueba para realizar sobre la muestra", MsgBoxStyle.Exclamation, "Error")
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("DELETE FROM `bd_productos`.`productos` WHERE `ProductoID`='" & ProductoID & "';"), conn)
+                    cmd.ExecuteNonQuery()
+                    Console.WriteLine("Reporte Eliminado")
+                    'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, False, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+                Exit Sub
+            End If
+
+            mensaje = "Esta seguro que desea registrar las siguientes pruebas:" & vbCrLf & vbCrLf & mensaje & vbCrLf & "Para el producto: " & vbCrLf & vbCrLf & CmbBxProducto.Text & "?"
+
+            If MessageBox.Show(mensaje, "Registro Producto", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+
+                Dim steps As Integer = 100 / checks
+                Dim max As Integer = (steps * checks) - steps
+                ProgressBar1.Maximum = max
+                Dim temp = pruebascategoria
+
+                For i = 0 To pruebascategoria - 1
+                    If CheckBoxButtonArray(i).Checked = True Then
+                        'MsgBox(cod_prue(i) & "-" & nombre_prueba(i))
+                        Dim ID_Prueba As String = cod_prue(i)
+
+                        Try
+                            conn.Open()
+                            Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`pruebasxproducto` (`ProductoID`, `ID_Prueba`) VALUES ('" & ProductoID & "', '" & ID_Prueba & "');"), conn)
+                            cmd.ExecuteNonQuery()
+                            Console.WriteLine("Reporte Registrado")
+                            'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                            conn.Close()
+                        Catch ex As Exception
+                            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                            Dim cmd As New MySqlCommand(String.Format("DELETE FROM `bd_productos`.`productos` WHERE `ProductoID`='" & ProductoID & "';"), conn)
+                            cmd.ExecuteNonQuery()
+                            Console.WriteLine("Reporte Eliminado")
+                            'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                            conn.Close()
+                            Exit Sub
+                        End Try
+                        Dim var As Integer = ProgressBar1.Value
+                        If var = max Then
+                            Dim ID As String = ProductoID.Substring(5)
+                            If EsAnalista = 0 Then
+                                MsgBox("Reporte Registrado" & vbCrLf & vbCrLf & "Numero de Registro: " & ID & vbCrLf & vbCrLf & "Por favor anote el numero de registro e incluyalo en el envio de la misma.", MsgBoxStyle.Information, "Reporte Registrado")
+                            Else
+                                MsgBox("Reporte Registrado" & vbCrLf & vbCrLf & "Numero de Registro: " & ID, MsgBoxStyle.Information, "Reporte Registrado")
+                            End If
+                            ProgressBar1.Value = 0
+                            Panel1.Controls.Clear()
+                            TxtBxOrigen.Clear()
+                            TxtBxLote.Clear()
+                            RchTxtBxObservaciones.Clear()
+
+                            With TxtBxIDMuestra
+                                .Clear()
+                                .Focus()
+                            End With
+                        Else
+                            ProgressBar1.Increment(steps)
+                        End If
+                    End If
+                Next
+
+            ElseIf DialogResult.No Or DialogResult.Cancel Or DialogResult.Abort Then
+
+                Try
+                    conn.Open()
+                    Dim cmd As New MySqlCommand(String.Format("DELETE FROM `bd_productos`.`productos` WHERE `ProductoID`='" & ProductoID & "';"), conn)
+                    cmd.ExecuteNonQuery()
+                    Console.WriteLine("Reporte Eliminado")
+                    'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                    conn.Close()
+                Catch ex As Exception
+                    MsgBox(ex.Message, False, "Error")
+                    conn.Close()
+                    Exit Sub
+                End Try
+
+                Panel1.Controls.Clear()
+                TxtBxOrigen.Clear()
+                TxtBxLote.Clear()
+                RchTxtBxObservaciones.Clear()
+
+                With TxtBxIDMuestra
+                    .Clear()
+                    .Focus()
+                End With
+
+            End If
 
         End If
+
+        Form1.CargarDGVProductosSinRevisar()
+        Form1.CargarDGVProductosLimite()
+        Form1.CargarDGVProductosRevisados()
+        Form1.ProductosFechaLimiteCerca()
 
     End Sub
 
@@ -547,4 +827,21 @@ Public Class Form6
         End Try
 
     End Sub
+
+    Private Sub CmbBxCliente_SelectedValueChanged(sender As Object, e As EventArgs) Handles CmbBxCliente.SelectedValueChanged
+        If control = 0 Then
+            Exit Sub
+        End If
+        Dim id_cliente As String = CmbBxCliente.SelectedValue.ToString
+        Try
+            conn.Open()
+            Dim cmd As New MySqlCommand(String.Format("Select Direccion from clientes where ClienteID =" & id_cliente), conn)
+            TxtBxDireccion.Text = cmd.ExecuteScalar.ToString
+            conn.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+            conn.Close()
+        End Try
+    End Sub
+
 End Class

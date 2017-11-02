@@ -30,7 +30,6 @@ Public Class Form1
             DTPFechaLimite.Visible = True
             DTPFechaLimite.Format = DateTimePickerFormat.Custom
             DTPFechaLimite.CustomFormat = "yyyy-MM-dd"
-            BtnGenerarReporte.Visible = False
             BtnGenerarReporte2.Visible = False
             TabControl1.TabPages.Insert(2, TabPageProductosRevisados)
             TabControl1.TabPages.Insert(3, TabPageAdmin)
@@ -53,7 +52,6 @@ Public Class Form1
             Panel2.Visible = False
             TxtBxProductoID.Enabled = True
             BtnRegistrarProducto.Visible = True
-            BtnGenerarReporte.Visible = True
             BtnGenerarReporte2.Visible = True
             TabControl1.TabPages.Remove(TabPageAdmin)
             TabControl1.TabPages.Remove(TabPageProductosRevisados)
@@ -64,7 +62,6 @@ Public Class Form1
             Panel2.Visible = False
             TxtBxProductoID.Enabled = True
             BtnRegistrarProducto.Visible = True
-            BtnGenerarReporte.Visible = True
             BtnGenerarReporte2.Visible = True
             TabControl1.TabPages.Remove(TabPageAdmin)
             TabControl1.TabPages.Remove(TabPageProductosRevisados)
@@ -100,7 +97,7 @@ Public Class Form1
     End Sub
 
     Public Sub CargarDGVProductosSinRevisar()
-        Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Numero_Serie as 'Numero de Serie', Observaciones, Fecha_Entrada, Hora_Entrada, Fecha_Limite, Estado
+        Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Fecha_Registro as 'Fecha de Registro', Observaciones_Cliente as 'Observaciones del Cliente', Fecha_Entrada, Hora_Entrada, Fecha_Limite, Estado, Observaciones_Analista as 'Observaciones del Analista', Observaciones_Administrador as 'Observaciones del Administrador'
                                from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID
                                Where Estado = 'Pendiente'; "
 
@@ -134,7 +131,7 @@ Public Class Form1
 
     Public Sub CargarDGVProductosRevisados()
         If admin = 1 Then
-            Dim query As String = "SELECT distinct productos.ProductoID as 'ID Producto', clientes.ClienteID, clientes.Nombre as 'Cliente', clientes.Direccion as 'Direccion',tipo_productos.Tipo_Producto_ID, tipo_productos.Nombre as 'Producto', productos.Numero_Serie as 'Numero de Serie', productos.Observaciones as 'Observaciones', productos.Fecha_Entrada as 'Fecha de Entrada', Productos.Hora_Entrada as 'Hora de Entrada', reportes.Fecha_Reporte as 'Fecha Reporte', productos.Fecha_Limite as 'Fecha Limite', productos.Estado as 'Estado', productos.UsuarioID, usuarios.usuario as 'Revisado Por'
+            Dim query As String = "SELECT distinct productos.ProductoID as 'ID Producto', clientes.ClienteID, clientes.Nombre as 'Cliente', clientes.Direccion as 'Direccion',tipo_productos.Tipo_Producto_ID, tipo_productos.Nombre as 'Producto', productos.Observaciones_Cliente as 'Observaciones del Cliente', productos.Fecha_Entrada as 'Fecha de Entrada', Productos.Hora_Entrada as 'Hora de Entrada', reportes.Fecha_Reporte as 'Fecha Reporte', productos.Fecha_Limite as 'Fecha Limite', productos.Estado as 'Estado',productos.Observaciones_Analista as 'Observaciones del Analista', productos.UsuarioID, usuarios.usuario as 'Revisado Por'
                                    from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID inner join usuarios on productos.UsuarioID = usuarios.UsuarioID inner join reportes on productos.ProductoID = reportes.ProductoID
                                    Where Estado = 'Revisado';"
 
@@ -223,7 +220,7 @@ Public Class Form1
     End Sub
 
     Public Sub CargarDGVProductosLimite()
-        Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Numero_Serie as 'Numero de Serie', Observaciones, Fecha_Entrada, Hora_Entrada, Fecha_Limite, Estado
+        Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Fecha_Registro as 'Fecha de Registro', Observaciones_Cliente as 'Observaciones del Cliente', Fecha_Entrada, Hora_Entrada, Fecha_Limite, Estado, Observaciones_Analista as 'Observaciones del Analista', Observaciones_Administrador as 'Observaciones del Administrador'
                                from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID
                                Where Estado = 'Pendiente' and datediff(Fecha_limite,(select date(now()))) <= 10;"
 
@@ -245,7 +242,7 @@ Public Class Form1
             reader.Close()
             conn.Close()
         Catch ex As Exception
-            MsgBox(ex.Message, "Error")
+            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
             conn.Close()
         End Try
         DGVProductosLimite.Columns(1).Visible = False
@@ -258,8 +255,6 @@ Public Class Form1
 
     Private Sub BtnDesconectar_Click(sender As Object, e As EventArgs) Handles BtnDesconectar.Click
         TxtBxProductoID.Clear()
-        TxtBxNumeroSerie.Clear()
-        RchTxtBxObservaciones.Clear()
         CmbBxClientes.SelectedIndex = 0
         CmbBxTipoProducto.SelectedIndex = 0
         BtnModificarRegistro.Enabled = False
@@ -276,15 +271,15 @@ Public Class Form1
         Form2.Show()
     End Sub
 
-    Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs) Handles RchTxtBxObservaciones.TextChanged
-        Dim i As Integer = RchTxtBxObservaciones.TextLength
-        LblContadorCaracteres.Text = i.ToString + "/500"
-        If i >= 450 Then
-            LblContadorCaracteres.ForeColor = Color.Red
-        Else
-            LblContadorCaracteres.ForeColor = Color.Black
-        End If
-    End Sub
+    'Private Sub RichTextBox1_TextChanged(sender As Object, e As EventArgs)
+    '    Dim i As Integer = RchTxtBxObservaciones.TextLength
+    '    LblContadorCaracteres.Text = i.ToString + "/500"
+    '    If i >= 450 Then
+    '        LblContadorCaracteres.ForeColor = Color.Red
+    '    Else
+    '        LblContadorCaracteres.ForeColor = Color.Black
+    '    End If
+    'End Sub
 
     Private Sub RichTextBox2_TextChanged(sender As Object, e As EventArgs) Handles RchTxBxObservaciones2.TextChanged
         Dim i As Integer = RchTxBxObservaciones2.TextLength
@@ -347,96 +342,104 @@ Public Class Form1
     End Sub
 
     Private Sub BtnRegistrarProducto_Click(sender As Object, e As EventArgs) Handles BtnRegistrarProducto.Click
-        Dim año_actual As String
-        Try
-            conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("SELECT YEAR (NOW());"), conn)
-            año_actual = (cmd.ExecuteScalar).ToString
-            conn.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message, False, "Error")
-            conn.Close()
-            Exit Sub
-        End Try
+        Form6.AnalistaOCliente(1)
+        Form6.ShowDialog()
 
-        Dim llave As String = año_actual & "-" & TxtBxProductoID.Text
-        Dim Cliente As Integer = CmbBxClientes.SelectedValue
-        Dim NumeroSerie As String = TxtBxNumeroSerie.Text
-        Dim Producto As Integer = CmbBxTipoProducto.SelectedValue
-        Dim intervalo As String
-
-        Try
-            conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("SELECT Intervalo from tipo_productos WHERE Tipo_Producto_ID = '" & Producto & "'"), conn)
-            intervalo = cmd.ExecuteScalar.ToString
-            conn.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message, False, "Error")
-            conn.Close()
-            Exit Sub
-        End Try
-
-        Dim fecha_registro As String
-        Dim fecha_limite As String
-        Dim hora_registro As String
-
-        Try
-            conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("SELECT DATE(NOW())"), conn)
-            Dim fecha_registro_datetime As DateTime = cmd.ExecuteScalar
-            fecha_registro = fecha_registro_datetime.ToString("yyyy-MM-dd")
-            conn.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message, False, "Error")
-            conn.Close()
-            Exit Sub
-        End Try
-
-        Try
-            conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("SELECT TIME(NOW())"), conn)
-            hora_registro = cmd.ExecuteScalar.ToString
-            conn.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
-            conn.Close()
-            Exit Sub
-        End Try
-
-        Try
-            conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("SELECT DATE_ADD('" & fecha_registro & "', interval " & intervalo & ");"), conn)
-            Dim fecha_limite_datetime As DateTime = cmd.ExecuteScalar
-            fecha_limite = fecha_limite_datetime.ToString("yyyy-MM-dd")
-            conn.Close()
-        Catch ex As Exception
-            MsgBox(ex.Message, False, "Error")
-            conn.Close()
-            Exit Sub
-        End Try
-
-        Dim Observaciones As String = RchTxtBxObservaciones.Text
-
-        Try
-            conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("INSERT INTO productos (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Observaciones`, `Fecha_Entrada`, `Hora_Entrada`, `Fecha_Limite`, `Estado`) VALUES ('" & llave & "', '" & Cliente & "', '" & Producto & "', '" & NumeroSerie & "', '" & Observaciones & "', '" & fecha_registro & "','" & hora_registro & "','" & fecha_limite & "', 'Pendiente');"), conn)
-            cmd.ExecuteNonQuery()
-            Console.WriteLine("Producto Registrado")
-            conn.Close()
-        Catch ex As MySqlException
-            Console.WriteLine("INSERT INTO productos (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Observaciones`, `Fecha_Entrada`, `Hora_Entrada`, `Fecha_Limite`, `Estado`) VALUES ('" & llave & "', '" & Cliente & "', '" & Producto & "', '" & NumeroSerie & "', '" & Observaciones & "', '" & fecha_registro & "','" & hora_registro & "','" & fecha_limite & "', 'Pendiente');")
-            MsgBox(ex.Message, False, "Error")
-            conn.Close()
-            Exit Sub
-        End Try
         CargarDGVProductosSinRevisar()
         CargarDGVProductosLimite()
         CargarDGVProductosRevisados()
         ProductosFechaLimiteCerca()
-        TxtBxNumeroSerie.Clear()
-        TxtBxProductoID.Clear()
-        RchTxtBxObservaciones.Clear()
-        TxtBxProductoID.Select()
+
+        'Dim año_actual As String
+        'Try
+        '    conn.Open()
+        '    Dim cmd As New MySqlCommand(String.Format("SELECT YEAR (NOW());"), conn)
+        '    año_actual = (cmd.ExecuteScalar).ToString
+        '    conn.Close()
+        'Catch ex As Exception
+        '    MsgBox(ex.Message, False, "Error")
+        '    conn.Close()
+        '    Exit Sub
+        'End Try
+
+        'Dim llave As String = año_actual & "-" & TxtBxProductoID.Text
+        'Dim Cliente As Integer = CmbBxClientes.SelectedValue
+        'Dim NumeroSerie As String = TxtBxNumeroSerie.Text
+        'Dim Producto As Integer = CmbBxTipoProducto.SelectedValue
+        'Dim intervalo As String
+
+        'Try
+        '    conn.Open()
+        '    Dim cmd As New MySqlCommand(String.Format("SELECT Intervalo from tipo_productos WHERE Tipo_Producto_ID = '" & Producto & "'"), conn)
+        '    intervalo = cmd.ExecuteScalar.ToString
+        '    conn.Close()
+        'Catch ex As Exception
+        '    MsgBox(ex.Message, False, "Error")
+        '    conn.Close()
+        '    Exit Sub
+        'End Try
+
+        'Dim fecha_registro As String
+        'Dim fecha_limite As String
+        'Dim hora_registro As String
+
+        'Try
+        '    conn.Open()
+        '    Dim cmd As New MySqlCommand(String.Format("SELECT DATE(NOW())"), conn)
+        '    Dim fecha_registro_datetime As DateTime = cmd.ExecuteScalar
+        '    fecha_registro = fecha_registro_datetime.ToString("yyyy-MM-dd")
+        '    conn.Close()
+        'Catch ex As Exception
+        '    MsgBox(ex.Message, False, "Error")
+        '    conn.Close()
+        '    Exit Sub
+        'End Try
+
+        'Try
+        '    conn.Open()
+        '    Dim cmd As New MySqlCommand(String.Format("SELECT TIME(NOW())"), conn)
+        '    hora_registro = cmd.ExecuteScalar.ToString
+        '    conn.Close()
+        'Catch ex As Exception
+        '    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+        '    conn.Close()
+        '    Exit Sub
+        'End Try
+
+        'Try
+        '    conn.Open()
+        '    Dim cmd As New MySqlCommand(String.Format("SELECT DATE_ADD('" & fecha_registro & "', interval " & intervalo & ");"), conn)
+        '    Dim fecha_limite_datetime As DateTime = cmd.ExecuteScalar
+        '    fecha_limite = fecha_limite_datetime.ToString("yyyy-MM-dd")
+        '    conn.Close()
+        'Catch ex As Exception
+        '    MsgBox(ex.Message, False, "Error")
+        '    conn.Close()
+        '    Exit Sub
+        'End Try
+
+        'Dim Observaciones As String = RchTxtBxObservaciones.Text
+
+        'Try
+        '    conn.Open()
+        '    Dim cmd As New MySqlCommand(String.Format("INSERT INTO productos (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Observaciones`, `Fecha_Entrada`, `Hora_Entrada`, `Fecha_Limite`, `Estado`) VALUES ('" & llave & "', '" & Cliente & "', '" & Producto & "', '" & NumeroSerie & "', '" & Observaciones & "', '" & fecha_registro & "','" & hora_registro & "','" & fecha_limite & "', 'Pendiente');"), conn)
+        '    cmd.ExecuteNonQuery()
+        '    Console.WriteLine("Producto Registrado")
+        '    conn.Close()
+        'Catch ex As MySqlException
+        '    Console.WriteLine("INSERT INTO productos (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Observaciones`, `Fecha_Entrada`, `Hora_Entrada`, `Fecha_Limite`, `Estado`) VALUES ('" & llave & "', '" & Cliente & "', '" & Producto & "', '" & NumeroSerie & "', '" & Observaciones & "', '" & fecha_registro & "','" & hora_registro & "','" & fecha_limite & "', 'Pendiente');")
+        '    MsgBox(ex.Message, False, "Error")
+        '    conn.Close()
+        '    Exit Sub
+        'End Try
+        'CargarDGVProductosSinRevisar()
+        'CargarDGVProductosLimite()
+        'CargarDGVProductosRevisados()
+        'ProductosFechaLimiteCerca()
+        'TxtBxNumeroSerie.Clear()
+        'TxtBxProductoID.Clear()
+        'RchTxtBxObservaciones.Clear()
+        'TxtBxProductoID.Select()
     End Sub
 
     Private Sub DGVProductosSinRevisar_Sorted(sender As Object, e As EventArgs) Handles DGVProductosSinRevisar.Sorted
@@ -451,9 +454,7 @@ Public Class Form1
                 TxtBxProductoID.Text = DGVProductosSinRevisar(0, (fila_actual)).Value
                 CmbBxClientes.SelectedValue = DGVProductosSinRevisar(1, (fila_actual)).Value
                 CmbBxTipoProducto.SelectedValue = DGVProductosSinRevisar(2, (fila_actual)).Value
-                TxtBxNumeroSerie.Text = DGVProductosSinRevisar(5, (fila_actual)).Value
-                RchTxtBxObservaciones.Text = DGVProductosSinRevisar(6, (fila_actual)).Value
-                DTPFechaLimite.Value = DGVProductosSinRevisar(8, (fila_actual)).Value
+                DTPFechaLimite.Value = DGVProductosSinRevisar(9, (fila_actual)).Value
             End If
         Catch ex As Exception
             Exit Sub
@@ -483,15 +484,12 @@ Public Class Form1
         If MessageBox.Show("¿Esta seguro que desea modificar el registro seleccionado?", "Modificar", MessageBoxButtons.YesNo) = DialogResult.Yes Then
             Dim fila_actual As Integer = (DGVProductosSinRevisar.CurrentRow.Index)
             Dim Cliente As Integer = CmbBxClientes.SelectedValue
-            Dim producto As Integer = CmbBxTipoProducto.SelectedValue
-            Dim numero_serie As String = TxtBxNumeroSerie.Text
-            Dim observaciones As String = RchTxtBxObservaciones.Text
             Dim fecha As String = DTPFechaLimite.Value.ToString("yyyy-MM-dd")
             Dim id As String = TxtBxProductoID.Text
 
             Try
                 conn.Open()
-                Dim cmd As New MySqlCommand(String.Format("UPDATE productos SET ClienteID = '" & Cliente & "', Tipo_Producto_ID ='" & producto & "', Numero_Serie ='" & numero_serie & "', Observaciones ='" & observaciones & "', Fecha_Limite = '" & fecha & "' WHERE ProductoID ='" & id & "';"), conn)
+                Dim cmd As New MySqlCommand(String.Format("UPDATE productos SET ClienteID = '" & Cliente & "', Fecha_Limite = '" & fecha & "' WHERE ProductoID ='" & id & "';"), conn)
                 cmd.ExecuteNonQuery()
                 conn.Close()
             Catch ex As Exception
@@ -543,7 +541,7 @@ Public Class Form1
         nombre_usuario = usuario
     End Sub
 
-    Private Sub BtnGenerarReporte_Click(sender As Object, e As EventArgs) Handles BtnGenerarReporte.Click
+    Private Sub DGVProductosSinRevisar_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVProductosSinRevisar.CellDoubleClick
         Dim fila_actual As Integer = (DGVProductosSinRevisar.CurrentRow.Index)
         Form3.TxtBxUsuario.Text = nombre_usuario
         Dim usu_id As String
@@ -561,15 +559,14 @@ Public Class Form1
         Form3.TxtBxIDProducto.Text = DGVProductosSinRevisar(0, (fila_actual)).Value
         Form3.TxtBxCliente.Text = DGVProductosSinRevisar(3, fila_actual).Value
         Form3.TxtBxProducto.Text = DGVProductosSinRevisar(4, fila_actual).Value
-        'Form3.TxtBxNumeroSerie.Text = DGVProductosSinRevisar(5, fila_actual).Value
-        Form3.RchTxtBxObservaciones.Text = DGVProductosSinRevisar(6, fila_actual).Value
         Form3.TxtBxTipoProductoID.Text = DGVProductosSinRevisar(2, fila_actual).Value
+        Form3.RchTxtBxObservaciones.Text = DGVProductosSinRevisar(11, fila_actual).Value
         Form3.TxtBxClienteID.Text = DGVProductosSinRevisar(1, fila_actual).Value
         Dim fecha_entrada As Date = DGVProductosSinRevisar(7, fila_actual).Value
         Form3.TxtBxFechaEntrada.Text = fecha_entrada.ToString("yyyy-MM-dd")
         Dim hora_entrada As String = DGVProductosSinRevisar(8, fila_actual).Value.ToString
         Form3.TxtBxHoraEntrada.Text = hora_entrada
-        Dim fecha_registro As Date
+        Dim fecha_reporte As Date
 
         Try
             conn.Open()
@@ -585,13 +582,13 @@ Public Class Form1
         Try
             conn.Open()
             Dim cmd As New MySqlCommand(String.Format("select date(now())"), conn)
-            fecha_registro = cmd.ExecuteScalar
+            fecha_reporte = cmd.ExecuteScalar
             conn.Close()
         Catch ex As Exception
             MsgBox(ex.Message, False, "Error")
             conn.Close()
         End Try
-        Form3.TxtBxFechaRegistro.Text = fecha_registro.ToString("yyyy-MM-dd")
+        Form3.TxtBxFechaRegistro.Text = fecha_reporte.ToString("yyyy-MM-dd")
 
         Form3.ShowDialog()
     End Sub
@@ -804,7 +801,7 @@ Public Class Form1
                 conn.Close()
             End Try
         ElseIf CmbBxTablas.SelectedItem = "Productos Aprobados" Then
-            Dim query As String = "SELECT distinct productos.ProductoID as 'ID Producto', clientes.ClienteID, clientes.Nombre as 'Cliente', clientes.Direccion as 'Direccion',tipo_productos.Tipo_Producto_ID, tipo_productos.Nombre as 'Producto', productos.Numero_Serie as 'Numero de Serie', productos.Observaciones as 'Observaciones', productos.Fecha_Entrada as 'Fecha de Entrada', Productos.Hora_Entrada as 'Hora de Entrada', reportes.Fecha_Reporte as 'Fecha Reporte', productos.Fecha_Limite as 'Fecha Limite', productos.Estado as 'Estado', productos.ID_Muestra, productos.Tanque,productos.Lote,productos.ATN,productos.TipodePrueba, productos.UsuarioID, usuarios.usuario as 'Revisado Por',  productos.PortBioD
+            Dim query As String = "SELECT distinct productos.ProductoID as 'ID Producto', clientes.ClienteID, clientes.Nombre as 'Cliente', clientes.Direccion as 'Direccion',tipo_productos.Tipo_Producto_ID, tipo_productos.Nombre as 'Producto', productos.Observaciones_Cliente as 'Observaciones del Cliente', productos.Fecha_Entrada as 'Fecha de Entrada', Productos.Hora_Entrada as 'Hora de Entrada', reportes.Fecha_Reporte as 'Fecha Reporte', productos.Fecha_Limite as 'Fecha Limite', productos.Estado as 'Estado',productos.Observaciones_Analista as 'Observaciones del Analista', productos.UsuarioID, usuarios.usuario as 'Revisado Por', productos.ID_Muestra, productos.Tanque,productos.Lote,productos.ATN,productos.TipodePrueba,  productos.PortBioD, productos.Observaciones_Administrador as 'Observaciones del Admin'
                                    from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID inner join usuarios on productos.UsuarioID = usuarios.UsuarioID inner join reportes on productos.ProductoID = reportes.ProductoID
                                    Where Estado = 'Aprobado';"
 
@@ -832,13 +829,12 @@ Public Class Form1
 
             DGVAdmin.Columns(1).Visible = False
             DGVAdmin.Columns(4).Visible = False
-            DGVAdmin.Columns(12).Visible = False
             DGVAdmin.Columns(13).Visible = False
-            DGVAdmin.Columns(14).Visible = False
             DGVAdmin.Columns(15).Visible = False
             DGVAdmin.Columns(16).Visible = False
             DGVAdmin.Columns(17).Visible = False
             DGVAdmin.Columns(18).Visible = False
+            DGVAdmin.Columns(19).Visible = False
             DGVAdmin.Columns(20).Visible = False
 
         End If
@@ -1191,8 +1187,8 @@ Public Class Form1
     Private Sub RBAnalista_CheckedChanged(sender As Object, e As EventArgs) Handles RBAnalista.CheckedChanged
         If RBAnalista.Checked = True Then
             admin = 0
+            Panel1.Visible = False
             Panel2.Visible = False
-            TxtBxProductoID.Enabled = True
             BtnRegistrarProducto.Visible = True
             BtnModificarRegistro.Visible = False
             BtnModificarRegistroLimite.Visible = False
@@ -1200,7 +1196,6 @@ Public Class Form1
             LblFechaLimite2.Visible = False
             DTPFechaLimite.Visible = False
             DTPFechaLimite2.Visible = False
-            BtnGenerarReporte.Visible = True
             BtnGenerarReporte2.Visible = True
             TabControl1.TabPages.Remove(TabPageAdmin)
             TabControl1.TabPages.Remove(TabPageProductosRevisados)
@@ -1208,8 +1203,11 @@ Public Class Form1
             RBAnalista.Checked = True
         ElseIf RBAdmin.Checked = True Then
             admin = 1
+            Panel1.Visible = True
+            TxtBxProductoID.ReadOnly = True
             Panel2.Visible = True
-            TxtBxProductoID.Enabled = False
+            CmbBxClientes.Enabled = True
+            CmbBxTipoProducto.Enabled = False
             TxtBxNumeroProducto2.Enabled = False
             BtnRegistrarProducto.Visible = False
             BtnModificarRegistro.Visible = True
@@ -1228,7 +1226,6 @@ Public Class Form1
             DTPFechaLimite.Visible = True
             DTPFechaLimite.Format = DateTimePickerFormat.Custom
             DTPFechaLimite.CustomFormat = "yyyy-MM-dd"
-            BtnGenerarReporte.Visible = False
             BtnGenerarReporte2.Visible = False
             TabControl1.TabPages.Insert(2, TabPageProductosRevisados)
             TabControl1.TabPages.Insert(3, TabPageAdmin)
@@ -1262,11 +1259,11 @@ Public Class Form1
         Form5.RBBasica.Checked = False
         Form5.RBEspecifica.Enabled = True
         Form5.RBEspecifica.Checked = False
-        Form5.TxtBxOrigen.ReadOnly = False
+        Form5.TxtBxOrigen.ReadOnly = True
         Form5.TxtBxOrigen.Clear()
-        Form5.TxtBxLote.ReadOnly = False
+        Form5.TxtBxLote.ReadOnly = True
         Form5.TxtBxLote.Clear()
-        Form5.TxtBxIDMuestra.ReadOnly = False
+        Form5.TxtBxIDMuestra.ReadOnly = True
         Form5.TxtBxIDMuestra.Clear()
         Form5.TxtBxATN.ReadOnly = False
         Form5.TxtBxATN.Clear()
@@ -1292,9 +1289,20 @@ Public Class Form1
             Exit Sub
         End Try
 
-        If DGVProductosRevisados(4, fila_actual).Value = "4" Then
-            Form5.PorcentajeBioD.Value = 1
-            Form5.PorcentajeBioD.ReadOnly = False
+        If DGVProductosRevisados(4, fila_actual).Value = "3" Then
+            Dim portbiod As Integer
+            Try
+                conn.Open()
+                Dim cmd As New MySqlCommand(String.Format("select PortBioD from Productos where ProductoID = '" & DGVProductosRevisados(0, fila_actual).Value & "';"), conn)
+                portbiod = cmd.ExecuteScalar
+                conn.Close()
+            Catch ex As Exception
+                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                conn.Close()
+                Exit Sub
+            End Try
+            Form5.PorcentajeBioD.Text = portbiod
+            Form5.PorcentajeBioD.ReadOnly = True
             Form5.LblPorcentajeBioD.Visible = True
         Else
             Form5.PorcentajeBioD.Visible = False
@@ -1307,21 +1315,25 @@ Public Class Form1
         Form5.TxtBxCliente.Text = DGVProductosRevisados(2, fila_actual).Value
         Form5.TxtBxTipoProductoID.Text = DGVProductosRevisados(4, fila_actual).Value
         Form5.TxtBxProducto.Text = DGVProductosRevisados(5, fila_actual).Value
-        'Form5.TxtBxNumeroSerie.Text = DGVProductosRevisados(6, fila_actual).Value
-        Form5.RchTxtBxObservaciones.Text = DGVProductosRevisados(7, fila_actual).Value
-        Dim fecha_entrada As Date = DGVProductosRevisados(8, fila_actual).Value
+        Dim fecha_entrada As Date = DGVProductosRevisados(7, fila_actual).Value
         Form5.TxtBxFechaEntrada.Text = fecha_entrada.ToString("yyyy-MM-dd")
-        Dim hora_entrada As String = DGVProductosRevisados(9, fila_actual).Value.ToString
+        Dim hora_entrada As String = DGVProductosRevisados(8, fila_actual).Value.ToString
         Form5.TxtBxHoraEntrada.Text = hora_entrada
-        Dim fecha_registro As Date = DGVProductosRevisados(10, fila_actual).Value
-        Dim PeriodoAnalisis As String = DateDiff("d", fecha_entrada, fecha_registro)
+        Dim fecha_reporte As Date = DGVProductosRevisados(9, fila_actual).Value
+        Dim PeriodoAnalisis As String = DateDiff("d", fecha_entrada, fecha_reporte)
         Form5.TxtBxPeriodoAnalisis.Text = PeriodoAnalisis + " dias"
 
 
         Try
             conn.Open()
             Dim cmd As New MySqlCommand(String.Format("Select Direccion from Clientes where ClienteID = '" & DGVProductosRevisados(1, fila_actual).Value & "';"), conn)
+            Dim cmd2 As New MySqlCommand(String.Format("Select ID_Muestra from productos where ProductoID = '" & DGVProductosRevisados(0, fila_actual).Value & "';"), conn)
+            Dim cmd3 As New MySqlCommand(String.Format("Select Tanque from productos where ProductoID = '" & DGVProductosRevisados(0, fila_actual).Value & "';"), conn)
+            Dim cmd4 As New MySqlCommand(String.Format("Select Lote from productos where ProductoID = '" & DGVProductosRevisados(0, fila_actual).Value & "';"), conn)
             Form5.TxtBxDireccion.Text = cmd.ExecuteScalar
+            Form5.TxtBxIDMuestra.Text = cmd2.ExecuteScalar
+            Form5.TxtBxOrigen.Text = cmd3.ExecuteScalar
+            Form5.TxtBxLote.Text = cmd4.ExecuteScalar
             conn.Close()
         Catch ex As Exception
             MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
@@ -1329,7 +1341,8 @@ Public Class Form1
             Exit Sub
         End Try
 
-        Form5.TxtBxFechaRegistro.Text = fecha_registro.ToString("yyyy-MM-dd")
+
+        Form5.TxtBxFechaReporte.Text = fecha_reporte.ToString("yyyy-MM-dd")
 
         Form5.ShowDialog()
 
@@ -1344,8 +1357,8 @@ Public Class Form1
                 Exit Sub
             End If
 
-            If DGVAdmin(4, fila_actual).Value = "4" Then
-                Form5.PorcentajeBioD.Value = DGVAdmin(20, fila_actual).Value
+            If DGVAdmin(4, fila_actual).Value = "3" Then
+                Form5.PorcentajeBioD.Text = DGVAdmin(20, fila_actual).Value
                 Form5.PorcentajeBioD.ReadOnly = True
                 Form5.LblPorcentajeBioD.Visible = True
             Else
@@ -1373,7 +1386,7 @@ Public Class Form1
             Dim fecha_registro As Date = DGVAdmin(10, fila_actual).Value
             Dim PeriodoAnalisis As String = DateDiff("d", fecha_entrada, fecha_registro)
             Form5.TxtBxPeriodoAnalisis.Text = PeriodoAnalisis + " dias"
-            Form5.TxtBxFechaRegistro.Text = fecha_registro.ToString("yyyy-MM-dd")
+            Form5.TxtBxFechaReporte.Text = fecha_registro.ToString("yyyy-MM-dd")
             Form5.TxtBxIDMuestra.Text = DGVAdmin(13, fila_actual).Value
             Form5.TxtBxOrigen.Text = DGVAdmin(14, fila_actual).Value
             Form5.TxtBxLote.Text = DGVAdmin(15, fila_actual).Value
@@ -1394,9 +1407,9 @@ Public Class Form1
             Form5.RBCompleta.Enabled = False
             Form5.RBBasica.Enabled = False
             Form5.RBEspecifica.Enabled = False
-            Form5.TxtBxOrigen.ReadOnly = True
-            Form5.TxtBxLote.ReadOnly = True
-            Form5.TxtBxIDMuestra.ReadOnly = True
+            Form5.TxtBxOrigen.ReadOnly = False
+            Form5.TxtBxLote.ReadOnly = False
+            Form5.TxtBxIDMuestra.ReadOnly = False
             Form5.TxtBxATN.ReadOnly = True
 
 
@@ -1432,8 +1445,7 @@ Public Class Form1
         id_producto = id_producto + sub_id
         Dim clienteID As String = DGVAdmin(1, fila_actual).Value
         Dim tipoProducto As String = DGVAdmin(4, fila_actual).Value
-        Dim numeroSerie As String = DGVAdmin(6, fila_actual).Value
-        Dim observaciones As String = "Re-Proceso"
+        Dim observacionesAdmin As String = "Re-Proceso"
         Dim estado As String = "Pendiente"
         Dim intervalo As String
 
@@ -1489,7 +1501,7 @@ Public Class Form1
 
         Try
             conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("INSERT INTO productos (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Numero_Serie`, `Observaciones`, `Fecha_Entrada`, `Hora_Entrada`, `Fecha_Limite`, `Estado`) VALUES ('" & id_producto & "', '" & clienteID & "', '" & tipoProducto & "', '" & numeroSerie & "', '" & observaciones & "', '" & fecha_registro & "','" & hora_registro & "','" & fecha_limite & "', '" & estado & "');"), conn)
+            Dim cmd As New MySqlCommand(String.Format("INSERT INTO productos (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Observaciones_Administrador`,`Fecha_Registro`, `Fecha_Entrada`, `Hora_Entrada`, `Fecha_Limite`, `Estado`) VALUES ('" & id_producto & "', '" & clienteID & "', '" & tipoProducto & "', '" & observacionesAdmin & "', '" & fecha_registro & "', '" & fecha_registro & "' ,'" & hora_registro & "','" & fecha_limite & "', '" & estado & "');"), conn)
             cmd.ExecuteNonQuery()
             Console.WriteLine("Re-Proceso Registrado")
             MsgBox("Re-proceso Registrado", MsgBoxStyle.Information, "Error")
@@ -1503,9 +1515,7 @@ Public Class Form1
         CargarDGVProductosLimite()
         CargarDGVProductosRevisados()
         ProductosFechaLimiteCerca()
-        TxtBxNumeroSerie.Clear()
         TxtBxProductoID.Clear()
-        RchTxtBxObservaciones.Clear()
         TxtBxProductoID.Select()
 
 

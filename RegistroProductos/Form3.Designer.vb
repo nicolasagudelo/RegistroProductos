@@ -23,8 +23,6 @@ Partial Class Form3
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form3))
-        Me.CmbBxCategorias = New System.Windows.Forms.ComboBox()
-        Me.LblCategoria = New System.Windows.Forms.Label()
         Me.LblIDProducto = New System.Windows.Forms.Label()
         Me.TxtBxIDProducto = New System.Windows.Forms.TextBox()
         Me.LblCliente = New System.Windows.Forms.Label()
@@ -50,31 +48,14 @@ Partial Class Form3
         Me.LblDireccion = New System.Windows.Forms.Label()
         Me.TxtBxHoraEntrada = New System.Windows.Forms.TextBox()
         Me.LblHoraEntrada = New System.Windows.Forms.Label()
-        Me.RBSeleccionarTodo = New System.Windows.Forms.RadioButton()
-        Me.RBQuitarTodo = New System.Windows.Forms.RadioButton()
         Me.LblRuta = New System.Windows.Forms.Label()
         Me.TxtBxRuta = New System.Windows.Forms.TextBox()
         Me.BtnEncontrarRuta = New System.Windows.Forms.Button()
         Me.BtnAbrirDatos = New System.Windows.Forms.Button()
+        Me.ProgressBar1 = New System.Windows.Forms.ProgressBar()
+        Me.RBSeleccionarTodo = New System.Windows.Forms.RadioButton()
+        Me.RBQuitarTodo = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
-        '
-        'CmbBxCategorias
-        '
-        Me.CmbBxCategorias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CmbBxCategorias.FormattingEnabled = True
-        Me.CmbBxCategorias.Location = New System.Drawing.Point(15, 281)
-        Me.CmbBxCategorias.Name = "CmbBxCategorias"
-        Me.CmbBxCategorias.Size = New System.Drawing.Size(171, 21)
-        Me.CmbBxCategorias.TabIndex = 0
-        '
-        'LblCategoria
-        '
-        Me.LblCategoria.AutoSize = True
-        Me.LblCategoria.Location = New System.Drawing.Point(12, 265)
-        Me.LblCategoria.Name = "LblCategoria"
-        Me.LblCategoria.Size = New System.Drawing.Size(83, 13)
-        Me.LblCategoria.TabIndex = 1
-        Me.LblCategoria.Text = "Tipo de Prueba:"
         '
         'LblIDProducto
         '
@@ -113,7 +94,7 @@ Partial Class Form3
         'LblTipoMercancia
         '
         Me.LblTipoMercancia.AutoSize = True
-        Me.LblTipoMercancia.Location = New System.Drawing.Point(14, 108)
+        Me.LblTipoMercancia.Location = New System.Drawing.Point(12, 108)
         Me.LblTipoMercancia.Name = "LblTipoMercancia"
         Me.LblTipoMercancia.Size = New System.Drawing.Size(53, 13)
         Me.LblTipoMercancia.TabIndex = 7
@@ -121,7 +102,7 @@ Partial Class Form3
         '
         'TxtBxProducto
         '
-        Me.TxtBxProducto.Location = New System.Drawing.Point(17, 124)
+        Me.TxtBxProducto.Location = New System.Drawing.Point(15, 124)
         Me.TxtBxProducto.Name = "TxtBxProducto"
         Me.TxtBxProducto.ReadOnly = True
         Me.TxtBxProducto.Size = New System.Drawing.Size(128, 20)
@@ -141,7 +122,6 @@ Partial Class Form3
         Me.RchTxtBxObservaciones.Location = New System.Drawing.Point(15, 166)
         Me.RchTxtBxObservaciones.MaxLength = 150
         Me.RchTxtBxObservaciones.Name = "RchTxtBxObservaciones"
-        Me.RchTxtBxObservaciones.ReadOnly = True
         Me.RchTxtBxObservaciones.Size = New System.Drawing.Size(171, 96)
         Me.RchTxtBxObservaciones.TabIndex = 12
         Me.RchTxtBxObservaciones.Text = ""
@@ -293,38 +273,14 @@ Partial Class Form3
         Me.LblHoraEntrada.TabIndex = 28
         Me.LblHoraEntrada.Text = "Hora de Entrada:"
         '
-        'RBSeleccionarTodo
-        '
-        Me.RBSeleccionarTodo.AutoSize = True
-        Me.RBSeleccionarTodo.Checked = True
-        Me.RBSeleccionarTodo.Location = New System.Drawing.Point(12, 347)
-        Me.RBSeleccionarTodo.Name = "RBSeleccionarTodo"
-        Me.RBSeleccionarTodo.Size = New System.Drawing.Size(109, 17)
-        Me.RBSeleccionarTodo.TabIndex = 30
-        Me.RBSeleccionarTodo.TabStop = True
-        Me.RBSeleccionarTodo.Text = "Seleccionar Todo"
-        Me.RBSeleccionarTodo.UseVisualStyleBackColor = True
-        Me.RBSeleccionarTodo.Visible = False
-        '
-        'RBQuitarTodo
-        '
-        Me.RBQuitarTodo.AutoSize = True
-        Me.RBQuitarTodo.Location = New System.Drawing.Point(127, 347)
-        Me.RBQuitarTodo.Name = "RBQuitarTodo"
-        Me.RBQuitarTodo.Size = New System.Drawing.Size(77, 17)
-        Me.RBQuitarTodo.TabIndex = 31
-        Me.RBQuitarTodo.Text = "Quitar todo"
-        Me.RBQuitarTodo.UseVisualStyleBackColor = True
-        Me.RBQuitarTodo.Visible = False
-        '
         'LblRuta
         '
         Me.LblRuta.AutoSize = True
         Me.LblRuta.Location = New System.Drawing.Point(12, 305)
         Me.LblRuta.Name = "LblRuta"
-        Me.LblRuta.Size = New System.Drawing.Size(120, 13)
+        Me.LblRuta.Size = New System.Drawing.Size(72, 13)
         Me.LblRuta.TabIndex = 32
-        Me.LblRuta.Text = "Ubicacion de los Datos:"
+        Me.LblRuta.Text = "Cargar Datos:"
         '
         'TxtBxRuta
         '
@@ -352,18 +308,48 @@ Partial Class Form3
         Me.BtnAbrirDatos.Text = "Abrir"
         Me.BtnAbrirDatos.UseVisualStyleBackColor = True
         '
+        'ProgressBar1
+        '
+        Me.ProgressBar1.Location = New System.Drawing.Point(12, 672)
+        Me.ProgressBar1.Name = "ProgressBar1"
+        Me.ProgressBar1.Size = New System.Drawing.Size(251, 23)
+        Me.ProgressBar1.TabIndex = 36
+        '
+        'RBSeleccionarTodo
+        '
+        Me.RBSeleccionarTodo.AutoSize = True
+        Me.RBSeleccionarTodo.Location = New System.Drawing.Point(12, 345)
+        Me.RBSeleccionarTodo.Name = "RBSeleccionarTodo"
+        Me.RBSeleccionarTodo.Size = New System.Drawing.Size(109, 17)
+        Me.RBSeleccionarTodo.TabIndex = 37
+        Me.RBSeleccionarTodo.TabStop = True
+        Me.RBSeleccionarTodo.Text = "Seleccionar Todo"
+        Me.RBSeleccionarTodo.UseVisualStyleBackColor = True
+        '
+        'RBQuitarTodo
+        '
+        Me.RBQuitarTodo.AutoSize = True
+        Me.RBQuitarTodo.Location = New System.Drawing.Point(127, 345)
+        Me.RBQuitarTodo.Name = "RBQuitarTodo"
+        Me.RBQuitarTodo.Size = New System.Drawing.Size(81, 17)
+        Me.RBQuitarTodo.TabIndex = 38
+        Me.RBQuitarTodo.TabStop = True
+        Me.RBQuitarTodo.Text = "Quitar Todo"
+        Me.RBQuitarTodo.UseVisualStyleBackColor = True
+        '
         'Form3
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoScroll = True
         Me.ClientSize = New System.Drawing.Size(485, 707)
+        Me.Controls.Add(Me.RBQuitarTodo)
+        Me.Controls.Add(Me.RBSeleccionarTodo)
+        Me.Controls.Add(Me.ProgressBar1)
         Me.Controls.Add(Me.BtnAbrirDatos)
         Me.Controls.Add(Me.BtnEncontrarRuta)
         Me.Controls.Add(Me.TxtBxRuta)
         Me.Controls.Add(Me.LblRuta)
-        Me.Controls.Add(Me.RBQuitarTodo)
-        Me.Controls.Add(Me.RBSeleccionarTodo)
         Me.Controls.Add(Me.TxtBxHoraEntrada)
         Me.Controls.Add(Me.LblHoraEntrada)
         Me.Controls.Add(Me.TxtBxDireccion)
@@ -389,8 +375,6 @@ Partial Class Form3
         Me.Controls.Add(Me.LblCliente)
         Me.Controls.Add(Me.TxtBxIDProducto)
         Me.Controls.Add(Me.LblIDProducto)
-        Me.Controls.Add(Me.LblCategoria)
-        Me.Controls.Add(Me.CmbBxCategorias)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form3"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
@@ -399,9 +383,6 @@ Partial Class Form3
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents CmbBxCategorias As ComboBox
-    Friend WithEvents LblCategoria As Label
     Friend WithEvents LblIDProducto As Label
     Friend WithEvents TxtBxIDProducto As TextBox
     Friend WithEvents LblCliente As Label
@@ -427,10 +408,11 @@ Partial Class Form3
     Friend WithEvents LblDireccion As Label
     Friend WithEvents TxtBxHoraEntrada As TextBox
     Friend WithEvents LblHoraEntrada As Label
-    Friend WithEvents RBSeleccionarTodo As RadioButton
-    Friend WithEvents RBQuitarTodo As RadioButton
     Friend WithEvents LblRuta As Label
     Friend WithEvents TxtBxRuta As TextBox
     Friend WithEvents BtnEncontrarRuta As Button
     Friend WithEvents BtnAbrirDatos As Button
+    Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents RBSeleccionarTodo As RadioButton
+    Friend WithEvents RBQuitarTodo As RadioButton
 End Class

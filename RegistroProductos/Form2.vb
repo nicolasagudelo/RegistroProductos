@@ -132,6 +132,7 @@ Public Class Form2
             MsgBox("Conectado como: " & CmbBxCliente.Text & "", False, "Log-In")
             Form6.RecibirClienteId(cliente)
             Me.Hide()
+            Form6.AnalistaOCliente(0)
             Form6.ShowDialog()
         Else
             MsgBox("Credenciales de inicio de sesion no validas")

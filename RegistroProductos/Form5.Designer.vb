@@ -33,9 +33,9 @@ Partial Class Form5
         Me.LblIDUsuario = New System.Windows.Forms.Label()
         Me.TxtBxUsuario = New System.Windows.Forms.TextBox()
         Me.LblUsuario = New System.Windows.Forms.Label()
-        Me.TxtBxFechaRegistro = New System.Windows.Forms.TextBox()
+        Me.TxtBxFechaReporte = New System.Windows.Forms.TextBox()
         Me.TxtBxFechaEntrada = New System.Windows.Forms.TextBox()
-        Me.LblFechaRegistro = New System.Windows.Forms.Label()
+        Me.LblFechaReporte = New System.Windows.Forms.Label()
         Me.LblFechaEntrada = New System.Windows.Forms.Label()
         Me.RchTxtBxObservaciones = New System.Windows.Forms.RichTextBox()
         Me.LblObservaciones = New System.Windows.Forms.Label()
@@ -64,11 +64,10 @@ Partial Class Form5
         Me.LblATN = New System.Windows.Forms.Label()
         Me.BtnGenerarPDF = New System.Windows.Forms.Button()
         Me.CBPruebaMicro = New System.Windows.Forms.CheckBox()
-        Me.PorcentajeBioD = New System.Windows.Forms.NumericUpDown()
         Me.LblPorcentajeBioD = New System.Windows.Forms.Label()
+        Me.PorcentajeBioD = New System.Windows.Forms.TextBox()
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrpBxTipoPrueba.SuspendLayout()
-        CType(Me.PorcentajeBioD, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TxtBxHoraEntrada
@@ -115,11 +114,10 @@ Partial Class Form5
         '
         'TxtBxTipoProductoID
         '
-        Me.TxtBxTipoProductoID.Location = New System.Drawing.Point(452, 1)
+        Me.TxtBxTipoProductoID.Location = New System.Drawing.Point(392, 24)
         Me.TxtBxTipoProductoID.Name = "TxtBxTipoProductoID"
-        Me.TxtBxTipoProductoID.Size = New System.Drawing.Size(10, 20)
+        Me.TxtBxTipoProductoID.Size = New System.Drawing.Size(29, 20)
         Me.TxtBxTipoProductoID.TabIndex = 50
-        Me.TxtBxTipoProductoID.Visible = False
         '
         'TxtBxIdUsuario
         '
@@ -157,13 +155,13 @@ Partial Class Form5
         Me.LblUsuario.TabIndex = 46
         Me.LblUsuario.Text = "Usuario que realizo el analisis:"
         '
-        'TxtBxFechaRegistro
+        'TxtBxFechaReporte
         '
-        Me.TxtBxFechaRegistro.Location = New System.Drawing.Point(241, 286)
-        Me.TxtBxFechaRegistro.Name = "TxtBxFechaRegistro"
-        Me.TxtBxFechaRegistro.ReadOnly = True
-        Me.TxtBxFechaRegistro.Size = New System.Drawing.Size(128, 20)
-        Me.TxtBxFechaRegistro.TabIndex = 45
+        Me.TxtBxFechaReporte.Location = New System.Drawing.Point(241, 286)
+        Me.TxtBxFechaReporte.Name = "TxtBxFechaReporte"
+        Me.TxtBxFechaReporte.ReadOnly = True
+        Me.TxtBxFechaReporte.Size = New System.Drawing.Size(128, 20)
+        Me.TxtBxFechaReporte.TabIndex = 45
         '
         'TxtBxFechaEntrada
         '
@@ -173,14 +171,14 @@ Partial Class Form5
         Me.TxtBxFechaEntrada.Size = New System.Drawing.Size(128, 20)
         Me.TxtBxFechaEntrada.TabIndex = 44
         '
-        'LblFechaRegistro
+        'LblFechaReporte
         '
-        Me.LblFechaRegistro.AutoSize = True
-        Me.LblFechaRegistro.Location = New System.Drawing.Point(238, 270)
-        Me.LblFechaRegistro.Name = "LblFechaRegistro"
-        Me.LblFechaRegistro.Size = New System.Drawing.Size(97, 13)
-        Me.LblFechaRegistro.TabIndex = 43
-        Me.LblFechaRegistro.Text = "Fecha de Registro:"
+        Me.LblFechaReporte.AutoSize = True
+        Me.LblFechaReporte.Location = New System.Drawing.Point(238, 270)
+        Me.LblFechaReporte.Name = "LblFechaReporte"
+        Me.LblFechaReporte.Size = New System.Drawing.Size(96, 13)
+        Me.LblFechaReporte.TabIndex = 43
+        Me.LblFechaReporte.Text = "Fecha de Reporte:"
         '
         'LblFechaEntrada
         '
@@ -357,6 +355,7 @@ Partial Class Form5
         '
         Me.TxtBxIDMuestra.Location = New System.Drawing.Point(241, 379)
         Me.TxtBxIDMuestra.Name = "TxtBxIDMuestra"
+        Me.TxtBxIDMuestra.ReadOnly = True
         Me.TxtBxIDMuestra.Size = New System.Drawing.Size(128, 20)
         Me.TxtBxIDMuestra.TabIndex = 63
         '
@@ -373,6 +372,7 @@ Partial Class Form5
         '
         Me.TxtBxOrigen.Location = New System.Drawing.Point(27, 482)
         Me.TxtBxOrigen.Name = "TxtBxOrigen"
+        Me.TxtBxOrigen.ReadOnly = True
         Me.TxtBxOrigen.Size = New System.Drawing.Size(128, 20)
         Me.TxtBxOrigen.TabIndex = 65
         '
@@ -389,6 +389,7 @@ Partial Class Form5
         '
         Me.TxtBxLote.Location = New System.Drawing.Point(27, 529)
         Me.TxtBxLote.Name = "TxtBxLote"
+        Me.TxtBxLote.ReadOnly = True
         Me.TxtBxLote.Size = New System.Drawing.Size(128, 20)
         Me.TxtBxLote.TabIndex = 67
         '
@@ -438,16 +439,6 @@ Partial Class Form5
         Me.CBPruebaMicro.UseVisualStyleBackColor = True
         Me.CBPruebaMicro.Visible = False
         '
-        'PorcentajeBioD
-        '
-        Me.PorcentajeBioD.Location = New System.Drawing.Point(27, 578)
-        Me.PorcentajeBioD.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
-        Me.PorcentajeBioD.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.PorcentajeBioD.Name = "PorcentajeBioD"
-        Me.PorcentajeBioD.Size = New System.Drawing.Size(128, 20)
-        Me.PorcentajeBioD.TabIndex = 72
-        Me.PorcentajeBioD.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
         'LblPorcentajeBioD
         '
         Me.LblPorcentajeBioD.AutoSize = True
@@ -457,13 +448,21 @@ Partial Class Form5
         Me.LblPorcentajeBioD.TabIndex = 73
         Me.LblPorcentajeBioD.Text = "Porcentaje BioDiesel:"
         '
+        'PorcentajeBioD
+        '
+        Me.PorcentajeBioD.Location = New System.Drawing.Point(27, 578)
+        Me.PorcentajeBioD.Name = "PorcentajeBioD"
+        Me.PorcentajeBioD.ReadOnly = True
+        Me.PorcentajeBioD.Size = New System.Drawing.Size(128, 20)
+        Me.PorcentajeBioD.TabIndex = 74
+        '
         'Form5
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(893, 707)
-        Me.Controls.Add(Me.LblPorcentajeBioD)
         Me.Controls.Add(Me.PorcentajeBioD)
+        Me.Controls.Add(Me.LblPorcentajeBioD)
         Me.Controls.Add(Me.CBPruebaMicro)
         Me.Controls.Add(Me.TxtBxATN)
         Me.Controls.Add(Me.LblATN)
@@ -489,9 +488,9 @@ Partial Class Form5
         Me.Controls.Add(Me.LblIDUsuario)
         Me.Controls.Add(Me.TxtBxUsuario)
         Me.Controls.Add(Me.LblUsuario)
-        Me.Controls.Add(Me.TxtBxFechaRegistro)
+        Me.Controls.Add(Me.TxtBxFechaReporte)
         Me.Controls.Add(Me.TxtBxFechaEntrada)
-        Me.Controls.Add(Me.LblFechaRegistro)
+        Me.Controls.Add(Me.LblFechaReporte)
         Me.Controls.Add(Me.LblFechaEntrada)
         Me.Controls.Add(Me.RchTxtBxObservaciones)
         Me.Controls.Add(Me.LblObservaciones)
@@ -508,7 +507,6 @@ Partial Class Form5
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GrpBxTipoPrueba.ResumeLayout(False)
         Me.GrpBxTipoPrueba.PerformLayout()
-        CType(Me.PorcentajeBioD, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -524,9 +522,9 @@ Partial Class Form5
     Friend WithEvents LblIDUsuario As Label
     Friend WithEvents TxtBxUsuario As TextBox
     Friend WithEvents LblUsuario As Label
-    Friend WithEvents TxtBxFechaRegistro As TextBox
+    Friend WithEvents TxtBxFechaReporte As TextBox
     Friend WithEvents TxtBxFechaEntrada As TextBox
-    Friend WithEvents LblFechaRegistro As Label
+    Friend WithEvents LblFechaReporte As Label
     Friend WithEvents LblFechaEntrada As Label
     Friend WithEvents RchTxtBxObservaciones As RichTextBox
     Friend WithEvents LblObservaciones As Label
@@ -555,6 +553,6 @@ Partial Class Form5
     Friend WithEvents LblATN As Label
     Friend WithEvents BtnGenerarPDF As Button
     Friend WithEvents CBPruebaMicro As CheckBox
-    Friend WithEvents PorcentajeBioD As NumericUpDown
     Friend WithEvents LblPorcentajeBioD As Label
+    Friend WithEvents PorcentajeBioD As TextBox
 End Class
