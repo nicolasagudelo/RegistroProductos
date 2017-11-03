@@ -30,15 +30,21 @@ Public Class Form6
 
     Private Sub cargarcontroles()
         If EsAnalista = 0 Then
+            TabControl1.TabPages.Insert(1, TabPage2)
             CmbBxCliente.Enabled = False
             CmbBxCliente.SelectedValue = cliente
+            LblCambiarContraseña.Visible = True
+            LblCambiarContraseña.Enabled = True
         Else
             CmbBxCliente.Enabled = True
             CmbBxCliente.SelectedValue = 1
+            LblCambiarContraseña.Visible = False
+            LblCambiarContraseña.Enabled = False
         End If
     End Sub
 
     Private Sub Form6_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        TabControl1.TabPages.Remove(TabPage2)
         control = 0
         Connect()
         CargarClientes()
@@ -112,7 +118,7 @@ Public Class Form6
         If control = 0 Then
             Exit Sub
         End If
-
+        Cursor = Cursors.WaitCursor
         cod_prue.Clear()
         nombre_prueba.Clear()
 
@@ -271,6 +277,7 @@ Public Class Form6
             Next
 
         End If
+        Cursor = Cursors.Default
     End Sub
 
     Private Sub RBSeleccionarTodo_CheckedChanged(sender As Object, e As EventArgs) Handles RBSeleccionarTodo.CheckedChanged
@@ -509,13 +516,7 @@ Public Class Form6
                     Exit Sub
                 End Try
 
-                Panel1.Controls.Clear()
-                TxtBxOrigen.Clear()
-                TxtBxLote.Clear()
-                RchTxtBxObservaciones.Clear()
-
                 With TxtBxIDMuestra
-                    .Clear()
                     .Focus()
                 End With
 
@@ -737,13 +738,7 @@ Public Class Form6
                     Exit Sub
                 End Try
 
-                Panel1.Controls.Clear()
-                TxtBxOrigen.Clear()
-                TxtBxLote.Clear()
-                RchTxtBxObservaciones.Clear()
-
                 With TxtBxIDMuestra
-                    .Clear()
                     .Focus()
                 End With
 
@@ -811,7 +806,7 @@ Public Class Form6
             conn.Open()
             Dim cmd As New MySqlCommand(String.Format("SELECT productos.productoID as 'Numero Registro', tipo_productos.Nombre, productos.Fecha_Registro as 'Fecha de Registro', productos.Fecha_Entrada as 'Fecha de Entrada al Lab', productos.Estado
                                                        FROM productos inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID
-                                                       where Fecha_Registro between '" & fecha_inicial & "' and '" & fecha_final & "'; "), conn)
+                                                       where Fecha_Registro between '" & fecha_inicial & "' and '" & fecha_final & "' and ClienteID = '" & CmbBxCliente.SelectedValue & "'; "), conn)
             Dim reader As MySqlDataReader
             reader = cmd.ExecuteReader()
             Dim table As New DataTable
@@ -844,4 +839,8 @@ Public Class Form6
         End Try
     End Sub
 
+    Private Sub LblCambiarContraseña_Click(sender As Object, e As EventArgs) Handles LblCambiarContraseña.Click
+        FormCambiarContraseña.RecibirVariablesForm1(CmbBxCliente.Text, 1)
+        FormCambiarContraseña.ShowDialog()
+    End Sub
 End Class

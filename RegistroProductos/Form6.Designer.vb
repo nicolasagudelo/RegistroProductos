@@ -58,6 +58,7 @@ Partial Class Form6
         Me.LblFechaInicio = New System.Windows.Forms.Label()
         Me.FechaInicio = New System.Windows.Forms.DateTimePicker()
         Me.DGVHistorial = New System.Windows.Forms.DataGridView()
+        Me.LblCambiarContraseña = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.PorcentajeBioD, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -81,6 +82,7 @@ Partial Class Form6
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPage1.Controls.Add(Me.LblCambiarContraseña)
         Me.TabPage1.Controls.Add(Me.ProgressBar1)
         Me.TabPage1.Controls.Add(Me.CmbBxCategorias)
         Me.TabPage1.Controls.Add(Me.BtnCancelar)
@@ -444,6 +446,19 @@ Partial Class Form6
         Me.DGVHistorial.Size = New System.Drawing.Size(1024, 360)
         Me.DGVHistorial.TabIndex = 0
         '
+        'LblCambiarContraseña
+        '
+        Me.LblCambiarContraseña.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.LblCambiarContraseña.AutoSize = True
+        Me.LblCambiarContraseña.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.LblCambiarContraseña.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblCambiarContraseña.ForeColor = System.Drawing.Color.Blue
+        Me.LblCambiarContraseña.Location = New System.Drawing.Point(8, 407)
+        Me.LblCambiarContraseña.Name = "LblCambiarContraseña"
+        Me.LblCambiarContraseña.Size = New System.Drawing.Size(120, 13)
+        Me.LblCambiarContraseña.TabIndex = 84
+        Me.LblCambiarContraseña.Text = "Cambiar Contraseña"
+        '
         'Form6
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -500,4 +515,5 @@ Partial Class Form6
     Friend WithEvents FechaFin As DateTimePicker
     Friend WithEvents LblFechaInicio As Label
     Friend WithEvents FechaInicio As DateTimePicker
+    Friend WithEvents LblCambiarContraseña As Label
 End Class

@@ -118,6 +118,7 @@ Partial Class Form5
         Me.TxtBxTipoProductoID.Name = "TxtBxTipoProductoID"
         Me.TxtBxTipoProductoID.Size = New System.Drawing.Size(29, 20)
         Me.TxtBxTipoProductoID.TabIndex = 50
+        Me.TxtBxTipoProductoID.Visible = False
         '
         'TxtBxIdUsuario
         '

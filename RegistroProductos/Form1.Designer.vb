@@ -38,23 +38,17 @@ Partial Class Form1
         Me.BtnRegistrarProducto = New System.Windows.Forms.Button()
         Me.BtnModificarRegistro = New System.Windows.Forms.Button()
         Me.TabPageProductoLimite = New System.Windows.Forms.TabPage()
-        Me.BtnGenerarReporte2 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.DTPFechaLimite2 = New System.Windows.Forms.DateTimePicker()
         Me.LblFechaLimite2 = New System.Windows.Forms.Label()
-        Me.LblContadorCaracteres2 = New System.Windows.Forms.Label()
-        Me.BtnModificarRegistroLimite = New System.Windows.Forms.Button()
-        Me.RchTxBxObservaciones2 = New System.Windows.Forms.RichTextBox()
-        Me.LblObservaciones2 = New System.Windows.Forms.Label()
-        Me.LblNumeroSerie2 = New System.Windows.Forms.Label()
         Me.CmbBxProducto2 = New System.Windows.Forms.ComboBox()
-        Me.TxtBxNumeroSerie2 = New System.Windows.Forms.TextBox()
         Me.LblProducto2 = New System.Windows.Forms.Label()
         Me.CmbBxCliente2 = New System.Windows.Forms.ComboBox()
         Me.LblCliente2 = New System.Windows.Forms.Label()
         Me.LblNumeroProducto2 = New System.Windows.Forms.Label()
         Me.TxtBxNumeroProducto2 = New System.Windows.Forms.TextBox()
         Me.DGVProductosLimite = New System.Windows.Forms.DataGridView()
+        Me.BtnModificarRegistroLimite = New System.Windows.Forms.Button()
         Me.TabPageProductosRevisados = New System.Windows.Forms.TabPage()
         Me.DGVProductosRevisados = New System.Windows.Forms.DataGridView()
         Me.TabPageAdmin = New System.Windows.Forms.TabPage()
@@ -84,6 +78,8 @@ Partial Class Form1
         Me.GrpBxTipoSesion = New System.Windows.Forms.GroupBox()
         Me.RBAnalista = New System.Windows.Forms.RadioButton()
         Me.RBAdmin = New System.Windows.Forms.RadioButton()
+        Me.TabPageTransito = New System.Windows.Forms.TabPage()
+        Me.DGVTransito = New System.Windows.Forms.DataGridView()
         Me.TabControl1.SuspendLayout()
         Me.TabPageRegistrarProducto.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -99,6 +95,8 @@ Partial Class Form1
         Me.GrpBxAdmin.SuspendLayout()
         CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrpBxTipoSesion.SuspendLayout()
+        Me.TabPageTransito.SuspendLayout()
+        CType(Me.DGVTransito, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -108,6 +106,7 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.TabPageRegistrarProducto)
         Me.TabControl1.Controls.Add(Me.TabPageProductoLimite)
+        Me.TabControl1.Controls.Add(Me.TabPageTransito)
         Me.TabControl1.Controls.Add(Me.TabPageProductosRevisados)
         Me.TabControl1.Controls.Add(Me.TabPageAdmin)
         Me.TabControl1.Location = New System.Drawing.Point(0, 24)
@@ -231,6 +230,7 @@ Partial Class Form1
         Me.DGVProductosSinRevisar.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DGVProductosSinRevisar.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DGVProductosSinRevisar.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVProductosSinRevisar.Cursor = System.Windows.Forms.Cursors.Default
         Me.DGVProductosSinRevisar.Location = New System.Drawing.Point(3, 3)
         Me.DGVProductosSinRevisar.Name = "DGVProductosSinRevisar"
         Me.DGVProductosSinRevisar.Size = New System.Drawing.Size(916, 278)
@@ -261,9 +261,9 @@ Partial Class Form1
         'TabPageProductoLimite
         '
         Me.TabPageProductoLimite.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPageProductoLimite.Controls.Add(Me.BtnGenerarReporte2)
         Me.TabPageProductoLimite.Controls.Add(Me.Panel2)
         Me.TabPageProductoLimite.Controls.Add(Me.DGVProductosLimite)
+        Me.TabPageProductoLimite.Controls.Add(Me.BtnModificarRegistroLimite)
         Me.TabPageProductoLimite.Location = New System.Drawing.Point(4, 22)
         Me.TabPageProductoLimite.Name = "TabPageProductoLimite"
         Me.TabPageProductoLimite.Padding = New System.Windows.Forms.Padding(3)
@@ -271,29 +271,13 @@ Partial Class Form1
         Me.TabPageProductoLimite.TabIndex = 1
         Me.TabPageProductoLimite.Text = "Productos Limite"
         '
-        'BtnGenerarReporte2
-        '
-        Me.BtnGenerarReporte2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnGenerarReporte2.Location = New System.Drawing.Point(801, 291)
-        Me.BtnGenerarReporte2.Name = "BtnGenerarReporte2"
-        Me.BtnGenerarReporte2.Size = New System.Drawing.Size(121, 107)
-        Me.BtnGenerarReporte2.TabIndex = 4
-        Me.BtnGenerarReporte2.Text = "Generar Reporte"
-        Me.BtnGenerarReporte2.UseVisualStyleBackColor = True
-        '
         'Panel2
         '
         Me.Panel2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.Controls.Add(Me.DTPFechaLimite2)
         Me.Panel2.Controls.Add(Me.LblFechaLimite2)
-        Me.Panel2.Controls.Add(Me.LblContadorCaracteres2)
-        Me.Panel2.Controls.Add(Me.BtnModificarRegistroLimite)
-        Me.Panel2.Controls.Add(Me.RchTxBxObservaciones2)
-        Me.Panel2.Controls.Add(Me.LblObservaciones2)
-        Me.Panel2.Controls.Add(Me.LblNumeroSerie2)
         Me.Panel2.Controls.Add(Me.CmbBxProducto2)
-        Me.Panel2.Controls.Add(Me.TxtBxNumeroSerie2)
         Me.Panel2.Controls.Add(Me.LblProducto2)
         Me.Panel2.Controls.Add(Me.CmbBxCliente2)
         Me.Panel2.Controls.Add(Me.LblCliente2)
@@ -307,9 +291,9 @@ Partial Class Form1
         'DTPFechaLimite2
         '
         Me.DTPFechaLimite2.Enabled = False
-        Me.DTPFechaLimite2.Location = New System.Drawing.Point(563, 87)
+        Me.DTPFechaLimite2.Location = New System.Drawing.Point(258, 40)
         Me.DTPFechaLimite2.Name = "DTPFechaLimite2"
-        Me.DTPFechaLimite2.Size = New System.Drawing.Size(121, 20)
+        Me.DTPFechaLimite2.Size = New System.Drawing.Size(217, 20)
         Me.DTPFechaLimite2.TabIndex = 13
         Me.DTPFechaLimite2.Visible = False
         '
@@ -317,81 +301,27 @@ Partial Class Form1
         '
         Me.LblFechaLimite2.AutoSize = True
         Me.LblFechaLimite2.Enabled = False
-        Me.LblFechaLimite2.Location = New System.Drawing.Point(560, 71)
+        Me.LblFechaLimite2.Location = New System.Drawing.Point(255, 24)
         Me.LblFechaLimite2.Name = "LblFechaLimite2"
         Me.LblFechaLimite2.Size = New System.Drawing.Size(70, 13)
         Me.LblFechaLimite2.TabIndex = 12
         Me.LblFechaLimite2.Text = "Fecha Limite:"
         Me.LblFechaLimite2.Visible = False
         '
-        'LblContadorCaracteres2
-        '
-        Me.LblContadorCaracteres2.AutoSize = True
-        Me.LblContadorCaracteres2.Location = New System.Drawing.Point(510, 111)
-        Me.LblContadorCaracteres2.Name = "LblContadorCaracteres2"
-        Me.LblContadorCaracteres2.Size = New System.Drawing.Size(36, 13)
-        Me.LblContadorCaracteres2.TabIndex = 11
-        Me.LblContadorCaracteres2.Text = "0/150"
-        '
-        'BtnModificarRegistroLimite
-        '
-        Me.BtnModificarRegistroLimite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.BtnModificarRegistroLimite.Enabled = False
-        Me.BtnModificarRegistroLimite.Location = New System.Drawing.Point(694, 63)
-        Me.BtnModificarRegistroLimite.Name = "BtnModificarRegistroLimite"
-        Me.BtnModificarRegistroLimite.Size = New System.Drawing.Size(90, 45)
-        Me.BtnModificarRegistroLimite.TabIndex = 10
-        Me.BtnModificarRegistroLimite.Text = "Modificar Registro"
-        Me.BtnModificarRegistroLimite.UseVisualStyleBackColor = True
-        Me.BtnModificarRegistroLimite.Visible = False
-        '
-        'RchTxBxObservaciones2
-        '
-        Me.RchTxBxObservaciones2.Location = New System.Drawing.Point(335, 40)
-        Me.RchTxBxObservaciones2.MaxLength = 150
-        Me.RchTxBxObservaciones2.Name = "RchTxBxObservaciones2"
-        Me.RchTxBxObservaciones2.Size = New System.Drawing.Size(211, 68)
-        Me.RchTxBxObservaciones2.TabIndex = 9
-        Me.RchTxBxObservaciones2.Text = ""
-        '
-        'LblObservaciones2
-        '
-        Me.LblObservaciones2.AutoSize = True
-        Me.LblObservaciones2.Location = New System.Drawing.Point(332, 11)
-        Me.LblObservaciones2.Name = "LblObservaciones2"
-        Me.LblObservaciones2.Size = New System.Drawing.Size(78, 13)
-        Me.LblObservaciones2.TabIndex = 8
-        Me.LblObservaciones2.Text = "Observaciones"
-        '
-        'LblNumeroSerie2
-        '
-        Me.LblNumeroSerie2.AutoSize = True
-        Me.LblNumeroSerie2.Location = New System.Drawing.Point(176, 11)
-        Me.LblNumeroSerie2.Name = "LblNumeroSerie2"
-        Me.LblNumeroSerie2.Size = New System.Drawing.Size(89, 13)
-        Me.LblNumeroSerie2.TabIndex = 7
-        Me.LblNumeroSerie2.Text = "Numero de Serie:"
-        '
         'CmbBxProducto2
         '
         Me.CmbBxProducto2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CmbBxProducto2.Enabled = False
         Me.CmbBxProducto2.FormattingEnabled = True
-        Me.CmbBxProducto2.Location = New System.Drawing.Point(179, 87)
+        Me.CmbBxProducto2.Location = New System.Drawing.Point(258, 87)
         Me.CmbBxProducto2.Name = "CmbBxProducto2"
-        Me.CmbBxProducto2.Size = New System.Drawing.Size(150, 21)
+        Me.CmbBxProducto2.Size = New System.Drawing.Size(217, 21)
         Me.CmbBxProducto2.TabIndex = 6
-        '
-        'TxtBxNumeroSerie2
-        '
-        Me.TxtBxNumeroSerie2.Location = New System.Drawing.Point(179, 40)
-        Me.TxtBxNumeroSerie2.Name = "TxtBxNumeroSerie2"
-        Me.TxtBxNumeroSerie2.Size = New System.Drawing.Size(150, 20)
-        Me.TxtBxNumeroSerie2.TabIndex = 5
         '
         'LblProducto2
         '
         Me.LblProducto2.AutoSize = True
-        Me.LblProducto2.Location = New System.Drawing.Point(176, 71)
+        Me.LblProducto2.Location = New System.Drawing.Point(255, 71)
         Me.LblProducto2.Name = "LblProducto2"
         Me.LblProducto2.Size = New System.Drawing.Size(53, 13)
         Me.LblProducto2.TabIndex = 4
@@ -404,7 +334,7 @@ Partial Class Form1
         Me.CmbBxCliente2.IntegralHeight = False
         Me.CmbBxCliente2.Location = New System.Drawing.Point(13, 87)
         Me.CmbBxCliente2.Name = "CmbBxCliente2"
-        Me.CmbBxCliente2.Size = New System.Drawing.Size(160, 21)
+        Me.CmbBxCliente2.Size = New System.Drawing.Size(212, 21)
         Me.CmbBxCliente2.TabIndex = 3
         '
         'LblCliente2
@@ -421,15 +351,15 @@ Partial Class Form1
         Me.LblNumeroProducto2.AutoSize = True
         Me.LblNumeroProducto2.Location = New System.Drawing.Point(10, 11)
         Me.LblNumeroProducto2.Name = "LblNumeroProducto2"
-        Me.LblNumeroProducto2.Size = New System.Drawing.Size(85, 26)
+        Me.LblNumeroProducto2.Size = New System.Drawing.Size(94, 26)
         Me.LblNumeroProducto2.TabIndex = 1
-        Me.LblNumeroProducto2.Text = "Identificador del " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "producto:"
+        Me.LblNumeroProducto2.Text = "Identificador de la " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "muestra:"
         '
         'TxtBxNumeroProducto2
         '
         Me.TxtBxNumeroProducto2.Location = New System.Drawing.Point(13, 40)
         Me.TxtBxNumeroProducto2.Name = "TxtBxNumeroProducto2"
-        Me.TxtBxNumeroProducto2.Size = New System.Drawing.Size(160, 20)
+        Me.TxtBxNumeroProducto2.Size = New System.Drawing.Size(212, 20)
         Me.TxtBxNumeroProducto2.TabIndex = 0
         '
         'DGVProductosLimite
@@ -441,10 +371,23 @@ Partial Class Form1
         Me.DGVProductosLimite.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DGVProductosLimite.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DGVProductosLimite.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVProductosLimite.Cursor = System.Windows.Forms.Cursors.Default
         Me.DGVProductosLimite.Location = New System.Drawing.Point(3, 3)
         Me.DGVProductosLimite.Name = "DGVProductosLimite"
         Me.DGVProductosLimite.Size = New System.Drawing.Size(916, 254)
         Me.DGVProductosLimite.TabIndex = 2
+        '
+        'BtnModificarRegistroLimite
+        '
+        Me.BtnModificarRegistroLimite.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.BtnModificarRegistroLimite.Enabled = False
+        Me.BtnModificarRegistroLimite.Location = New System.Drawing.Point(829, 365)
+        Me.BtnModificarRegistroLimite.Name = "BtnModificarRegistroLimite"
+        Me.BtnModificarRegistroLimite.Size = New System.Drawing.Size(90, 45)
+        Me.BtnModificarRegistroLimite.TabIndex = 10
+        Me.BtnModificarRegistroLimite.Text = "Modificar Registro"
+        Me.BtnModificarRegistroLimite.UseVisualStyleBackColor = True
+        Me.BtnModificarRegistroLimite.Visible = False
         '
         'TabPageProductosRevisados
         '
@@ -466,6 +409,7 @@ Partial Class Form1
         Me.DGVProductosRevisados.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DGVProductosRevisados.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.DGVProductosRevisados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVProductosRevisados.Cursor = System.Windows.Forms.Cursors.Default
         Me.DGVProductosRevisados.Location = New System.Drawing.Point(3, 6)
         Me.DGVProductosRevisados.Name = "DGVProductosRevisados"
         Me.DGVProductosRevisados.Size = New System.Drawing.Size(916, 406)
@@ -746,13 +690,38 @@ Partial Class Form1
         'RBAdmin
         '
         Me.RBAdmin.AutoSize = True
-        Me.RBAdmin.Location = New System.Drawing.Point(0, 16)
+        Me.RBAdmin.Location = New System.Drawing.Point(6, 16)
         Me.RBAdmin.Name = "RBAdmin"
         Me.RBAdmin.Size = New System.Drawing.Size(88, 17)
         Me.RBAdmin.TabIndex = 0
         Me.RBAdmin.TabStop = True
         Me.RBAdmin.Text = "Administrador"
         Me.RBAdmin.UseVisualStyleBackColor = True
+        '
+        'TabPageTransito
+        '
+        Me.TabPageTransito.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPageTransito.Controls.Add(Me.DGVTransito)
+        Me.TabPageTransito.Location = New System.Drawing.Point(4, 22)
+        Me.TabPageTransito.Name = "TabPageTransito"
+        Me.TabPageTransito.Size = New System.Drawing.Size(925, 434)
+        Me.TabPageTransito.TabIndex = 4
+        Me.TabPageTransito.Text = "Productos En Transito"
+        '
+        'DGVTransito
+        '
+        Me.DGVTransito.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGVTransito.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DGVTransito.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.DGVTransito.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DGVTransito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVTransito.Cursor = System.Windows.Forms.Cursors.Default
+        Me.DGVTransito.Location = New System.Drawing.Point(3, 3)
+        Me.DGVTransito.Name = "DGVTransito"
+        Me.DGVTransito.Size = New System.Drawing.Size(916, 421)
+        Me.DGVTransito.TabIndex = 1
         '
         'Form1
         '
@@ -791,6 +760,8 @@ Partial Class Form1
         CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GrpBxTipoSesion.ResumeLayout(False)
         Me.GrpBxTipoSesion.PerformLayout()
+        Me.TabPageTransito.ResumeLayout(False)
+        CType(Me.DGVTransito, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -816,19 +787,13 @@ Partial Class Form1
     Friend WithEvents Panel2 As Panel
     Friend WithEvents DTPFechaLimite2 As DateTimePicker
     Friend WithEvents LblFechaLimite2 As Label
-    Friend WithEvents LblContadorCaracteres2 As Label
     Friend WithEvents BtnModificarRegistroLimite As Button
-    Friend WithEvents RchTxBxObservaciones2 As RichTextBox
-    Friend WithEvents LblObservaciones2 As Label
-    Friend WithEvents LblNumeroSerie2 As Label
     Friend WithEvents CmbBxProducto2 As ComboBox
-    Friend WithEvents TxtBxNumeroSerie2 As TextBox
     Friend WithEvents LblProducto2 As Label
     Friend WithEvents CmbBxCliente2 As ComboBox
     Friend WithEvents LblCliente2 As Label
     Friend WithEvents LblNumeroProducto2 As Label
     Friend WithEvents TxtBxNumeroProducto2 As TextBox
-    Friend WithEvents BtnGenerarReporte2 As Button
     Friend WithEvents LblCambiarContraseña As Label
     Friend WithEvents TabPageAdmin As TabPage
     Friend WithEvents DGVAdmin As DataGridView
@@ -857,4 +822,6 @@ Partial Class Form1
     Friend WithEvents TabPageProductosRevisados As TabPage
     Friend WithEvents DGVProductosRevisados As DataGridView
     Friend WithEvents CmbBxTipoProducto As ComboBox
+    Friend WithEvents TabPageTransito As TabPage
+    Friend WithEvents DGVTransito As DataGridView
 End Class
