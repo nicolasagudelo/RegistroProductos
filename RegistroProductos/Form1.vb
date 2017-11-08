@@ -547,6 +547,7 @@ Public Class Form1
 
     Private Sub DGVProductosSinRevisar_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVProductosSinRevisar.CellDoubleClick
         If admin = 1 Then
+            MsgBox("No puede registrar muestras como administrador, utilice su perfil de analista", MsgBoxStyle.Exclamation, "Error")
             Exit Sub
         End If
         Cursor = Cursors.WaitCursor
@@ -563,6 +564,7 @@ Public Class Form1
             conn.Close()
             Exit Sub
         End Try
+        Form3.TxtBxRuta.Clear()
         Form3.TxtBxIdUsuario.Text = usu_id
         Form3.TxtBxIDProducto.Text = DGVProductosSinRevisar(0, (fila_actual)).Value
         Form3.TxtBxCliente.Text = DGVProductosSinRevisar(3, fila_actual).Value
@@ -1399,7 +1401,7 @@ Public Class Form1
             Form5.TxtBxIDMuestra.Text = DGVAdmin(15, fila_actual).Value
             Form5.TxtBxOrigen.Text = DGVAdmin(16, fila_actual).Value
             Form5.TxtBxLote.Text = DGVAdmin(17, fila_actual).Value
-            Form5.TxtBxATN.Text = DGVAdmin(18, fila_actual).Value
+            Form5.TxtBxATN.Text = DGVAdmin(18, fila_actual).Value.ToString
             Dim tipo_prueba As String = DGVAdmin(19, fila_actual).Value
             If tipo_prueba = 1 Then
                 Form5.RBBasica.Checked = True

@@ -264,6 +264,8 @@ Partial Class Form5
         Me.DGV.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.DGV.BackgroundColor = System.Drawing.SystemColors.Control
         Me.DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV.Location = New System.Drawing.Point(448, 16)
@@ -421,6 +423,7 @@ Partial Class Form5
         '
         'BtnGenerarPDF
         '
+        Me.BtnGenerarPDF.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnGenerarPDF.Location = New System.Drawing.Point(797, 614)
         Me.BtnGenerarPDF.Name = "BtnGenerarPDF"
         Me.BtnGenerarPDF.Size = New System.Drawing.Size(91, 81)
@@ -505,6 +508,7 @@ Partial Class Form5
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form5"
         Me.Text = "Form5"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GrpBxTipoPrueba.ResumeLayout(False)
         Me.GrpBxTipoPrueba.PerformLayout()

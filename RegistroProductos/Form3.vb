@@ -1,6 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.Configuration
 Imports System.IO
+Imports System.Decimal
 
 Public Class Form3
     Dim conn As New MySqlConnection
@@ -187,13 +188,16 @@ Public Class Form3
         For i = 0 To pruebasproducto - 1
             If TextBoxArray(i).Enabled = True Then
                 checks += 1
-                If TextBoxArray(i).Text = "" Then
+                If TextBoxArray(i).Text.Trim = "" Then
                     MsgBox("El valor para la prueba" & cod_prue(i) & " esta vacio, Asignele un valor o desmarquelo antes de continuar", False, "Error")
                     Exit Sub
                 End If
             End If
         Next
-
+        If checks = 0 Then
+            MsgBox("Eliga alguna prueba para reportar", MsgBoxStyle.Exclamation, "Error")
+            Exit Sub
+        End If
         Dim steps As Integer = 100 / checks
         Dim max = (steps * pruebasproducto) - steps
         ProgressBar1.Maximum = max
@@ -305,25 +309,110 @@ Public Class Form3
                     Exit Sub
                 End Try
 
+                Dim rutavacia As Integer = 0
+
+                If TxtBxRuta.Text.Trim = "" Then
+                    rutavacia = 1
+                    If MessageBox.Show("¿Esta seguro de que desea dejar la ruta de datos en blanco?", "Advertencia", MessageBoxButtons.YesNo) = DialogResult.No Then
+                        Exit Sub
+                    End If
+                End If
+
+                If rutavacia = 0 Then
+
+                    Dim filepath As String = TxtBxRuta.Text
+
+                    Dim numero_de_lineas = File.ReadAllLines(filepath).Length
+
+                    Dim sData() As String
+                    Dim IDPrueba, Valor1, Valor2, Valor3, Valor4, Valor5, Valor6, Valor7, Valor8, Valor9, Valor10 As New List(Of String)()
+
+                    Using sr As New StreamReader(filepath)
+                        While Not sr.EndOfStream
+                            sData = sr.ReadLine().Split(";"c)
+
+                            IDPrueba.Add(sData(0).Trim())
+                            Try
+                                Valor1.Add(sData(1).Trim())
+                                Valor2.Add(sData(2).Trim())
+                                Valor3.Add(sData(3).Trim())
+                                Valor4.Add(sData(4).Trim())
+                                Valor5.Add(sData(5).Trim())
+                                Valor6.Add(sData(6).Trim())
+                                Valor7.Add(sData(7).Trim())
+                                Valor8.Add(sData(8).Trim())
+                                Valor9.Add(sData(9).Trim())
+                                Valor10.Add(sData(10).Trim())
+                            Catch ex As Exception
+
+                            End Try
+
+                        End While
+                    End Using
+
+                    For j As Integer = 0 To numero_de_lineas - 1
+
+                        If IDPrueba(j) = "D-3242" Then
+
+                            Dim WP As Double
+                            Dim V As Double
+                            Dim Vb As Double
+                            Double.TryParse(Valor1(j), WP)
+                            Double.TryParse(Valor2(j), V)
+                            Double.TryParse(Valor3(j), Vb)
+                            Dim Normalidad As Decimal
+
+                            Normalidad = (WP / 204.23) * (1000 / (V - Vb))
+                            Normalidad = Round(Normalidad, 4)
+
+                            Dim W As Double
+                            Dim A As Double
+                            Dim B As Double
+                            Dim Tm As Double
+                            Double.TryParse(Valor4(j), W)
+                            Double.TryParse(Valor5(j), A)
+                            Double.TryParse(Valor6(j), B)
+                            Double.TryParse(Valor7(j), Tm)
+
+                            Dim llave As String
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("SELECT MAX(DatoID)+1 FROM datosproducto;"), conn)
+                                llave = Convert.ToString(cmd.ExecuteScalar())
+                                conn.Close()
+                                If llave = Nothing Then
+                                    llave = "1"
+                                End If
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_4`, `Dato_5`, `Dato_6`, `Dato_7`, `Dato_8`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-3242', '" & WP & "', '" & V & "', '" & Vb & "', '" & Normalidad & "', '" & W & "', '" & A & "', '" & B & "', '" & Tm & "');"), conn)
+                                cmd.ExecuteNonQuery()
+                                Console.WriteLine("Datos Registrados")
+                                conn.Close()
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                        End If
+
+                    Next
+
+                End If
+
                 If existevalor = False Then
 
-                    Try
-                        conn.Open()
-                        Dim cmd As New MySqlCommand(String.Format("INSERT INTO reportes (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Fecha_Ingreso`, `Hora_Ingreso`, `Fecha_Reporte`, `ID_Prueba`, `Valor`, `UsuarioID`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & TipoProducto & "', '" & Fecha_Ingreso & "', '" & Hora_Ingreso & "', '" & Fecha_Reporte & "', '" & ID_Prueba & "', '" & valor & "', '" & UsuarioID & "');"), conn)
-                        cmd.ExecuteNonQuery()
-                        Console.WriteLine("Reporte Registrado")
-                        'MsgBox("Reporte Registrado", False, "Reporte Registrado")
-                        conn.Close()
-                    Catch ex As Exception
-                        MsgBox(ex.Message, False, "Error")
-                        conn.Close()
-                        Exit Sub
-                    End Try
-                Else
-                    If existevalor2 = False Then
                         Try
                             conn.Open()
-                            Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_2`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
+                            Dim cmd As New MySqlCommand(String.Format("INSERT INTO reportes (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Fecha_Ingreso`, `Hora_Ingreso`, `Fecha_Reporte`, `ID_Prueba`, `Valor`, `UsuarioID`) VALUES ('" & ProductoID & "', '" & ClienteID & "', '" & TipoProducto & "', '" & Fecha_Ingreso & "', '" & Hora_Ingreso & "', '" & Fecha_Reporte & "', '" & ID_Prueba & "', '" & valor & "', '" & UsuarioID & "');"), conn)
                             cmd.ExecuteNonQuery()
                             Console.WriteLine("Reporte Registrado")
                             'MsgBox("Reporte Registrado", False, "Reporte Registrado")
@@ -334,10 +423,10 @@ Public Class Form3
                             Exit Sub
                         End Try
                     Else
-                        If existevalor3 = False Then
+                        If existevalor2 = False Then
                             Try
                                 conn.Open()
-                                Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_3`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
+                                Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_2`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
                                 cmd.ExecuteNonQuery()
                                 Console.WriteLine("Reporte Registrado")
                                 'MsgBox("Reporte Registrado", False, "Reporte Registrado")
@@ -348,10 +437,10 @@ Public Class Form3
                                 Exit Sub
                             End Try
                         Else
-                            If existevalor4 = False Then
+                            If existevalor3 = False Then
                                 Try
                                     conn.Open()
-                                    Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_4`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
+                                    Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_3`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
                                     cmd.ExecuteNonQuery()
                                     Console.WriteLine("Reporte Registrado")
                                     'MsgBox("Reporte Registrado", False, "Reporte Registrado")
@@ -362,10 +451,10 @@ Public Class Form3
                                     Exit Sub
                                 End Try
                             Else
-                                If existevalor5 = False Then
+                                If existevalor4 = False Then
                                     Try
                                         conn.Open()
-                                        Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_5`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
+                                        Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_4`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
                                         cmd.ExecuteNonQuery()
                                         Console.WriteLine("Reporte Registrado")
                                         'MsgBox("Reporte Registrado", False, "Reporte Registrado")
@@ -375,13 +464,27 @@ Public Class Form3
                                         conn.Close()
                                         Exit Sub
                                     End Try
+                                Else
+                                    If existevalor5 = False Then
+                                        Try
+                                            conn.Open()
+                                            Dim cmd As New MySqlCommand(String.Format("UPDATE `bd_productos`.`reportes` SET `Valor_5`='" & valor & "' WHERE `ProductoID`='" & ProductoID & "' and`ID_Prueba`='" & ID_Prueba & "';"), conn)
+                                            cmd.ExecuteNonQuery()
+                                            Console.WriteLine("Reporte Registrado")
+                                            'MsgBox("Reporte Registrado", False, "Reporte Registrado")
+                                            conn.Close()
+                                        Catch ex As Exception
+                                            MsgBox(ex.Message, False, "Error")
+                                            conn.Close()
+                                            Exit Sub
+                                        End Try
+                                    End If
                                 End If
                             End If
                         End If
                     End If
+                    ProgressBar1.Increment(steps)
                 End If
-                ProgressBar1.Increment(steps)
-            End If
         Next
 
         Try
@@ -415,7 +518,7 @@ Public Class Form3
         Dim getruta As New OpenFileDialog
         getruta.InitialDirectory = "C:\"
         getruta.RestoreDirectory = False
-        getruta.Filter = "PDF Files(*.pdf)|*.pdf"
+        getruta.Filter = "CSV Files(*.csv)|*.csv"
         getruta.ShowDialog()
 
         Dim filepath As String
@@ -428,6 +531,73 @@ Public Class Form3
         End Try
 
         TxtBxRuta.Text = filepath
+
+        Dim numero_de_lineas = File.ReadAllLines(filepath).Length
+
+        Dim sData() As String
+        Dim IDPrueba, Valor1, Valor2, Valor3, Valor4, Valor5, Valor6, Valor7, Valor8, Valor9, Valor10 As New List(Of String)()
+
+        Using sr As New StreamReader(filepath)
+            While Not sr.EndOfStream
+                sData = sr.ReadLine().Split(";"c)
+
+                IDPrueba.Add(sData(0).Trim())
+                Try
+                    Valor1.Add(sData(1).Trim())
+                    Valor2.Add(sData(2).Trim())
+                    Valor3.Add(sData(3).Trim())
+                    Valor4.Add(sData(4).Trim())
+                    Valor5.Add(sData(5).Trim())
+                    Valor6.Add(sData(6).Trim())
+                    Valor7.Add(sData(7).Trim())
+                    Valor8.Add(sData(8).Trim())
+                    Valor9.Add(sData(9).Trim())
+                    Valor10.Add(sData(10).Trim())
+                Catch ex As Exception
+
+                End Try
+
+            End While
+        End Using
+
+        For i As Integer = 0 To numero_de_lineas - 1
+
+            If IDPrueba(i) = "D-3242" Then
+
+                Dim WP As Double
+                Dim V As Double
+                Dim Vb As Double
+                Double.TryParse(Valor1(i), WP)
+                Double.TryParse(Valor2(i), V)
+                Double.TryParse(Valor3(i), Vb)
+                Dim Normalidad As Decimal
+
+                Normalidad = (WP / 204.23) * (1000 / (V - Vb))
+                Normalidad = Round(Normalidad, 4)
+
+                Dim W As Double
+                Dim A As Double
+                Dim B As Double
+                Dim Tm As Double
+                Double.TryParse(Valor4(i), W)
+                Double.TryParse(Valor5(i), A)
+                Double.TryParse(Valor6(i), B)
+                Double.TryParse(Valor7(i), Tm)
+
+                Dim Acidez As Decimal
+
+                Acidez = ((A - B) * Normalidad * 56.1) / W
+                Acidez = Round(Acidez, 3)
+
+                For j As Integer = 0 To pruebasproducto - 1
+                    If TextBoxArray(j).Name = "TxtBxD-3242" Then
+                        TextBoxArray(j).Text = Acidez.ToString
+                    End If
+                Next
+
+            End If
+
+        Next
 
     End Sub
 

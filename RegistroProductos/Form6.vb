@@ -93,8 +93,18 @@ Public Class Form6
 
     End Sub
 
+    Dim control2 As Integer = 0
+
     Public Sub CargarCategorias()
-        Dim query As String = " Select ID_Categoria, Nombre from categorias"
+        If control = 0 Then
+            Exit Sub
+        End If
+
+        control2 = 0
+
+        Dim query As String = "select categoriaxproducto.ID_Categoria, Categorias.nombre
+                               from categoriaxproducto inner join categorias on categoriaxproducto.ID_Categoria = categorias.ID_Categoria
+                               where ID_producto = '" & CmbBxProducto.SelectedValue & "';"
         Dim cmd As New MySqlCommand(query, conn)
         Dim sqlAdap As New MySqlDataAdapter(cmd)
         Dim dtRecord As New DataTable
@@ -102,6 +112,8 @@ Public Class Form6
         CmbBxCategorias.DataSource = dtRecord
         CmbBxCategorias.DisplayMember = "Nombre"
         CmbBxCategorias.ValueMember = "ID_Categoria"
+
+        control2 = 1
     End Sub
 
     Dim control As Integer = 0
@@ -114,8 +126,8 @@ Public Class Form6
     Dim cod_prue As New List(Of String)()
     Dim nombre_prueba As New List(Of String)()
 
-    Private Sub CmbBxCategorias_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbBxCategorias.SelectedIndexChanged
-        If control = 0 Then
+    Private Sub CmbBxCategorias_SelectedValueChanged(sender As Object, e As EventArgs) Handles CmbBxCategorias.SelectedValueChanged
+        If control = 0 Or control2 = 0 Then
             Exit Sub
         End If
         Cursor = Cursors.WaitCursor
@@ -319,6 +331,7 @@ Public Class Form6
     End Sub
 
     Private Sub CmbBxProducto_SelectedValueChanged(sender As Object, e As EventArgs) Handles CmbBxProducto.SelectedValueChanged
+
         Dim var As String = CmbBxProducto.SelectedValue.ToString
 
         If var = "3" Then
@@ -328,6 +341,9 @@ Public Class Form6
             PorcentajeBioD.Visible = False
             LblPorcentajeBioD.Visible = False
         End If
+
+        CargarCategorias()
+        Panel1.Controls.Clear()
     End Sub
 
     Private Sub Form6_Closed(sender As Object, e As EventArgs) Handles Me.Closed
