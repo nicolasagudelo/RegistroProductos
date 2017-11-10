@@ -352,8 +352,7 @@ Public Class Form3
 
                     For j As Integer = 0 To numero_de_lineas - 1
 
-                        'Probar: if IDPrueba(j) = ID_Prueba
-                        If IDPrueba(j) = "D-3242" Then
+                        If ID_Prueba = "D-3242" And IDPrueba(j) = "D-3242" Then
 
                             Dim WP As Double
                             Dim V As Double
@@ -375,6 +374,11 @@ Public Class Form3
                             Double.TryParse(Valor6(j), B)
                             Double.TryParse(Valor7(j), Tm)
 
+                            Dim Acidez As Decimal
+
+                            Acidez = ((A - B) * Normalidad * 56.1) / W
+                            Acidez = Round(Acidez, 3)
+
                             Dim llave As String
 
                             Try
@@ -393,7 +397,7 @@ Public Class Form3
 
                             Try
                                 conn.Open()
-                                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_4`, `Dato_5`, `Dato_6`, `Dato_7`, `Dato_8`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-3242', '" & WP & "', '" & V & "', '" & Vb & "', '" & Normalidad & "', '" & W & "', '" & A & "', '" & B & "', '" & Tm & "');"), conn)
+                                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_4`, `Dato_5`, `Dato_6`, `Dato_7`, `Dato_8`, `Dato_9`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-3242', '" & WP & "', '" & V & "', '" & Vb & "', '" & Normalidad & "', '" & W & "', '" & A & "', '" & B & "', '" & Tm & "', '" & Acidez & "');"), conn)
                                 cmd.ExecuteNonQuery()
                                 Console.WriteLine("Datos Registrados")
                                 conn.Close()
@@ -402,6 +406,548 @@ Public Class Form3
                                 conn.Close()
                                 Exit Sub
                             End Try
+
+                        ElseIf ID_Prueba = "D-1319-01" And IDPrueba(j) = "D-1319-01" Then
+
+                            Dim Lt1 As Double
+                            Dim Lt2 As Double
+                            Dim Lt3 As Double
+                            Dim Lt4 As Double
+                            Dim La1 As Double
+                            Dim La2 As Double
+                            Dim La3 As Double
+                            Dim La4 As Double
+                            Double.TryParse(Valor1(j), Lt1)
+                            Double.TryParse(Valor2(j), Lt2)
+                            Double.TryParse(Valor3(j), Lt3)
+                            Double.TryParse(Valor4(j), Lt4)
+                            Double.TryParse(Valor5(j), La1)
+                            Double.TryParse(Valor6(j), La2)
+                            Double.TryParse(Valor7(j), La3)
+                            Double.TryParse(Valor8(j), La4)
+
+                            Dim calc1 As Decimal = (La1 / Lt1) * 100
+                            Dim calc2 As Decimal = (La2 / Lt2) * 100
+                            Dim calc3 As Decimal = (La3 / Lt3) * 100
+                            Dim calc4 As Decimal = (La4 / Lt4) * 100
+
+                            calc1 = Round(calc1, 1)
+                            calc2 = Round(calc2, 1)
+                            calc3 = Round(calc3, 1)
+                            calc4 = Round(calc4, 1)
+
+                            Dim prom As Decimal = (calc1 + calc2 + calc3 + calc4) / 4
+
+                            prom = Round(prom, 1)
+
+                            Dim llave As String
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("SELECT MAX(DatoID)+1 FROM datosproducto;"), conn)
+                                llave = Convert.ToString(cmd.ExecuteScalar())
+                                conn.Close()
+                                If llave = Nothing Then
+                                    llave = "1"
+                                End If
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_4`, `Dato_5`, `Dato_6`, `Dato_7`, `Dato_8`, `Dato_9`, `Dato_10`, `Dato_11`, `Dato_12`, `Dato_13`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-1319-01', '" & Lt1 & "', '" & Lt2 & "', '" & Lt3 & "', '" & Lt4 & "', '" & La1 & "', '" & La2 & "', '" & La3 & "', '" & La4 & "', '" & calc1 & "', '" & calc2 & "', '" & calc3 & "', '" & calc4 & "', '" & prom & "');"), conn)
+                                cmd.ExecuteNonQuery()
+                                Console.WriteLine("Datos Registrados")
+                                conn.Close()
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                        ElseIf ID_Prueba = "D-1319-02" And IDPrueba(j) = "D-1319-02" Then
+
+                            Dim Lt1 As Double
+                            Dim Lt2 As Double
+                            Dim Lt3 As Double
+                            Dim Lt4 As Double
+                            Dim Lo1 As Double
+                            Dim Lo2 As Double
+                            Dim Lo3 As Double
+                            Dim Lo4 As Double
+                            Double.TryParse(Valor1(j), Lt1)
+                            Double.TryParse(Valor2(j), Lt2)
+                            Double.TryParse(Valor3(j), Lt3)
+                            Double.TryParse(Valor4(j), Lt4)
+                            Double.TryParse(Valor5(j), Lo1)
+                            Double.TryParse(Valor6(j), Lo2)
+                            Double.TryParse(Valor7(j), Lo3)
+                            Double.TryParse(Valor8(j), Lo4)
+
+                            Dim calc1 As Decimal = (Lo1 / Lt1) * 100
+                            Dim calc2 As Decimal = (Lo2 / Lt2) * 100
+                            Dim calc3 As Decimal = (Lo3 / Lt3) * 100
+                            Dim calc4 As Decimal = (Lo4 / Lt4) * 100
+
+                            calc1 = Round(calc1, 1)
+                            calc2 = Round(calc2, 1)
+                            calc3 = Round(calc3, 1)
+                            calc4 = Round(calc4, 1)
+
+                            Dim prom As Decimal = (calc1 + calc2 + calc3 + calc4) / 4
+
+                            prom = Round(prom, 1)
+
+                            Dim llave As String
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("SELECT MAX(DatoID)+1 FROM datosproducto;"), conn)
+                                llave = Convert.ToString(cmd.ExecuteScalar())
+                                conn.Close()
+                                If llave = Nothing Then
+                                    llave = "1"
+                                End If
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_4`, `Dato_5`, `Dato_6`, `Dato_7`, `Dato_8`, `Dato_9`, `Dato_10`, `Dato_11`, `Dato_12`, `Dato_13`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-1319-02', '" & Lt1 & "', '" & Lt2 & "', '" & Lt3 & "', '" & Lt4 & "', '" & Lo1 & "', '" & Lo2 & "', '" & Lo3 & "', '" & Lo4 & "', '" & calc1 & "', '" & calc2 & "', '" & calc3 & "', '" & calc4 & "', '" & prom & "');"), conn)
+                                cmd.ExecuteNonQuery()
+                                Console.WriteLine("Datos Registrados")
+                                conn.Close()
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                        ElseIf ID_Prueba = "D-1319-03" And IDPrueba(j) = "D-1319-03" Then
+
+                            Dim Lt1 As Double
+                            Dim Lt2 As Double
+                            Dim Lt3 As Double
+                            Dim Lt4 As Double
+                            Dim Li1 As Double
+                            Dim Li2 As Double
+                            Dim Li3 As Double
+                            Dim Li4 As Double
+                            Double.TryParse(Valor1(j), Lt1)
+                            Double.TryParse(Valor2(j), Lt2)
+                            Double.TryParse(Valor3(j), Lt3)
+                            Double.TryParse(Valor4(j), Lt4)
+                            Double.TryParse(Valor5(j), Li1)
+                            Double.TryParse(Valor6(j), Li2)
+                            Double.TryParse(Valor7(j), Li3)
+                            Double.TryParse(Valor8(j), Li4)
+
+                            Dim calc1 As Decimal = (Li1 / Lt1) * 100
+                            Dim calc2 As Decimal = (Li2 / Lt2) * 100
+                            Dim calc3 As Decimal = (Li3 / Lt3) * 100
+                            Dim calc4 As Decimal = (Li4 / Lt4) * 100
+
+                            calc1 = Round(calc1, 1)
+                            calc2 = Round(calc2, 1)
+                            calc3 = Round(calc3, 1)
+                            calc4 = Round(calc4, 1)
+
+                            Dim prom As Decimal = (calc1 + calc2 + calc3 + calc4) / 4
+
+                            prom = Round(prom, 1)
+
+                            Dim llave As String
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("SELECT MAX(DatoID)+1 FROM datosproducto;"), conn)
+                                llave = Convert.ToString(cmd.ExecuteScalar())
+                                conn.Close()
+                                If llave = Nothing Then
+                                    llave = "1"
+                                End If
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_4`, `Dato_5`, `Dato_6`, `Dato_7`, `Dato_8`, `Dato_9`, `Dato_10`, `Dato_11`, `Dato_12`, `Dato_13`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-1319-03', '" & Lt1 & "', '" & Lt2 & "', '" & Lt3 & "', '" & Lt4 & "', '" & Li1 & "', '" & Li2 & "', '" & Li3 & "', '" & Li4 & "', '" & calc1 & "', '" & calc2 & "', '" & calc3 & "', '" & calc4 & "', '" & prom & "');"), conn)
+                                cmd.ExecuteNonQuery()
+                                Console.WriteLine("Datos Registrados")
+                                conn.Close()
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                        ElseIf ID_Prueba = "D-1840" And IDPrueba(j) = "D-1840" Then
+
+                            Dim A As Double
+                            Dim W As Double
+                            Dim K As Double
+                            Dim PromAbsor As Double
+                            Dim B As Double
+                            Dim C As Double
+
+                            Double.TryParse(Valor1(j), A)
+                            Double.TryParse(Valor2(j), W)
+                            Double.TryParse(Valor3(j), K)
+                            Double.TryParse(Valor4(j), PromAbsor)
+                            Double.TryParse(Valor5(j), B)
+                            Double.TryParse(Valor6(j), C)
+
+                            Dim M As Decimal = ((A * K) / (33.7 * W)) * 100
+                            Dim BC As Decimal = B / C
+                            Dim Vol As Decimal = M * BC
+
+                            Vol = Round(Vol, 2)
+
+                            Dim llave As String
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("SELECT MAX(DatoID)+1 FROM datosproducto;"), conn)
+                                llave = Convert.ToString(cmd.ExecuteScalar())
+                                conn.Close()
+                                If llave = Nothing Then
+                                    llave = "1"
+                                End If
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_4`, `Dato_5`, `Dato_6`, `Dato_7`, `Dato_8`, `Dato_9`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-1840', '" & A & "', '" & W & "', '" & K & "', '" & PromAbsor & "', '" & B & "', '" & C & "', '" & M & "', '" & BC & "', '" & Vol & "');"), conn)
+                                cmd.ExecuteNonQuery()
+                                Console.WriteLine("Datos Registrados")
+                                conn.Close()
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                        ElseIf ID_Prueba = "D-1322" And IDPrueba(j) = "D-1322" Then
+
+                            Dim FactorCorreccion As Double
+                            Dim PresionBar As Double
+                            Dim TempMues As Double
+                            Dim Lec1 As Double
+                            Dim Lec2 As Double
+                            Dim Lec3 As Double
+                            Dim Turbidez As String
+                            Dim Filtracion As String
+
+                            Double.TryParse(Valor1(j), FactorCorreccion)
+                            Double.TryParse(Valor2(j), PresionBar)
+                            Double.TryParse(Valor3(j), TempMues)
+                            Double.TryParse(Valor4(j), Lec1)
+                            Double.TryParse(Valor5(j), Lec2)
+                            Double.TryParse(Valor6(j), Lec3)
+                            Turbidez = Valor7(j)
+                            Filtracion = Valor8(j)
+
+                            Dim prom As Decimal = (Lec1 + Lec2 + Lec3) / 3
+
+                            Dim Val As Decimal = prom * FactorCorreccion
+
+                            Val = Math.Round((valor * 2)) / 2
+
+                            Dim llave As String
+
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("SELECT MAX(DatoID)+1 FROM datosproducto;"), conn)
+                                llave = Convert.ToString(cmd.ExecuteScalar())
+                                conn.Close()
+                                If llave = Nothing Then
+                                    llave = "1"
+                                End If
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_4`, `Dato_5`, `Dato_6`, `Dato_7`, `Dato_8`, `Dato_9`, `Dato_10`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-1322', '" & Turbidez & "', '" & Filtracion & "', '" & PresionBar & "', '" & TempMues & "', '" & Lec1 & "', '" & Lec2 & "', '" & Lec3 & "', '" & prom & "', '" & FactorCorreccion & "', '" & Val & "');"), conn)
+                                cmd.ExecuteNonQuery()
+                                Console.WriteLine("Datos Registrados")
+                                conn.Close()
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                        ElseIf ID_Prueba = "D-56" And IDPrueba(j) = "D-56" Then
+
+                            Dim TempMues As Double
+                            Dim PresionBar As Double
+                            Dim PuntoChispa As Double
+
+                            Double.TryParse(Valor1(j), TempMues)
+                            Double.TryParse(Valor2(j), PresionBar)
+                            Double.TryParse(Valor3(j), PuntoChispa)
+
+                            Dim PuntoChispaCorregido As Decimal = PuntoChispa + 0.25 * (101.3 - PresionBar)
+
+                            PuntoChispaCorregido = Math.Round((PuntoChispaCorregido * 2)) / 2
+
+                            Dim llave As String
+
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("SELECT MAX(DatoID)+1 FROM datosproducto;"), conn)
+                                llave = Convert.ToString(cmd.ExecuteScalar())
+                                conn.Close()
+                                If llave = Nothing Then
+                                    llave = "1"
+                                End If
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_4`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-56', '" & TempMues & "', '" & PresionBar & "', '" & PuntoChispa & "', '" & PuntoChispaCorregido & "');"), conn)
+                                cmd.ExecuteNonQuery()
+                                Console.WriteLine("Datos Registrados")
+                                conn.Close()
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                        ElseIf ID_Prueba = "D-93" And IDPrueba(j) = "D-93" Then
+
+                            Dim TempMues As Double
+                            Dim PresionBar As Double
+                            Dim PuntoChispa As Double
+
+                            Double.TryParse(Valor1(j), TempMues)
+                            Double.TryParse(Valor2(j), PresionBar)
+                            Double.TryParse(Valor3(j), PuntoChispa)
+
+                            Dim PuntoChispaCorregido As Decimal = PuntoChispa + 0.25 * (101.3 - PresionBar)
+
+                            PuntoChispaCorregido = Math.Round((PuntoChispaCorregido * 2)) / 2
+
+                            Dim llave As String
+
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("SELECT MAX(DatoID)+1 FROM datosproducto;"), conn)
+                                llave = Convert.ToString(cmd.ExecuteScalar())
+                                conn.Close()
+                                If llave = Nothing Then
+                                    llave = "1"
+                                End If
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                            Try
+                                conn.Open()
+                                Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_4`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-93', '" & TempMues & "', '" & PresionBar & "', '" & PuntoChispa & "', '" & PuntoChispaCorregido & "');"), conn)
+                                cmd.ExecuteNonQuery()
+                                Console.WriteLine("Datos Registrados")
+                                conn.Close()
+                            Catch ex As Exception
+                                MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                conn.Close()
+                                Exit Sub
+                            End Try
+
+                        ElseIf ID_Prueba = "D-4294-01" And IDPrueba(j) = "D-4294-01" Then
+
+                            Dim AguaSuspendida As String
+                            Dim Homogeniziacion As String
+                            Dim muestra1 As Double
+                            Dim muestra2 As Double
+
+                            AguaSuspendida = Valor1(j)
+                            Homogeniziacion = Valor2(j)
+                            Double.TryParse(Valor3(j), muestra1)
+                            Double.TryParse(Valor4(j), muestra2)
+
+                            Dim prom As Decimal
+
+                            If muestra2 = 0 Then
+                                prom = muestra1
+                                prom = Round(prom, 4)
+
+                                Dim llave As String
+
+
+                                Try
+                                    conn.Open()
+                                    Dim cmd As New MySqlCommand(String.Format("SELECT MAX(DatoID)+1 FROM datosproducto;"), conn)
+                                    llave = Convert.ToString(cmd.ExecuteScalar())
+                                    conn.Close()
+                                    If llave = Nothing Then
+                                        llave = "1"
+                                    End If
+                                Catch ex As Exception
+                                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                    conn.Close()
+                                    Exit Sub
+                                End Try
+
+                                Try
+                                    conn.Open()
+                                    Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_5`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-4294-01', '" & AguaSuspendida & "', '" & Homogeniziacion & "', '" & muestra1 & "', '" & prom & "');"), conn)
+                                    cmd.ExecuteNonQuery()
+                                    Console.WriteLine("Datos Registrados")
+                                    conn.Close()
+                                Catch ex As Exception
+                                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                    conn.Close()
+                                    Exit Sub
+                                End Try
+
+                            Else
+                                prom = (muestra1 + muestra2) / 2
+
+                                prom = Round(prom, 4)
+
+                                Dim llave As String
+
+
+                                Try
+                                    conn.Open()
+                                    Dim cmd As New MySqlCommand(String.Format("SELECT MAX(DatoID)+1 FROM datosproducto;"), conn)
+                                    llave = Convert.ToString(cmd.ExecuteScalar())
+                                    conn.Close()
+                                    If llave = Nothing Then
+                                        llave = "1"
+                                    End If
+                                Catch ex As Exception
+                                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                    conn.Close()
+                                    Exit Sub
+                                End Try
+
+                                Try
+                                    conn.Open()
+                                    Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_4`, `Dato_5`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-4294-01', '" & AguaSuspendida & "', '" & Homogeniziacion & "', '" & muestra1 & "', '" & muestra2 & "', '" & prom & "');"), conn)
+                                    cmd.ExecuteNonQuery()
+                                    Console.WriteLine("Datos Registrados")
+                                    conn.Close()
+                                Catch ex As Exception
+                                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                    conn.Close()
+                                    Exit Sub
+                                End Try
+
+                            End If
+
+
+
+                        ElseIf ID_Prueba = "D-4294-02" And IDPrueba(j) = "D-4294-02" Then
+
+                            Dim AguaSuspendida As String
+                            Dim Homogeniziacion As String
+                            Dim muestra1 As Double
+                            Dim muestra2 As Double
+
+                            AguaSuspendida = Valor1(j)
+                            Homogeniziacion = Valor2(j)
+                            Double.TryParse(Valor3(j), muestra1)
+                            Double.TryParse(Valor4(j), muestra2)
+
+                            Dim prom As Decimal
+
+                            If muestra2 = 0 Then
+                                prom = muestra1
+                                prom = Round(prom, 4)
+
+                                Dim llave As String
+
+
+                                Try
+                                    conn.Open()
+                                    Dim cmd As New MySqlCommand(String.Format("SELECT MAX(DatoID)+1 FROM datosproducto;"), conn)
+                                    llave = Convert.ToString(cmd.ExecuteScalar())
+                                    conn.Close()
+                                    If llave = Nothing Then
+                                        llave = "1"
+                                    End If
+                                Catch ex As Exception
+                                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                    conn.Close()
+                                    Exit Sub
+                                End Try
+
+                                Try
+                                    conn.Open()
+                                    Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_5`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-4294-02', '" & AguaSuspendida & "', '" & Homogeniziacion & "', '" & muestra1 & "', '" & prom & "');"), conn)
+                                    cmd.ExecuteNonQuery()
+                                    Console.WriteLine("Datos Registrados")
+                                    conn.Close()
+                                Catch ex As Exception
+                                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                    conn.Close()
+                                    Exit Sub
+                                End Try
+
+                            Else
+                                prom = (muestra1 + muestra2) / 2
+
+                                prom = Round(prom, 4)
+
+                                Dim llave As String
+
+
+                                Try
+                                    conn.Open()
+                                    Dim cmd As New MySqlCommand(String.Format("SELECT MAX(DatoID)+1 FROM datosproducto;"), conn)
+                                    llave = Convert.ToString(cmd.ExecuteScalar())
+                                    conn.Close()
+                                    If llave = Nothing Then
+                                        llave = "1"
+                                    End If
+                                Catch ex As Exception
+                                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                    conn.Close()
+                                    Exit Sub
+                                End Try
+
+                                Try
+                                    conn.Open()
+                                    Dim cmd As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`datosproducto` (`DatoID`, `ProductoID`, `ID_Prueba`, `Dato_1`, `Dato_2`, `Dato_3`, `Dato_4`, `Dato_5`) VALUES ('" & llave & "', '" & TxtBxIDProducto.Text & "', 'D-4294-02', '" & AguaSuspendida & "', '" & Homogeniziacion & "', '" & muestra1 & "', '" & muestra2 & "', '" & prom & "');"), conn)
+                                    cmd.ExecuteNonQuery()
+                                    Console.WriteLine("Datos Registrados")
+                                    conn.Close()
+                                Catch ex As Exception
+                                    MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error")
+                                    conn.Close()
+                                    Exit Sub
+                                End Try
+
+                            End If
 
                         End If
 
@@ -503,6 +1049,7 @@ Public Class Form3
         Form1.CargarDGVProductosSinRevisar()
         Form1.ProductosFechaLimiteCerca()
         MsgBox("Reporte Registrado", False, "Reporte Registrado")
+        ProgressBar1.Value = 0
         Me.Close()
     End Sub
 
@@ -561,43 +1108,383 @@ Public Class Form3
             End While
         End Using
 
-        For i As Integer = 0 To numero_de_lineas - 1
+        For j = 0 To pruebasproducto - 1
+            If TextBoxArray(j).Enabled = True Then
 
-            If IDPrueba(i) = "D-3242" Then
+                For i As Integer = 0 To numero_de_lineas - 1
 
-                Dim WP As Double
-                Dim V As Double
-                Dim Vb As Double
-                Double.TryParse(Valor1(i), WP)
-                Double.TryParse(Valor2(i), V)
-                Double.TryParse(Valor3(i), Vb)
-                Dim Normalidad As Decimal
+                    If IDPrueba(i) = "D-3242" Then
 
-                Normalidad = (WP / 204.23) * (1000 / (V - Vb))
-                Normalidad = Round(Normalidad, 4)
+                        Dim WP As Double
+                        Dim V As Double
+                        Dim Vb As Double
+                        Double.TryParse(Valor1(i), WP)
+                        Double.TryParse(Valor2(i), V)
+                        Double.TryParse(Valor3(i), Vb)
+                        Dim Normalidad As Decimal
 
-                Dim W As Double
-                Dim A As Double
-                Dim B As Double
-                Dim Tm As Double
-                Double.TryParse(Valor4(i), W)
-                Double.TryParse(Valor5(i), A)
-                Double.TryParse(Valor6(i), B)
-                Double.TryParse(Valor7(i), Tm)
+                        Normalidad = (WP / 204.23) * (1000 / (V - Vb))
+                        Normalidad = Round(Normalidad, 4)
 
-                Dim Acidez As Decimal
+                        Dim W As Double
+                        Dim A As Double
+                        Dim B As Double
+                        Dim Tm As Double
+                        Double.TryParse(Valor4(i), W)
+                        Double.TryParse(Valor5(i), A)
+                        Double.TryParse(Valor6(i), B)
+                        Double.TryParse(Valor7(i), Tm)
 
-                Acidez = ((A - B) * Normalidad * 56.1) / W
-                Acidez = Round(Acidez, 3)
+                        Dim Acidez As Decimal
 
-                For j As Integer = 0 To pruebasproducto - 1
-                    If TextBoxArray(j).Name = "TxtBxD-3242" Then
-                        TextBoxArray(j).Text = Acidez.ToString
+                        Acidez = ((A - B) * Normalidad * 56.1) / W
+                        Acidez = Round(Acidez, 3)
+
+                        For k As Integer = 0 To pruebasproducto - 1
+                            If TextBoxArray(k).Name = "TxtBxD-3242" Then
+                                TextBoxArray(k).Text = Acidez.ToString
+                            End If
+                        Next
+
+                    ElseIf IDPrueba(i) = "D-1319-01" Then
+
+                        Dim Lt1 As Double
+                        Dim Lt2 As Double
+                        Dim Lt3 As Double
+                        Dim Lt4 As Double
+                        Dim La1 As Double
+                        Dim La2 As Double
+                        Dim La3 As Double
+                        Dim La4 As Double
+                        Double.TryParse(Valor1(i), Lt1)
+                        Double.TryParse(Valor2(i), Lt2)
+                        Double.TryParse(Valor3(i), Lt3)
+                        Double.TryParse(Valor4(i), Lt4)
+                        Double.TryParse(Valor5(i), La1)
+                        Double.TryParse(Valor6(i), La2)
+                        Double.TryParse(Valor7(i), La3)
+                        Double.TryParse(Valor8(i), La4)
+
+                        Dim calc1 As Decimal = (La1 / Lt1) * 100
+                        Dim calc2 As Decimal = (La2 / Lt2) * 100
+                        Dim calc3 As Decimal = (La3 / Lt3) * 100
+                        Dim calc4 As Decimal = (La4 / Lt4) * 100
+
+                        calc1 = Round(calc1, 1)
+                        calc2 = Round(calc2, 1)
+                        calc3 = Round(calc3, 1)
+                        calc4 = Round(calc4, 1)
+
+                        Dim prom As Decimal = (calc1 + calc2 + calc3 + calc4) / 4
+
+                        prom = Round(prom, 1)
+
+                        For k As Integer = 0 To pruebasproducto - 1
+                            If TextBoxArray(k).Name = "TxtBxD-1319-01" Then
+                                TextBoxArray(k).Text = prom.ToString
+                            End If
+                        Next
+
+                    ElseIf IDPrueba(i) = "D-1319-02" Then
+
+                        Dim Lt1 As Double
+                        Dim Lt2 As Double
+                        Dim Lt3 As Double
+                        Dim Lt4 As Double
+                        Dim Lo1 As Double
+                        Dim Lo2 As Double
+                        Dim Lo3 As Double
+                        Dim Lo4 As Double
+                        Double.TryParse(Valor1(i), Lt1)
+                        Double.TryParse(Valor2(i), Lt2)
+                        Double.TryParse(Valor3(i), Lt3)
+                        Double.TryParse(Valor4(i), Lt4)
+                        Double.TryParse(Valor5(i), Lo1)
+                        Double.TryParse(Valor6(i), Lo2)
+                        Double.TryParse(Valor7(i), Lo3)
+                        Double.TryParse(Valor8(i), Lo4)
+
+                        Dim calc1 As Decimal = (Lo1 / Lt1) * 100
+                        Dim calc2 As Decimal = (Lo2 / Lt2) * 100
+                        Dim calc3 As Decimal = (Lo3 / Lt3) * 100
+                        Dim calc4 As Decimal = (Lo4 / Lt4) * 100
+
+                        calc1 = Round(calc1, 1)
+                        calc2 = Round(calc2, 1)
+                        calc3 = Round(calc3, 1)
+                        calc4 = Round(calc4, 1)
+
+                        Dim prom As Decimal = (calc1 + calc2 + calc3 + calc4) / 4
+
+                        prom = Round(prom, 1)
+
+                        For k As Integer = 0 To pruebasproducto - 1
+                            If TextBoxArray(k).Name = "TxtBxD-1319-02" Then
+                                TextBoxArray(k).Text = prom.ToString
+                            End If
+                        Next
+
+                    ElseIf IDPrueba(i) = "D-1319-03" Then
+
+                        Dim Lt1 As Double
+                        Dim Lt2 As Double
+                        Dim Lt3 As Double
+                        Dim Lt4 As Double
+                        Dim Li1 As Double
+                        Dim Li2 As Double
+                        Dim Li3 As Double
+                        Dim Li4 As Double
+                        Double.TryParse(Valor1(i), Lt1)
+                        Double.TryParse(Valor2(i), Lt2)
+                        Double.TryParse(Valor3(i), Lt3)
+                        Double.TryParse(Valor4(i), Lt4)
+                        Double.TryParse(Valor5(i), Li1)
+                        Double.TryParse(Valor6(i), Li2)
+                        Double.TryParse(Valor7(i), Li3)
+                        Double.TryParse(Valor8(i), Li4)
+
+                        Dim calc1 As Decimal = (Li1 / Lt1) * 100
+                        Dim calc2 As Decimal = (Li2 / Lt2) * 100
+                        Dim calc3 As Decimal = (Li3 / Lt3) * 100
+                        Dim calc4 As Decimal = (Li4 / Lt4) * 100
+
+                        calc1 = Round(calc1, 1)
+                        calc2 = Round(calc2, 1)
+                        calc3 = Round(calc3, 1)
+                        calc4 = Round(calc4, 1)
+
+                        Dim prom As Decimal = (calc1 + calc2 + calc3 + calc4) / 4
+
+                        prom = Round(prom, 1)
+
+                        For k As Integer = 0 To pruebasproducto - 1
+                            If TextBoxArray(k).Name = "TxtBxD-1319-03" Then
+                                TextBoxArray(k).Text = prom.ToString
+                            End If
+                        Next
+
+                    ElseIf IDPrueba(i) = "D-1840" Then
+
+                        Dim A As Double
+                        Dim W As Double
+                        Dim K As Double
+                        Dim PromAbsor As Double
+                        Dim B As Double
+                        Dim C As Double
+
+                        Double.TryParse(Valor1(i), A)
+                        Double.TryParse(Valor2(i), W)
+                        Double.TryParse(Valor3(i), K)
+                        Double.TryParse(Valor4(i), PromAbsor)
+                        Double.TryParse(Valor5(i), B)
+                        Double.TryParse(Valor6(i), C)
+
+                        Dim M As Decimal = ((A * K) / (33.7 * W)) * 100
+                        Dim BC As Decimal = B / C
+                        Dim Vol As Decimal = M * BC
+
+                        Vol = Round(Vol, 2)
+
+                        For l As Integer = 0 To pruebasproducto - 1
+                            If TextBoxArray(l).Name = "TxtBxD-1840" Then
+                                TextBoxArray(l).Text = Vol.ToString
+                            End If
+                        Next
+
+                    ElseIf IDPrueba(i) = "D-1322" Then
+
+                        Dim FactorCorreccion As Double
+                        Dim PresionBar As Double
+                        Dim TempMues As Double
+                        Dim Lec1 As Double
+                        Dim Lec2 As Double
+                        Dim Lec3 As Double
+                        Dim Turbidez As String
+                        Dim Filtracion As String
+
+                        Double.TryParse(Valor1(i), FactorCorreccion)
+                        Double.TryParse(Valor2(i), PresionBar)
+                        Double.TryParse(Valor3(i), TempMues)
+                        Double.TryParse(Valor4(i), Lec1)
+                        Double.TryParse(Valor5(i), Lec2)
+                        Double.TryParse(Valor6(i), Lec3)
+                        Turbidez = Valor7(i)
+                        Filtracion = Valor8(i)
+
+                        Dim prom As Decimal = (Lec1 + Lec2 + Lec3) / 3
+
+                        Dim valor As Decimal = prom * FactorCorreccion
+
+                        valor = Math.Round((valor * 2)) / 2
+
+                        For k As Integer = 0 To pruebasproducto - 1
+                            If TextBoxArray(k).Name = "TxtBxD-1322" Then
+                                TextBoxArray(k).Text = valor.ToString
+                            End If
+                        Next
+
+                    ElseIf IDPrueba(i) = "D-56" Then
+
+                        Dim TempMues As Double
+                        Dim PresionBar As Double
+                        Dim PuntoChispa As Double
+
+                        Double.TryParse(Valor1(i), TempMues)
+                        Double.TryParse(Valor2(i), PresionBar)
+                        Double.TryParse(Valor3(i), PuntoChispa)
+
+                        Dim PuntoChispaCorregido As Decimal = PuntoChispa + 0.25 * (101.3 - PresionBar)
+
+                        PuntoChispaCorregido = Math.Round((PuntoChispaCorregido * 2)) / 2
+
+                        For k As Integer = 0 To pruebasproducto - 1
+                            If TextBoxArray(k).Name = "TxtBxD-56" Then
+                                TextBoxArray(k).Text = PuntoChispaCorregido.ToString
+                            End If
+                        Next
+
+                    ElseIf IDPrueba(i) = "D-93" Then
+
+                        Dim TempMues As Double
+                        Dim PresionBar As Double
+                        Dim PuntoChispa As Double
+
+                        Double.TryParse(Valor1(i), TempMues)
+                        Double.TryParse(Valor2(i), PresionBar)
+                        Double.TryParse(Valor3(i), PuntoChispa)
+
+                        Dim PuntoChispaCorregido As Decimal = PuntoChispa + 0.25 * (101.3 - PresionBar)
+
+                        PuntoChispaCorregido = Math.Round((PuntoChispaCorregido * 2)) / 2
+
+                        For k As Integer = 0 To pruebasproducto - 1
+                            If TextBoxArray(k).Name = "TxtBxD-93" Then
+                                TextBoxArray(k).Text = PuntoChispaCorregido.ToString
+                            End If
+                        Next
+
+                    ElseIf IDPrueba(i) = "D-4294-01" Then
+
+                        Dim AguaSuspendida As String
+                        Dim Homogeniziacion As String
+                        Dim muestra1 As Double
+                        Dim muestra2 As Double
+
+                        AguaSuspendida = Valor1(i)
+                        Homogeniziacion = Valor2(i)
+                        Double.TryParse(Valor3(i), muestra1)
+                        Double.TryParse(Valor4(i), muestra2)
+
+                        Dim prom As Decimal
+
+                        If muestra2 = 0 Then
+                            prom = muestra1
+                            prom = Round(prom, 4)
+                        Else
+                            prom = (muestra1 + muestra2) / 2
+
+                            prom = Round(prom, 4)
+                        End If
+
+                        For k As Integer = 0 To pruebasproducto - 1
+                            If TextBoxArray(k).Name = "TxtBxD-4294-01" Then
+                                TextBoxArray(k).Text = prom.ToString
+                            End If
+                        Next
+
+                    ElseIf IDPrueba(i) = "D-4294-02" Then
+
+                        Dim AguaSuspendida As String
+                        Dim Homogeniziacion As String
+                        Dim muestra1 As Double
+                        Dim muestra2 As Double
+
+                        AguaSuspendida = Valor1(i)
+                        Homogeniziacion = Valor2(i)
+                        Double.TryParse(Valor3(i), muestra1)
+                        Double.TryParse(Valor4(i), muestra2)
+
+                        Dim prom As Decimal
+
+                        If muestra2 = 0 Then
+                            prom = muestra1
+                            prom = Round(prom, 4)
+                        Else
+                            prom = (muestra1 + muestra2) / 2
+
+                            prom = Round(prom, 4)
+                        End If
+
+                        For k As Integer = 0 To pruebasproducto - 1
+                            If TextBoxArray(k).Name = "TxtBxD-4294-02" Then
+                                TextBoxArray(k).Text = prom.ToString
+                            End If
+                        Next
+
+                    ElseIf IDPrueba(i) = "D-3241-01" Then
+
+                        Dim NoSerie As String
+                        Dim observaciones As String
+                        Dim resultado As String
+                        Dim horafinalizacionfuel As String
+                        Dim tempfuel As String
+                        Dim Tcaidafuelinicio As String
+                        Dim Tcaidafuelfinal As String
+                        Dim horainicioh As String
+                        Dim horafinalizacionprueba As String
+                        Dim volumenpasado As String
+
+                        NoSerie = Valor1(i)
+                        observaciones = Valor2(i)
+                        resultado = Valor3(i)
+                        horafinalizacionfuel = Valor4(i)
+                        tempfuel = Valor5(i)
+                        Tcaidafuelinicio = Valor6(i)
+                        Tcaidafuelfinal = Valor7(i)
+                        horainicioh = Valor8(i)
+                        horafinalizacionprueba = Valor9(i)
+                        volumenpasado = Valor10(i)
+
+                        For k As Integer = 0 To pruebasproducto - 1
+                            If TextBoxArray(k).Name = "TxtBxD-3241-01" Then
+                                TextBoxArray(k).Text = resultado
+                            End If
+                        Next
+
+                    ElseIf IDPrueba(i) = "D-3241-02" Then
+
+                        Dim NoSerie As String
+                        Dim observaciones As String
+                        Dim resultado As String
+                        Dim horafinalizacionfuel As String
+                        Dim tempfuel As String
+                        Dim Tcaidafuelinicio As String
+                        Dim Tcaidafuelfinal As String
+                        Dim horainicioh As String
+                        Dim horafinalizacionprueba As String
+                        Dim volumenpasado As String
+
+                        NoSerie = Valor1(i)
+                        observaciones = Valor2(i)
+                        resultado = Valor3(i)
+                        horafinalizacionfuel = Valor4(i)
+                        tempfuel = Valor5(i)
+                        Tcaidafuelinicio = Valor6(i)
+                        Tcaidafuelfinal = Valor7(i)
+                        horainicioh = Valor8(i)
+                        horafinalizacionprueba = Valor9(i)
+                        volumenpasado = Valor10(i)
+
+                        For k As Integer = 0 To pruebasproducto - 1
+                            If TextBoxArray(k).Name = "TxtBxD-3241-02" Then
+                                TextBoxArray(k).Text = resultado
+                            End If
+                        Next
+
                     End If
+
                 Next
-
             End If
-
         Next
 
     End Sub

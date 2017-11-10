@@ -97,7 +97,8 @@ Public Class Form1
     Public Sub CargarDGVProductosTransito()
         Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Fecha_Registro as 'Fecha de Registro', Estado, Observaciones_Cliente as 'Observaciones del Cliente'
                                from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID
-                               Where Estado = 'Transito'; "
+                               Where Estado = 'Transito'
+                               ORDER BY LENGTH(ProductoID), ProductoID;"
 
         Dim cmd As New MySqlCommand(query, conn)
         Dim reader As MySqlDataReader
@@ -128,7 +129,8 @@ Public Class Form1
     Public Sub CargarDGVProductosSinRevisar()
         Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Fecha_Registro as 'Fecha de Registro', Observaciones_Cliente as 'Observaciones del Cliente', Fecha_Entrada, Hora_Entrada, Fecha_Limite, Estado, Observaciones_Analista as 'Observaciones del Analista', Observaciones_Administrador as 'Observaciones del Administrador'
                                from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID
-                               Where Estado = 'Pendiente'; "
+                               Where Estado = 'Pendiente'
+                               ORDER BY LENGTH(ProductoID), ProductoID; "
 
         Dim cmd As New MySqlCommand(query, conn)
         Dim reader As MySqlDataReader
@@ -162,7 +164,8 @@ Public Class Form1
         If admin = 1 Then
             Dim query As String = "SELECT distinct productos.ProductoID as 'ID Producto', clientes.ClienteID, clientes.Nombre as 'Cliente', clientes.Direccion as 'Direccion',tipo_productos.Tipo_Producto_ID, tipo_productos.Nombre as 'Producto', productos.Observaciones_Cliente as 'Observaciones del Cliente', productos.Fecha_Entrada as 'Fecha de Entrada', Productos.Hora_Entrada as 'Hora de Entrada', reportes.Fecha_Reporte as 'Fecha Reporte', productos.Fecha_Limite as 'Fecha Limite', productos.Estado as 'Estado',productos.Observaciones_Analista as 'Observaciones del Analista', productos.UsuarioID, usuarios.usuario as 'Revisado Por'
                                    from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID inner join usuarios on productos.UsuarioID = usuarios.UsuarioID inner join reportes on productos.ProductoID = reportes.ProductoID
-                                   Where Estado = 'Revisado';"
+                                   Where Estado = 'Revisado'
+                                   ORDER BY LENGTH(productos.ProductoID), productos.ProductoID"
 
             Dim cmd As New MySqlCommand(query, conn)
             Dim reader As MySqlDataReader
@@ -251,7 +254,8 @@ Public Class Form1
     Public Sub CargarDGVProductosLimite()
         Dim query As String = "SELECT ProductoID as 'Identificador', productos.ClienteID, productos.Tipo_Producto_ID, Clientes.Nombre as 'Cliente', tipo_productos.Nombre as 'Tipo de Mercancia', Fecha_Registro as 'Fecha de Registro', Observaciones_Cliente as 'Observaciones del Cliente', Fecha_Entrada, Hora_Entrada, Fecha_Limite, Estado, Observaciones_Analista as 'Observaciones del Analista', Observaciones_Administrador as 'Observaciones del Administrador'
                                from productos inner join clientes on productos.ClienteID = clientes.ClienteID inner join tipo_productos on productos.Tipo_Producto_ID = tipo_productos.Tipo_Producto_ID
-                               Where Estado = 'Pendiente' and datediff(Fecha_limite,(select date(now()))) <= 10;"
+                               Where Estado = 'Pendiente' and datediff(Fecha_limite,(select date(now()))) <= 10
+                               ORDER BY LENGTH(ProductoID), ProductoID;"
 
         Dim cmd As New MySqlCommand(query, conn)
         Dim reader As MySqlDataReader
