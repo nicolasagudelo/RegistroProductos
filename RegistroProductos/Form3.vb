@@ -352,6 +352,7 @@ Public Class Form3
 
                     For j As Integer = 0 To numero_de_lineas - 1
 
+                        'Probar: if IDPrueba(j) = ID_Prueba
                         If IDPrueba(j) = "D-3242" Then
 
                             Dim WP As Double
