@@ -2440,8 +2440,14 @@ Public Class Form5
         Cursor = Cursors.WaitCursor
         Dim fila_actual As Integer = (DGV.CurrentRow.Index)
         Dim var As String = TxtBxIDProducto.Text
-        Dim var2 As String = DGV(0, fila_actual).Value
-        Dim nombre_prueba As String = DGV(1, fila_actual).Value
+        Dim var2 As String
+        Dim nombre_prueba As String
+        Try
+            var2 = DGV(0, fila_actual).Value
+            nombre_prueba = DGV(1, fila_actual).Value
+        Catch ex As Exception
+            Exit Sub
+        End Try
         Form7.LblIDProducto.Text = "ID del producto : " & var
         Form7.LblPrueba.Text = "Prueba: " & nombre_prueba
         Form7.RecibirVariablesForm5(var, var2)
