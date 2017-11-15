@@ -174,6 +174,66 @@ Public Class Form7
                                    where ProductoID = '" & id_producto & "' and ID_Prueba = '" & id_prueba & "';"
             LoadDGV(query)
 
+        ElseIf id_prueba = "MMIN" Then
+
+            Dim query As String = "SELECT DatoID, Dato_1 as 'Presion de Vapor REID Obtenida kPa (P)', Dato_2 as 'Porcentaje Evaporado a 70°C (A)', Dato_3 as 'ICV (P + 1.13 x A)'
+                                   from datosproducto
+                                   where ProductoID = '" & id_producto & "' and ID_Prueba = '" & id_prueba & "';"
+            LoadDGV(query)
+
+        ElseIf id_prueba = "EN14078" Then
+
+            Dim query As String = "SELECT DatoID, Dato_1 as 'Relacion Dilucion', Dato_2 as 'Dato Interpolado en la Curva', Dato_3 as 'Densidad BioDiesel Usada', Dato_4 as 'Observaciones', Dato_5 as 'Resultado'
+                                   from datosproducto
+                                   where ProductoID = '" & id_producto & "' and ID_Prueba = '" & id_prueba & "';"
+            LoadDGV(query)
+
+        ElseIf id_prueba = "EN12937" Then
+
+            Dim query As String = "SELECT DatoID, Dato_1 as 'Peso Muestra', Dato_2 as 'Observaciones', Dato_3 as 'Concentracion Leida'
+                                   from datosproducto
+                                   where ProductoID = '" & id_producto & "' and ID_Prueba = '" & id_prueba & "';"
+            LoadDGV(query)
+
+        ElseIf id_prueba = "D-7321" Then
+
+            Dim query As String = "SELECT DatoID, Dato_1 as 'Peso Inicial Membrana 1', Dato_2 as 'Peso Final Membrana 1', Dato_3 as 'Diferencia de pesos Membrana 1', Dato_4 as 'Peso Inicial Membrana 2', Dato_5 as 'Peso Final Membrana 2', Dato_6 as 'Diferencia de pesos Membrana 2', Dato_7 as 'Peso Inicial Membrana 3', Dato_8 as 'Peso Final Membrana 3', Dato_9 as 'Diferencia de pesos Membrana 3', Dato_10 as 'Volumen Filtrado Membrana 1', Dato_11 as 'Volumen Filtrado Membrana 2', Dato_12 as 'Volumen Filtrado Membrana 3', Dato_13 as 'Suma Diferencia de Pesos', Dato_14 as 'Suma Volumenes', Dato_15 as 'Resultado'
+                                   from datosproducto
+                                   where ProductoID = '" & id_producto & "' and ID_Prueba = '" & id_prueba & "';"
+            LoadDGV(query)
+
+        ElseIf id_prueba = "D-525" Then
+
+            Dim query As String = "SELECT DatoID, Dato_1 as 'Hora Inicio Inmersion Vasija de Presion al Baño', Dato_2 as 'Caida de Presion en 10 Minutos (Antes de Iniciar)', Dato_3 as 'Promedio Temperatura de la Prueba (°C)', Dato_4 as 'Periodo de Induccion Observado', Dato_5 as 'Resultado'
+                                   from datosproducto
+                                   where ProductoID = '" & id_producto & "' and ID_Prueba = '" & id_prueba & "';"
+            LoadDGV(query)
+
+        ElseIf id_prueba = "D-381" Then
+
+            If Form5.TxtBxTipoProductoID.Text = "4" Then
+
+                Dim query As String = "SELECT DatoID, Dato_1 as 'Peso Beaker Muestra con Residuo (B)', Dato_2 as 'Peso Beaker Muestra Vacio (D)', Dato_3 as 'Peso Beaker Blanco Antes (X)', Dato_4 as 'Peso Beaker Blanco Despues Prueba (Y)', Dato_5 as 'Material Suspendido', Dato_6 as 'Filtracion Vidrio Sinterizado', Dato_7 as 'Gomas Existentes', Dato_8 as 'Gomas Existentes Valor Reporte'
+                                   from datosproducto
+                                   where ProductoID = '" & id_producto & "' and ID_Prueba = '" & id_prueba & "';"
+                LoadDGV(query)
+
+            ElseIf Form5.TxtBxTipoProductoID.Text = "6" Or Form5.TxtBxTipoProductoID.Text = "7" Or Form5.TxtBxTipoProductoID.Text = "8" Or Form5.TxtBxTipoProductoID.Text = "9" Then
+
+                Dim query As String = "SELECT DatoID, Dato_1 as 'Peso Beaker Muestra con Residuo (B)', Dato_2 as 'Peso Beaker Muestra Vacio (D)', Dato_3 as 'Peso Beaker Blanco Antes (X)', Dato_4 as 'Peso Beaker Blanco Despues Prueba (Y)', Dato_5 as 'Peso Beaker Muestra con Residuo Despues Lavado (C)', Dato_6 as 'Peso Beaker Blanco Despues Lavado (Z)', Dato_7 as 'Material Suspendido', Dato_8 as 'Filtracion Vidrio Sinterizado', Dato_9 as 'Gomas sin Lavar', Dato_10 as 'Gomas sin Lavar Valor Reporte', Dato_11 as 'Gomas Lavadas', Dato_12 as 'Gomas Lavadas Valor Reporte'
+                                   from datosproducto
+                                   where ProductoID = '" & id_producto & "' and ID_Prueba = '" & id_prueba & "';"
+                LoadDGV(query)
+
+            End If
+
+        ElseIf id_prueba = "D-3338" Then
+
+            Dim query As String = "SELECT DatoID, Dato_1 as 'Aromaticos (A)', Dato_2 as 'Densidad (D)', Dato_3 as 'T10°C Recogido', Dato_4 as 'T50°C Recogido', Dato_5 as 'T90°C Recogido', Dato_6 as 'Promedio (T)', Dato_7 as 'MJ/Kg, Libre de Azufre', Dato_8 as 'Azufre % Masa', Dato_9 as 'MJ/Kg Corregido con S'
+                                   from datosproducto
+                                   where ProductoID = '" & id_producto & "' and ID_Prueba = '" & id_prueba & "';"
+            LoadDGV(query)
+
         End If
 
 

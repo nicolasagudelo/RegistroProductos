@@ -1448,6 +1448,7 @@ Public Class Form1
         End If
 
         Dim id_producto As String = DGVAdmin(0, fila_actual).Value.ToString
+        Dim id_original As String = id_producto
         Dim sub_id As Char
         sub_id = id_producto(id_producto.Length - 1)
 
@@ -1457,7 +1458,7 @@ Public Class Form1
             Inc(sub_id)
         End If
 
-        id_producto = id_producto + sub_id
+        id_producto = "R-" & id_producto + sub_id
         Dim clienteID As String = DGVAdmin(1, fila_actual).Value
         Dim tipoProducto As String = DGVAdmin(4, fila_actual).Value
         Dim observacionesAdmin As String = "Re-Proceso"
@@ -1516,8 +1517,42 @@ Public Class Form1
 
         Try
             conn.Open()
-            Dim cmd As New MySqlCommand(String.Format("INSERT INTO productos (`ProductoID`, `ClienteID`, `Tipo_Producto_ID`, `Observaciones_Administrador`,`Fecha_Registro`, `Fecha_Entrada`, `Hora_Entrada`, `Fecha_Limite`, `Estado`) VALUES ('" & id_producto & "', '" & clienteID & "', '" & tipoProducto & "', '" & observacionesAdmin & "', '" & fecha_registro & "', '" & fecha_registro & "' ,'" & hora_registro & "','" & fecha_limite & "', '" & estado & "');"), conn)
+            Dim cmd As New MySqlCommand(String.Format("INSERT INTO productos 
+	                                                    (ProductoID,
+                                                        ClienteID, 
+                                                        Tipo_Producto_ID, 
+                                                        Observaciones_Cliente,
+                                                        Fecha_Registro,
+                                                        Fecha_Entrada, 
+                                                        Hora_Entrada,
+                                                        Fecha_Limite, 
+                                                        Estado, 
+                                                        ID_Muestra, 
+                                                        Tanque, 
+                                                        Lote, 
+                                                        PortBioD)
+                                                        SELECT '" & id_producto & "',
+                                                        ClienteID,
+                                                        Tipo_Producto_ID,
+                                                        Observaciones_Cliente,
+                                                        '" & fecha_registro & "',
+                                                        '" & fecha_registro & "',
+                                                        '" & hora_registro & "',
+                                                        '" & fecha_limite & "',
+                                                        '" & estado & "',
+                                                        ID_Muestra,
+                                                        Tanque,
+                                                        Lote,
+                                                        PortBioD
+                                                        from productos where ProductoID = '" & id_original & "';"), conn)
+            Dim cmd2 As New MySqlCommand(String.Format("insert into pruebasxproducto
+			                                            (ProductoID,
+                                                        ID_Prueba)
+			                                            select '" & id_producto & "',
+                                                        ID_Prueba 
+                                                        from pruebasxproducto where ProductoID = '" & id_original & "';"), conn)
             cmd.ExecuteNonQuery()
+            cmd2.ExecuteNonQuery()
             Console.WriteLine("Re-Proceso Registrado")
             MsgBox("Re-proceso Registrado", MsgBoxStyle.Information, "Registro Ingresado")
             conn.Close()
@@ -1526,6 +1561,11 @@ Public Class Form1
             conn.Close()
             Exit Sub
         End Try
+
+
+
+        'Agregar pruebasxproducto para el registro de reproceso
+
         CargarDGVProductosSinRevisar()
         CargarDGVProductosLimite()
         CargarDGVProductosRevisados()

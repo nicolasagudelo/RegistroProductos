@@ -376,6 +376,7 @@ Partial Class Form3
         Me.Controls.Add(Me.TxtBxIDProducto)
         Me.Controls.Add(Me.LblIDProducto)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximumSize = New System.Drawing.Size(501, 746)
         Me.Name = "Form3"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Form3"
