@@ -379,7 +379,7 @@ Partial Class Form3
         Me.MaximumSize = New System.Drawing.Size(501, 746)
         Me.Name = "Form3"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.Text = "Form3"
+        Me.Text = "Reportar Resultados"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

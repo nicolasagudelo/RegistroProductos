@@ -22,6 +22,7 @@ Partial Class Form7
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form7))
         Me.DGV = New System.Windows.Forms.DataGridView()
         Me.LblIDProducto = New System.Windows.Forms.Label()
         Me.LblPrueba = New System.Windows.Forms.Label()
@@ -68,8 +69,9 @@ Partial Class Form7
         Me.Controls.Add(Me.LblPrueba)
         Me.Controls.Add(Me.LblIDProducto)
         Me.Controls.Add(Me.DGV)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form7"
-        Me.Text = "Form7"
+        Me.Text = "Detalles de la Prueba"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

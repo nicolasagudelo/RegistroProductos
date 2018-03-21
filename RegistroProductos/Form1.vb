@@ -957,11 +957,12 @@ Public Class Form1
         ElseIf CmbBxTablas.SelectedItem = "Clientes" Then
             Lbl1GrpBxAdmin2.Text = "Nombre del Cliente"
             Lbl1GrpBxAdmin2.Visible = True
-            Lbl2GrpBxAdmin2.Visible = False
+            Lbl2GrpBxAdmin2.Visible = True
+            Lbl2GrpBxAdmin2.Text = "Direccion"
             Lbl3GrpBxAdmin2.Visible = False
             Intervalo.Visible = False
             TxtBx1GrpBxAdmin2.Visible = True
-            TxtBx2GrpBxAdmin2.Visible = False
+            TxtBx2GrpBxAdmin2.Visible = True
             TxtBx3GrpBxAdmin2.Visible = False
             CmbBx1GrpBxAdmin2.Visible = False
             CmbBx2GrpBxAdmin2.Visible = False
@@ -1055,11 +1056,14 @@ Public Class Form1
                 End If
             End If
         ElseIf CmbBxTablas.SelectedItem = "Clientes" Then
+            If TxtBx1GrpBxAdmin2.Text.Trim = "" Or TxtBx2GrpBxAdmin2.Text.Trim = "" Then
+                MsgBox("Todos los campos deben estar llenos", MsgBoxStyle.Exclamation, "Error")
+            End If
             Try
                 conn.Open()
                 Dim cmd As New MySqlCommand(String.Format("select max(ClienteID) + 1 FROM clientes;"), conn)
                 Dim llave As String = cmd.ExecuteScalar.ToString
-                Dim cmd2 As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`clientes` (`ClienteID`, `Nombre`) VALUES ('" & llave & "', '" & TxtBx1GrpBxAdmin2.Text & "');"), conn)
+                Dim cmd2 As New MySqlCommand(String.Format("INSERT INTO `bd_productos`.`clientes` (`ClienteID`, `Nombre`, `Direccion`) VALUES ('" & llave & "', '" & TxtBx1GrpBxAdmin2.Text & "', '" & TxtBx2GrpBxAdmin2.Text & "');"), conn)
                 cmd2.ExecuteNonQuery()
                 conn.Close()
                 MsgBox("Cliente Agregado", MsgBoxStyle.Information, "Cliente Agregado")

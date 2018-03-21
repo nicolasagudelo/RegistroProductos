@@ -12,7 +12,6 @@ C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\Regi
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\bin\Debug\MySql.Data.dll
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\bin\Debug\MySql.Data.xml
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form2.resources
-C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.vbprojResolveAssemblyReference.cache
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form3.resources
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.FormCambiarContraseña.resources
 E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\bin\Debug\RegistroProductos.exe.config
@@ -35,3 +34,4 @@ E:\Desarrollo ExxonMobil\Registro de Productos\RegistroProductos\obj\Debug\Regis
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form5.resources
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form6.resources
 C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.Form7.resources
+C:\Users\IDETECO\source\repos\RegistroProductos\RegistroProductos\obj\Debug\RegistroProductos.vbprojResolveAssemblyReference.cache

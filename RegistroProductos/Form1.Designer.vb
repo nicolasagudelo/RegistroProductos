@@ -49,6 +49,8 @@ Partial Class Form1
         Me.TxtBxNumeroProducto2 = New System.Windows.Forms.TextBox()
         Me.DGVProductosLimite = New System.Windows.Forms.DataGridView()
         Me.BtnModificarRegistroLimite = New System.Windows.Forms.Button()
+        Me.TabPageTransito = New System.Windows.Forms.TabPage()
+        Me.DGVTransito = New System.Windows.Forms.DataGridView()
         Me.TabPageProductosRevisados = New System.Windows.Forms.TabPage()
         Me.DGVProductosRevisados = New System.Windows.Forms.DataGridView()
         Me.TabPageAdmin = New System.Windows.Forms.TabPage()
@@ -78,8 +80,6 @@ Partial Class Form1
         Me.GrpBxTipoSesion = New System.Windows.Forms.GroupBox()
         Me.RBAnalista = New System.Windows.Forms.RadioButton()
         Me.RBAdmin = New System.Windows.Forms.RadioButton()
-        Me.TabPageTransito = New System.Windows.Forms.TabPage()
-        Me.DGVTransito = New System.Windows.Forms.DataGridView()
         Me.TabControl1.SuspendLayout()
         Me.TabPageRegistrarProducto.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -87,6 +87,8 @@ Partial Class Form1
         Me.TabPageProductoLimite.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.DGVProductosLimite, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPageTransito.SuspendLayout()
+        CType(Me.DGVTransito, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPageProductosRevisados.SuspendLayout()
         CType(Me.DGVProductosRevisados, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPageAdmin.SuspendLayout()
@@ -95,8 +97,6 @@ Partial Class Form1
         Me.GrpBxAdmin.SuspendLayout()
         CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GrpBxTipoSesion.SuspendLayout()
-        Me.TabPageTransito.SuspendLayout()
-        CType(Me.DGVTransito, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -388,6 +388,31 @@ Partial Class Form1
         Me.BtnModificarRegistroLimite.Text = "Modificar Registro"
         Me.BtnModificarRegistroLimite.UseVisualStyleBackColor = True
         Me.BtnModificarRegistroLimite.Visible = False
+        '
+        'TabPageTransito
+        '
+        Me.TabPageTransito.BackColor = System.Drawing.SystemColors.Control
+        Me.TabPageTransito.Controls.Add(Me.DGVTransito)
+        Me.TabPageTransito.Location = New System.Drawing.Point(4, 22)
+        Me.TabPageTransito.Name = "TabPageTransito"
+        Me.TabPageTransito.Size = New System.Drawing.Size(925, 434)
+        Me.TabPageTransito.TabIndex = 4
+        Me.TabPageTransito.Text = "Productos En Transito"
+        '
+        'DGVTransito
+        '
+        Me.DGVTransito.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DGVTransito.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DGVTransito.BackgroundColor = System.Drawing.SystemColors.Control
+        Me.DGVTransito.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.DGVTransito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVTransito.Cursor = System.Windows.Forms.Cursors.Default
+        Me.DGVTransito.Location = New System.Drawing.Point(3, 3)
+        Me.DGVTransito.Name = "DGVTransito"
+        Me.DGVTransito.Size = New System.Drawing.Size(916, 421)
+        Me.DGVTransito.TabIndex = 1
         '
         'TabPageProductosRevisados
         '
@@ -698,31 +723,6 @@ Partial Class Form1
         Me.RBAdmin.Text = "Administrador"
         Me.RBAdmin.UseVisualStyleBackColor = True
         '
-        'TabPageTransito
-        '
-        Me.TabPageTransito.BackColor = System.Drawing.SystemColors.Control
-        Me.TabPageTransito.Controls.Add(Me.DGVTransito)
-        Me.TabPageTransito.Location = New System.Drawing.Point(4, 22)
-        Me.TabPageTransito.Name = "TabPageTransito"
-        Me.TabPageTransito.Size = New System.Drawing.Size(925, 434)
-        Me.TabPageTransito.TabIndex = 4
-        Me.TabPageTransito.Text = "Productos En Transito"
-        '
-        'DGVTransito
-        '
-        Me.DGVTransito.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.DGVTransito.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DGVTransito.BackgroundColor = System.Drawing.SystemColors.Control
-        Me.DGVTransito.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.DGVTransito.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVTransito.Cursor = System.Windows.Forms.Cursors.Default
-        Me.DGVTransito.Location = New System.Drawing.Point(3, 3)
-        Me.DGVTransito.Name = "DGVTransito"
-        Me.DGVTransito.Size = New System.Drawing.Size(916, 421)
-        Me.DGVTransito.TabIndex = 1
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -739,7 +739,7 @@ Partial Class Form1
         Me.MinimumSize = New System.Drawing.Size(951, 521)
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Form1"
+        Me.Text = "Manejo de Productos"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.TabControl1.ResumeLayout(False)
         Me.TabPageRegistrarProducto.ResumeLayout(False)
@@ -750,6 +750,8 @@ Partial Class Form1
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.DGVProductosLimite, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPageTransito.ResumeLayout(False)
+        CType(Me.DGVTransito, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPageProductosRevisados.ResumeLayout(False)
         CType(Me.DGVProductosRevisados, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPageAdmin.ResumeLayout(False)
@@ -760,8 +762,6 @@ Partial Class Form1
         CType(Me.DGVAdmin, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GrpBxTipoSesion.ResumeLayout(False)
         Me.GrpBxTipoSesion.PerformLayout()
-        Me.TabPageTransito.ResumeLayout(False)
-        CType(Me.DGVTransito, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

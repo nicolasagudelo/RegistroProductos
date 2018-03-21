@@ -507,7 +507,7 @@ Partial Class Form5
         Me.Controls.Add(Me.BtnGenerarPDF)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form5"
-        Me.Text = "Form5"
+        Me.Text = "Revision de Reporte"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.DGV, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GrpBxTipoPrueba.ResumeLayout(False)
